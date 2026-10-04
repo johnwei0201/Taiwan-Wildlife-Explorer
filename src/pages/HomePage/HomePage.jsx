@@ -1,4 +1,4 @@
-import { useMemo } from 'react'
+import { useEffect, useMemo, useRef } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import SpeciesCard from '../../components/SpeciesCard/SpeciesCard.jsx'
 import FilterPanel from '../../components/FilterPanel/FilterPanel.jsx'
@@ -33,6 +33,21 @@ export default function HomePage() {
   const activeGroup = found.group ?? (activeTags.length > 0 ? GROUPS[0] : null)
   const activeSub = found.subgroup // null＝第二層選「全部」
   const filters = Object.fromEntries(FILTERS.map((f) => [f.key, searchParams.get(f.key) ?? '']))
+
+  // 手機上第二層放不下會橫向捲動：把選取的小分類捲進畫面，避免「選了卻看不到」
+  // 只在第二層容器內左右捲動，不動到整個頁面的上下位置
+  const subtabsRef = useRef(null)
+  useEffect(() => {
+    const container = subtabsRef.current
+    const selected = container?.querySelector('[aria-selected="true"]')
+    if (!selected) return
+    const box = container.getBoundingClientRect()
+    const item = selected.getBoundingClientRect()
+    if (item.left < box.left || item.right > box.right) {
+      // 讓選取的按鈕停在容器中間
+      container.scrollLeft += item.left + item.width / 2 - (box.left + box.width / 2)
+    }
+  }, [activeGroup?.id, activeSub?.id])
 
   // 一打開網頁先隨機推薦 30 種（只挑有照片的），每次重新整理都不一樣
   const randomSpecies = useMemo(
@@ -136,7 +151,7 @@ export default function HomePage() {
 
       {/* 第二層小分類：選了有小分類的類群（例如昆蟲類）才出現 */}
       {activeGroup?.subgroups && (
-        <div className={styles.subtabs} role="tablist" aria-label={`${activeGroup.label}的小分類`}>
+        <div ref={subtabsRef} className={styles.subtabs} role="tablist" aria-label={`${activeGroup.label}的小分類`}>
           <span className={styles.subtabsLabel} aria-hidden="true">
             {activeGroup.label} ›
           </span>

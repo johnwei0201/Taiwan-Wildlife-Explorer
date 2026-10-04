@@ -24,13 +24,18 @@ const OUTPUT_DIR = 'public/data'
 // 收錄的類群（數字是 iNaturalist 的 taxon_id）
 //   minCount：台灣研究級觀察數的門檻，低於門檻的物種先不收
 //   （昆蟲有些物種只有幾筆紀錄，照片和資料都不完整，先求「完成」再求「完整」）
+//   withoutTaxonId：要排除的子類群，例如「蛾」＝鱗翅目扣掉蝴蝶（鳳蝶總科）
 const GROUPS = [
   { id: 'aves', label: '鳥類', inatTaxonId: 3 },
   { id: 'mammalia', label: '哺乳類', inatTaxonId: 40151 },
   { id: 'reptilia', label: '爬蟲類', inatTaxonId: 26036 },
   { id: 'amphibia', label: '兩棲類', inatTaxonId: 20978 },
   { id: 'lepidoptera', label: '蝴蝶', inatTaxonId: 47224, minCount: 20 }, // 鳳蝶總科（不含蛾）
+  { id: 'moth', label: '蛾', inatTaxonId: 47157, withoutTaxonId: 47224, minCount: 20 }, // 鱗翅目扣掉蝴蝶
   { id: 'odonata', label: '蜻蜓', inatTaxonId: 47792, minCount: 20 }, // 蜻蛉目（蜻蜓＋豆娘）
+  { id: 'coleoptera', label: '甲蟲', inatTaxonId: 47208, minCount: 20 }, // 鞘翅目
+  { id: 'mantodea', label: '螳螂', inatTaxonId: 48112, minCount: 20 }, // 螳螂目
+  { id: 'phasmida', label: '竹節蟲', inatTaxonId: 47198, minCount: 20 }, // 竹節蟲目
 ]
 
 // 排除清單：家養動物不屬於野生動物圖鑑
@@ -103,6 +108,7 @@ async function fetchInatSpecies(group) {
     const url =
       `${INAT_API}/observations/species_counts?place_id=${TAIWAN_PLACE_ID}` +
       `&taxon_id=${group.inatTaxonId}&quality_grade=research&locale=zh-TW` +
+      (group.withoutTaxonId ? `&without_taxon_id=${group.withoutTaxonId}` : '') +
       `&per_page=${perPage}&page=${page}`
     const data = await fetchJson(url)
     const minCount = group.minCount ?? 0

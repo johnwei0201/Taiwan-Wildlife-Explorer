@@ -15,10 +15,14 @@ export const GROUPS = [
     id: 'insecta',
     label: '昆蟲類',
     kind: 'group',
-    match: byGroup('lepidoptera', 'odonata'),
+    match: byGroup('lepidoptera', 'moth', 'odonata', 'coleoptera', 'mantodea', 'phasmida'),
     subgroups: [
       { id: 'lepidoptera', label: '蝴蝶', match: byGroup('lepidoptera') },
+      { id: 'moth', label: '蛾', match: byGroup('moth') },
       { id: 'odonata', label: '蜻蜓', match: byGroup('odonata') },
+      { id: 'coleoptera', label: '甲蟲', match: byGroup('coleoptera') },
+      { id: 'mantodea', label: '螳螂', match: byGroup('mantodea') },
+      { id: 'phasmida', label: '竹節蟲', match: byGroup('phasmida') },
     ],
   },
 ]
