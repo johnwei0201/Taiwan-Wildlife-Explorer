@@ -1,0 +1,81 @@
+/* ==========================================================
+   設計變數（Design Tokens）
+   把顏色、字級、間距集中在這裡，之後要改風格只改這一個檔案
+   ========================================================== */
+
+/* ----------------------------------------------------------
+   RWD 斷點（Mobile First：先寫手機，再往大螢幕加樣式）
+   注意：CSS 變數不能用在 @media 裡，所以斷點直接寫數字
+
+   手機   ：  0px ～  767px （預設樣式，不需要寫 @media）
+   平板   ：768px ～ 1199px  → @media (min-width: 768px)
+   桌機   ：1200px 以上       → @media (min-width: 1200px)
+   ---------------------------------------------------------- */
+
+:root {
+  /* ---------- 顏色：以台灣山林為靈感 ---------- */
+  --color-primary: #2f6b4f;        /* 森林綠：主色 */
+  --color-primary-dark: #1f4a36;
+  --color-primary-light: #e3efe8;
+  --color-accent: #d98e2b;         /* 帝雉金：強調色 */
+
+  --color-text: #1f2a24;
+  --color-text-muted: #5c6b63;
+  --color-bg: #f7f8f5;
+  --color-surface: #ffffff;
+  --color-border: #dde3dd;
+
+  /* 保育等級標籤用色 */
+  --color-endemic: #2f6b4f;        /* 特有種 */
+  --color-protected: #b5452f;      /* 保育類 */
+
+  /* ---------- 字型 ---------- */
+  --font-sans: 'Noto Sans TC', 'PingFang TC', 'Microsoft JhengHei', system-ui, sans-serif;
+  --font-scientific: Georgia, 'Times New Roman', serif; /* 學名用斜體襯線字 */
+
+  /* ---------- 字級（手機的預設值） ---------- */
+  --fs-sm: 0.875rem;   /* 14px */
+  --fs-base: 1rem;     /* 16px */
+  --fs-lg: 1.125rem;   /* 18px */
+  --fs-xl: 1.375rem;   /* 22px */
+  --fs-2xl: 1.75rem;   /* 28px */
+
+  /* ---------- 間距 ---------- */
+  --space-1: 0.25rem;  /* 4px */
+  --space-2: 0.5rem;   /* 8px */
+  --space-3: 0.75rem;  /* 12px */
+  --space-4: 1rem;     /* 16px */
+  --space-6: 1.5rem;   /* 24px */
+  --space-8: 2rem;     /* 32px */
+  --space-12: 3rem;    /* 48px */
+
+  /* ---------- 版面 ---------- */
+  --container-max: 1200px;
+  --container-padding: var(--space-4);  /* 手機左右留 16px */
+  --header-height: 56px;
+
+  /* ---------- 其他 ---------- */
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --shadow-sm: 0 1px 3px rgb(0 0 0 / 0.08);
+  --shadow-md: 0 4px 12px rgb(0 0 0 / 0.1);
+  --transition: 0.2s ease;
+}
+
+/* 平板：字級與留白稍微放大 */
+@media (min-width: 768px) {
+  :root {
+    --fs-xl: 1.5rem;
+    --fs-2xl: 2rem;
+    --container-padding: var(--space-6);
+    --header-height: 64px;
+  }
+}
+
+/* 桌機：再放大一些 */
+@media (min-width: 1200px) {
+  :root {
+    --fs-2xl: 2.5rem;
+    --container-padding: var(--space-8);
+  }
+}

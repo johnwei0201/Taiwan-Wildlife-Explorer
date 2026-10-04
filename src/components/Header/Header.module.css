@@ -1,0 +1,135 @@
+/* ---------- 手機（預設） ---------- */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background-color: var(--color-primary);
+  color: #fff;
+  box-shadow: var(--shadow-sm);
+}
+
+.inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: var(--header-height);
+}
+
+.logo {
+  display: flex;
+  flex-direction: column;
+  font-size: var(--fs-lg);
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.logoEn {
+  font-size: 0.7rem;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  opacity: 0.8;
+}
+
+/* 漢堡按鈕：三條線用一個 span 加上 ::before / ::after 畫出來 */
+.menuButton {
+  display: grid;
+  place-items: center;
+  width: 44px;   /* 手指點擊區域至少 44px（無障礙建議） */
+  height: 44px;
+}
+
+.menuIcon,
+.menuIcon::before,
+.menuIcon::after {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background-color: currentColor;
+  transition: transform var(--transition), background-color var(--transition);
+}
+
+.menuIcon {
+  position: relative;
+}
+
+.menuIcon::before,
+.menuIcon::after {
+  content: '';
+  position: absolute;
+  left: 0;
+}
+
+.menuIcon::before { top: -7px; }
+.menuIcon::after  { top: 7px; }
+
+/* 展開時變成 X */
+.menuIcon[data-open='true'] { background-color: transparent; }
+.menuIcon[data-open='true']::before { transform: translateY(7px) rotate(45deg); }
+.menuIcon[data-open='true']::after  { transform: translateY(-7px) rotate(-45deg); }
+
+/* 手機選單：預設隱藏，展開時從頁首下方出現 */
+.nav {
+  display: none;
+  position: absolute;
+  top: var(--header-height);
+  left: 0;
+  right: 0;
+  background-color: var(--color-primary-dark);
+  box-shadow: var(--shadow-md);
+}
+
+.nav[data-open='true'] {
+  display: block;
+}
+
+.navList {
+  display: flex;
+  flex-direction: column;
+}
+
+.navLink {
+  display: block;
+  padding: var(--space-4) var(--container-padding);
+  transition: background-color var(--transition);
+}
+
+.navLink:hover {
+  background-color: rgb(255 255 255 / 0.1);
+}
+
+.active {
+  font-weight: 700;
+  color: var(--color-accent);
+}
+
+/* ---------- 平板以上：隱藏漢堡，選單橫向排列 ---------- */
+@media (min-width: 768px) {
+  .menuButton {
+    display: none;
+  }
+
+  .nav,
+  .nav[data-open='true'] {
+    display: block;
+    position: static;
+    background: none;
+    box-shadow: none;
+  }
+
+  .navList {
+    flex-direction: row;
+    gap: var(--space-2);
+  }
+
+  .navLink {
+    padding: var(--space-2) var(--space-4);
+    border-radius: var(--radius-sm);
+  }
+}
+
+/* ---------- 桌機：Logo 再大一點 ---------- */
+@media (min-width: 1200px) {
+  .logo {
+    font-size: var(--fs-xl);
+  }
+}

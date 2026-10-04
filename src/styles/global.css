@@ -1,0 +1,40 @@
+/* ==========================================================
+   全站共用樣式
+   ========================================================== */
+
+body {
+  font-family: var(--font-sans);
+  font-size: var(--fs-base);
+  color: var(--color-text);
+  background-color: var(--color-bg);
+}
+
+/* 置中容器：內容最寬 1200px，左右自動留白 */
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: var(--container-padding);
+}
+
+/* 學名：慣例上要用斜體 */
+.scientific-name {
+  font-family: var(--font-scientific);
+  font-style: italic;
+}
+
+/* 只給螢幕閱讀器看、畫面上隱藏的文字（無障礙） */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* 鍵盤操作時才顯示的焦點框（無障礙） */
+:focus-visible {
+  outline: 3px solid var(--color-accent);
+  outline-offset: 2px;
+}

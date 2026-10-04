@@ -1,0 +1,120 @@
+/* ==========================================================
+   CSS Reset
+   目的：清除各家瀏覽器不一致的預設樣式，讓大家從同一個起點出發
+   ========================================================== */
+
+/* 1. 寬高計算包含 padding 與 border，排版比較直覺 */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* 2. 移除所有預設外距 */
+* {
+  margin: 0;
+}
+
+/* 3. 移除預設內距（只針對有預設內距的元素） */
+ul,
+ol,
+fieldset,
+legend {
+  padding: 0;
+}
+
+/* 4. 避免手機橫向翻轉時字體被自動放大 */
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+/* 5. 讓頁面至少有整個螢幕高；文字渲染更平滑 */
+body {
+  min-height: 100vh;
+  min-height: 100dvh;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* 6. 圖片與媒體：變成區塊元素，且不會撐破容器（RWD 關鍵） */
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+img {
+  height: auto;
+}
+
+/* 7. 表單元素預設不會繼承字型，這裡讓它繼承 */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+/* 8. 按鈕：移除預設外框與背景，游標顯示為手指 */
+button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+/* 9. 長單字（例如很長的學名或網址）會自動斷行，不會撐破版面 */
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}
+
+/* 10. 標題繼承字級，交給我們自己決定大小 */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+/* 11. 清單：移除項目符號 */
+ul,
+ol {
+  list-style: none;
+}
+
+/* 12. 連結：移除底線，顏色繼承 */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* 13. 表格：合併框線 */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* 14. 尊重「減少動態效果」的系統設定（無障礙） */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

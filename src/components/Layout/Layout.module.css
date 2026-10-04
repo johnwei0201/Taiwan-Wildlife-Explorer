@@ -1,0 +1,17 @@
+/* 讓頁尾永遠貼在畫面底部，即使內容很少 */
+.layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+}
+
+.main {
+  flex: 1;
+  padding-block: var(--space-6);
+}
+
+@media (min-width: 768px) {
+  .main {
+    padding-block: var(--space-8);
+  }
+}
