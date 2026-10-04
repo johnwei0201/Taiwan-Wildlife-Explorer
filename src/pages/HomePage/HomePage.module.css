@@ -15,7 +15,7 @@
 /* ---------- 類群切換 ---------- */
 .tabs {
   display: flex;
-  gap: var(--space-2);
+  gap: var(--space-1);
   overflow-x: auto;              /* 手機：放不下時可以橫向滑動 */
   padding-bottom: var(--space-2);
   scrollbar-width: none;
@@ -29,7 +29,7 @@
   flex-shrink: 0;
   padding: var(--space-2) var(--space-4);
   border: 1px solid var(--color-border);
-  border-radius: 999px;
+  border-radius: var(--radius-sm); /* 6px 圓角的方形按鈕 */
   background-color: var(--color-surface);
   white-space: nowrap;
   transition: background-color var(--transition), color var(--transition);
@@ -52,7 +52,7 @@
 }
 
 .tab[data-kind='group'] + .tab[data-kind='collection'] {
-  margin-left: var(--space-3);
+  margin-left: var(--space-2);
 }
 
 .tab[data-kind='collection'][aria-selected='true'] {
@@ -64,34 +64,6 @@
   margin-block: var(--space-4);
   font-size: var(--fs-sm);
   color: var(--color-text-muted);
-}
-
-/* 隨機推薦的標題列：說明文字＋「換一批」按鈕 */
-.randomHeader {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--space-2);
-  margin-block: var(--space-4);
-}
-
-.randomHeader .count {
-  margin-block: 0;
-}
-
-.shuffle {
-  padding: var(--space-1) var(--space-4);
-  font-size: var(--fs-sm);
-  color: var(--color-primary);
-  border: 1px solid var(--color-primary);
-  border-radius: 999px;
-  transition: background-color var(--transition), color var(--transition);
-}
-
-.shuffle:hover {
-  color: #fff;
-  background-color: var(--color-primary);
 }
 
 .message {

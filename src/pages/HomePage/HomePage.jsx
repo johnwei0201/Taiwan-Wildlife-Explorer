@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useMemo } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import SpeciesCard from '../../components/SpeciesCard/SpeciesCard.jsx'
 import FilterPanel from '../../components/FilterPanel/FilterPanel.jsx'
@@ -28,13 +28,10 @@ export default function HomePage() {
   const activeGroup = GROUPS.find((g) => g.id === searchParams.get('group')) ?? null // null＝還沒選，顯示隨機推薦
   const filters = Object.fromEntries(FILTERS.map((f) => [f.key, searchParams.get(f.key) ?? '']))
 
-  // 一打開網頁先隨機推薦 30 種（只挑有照片的），按「換一批」重新洗牌
-  const [shuffleCount, setShuffleCount] = useState(0)
+  // 一打開網頁先隨機推薦 30 種（只挑有照片的），每次重新整理都不一樣
   const randomSpecies = useMemo(
     () => shuffle(speciesList.filter((s) => s.photo)).slice(0, RANDOM_COUNT),
-    // shuffleCount 改變時重新洗牌
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [speciesList, shuffleCount],
+    [speciesList],
   )
 
   // 切換分頁時清空篩選條件（不同類群的選項不一樣）
@@ -96,18 +93,9 @@ export default function HomePage() {
       {/* 還沒選分頁：隨機推薦 */}
       {status === 'success' && !activeGroup && (
         <>
-          <div className={styles.randomHeader}>
-            <p className={styles.count}>
-              隨機推薦 {randomSpecies.length} 種（全台共 {speciesList.length} 種，點上方分類看更多）
-            </p>
-            <button
-              type="button"
-              className={styles.shuffle}
-              onClick={() => setShuffleCount((n) => n + 1)}
-            >
-              🔀 換一批
-            </button>
-          </div>
+          <p className={styles.count}>
+            隨機推薦 {randomSpecies.length} 種（全台共 {speciesList.length} 種，點上方分類看更多）
+          </p>
           <SpeciesGrid list={randomSpecies} />
         </>
       )}
