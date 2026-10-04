@@ -9,10 +9,6 @@
   cursor: crosshair;
 }
 
-.obscuredNote {
-  color: var(--color-protected);
-}
-
 /* 平板：高一點 */
 @media (min-width: 768px) {
   .map {

@@ -1,0 +1,83 @@
+.figure {
+  padding: var(--space-4);
+  background-color: var(--color-surface);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+}
+
+.chart {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 2px;
+  height: 180px;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 0;
+}
+
+/* 數字：手機太擠所以隱藏，平板以上才顯示 */
+.value {
+  display: none;
+  font-size: 0.625rem;
+  color: var(--color-text-muted);
+}
+
+.track {
+  display: flex;
+  align-items: flex-end;
+  flex: 1;
+  width: 70%;
+}
+
+.bar {
+  width: 100%;
+  min-height: 2px;
+  background-color: var(--color-primary);
+  border-radius: 3px 3px 0 0;
+  opacity: 0.75;
+}
+
+.bar[data-peak='true'] {
+  background-color: var(--color-accent);
+  opacity: 1;
+}
+
+.month {
+  margin-top: var(--space-1);
+  font-size: 0.625rem;
+  color: var(--color-text-muted);
+  white-space: nowrap;
+}
+
+.caption {
+  margin-top: var(--space-3);
+  font-size: var(--fs-sm);
+  color: var(--color-text-muted);
+}
+
+.empty {
+  color: var(--color-text-muted);
+}
+
+@media (min-width: 768px) {
+  .figure {
+    padding: var(--space-6);
+  }
+
+  .chart {
+    gap: var(--space-2);
+    height: 220px;
+  }
+
+  .value {
+    display: block;
+  }
+
+  .month {
+    font-size: var(--fs-sm);
+  }
+}

@@ -1,0 +1,77 @@
+.main {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background-color: var(--color-primary-light);
+  border-radius: var(--radius-md);
+}
+
+.mainImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.placeholder {
+  display: grid;
+  place-items: center;
+  height: 100%;
+  font-size: 4rem;
+  opacity: 0.4;
+}
+
+.credit {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: var(--space-1) var(--space-3);
+  font-size: 0.75rem;
+  color: #fff;
+  background: linear-gradient(transparent, rgb(0 0 0 / 0.6));
+}
+
+/* 縮圖：手機可以左右滑動 */
+.thumbs {
+  display: flex;
+  gap: var(--space-2);
+  margin-top: var(--space-2);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.thumbs::-webkit-scrollbar {
+  display: none;
+}
+
+.thumb {
+  flex-shrink: 0;
+  width: 64px;
+  aspect-ratio: 1;
+  overflow: hidden;
+  border: 3px solid transparent;
+  border-radius: var(--radius-sm);
+  opacity: 0.7;
+  transition: opacity var(--transition), border-color var(--transition);
+}
+
+.thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.thumb:hover {
+  opacity: 1;
+}
+
+.thumb[aria-pressed='true'] {
+  border-color: var(--color-accent);
+  opacity: 1;
+}
+
+@media (min-width: 768px) {
+  .thumb {
+    width: 76px;
+  }
+}

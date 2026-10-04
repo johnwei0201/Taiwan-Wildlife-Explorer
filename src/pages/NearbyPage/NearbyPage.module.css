@@ -66,6 +66,7 @@
 /* ---------- 版面：手機與平板為上下排列 ---------- */
 .layout {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: var(--space-6);
 }
 
@@ -133,7 +134,7 @@
 /* 桌機：左地圖、右清單，地圖捲動時固定不動 */
 @media (min-width: 1200px) {
   .layout {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     align-items: start;
   }
 

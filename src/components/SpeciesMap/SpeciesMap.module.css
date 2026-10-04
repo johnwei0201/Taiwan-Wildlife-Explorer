@@ -1,0 +1,23 @@
+/* 手機 */
+.map {
+  position: relative;
+  z-index: 0; /* 建立獨立圖層，避免 Leaflet 蓋住頁首 */
+  width: 100%;
+  height: 360px;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+}
+
+/* 平板 */
+@media (min-width: 768px) {
+  .map {
+    height: 460px;
+  }
+}
+
+/* 桌機 */
+@media (min-width: 1200px) {
+  .map {
+    height: 520px;
+  }
+}

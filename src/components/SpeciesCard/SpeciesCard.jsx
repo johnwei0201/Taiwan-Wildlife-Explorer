@@ -1,12 +1,6 @@
 import { Link } from 'react-router-dom'
+import { ALIEN_LABELS } from '../../constants/labels.js'
 import styles from './SpeciesCard.module.css'
-
-// 外來種類型（TaiCOL 的 alien_type）
-const ALIEN_LABELS = {
-  naturalized: '歸化種',
-  invasive: '入侵種',
-  cultured: '栽培豢養',
-}
 
 // 物種卡片：列表頁和「我附近的動物」都會共用這個元件
 export default function SpeciesCard({ species }) {

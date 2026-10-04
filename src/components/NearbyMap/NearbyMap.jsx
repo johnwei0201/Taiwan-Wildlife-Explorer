@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import L from 'leaflet'
 import { MapContainer, TileLayer, Circle, CircleMarker, Popup, useMap, useMapEvents } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css'
+import ObservationMarker from '../ObservationMarker/ObservationMarker.jsx'
 import styles from './NearbyMap.module.css'
 
 const TAIWAN_CENTER = [23.7, 120.95]
@@ -60,36 +61,8 @@ export default function NearbyMap({ location, radius, observations, onPick }) {
         </>
       )}
 
-      {/* 觀察紀錄：一般為實心橘點；位置已模糊化的為空心虛線 */}
       {observations.map((obs) => (
-        <CircleMarker
-          key={obs.id}
-          center={[obs.lat, obs.lng]}
-          radius={6}
-          pathOptions={
-            obs.obscured
-              ? { color: '#b5452f', weight: 2, dashArray: '3', fillOpacity: 0.1 }
-              : { color: '#fff', weight: 1, fillColor: '#d98e2b', fillOpacity: 0.9 }
-          }
-        >
-          <Popup>
-            <strong>{obs.nameZh ?? obs.nameSci}</strong>
-            <br />
-            <i>{obs.nameSci}</i>
-            <br />
-            觀察日期：{obs.observedOn ?? '不明'}
-            {obs.obscured && (
-              <>
-                <br />
-                <span className={styles.obscuredNote}>⚠️ 位置已模糊化，僅為大約範圍</span>
-              </>
-            )}
-            <br />
-            <a href={obs.url} target="_blank" rel="noreferrer">
-              在 iNaturalist 查看 →
-            </a>
-          </Popup>
-        </CircleMarker>
+        <ObservationMarker key={obs.id} observation={obs} />
       ))}
     </MapContainer>
   )

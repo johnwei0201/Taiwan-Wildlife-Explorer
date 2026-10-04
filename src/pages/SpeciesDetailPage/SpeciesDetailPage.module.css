@@ -1,0 +1,195 @@
+.back {
+  display: inline-block;
+  margin-bottom: var(--space-4);
+  color: var(--color-primary);
+  font-weight: 700;
+}
+
+.back:hover {
+  text-decoration: underline;
+}
+
+/* ---------- 上半部：照片 + 基本資料（手機上下排列） ---------- */
+.hero {
+  display: grid;
+  /* minmax(0, 1fr)：允許欄位縮到比內容還窄，避免縮圖列把版面撐破 */
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-6);
+  margin-bottom: var(--space-8);
+}
+
+.nameZh {
+  font-size: var(--fs-2xl);
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--color-primary-dark);
+}
+
+.nameSci {
+  margin-top: var(--space-1);
+  font-size: var(--fs-lg);
+  color: var(--color-text-muted);
+}
+
+.nameEn {
+  font-size: var(--fs-sm);
+  color: var(--color-text-muted);
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-top: var(--space-4);
+}
+
+.tag {
+  padding: var(--space-1) var(--space-3);
+  font-size: var(--fs-sm);
+  color: #fff;
+  border-radius: 999px;
+}
+
+.endemic   { background-color: var(--color-endemic); }
+.protected { background-color: var(--color-protected); }
+.alien     { background-color: var(--color-alien); }
+.redlist {
+  color: var(--color-text);
+  background-color: var(--color-primary-light);
+}
+
+/* 分類階層 */
+.taxonomy {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--space-2) var(--space-4);
+  margin-top: var(--space-6);
+  padding: var(--space-4);
+  font-size: var(--fs-sm);
+  background-color: var(--color-surface);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+}
+
+.taxonomy dt {
+  color: var(--color-text-muted);
+}
+
+.taxonomy dd {
+  margin: 0;
+}
+
+.summary {
+  margin-top: var(--space-6);
+  line-height: 1.8;
+}
+
+.source {
+  margin-top: var(--space-2);
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+}
+
+.source a {
+  text-decoration: underline;
+}
+
+/* ---------- 下半部各區塊 ---------- */
+.section {
+  margin-bottom: var(--space-8);
+}
+
+.sectionTitle {
+  margin-bottom: var(--space-4);
+  font-size: var(--fs-xl);
+  font-weight: 700;
+  color: var(--color-primary-dark);
+}
+
+.sectionNote {
+  margin-top: calc(var(--space-3) * -1);
+  margin-bottom: var(--space-4);
+  font-size: var(--fs-sm);
+  color: var(--color-text-muted);
+}
+
+.mapLayout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-6);
+}
+
+/* 最新觀察紀錄列表 */
+.records {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.record {
+  display: block;
+  padding: var(--space-3) var(--space-4);
+  background-color: var(--color-surface);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow var(--transition);
+}
+
+.record:hover {
+  box-shadow: var(--shadow-md);
+}
+
+.recordDate {
+  font-weight: 700;
+}
+
+.recordPlace {
+  font-size: var(--fs-sm);
+  color: var(--color-text-muted);
+}
+
+.obscuredBadge {
+  margin-left: var(--space-2);
+  font-size: 0.75rem;
+  color: var(--color-protected);
+}
+
+.message {
+  padding: var(--space-8) var(--space-4);
+  text-align: center;
+  color: var(--color-text-muted);
+  background-color: var(--color-surface);
+  border-radius: var(--radius-md);
+}
+
+/* Skeleton 尺寸 */
+.skeletonPhoto { aspect-ratio: 4 / 3; }
+.skeletonTitle { height: 2.5rem; width: 60%; }
+.skeletonLine  { height: 1rem; margin-top: var(--space-3); }
+.skeletonBlock { height: 200px; }
+
+/* ---------- 平板 ---------- */
+@media (min-width: 768px) {
+  .taxonomy {
+    grid-template-columns: auto 1fr auto 1fr;
+  }
+}
+
+/* ---------- 桌機：照片與資料左右排列；地圖與紀錄左右排列 ---------- */
+@media (min-width: 1200px) {
+  .hero {
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+    gap: var(--space-8);
+    align-items: start;
+  }
+
+  .mapLayout {
+    grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+    align-items: start;
+  }
+
+  .records {
+    max-height: 520px;
+    overflow-y: auto;
+  }
+}
