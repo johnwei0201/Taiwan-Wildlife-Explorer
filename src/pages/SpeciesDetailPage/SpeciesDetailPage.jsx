@@ -44,7 +44,7 @@ export default function SpeciesDetailPage() {
   const local = speciesList.find((species) => species.id === Number(id))
 
   // 我的位置：定位後查詢這個物種在使用者附近的紀錄（半徑可切換）
-  const { location: userLocation, isLocating, error: geoError, locate } = useGeolocation()
+  const { location: userLocation, isLocating, error: geoError, locate, clearLocation } = useGeolocation()
   const [radius, setRadius] = useState(5)
   const nearby = useAsync(
     (signal) => (userLocation ? fetchSpeciesNearby(id, userLocation, radius, signal) : Promise.resolve(null)),
@@ -86,10 +86,27 @@ export default function SpeciesDetailPage() {
       </section>
 
       <section className={styles.section}>
+        {/* 兩種檢視模式：台灣出沒地圖（全台）／我的位置（附近），按下的那個就是目前模式 */}
         <div className={styles.sectionHeader}>
-          <h2 className={styles.sectionTitle}>台灣出沒地圖</h2>
+          <h2 className={styles.sectionTitle}>
+            <button
+              type="button"
+              className={styles.titleButton}
+              aria-pressed={!userLocation}
+              title="回到台灣全圖"
+              onClick={clearLocation}
+            >
+              台灣出沒地圖
+            </button>
+          </h2>
           {/* 我的位置：看看這種動物離自己多遠、附近有沒有出現過 */}
-          <button type="button" className={styles.locate} onClick={locate} disabled={isLocating}>
+          <button
+            type="button"
+            className={styles.locate}
+            aria-pressed={Boolean(userLocation)}
+            onClick={locate}
+            disabled={isLocating}
+          >
             <LocationIcon />
             {isLocating ? '定位中…' : '我的位置'}
           </button>

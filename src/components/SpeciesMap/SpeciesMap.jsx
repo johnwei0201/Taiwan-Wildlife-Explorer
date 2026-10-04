@@ -10,14 +10,18 @@ const TAIWAN_CENTER = [23.7, 120.95]
 const TAIWAN_ZOOM = 7
 
 // 定位後，把地圖縮放到「剛好看到整個搜尋範圍」；若最近的紀錄在範圍外，也一起框進來
+// 清除位置時，回到台灣全圖
 // 不用動畫，避免 iPhone 上整頁縮放的問題
-function FitToUser({ location, radius, nearest }) {
+function FitView({ location, radius, nearest }) {
   const map = useMap()
   const nearestLat = nearest?.lat
   const nearestLng = nearest?.lng
 
   useEffect(() => {
-    if (!location) return
+    if (!location) {
+      map.setView(TAIWAN_CENTER, TAIWAN_ZOOM, { animate: false })
+      return
+    }
     const bounds = L.latLng(location.lat, location.lng).toBounds(radius * 2000) // 直徑，單位公尺
     if (nearestLat != null) bounds.extend([nearestLat, nearestLng])
     map.fitBounds(bounds, { animate: false, padding: [20, 20] })
@@ -62,9 +66,9 @@ export default function SpeciesMap({ taxonId, observations, userLocation, radius
           keepBuffer={4}
         />
 
+        <FitView location={userLocation} radius={radius} nearest={nearest} />
         {userLocation && (
           <>
-            <FitToUser location={userLocation} radius={radius} nearest={nearest} />
             {/* 搜尋範圍 */}
             <Circle
               center={userLocation}

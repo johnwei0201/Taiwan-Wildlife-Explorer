@@ -160,9 +160,35 @@
   background-color: var(--color-primary);
 }
 
+/* 「我的位置」模式中：按鈕維持深綠色，讓人知道目前是在看附近 */
+.locate[aria-pressed='true'] {
+  color: #fff;
+  background-color: var(--color-primary);
+}
+
 /* 按鈕變深綠色時，黑色圖示反轉成白色（白色圓環同時變黑），在深色底上才看得清楚 */
-.locate:hover img {
+.locate:hover img,
+.locate[aria-pressed='true'] img {
   filter: invert(1);
+}
+
+/* 標題「台灣出沒地圖」也是按鈕：點了回到台灣全圖 */
+.titleButton {
+  font-weight: inherit;
+  color: inherit;
+  border-bottom: 2px solid transparent;
+  transition: border-color var(--transition), color var(--transition);
+}
+
+/* 在「我的位置」模式時，標題變淡並出現虛線底線，提示可以點回全圖 */
+.titleButton[aria-pressed='false'] {
+  color: var(--color-text-muted);
+  border-bottom: 2px dashed var(--color-border);
+}
+
+.titleButton:hover {
+  color: var(--color-primary);
+  border-bottom-color: var(--color-primary);
 }
 
 .locate:disabled {

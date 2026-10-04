@@ -10,6 +10,7 @@ const roundCoord = (value) => Math.round(value * 100) / 100
  * error：'unsupported' 瀏覽器不支援 / 'denied' 使用者拒絕或逾時 / null
  * locate()：要求定位（需要使用者同意，而且網站必須是 HTTPS 或 localhost）
  * pickLocation({ lat, lng })：直接指定位置（例如點地圖）
+ * clearLocation()：清除位置（例如回到台灣全圖）
  */
 export function useGeolocation() {
   const [location, setLocation] = useState(null)
@@ -40,5 +41,10 @@ export function useGeolocation() {
     )
   }
 
-  return { location, isLocating, error, locate, pickLocation }
+  const clearLocation = () => {
+    setLocation(null)
+    setError(null)
+  }
+
+  return { location, isLocating, error, locate, pickLocation, clearLocation }
 }
