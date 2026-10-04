@@ -14,6 +14,7 @@ import {
   fetchSpeciesNearby,
   fetchNearbySpecies,
 } from '../../api/inaturalist.js'
+import { fetchWikiSummary, toTraditional } from '../../api/wikipedia.js'
 import { formatKm } from '../../utils/geo.js'
 import { useAsync } from '../../hooks/useAsync.js'
 import { useSpeciesList, withLocalData } from '../../hooks/useSpeciesList.js'
@@ -246,20 +247,59 @@ function SpeciesHero({ taxon, local, displayName }) {
           <TaxonomyTable key={taxon.id} items={taxonomy} speciesNameSci={taxon.nameSci} />
         )}
 
-        {taxon.summary && (
-          <>
-            <p className={styles.summary}>{taxon.summary}</p>
-            <p className={styles.source}>
-              簡介摘自維基百科（CC BY-SA 授權），經由{' '}
-              <a href={`https://www.inaturalist.org/taxa/${taxon.id}`} target="_blank" rel="noreferrer">
-                iNaturalist
-              </a>{' '}
-              取得
-            </p>
-          </>
-        )}
+        <SpeciesSummary taxon={taxon} nameZh={displayName} />
       </div>
     </section>
+  )
+}
+
+// ---------- 物種簡介：維基百科正體中文 ----------
+// 1. 用學名查中文維基（指定 zh-tw，自動轉成正體）
+// 2. 查不到時改用中文名再查一次
+// 3. 都查不到，才用 iNaturalist 附的維基摘要，並先轉成正體中文（原文可能是簡體字）
+function SpeciesSummary({ taxon, nameZh }) {
+  const summary = useAsync(async () => {
+    const wiki = (await fetchWikiSummary(taxon.nameSci)) ?? (nameZh ? await fetchWikiSummary(nameZh) : null)
+    if (wiki) return { ...wiki, source: 'wikipedia' }
+    if (taxon.summary) return { extract: await toTraditional(taxon.summary), source: 'inaturalist' }
+    return null
+  }, [taxon.nameSci, nameZh, taxon.summary])
+
+  if (summary.status === 'loading') return <div className={`skeleton ${styles.skeletonLine}`} />
+
+  if (summary.status === 'success' && summary.data?.source === 'wikipedia') {
+    return (
+      <>
+        <p className={styles.summary}>{summary.data.extract}</p>
+        <p className={styles.source}>
+          簡介摘自維基百科（CC BY-SA 授權）
+          {summary.data.url && (
+            <>
+              ・
+              <a href={summary.data.url} target="_blank" rel="noreferrer">
+                閱讀全文 →
+              </a>
+            </>
+          )}
+        </p>
+      </>
+    )
+  }
+
+  // 備案：使用 iNaturalist 附的摘要（已轉正體；維基百科暫時連不上時直接顯示原文）
+  const text = summary.data?.extract ?? taxon.summary
+  if (!text) return null
+  return (
+    <>
+      <p className={styles.summary}>{text}</p>
+      <p className={styles.source}>
+        簡介摘自維基百科（CC BY-SA 授權），經由{' '}
+        <a href={`https://www.inaturalist.org/taxa/${taxon.id}`} target="_blank" rel="noreferrer">
+          iNaturalist
+        </a>{' '}
+        取得
+      </p>
+    </>
   )
 }
 

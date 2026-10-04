@@ -85,12 +85,19 @@
 .navList {
   display: flex;
   flex-direction: column;
+  padding-block: var(--space-1);
 }
 
+/* 手機選單：字 16px，上下各 10px → 每行 44px（手指點擊的建議最小高度），不會太擠也不會太空 */
 .navLink {
   display: block;
-  padding: var(--space-4) var(--container-padding);
+  padding: 10px var(--container-padding);
   transition: background-color var(--transition);
+}
+
+/* 選項之間的淡分隔線，距離縮短後仍看得出是兩個獨立項目 */
+.navList li + li .navLink {
+  border-top: 1px solid rgb(255 255 255 / 0.12);
 }
 
 .navLink:hover {
@@ -119,11 +126,17 @@
   .navList {
     flex-direction: row;
     gap: var(--space-2);
+    padding-block: 0;
   }
 
   .navLink {
     padding: var(--space-2) var(--space-4);
     border-radius: var(--radius-sm);
+  }
+
+  /* 橫向排列時不需要分隔線 */
+  .navList li + li .navLink {
+    border-top: none;
   }
 }
 
