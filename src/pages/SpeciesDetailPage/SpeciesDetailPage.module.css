@@ -58,6 +58,53 @@
   background-color: var(--color-primary-light);
 }
 
+/* ---------- 標籤彈窗裡的內容 ---------- */
+/* 保育等級清單：目前等級加粗並用紅色標示 */
+.infoList {
+  margin-top: var(--space-2);
+  padding-left: var(--space-3);
+  border-left: 3px solid var(--color-border);
+}
+
+.infoList li[data-current='true'] {
+  font-weight: 700;
+  color: var(--color-protected);
+}
+
+/* 紅皮書階梯圖：暫無危機 › 接近受脅 › 易危 › 瀕危 › 極危 */
+.redlistScale {
+  display: flex;
+  flex-wrap: wrap;
+  margin-block: var(--space-2);
+  padding: 3px;
+  background-color: var(--color-bg);
+  border-radius: var(--radius-sm);
+}
+
+.redlistScale li {
+  display: flex;
+  align-items: center;
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+}
+
+.redlistScale span {
+  padding: 1px 6px;
+  border-radius: 4px;
+}
+
+.redlistScale li + li::before {
+  content: '›';
+  padding-inline: 1px;
+  color: var(--color-border);
+}
+
+.redlistScale span[data-current='true'] {
+  font-weight: 700;
+  color: #fff;
+  background-color: var(--color-accent);
+}
+
 .summary {
   margin-top: var(--space-6);
   line-height: 1.8;

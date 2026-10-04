@@ -1,0 +1,69 @@
+.wrap {
+  position: relative;
+  display: inline-block;
+}
+
+/* 標籤本身：外觀和原本的標籤一樣，顏色由外面傳進來的 className 決定 */
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: var(--space-1) var(--space-3);
+  font-size: var(--fs-sm);
+  border-radius: 999px;
+  cursor: help;
+}
+
+/* 小小的 ⓘ，提示「這裡可以看說明」 */
+.hint {
+  font-size: 0.75rem;
+  opacity: 0.75;
+}
+
+/* ---------- 彈窗 ---------- */
+.popover {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  z-index: 50;
+  display: block;
+  width: min(300px, calc(100vw - 24px));
+  padding: var(--space-3) var(--space-4);
+  font-size: var(--fs-sm);
+  line-height: 1.7;
+  text-align: left;
+  color: var(--color-text);
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+  animation: pop-in 0.15s ease-out;
+}
+
+@keyframes pop-in {
+  from {
+    opacity: 0;
+    margin-top: -4px;
+  }
+  to {
+    opacity: 1;
+    margin-top: 0;
+  }
+}
+
+/* 標籤和彈窗之間的空隙：用透明區塊補起來，滑鼠從標籤移到彈窗的途中不會消失 */
+.popover::before {
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: 0;
+  right: 0;
+  height: 10px;
+}
+
+.title {
+  display: block;
+  margin-bottom: var(--space-1);
+  font-size: var(--fs-base);
+  color: var(--color-primary-dark);
+}

@@ -10,7 +10,16 @@ import { formatKm } from '../../utils/geo.js'
 import { useAsync } from '../../hooks/useAsync.js'
 import { useSpeciesList } from '../../hooks/useSpeciesList.js'
 import { useGeolocation } from '../../hooks/useGeolocation.js'
-import { ALIEN_LABELS, REDLIST_LABELS, TAXONOMY_RANKS } from '../../constants/labels.js'
+import InfoTag from '../../components/InfoTag/InfoTag.jsx'
+import {
+  ALIEN_INFO,
+  ALIEN_LABELS,
+  ENDEMIC_INFO,
+  PROTECTED_INFO,
+  REDLIST_INFO,
+  REDLIST_LABELS,
+  TAXONOMY_RANKS,
+} from '../../constants/labels.js'
 import styles from './SpeciesDetailPage.module.css'
 
 const RADIUS_OPTIONS = [1, 5, 10] // 公里
@@ -156,13 +165,55 @@ function SpeciesHero({ taxon, local, displayName }) {
         <p className={`scientific-name ${styles.nameSci}`}>{taxon.nameSci}</p>
         {taxon.nameEn && <p className={styles.nameEn}>{taxon.nameEn}</p>}
 
+        {/* 標籤：滑鼠移上去（手機點一下）會出現說明 */}
         <ul className={styles.tags}>
-          {endemic && <li className={`${styles.tag} ${styles.endemic}`}>臺灣特有種</li>}
-          {local?.protectedLevel && (
-            <li className={`${styles.tag} ${styles.protected}`}>{local.protectedLevel} 級保育類</li>
+          {endemic && (
+            <li>
+              <InfoTag label="臺灣特有種" title={ENDEMIC_INFO.title} className={`${styles.tag} ${styles.endemic}`}>
+                <p>{ENDEMIC_INFO.text}</p>
+              </InfoTag>
+            </li>
           )}
-          {alienLabel && <li className={`${styles.tag} ${styles.alien}`}>{alienLabel}</li>}
-          {redlistLabel && <li className={`${styles.tag} ${styles.redlist}`}>紅皮書：{redlistLabel}</li>}
+          {local?.protectedLevel && (
+            <li>
+              <InfoTag
+                label={`${local.protectedLevel} 級保育類`}
+                title={PROTECTED_INFO.title}
+                className={`${styles.tag} ${styles.protected}`}
+              >
+                <p>{PROTECTED_INFO.text}</p>
+                <ul className={styles.infoList}>
+                  {Object.entries(PROTECTED_INFO.levels).map(([level, text]) => (
+                    <li key={level} data-current={level === local.protectedLevel}>
+                      {text}
+                    </li>
+                  ))}
+                </ul>
+              </InfoTag>
+            </li>
+          )}
+          {alienLabel && (
+            <li>
+              <InfoTag
+                label={alienLabel}
+                title={ALIEN_INFO[local.alienType].title}
+                className={`${styles.tag} ${styles.alien}`}
+              >
+                <p>{ALIEN_INFO[local.alienType].text}</p>
+              </InfoTag>
+            </li>
+          )}
+          {redlistLabel && (
+            <li>
+              <InfoTag
+                label={`紅皮書：${redlistLabel}`}
+                title={REDLIST_INFO.title}
+                className={`${styles.tag} ${styles.redlist}`}
+              >
+                <RedlistExplain code={local.redlist} />
+              </InfoTag>
+            </li>
+          )}
         </ul>
 
         {taxonomy.length > 0 && (
@@ -184,6 +235,28 @@ function SpeciesHero({ taxon, local, displayName }) {
         )}
       </div>
     </section>
+  )
+}
+
+// ---------- 紅皮書說明：危機等級階梯圖，目前等級標成金色 ----------
+function RedlistExplain({ code }) {
+  const current = REDLIST_INFO.scale.find((item) => item.code === code)
+
+  return (
+    <>
+      <p>{REDLIST_INFO.text}</p>
+      <ol className={styles.redlistScale}>
+        {REDLIST_INFO.scale.map((item) => (
+          <li key={item.code}>
+            {/* 文字包在 span 裡：金色底只套在文字上，前面的 › 不會被包進去 */}
+            <span data-current={item.code === code}>{item.label}</span>
+          </li>
+        ))}
+      </ol>
+      <p>
+        <strong>{current ? `${current.label}：${current.text}` : REDLIST_INFO.others[code]}</strong>
+      </p>
+    </>
   )
 }
 
