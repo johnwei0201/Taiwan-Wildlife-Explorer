@@ -2,7 +2,7 @@ import { useMemo } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import SpeciesCard from '../../components/SpeciesCard/SpeciesCard.jsx'
 import FilterPanel from '../../components/FilterPanel/FilterPanel.jsx'
-import { GROUPS, findGroup } from '../../constants/groups.js'
+import { COLLECTIONS, GROUPS, findGroup, matchTags, parseTags } from '../../constants/groups.js'
 import { FILTERS, applyFilters } from '../../constants/filters.js'
 import { useSpeciesList } from '../../hooks/useSpeciesList.js'
 import styles from './HomePage.module.css'
@@ -22,11 +22,16 @@ function shuffle(list) {
 export default function HomePage() {
   const { speciesList, status } = useSpeciesList()
 
-  // 分頁與篩選條件存在網址上（例如 /?group=insecta&sub=lepidoptera&color=藍）：
+  // 分頁與篩選條件存在網址上（例如 /?group=insecta&sub=lepidoptera&tag=endemic&color=藍）：
   // 點進物種詳細頁再按「上一頁」回來，條件還會保留
   const [searchParams, setSearchParams] = useSearchParams()
-  // activeGroup 為 null＝還沒選，顯示隨機推薦；activeSub 為 null＝第二層選「全部」
-  const { group: activeGroup, subgroup: activeSub } = findGroup(searchParams.get('group'), searchParams.get('sub'))
+  const groupParam = searchParams.get('group')
+  // 主題可複選；舊網址（例如 /?group=endemic）把主題放在 group，也一併讀進來
+  const activeTags = [...new Set([...parseTags(searchParams.get('tag')), ...parseTags(groupParam)])]
+  const found = findGroup(groupParam, searchParams.get('sub'))
+  // activeGroup 為 null＝還沒選，顯示隨機推薦；只選了主題時，範圍是「全部」
+  const activeGroup = found.group ?? (activeTags.length > 0 ? GROUPS[0] : null)
+  const activeSub = found.subgroup // null＝第二層選「全部」
   const filters = Object.fromEntries(FILTERS.map((f) => [f.key, searchParams.get(f.key) ?? '']))
 
   // 一打開網頁先隨機推薦 30 種（只挑有照片的），每次重新整理都不一樣
@@ -35,9 +40,25 @@ export default function HomePage() {
     [speciesList],
   )
 
-  // 切換分頁時清空篩選條件（不同類群的選項不一樣）
-  const selectGroup = (groupId) => setSearchParams({ group: groupId })
-  const selectSub = (subId) => setSearchParams(subId ? { group: activeGroup.id, sub: subId } : { group: activeGroup.id })
+  // 組出網址參數：分頁、小分類、主題（外觀篩選另外加）
+  const buildParams = (groupId, subId, tags) => {
+    const params = { group: groupId }
+    if (subId) params.sub = subId
+    if (tags.length > 0) params.tag = tags.join(',')
+    return params
+  }
+
+  // 切換分頁時清空外觀篩選（不同類群的選項不一樣），但保留主題：主題跨類群都適用
+  const selectGroup = (groupId) => setSearchParams(buildParams(groupId, null, activeTags))
+  const selectSub = (subId) => setSearchParams(buildParams(activeGroup.id, subId, activeTags))
+
+  // 點主題：選取／取消，外觀篩選保留
+  const toggleTag = (tagId) => {
+    const tags = activeTags.includes(tagId) ? activeTags.filter((t) => t !== tagId) : [...activeTags, tagId]
+    const next = buildParams(activeGroup?.id ?? 'all', activeSub?.id, tags)
+    for (const [key, value] of Object.entries(filters)) if (value) next[key] = value
+    setSearchParams(next, { replace: true })
+  }
 
   const changeFilter = (key, value) => {
     const next = new URLSearchParams(searchParams)
@@ -47,14 +68,22 @@ export default function HomePage() {
     setSearchParams(next, { replace: true })
   }
 
-  const clearFilters = () =>
-    setSearchParams(activeSub ? { group: activeGroup.id, sub: activeSub.id } : { group: activeGroup.id }, { replace: true })
+  const clearFilters = () => setSearchParams(buildParams(activeGroup.id, activeSub?.id, activeTags), { replace: true })
 
   const showFilters = activeGroup?.kind === 'group'
-  // 有選第二層就用第二層的範圍，例如「昆蟲類 › 蝴蝶」只看蝴蝶
+  const applyAppearance = (list) => (showFilters ? applyFilters(list, filters) : list)
+
+  // 篩選順序：分頁（有選第二層就用第二層，例如「昆蟲類 › 蝴蝶」）→ 主題 → 外觀
   const scope = activeSub ?? activeGroup
-  const groupSpecies = scope ? speciesList.filter(scope.match) : []
-  const filteredSpecies = showFilters ? applyFilters(groupSpecies, filters) : groupSpecies
+  const scopeSpecies = scope ? speciesList.filter(scope.match) : []
+  const groupSpecies = scopeSpecies.filter((s) => matchTags(s, activeTags))
+  const filteredSpecies = applyAppearance(groupSpecies)
+
+  // 每個主題「加選之後還剩幾種」：會變成 0 種的不能選（例如特有種＋外來種不可能同時成立）
+  const countWithTag = (tagId) => {
+    const tags = activeTags.includes(tagId) ? activeTags : [...activeTags, tagId]
+    return applyAppearance(scopeSpecies.filter((s) => matchTags(s, tags))).length
+  }
 
   return (
     <div className="container">
@@ -63,21 +92,46 @@ export default function HomePage() {
         <p className={styles.subtitle}>探索台灣的鳥類、哺乳類、爬蟲類、兩棲類與昆蟲類</p>
       </section>
 
-      {/* 分頁：手機可以左右滑動，平板以上會自動換行 */}
-      <div className={styles.tabs} role="tablist" aria-label="動物分類">
-        {GROUPS.map((group) => (
-          <button
-            key={group.id}
-            type="button"
-            role="tab"
-            aria-selected={activeGroup?.id === group.id}
-            data-kind={group.kind}
-            className={styles.tab}
-            onClick={() => selectGroup(group.id)}
-          >
-            {group.label}
-          </button>
-        ))}
+      <div className={styles.tabBar}>
+        {/* 分頁（單選）：手機可以左右滑動，平板以上會自動換行 */}
+        <div className={styles.tabs} role="tablist" aria-label="動物分類">
+          {GROUPS.map((group) => (
+            <button
+              key={group.id}
+              type="button"
+              role="tab"
+              aria-selected={activeGroup?.id === group.id}
+              className={styles.tab}
+              onClick={() => selectGroup(group.id)}
+            >
+              {group.label}
+            </button>
+          ))}
+        </div>
+
+        {/* 主題（可複選）：疊加在分頁上，選越多範圍越小 */}
+        <div className={styles.tabs} role="group" aria-label="主題（可複選）">
+          {COLLECTIONS.map((tag) => {
+            const isSelected = activeTags.includes(tag.id)
+            const count = status === 'success' ? countWithTag(tag.id) : null
+            return (
+              <button
+                key={tag.id}
+                type="button"
+                aria-pressed={isSelected}
+                data-kind="collection"
+                className={styles.tab}
+                title={count === null ? tag.label : `${tag.label}（${count} 種）`}
+                disabled={count === 0 && !isSelected}
+                onClick={() => toggleTag(tag.id)}
+              >
+                {/* 打勾：不只靠顏色，也用符號表示「已選取」 */}
+                {isSelected && <span aria-hidden="true">✓ </span>}
+                {tag.label}
+              </button>
+            )
+          })}
+        </div>
       </div>
 
       {/* 第二層小分類：選了有小分類的類群（例如昆蟲類）才出現 */}
@@ -133,7 +187,7 @@ export default function HomePage() {
         <>
           <p className={styles.count}>
             共 {filteredSpecies.length} 種
-            {filteredSpecies.length < groupSpecies.length && `（從 ${groupSpecies.length} 種中篩選）`}
+            {filteredSpecies.length < scopeSpecies.length && `（從 ${scopeSpecies.length} 種中篩選）`}
           </p>
           {filteredSpecies.length === 0 ? (
             <p className={styles.message}>沒有符合條件的動物，試著減少一些條件</p>

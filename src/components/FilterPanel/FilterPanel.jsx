@@ -62,7 +62,7 @@ function SelectFilter({ filter, list, group, filters, onChange }) {
       <label className={styles.field}>
         <span className={styles.label}>{filter.label}</span>
         <select className={styles.select} disabled>
-          <option>請先選上方的小分類</option>
+          <option>先選小分類</option>
         </select>
       </label>
     )

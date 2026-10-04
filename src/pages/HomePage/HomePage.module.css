@@ -13,7 +13,14 @@
 }
 
 /* ---------- 類群切換 ---------- */
+/* 分頁和主題分成兩組：手機上下兩排，平板以上排在同一行（放不下會換行） */
+.tabBar {
+  display: flex;
+  flex-direction: column;
+}
+
 .tabs {
+  min-width: 0; /* 讓手機上的橫向滑動在 flex 容器裡也能運作 */
   display: flex;
   gap: var(--space-1);
   overflow-x: auto;              /* 手機：放不下時可以橫向滑動 */
@@ -45,19 +52,25 @@
   color: #fff;
 }
 
-/* 主題分頁（特有種、保育類、入侵種）：用金色區分，和前面的類群分頁隔開一點 */
+/* 主題（特有種、保育類、外來種）：可複選，用金色和單選的分頁區分 */
 .tab[data-kind='collection'] {
   border-color: var(--color-accent);
   color: #9a5f12;
 }
 
-.tab[data-kind='group'] + .tab[data-kind='collection'] {
-  margin-left: var(--space-2);
-}
-
-.tab[data-kind='collection'][aria-selected='true'] {
+.tab[data-kind='collection'][aria-pressed='true'] {
   background-color: var(--color-accent);
   color: #fff;
+}
+
+/* 加選之後會變成 0 種的主題（例如已選特有種時的外來種）：淡化、不能點 */
+.tab:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.tab:disabled:hover {
+  border-color: var(--color-accent);
 }
 
 /* ---------- 第二層小分類（例如 昆蟲類 › 全部／蝴蝶／蜻蜓） ---------- */
@@ -125,6 +138,12 @@
 
 /* 平板：3 欄 */
 @media (min-width: 768px) {
+  .tabBar {
+    flex-direction: row;
+    flex-wrap: wrap;
+    column-gap: var(--space-3);
+  }
+
   .tabs {
     flex-wrap: wrap;
     overflow-x: visible;

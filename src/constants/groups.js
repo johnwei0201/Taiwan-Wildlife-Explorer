@@ -1,8 +1,8 @@
-// 首頁分頁（兩層）
-//   kind: 'group'      → 依類群分（id 和 species-list.json 的 group 欄位一致），會出現外觀篩選面板
-//   kind: 'collection' → 跨類群的主題（特有種、保育類、外來種），不顯示外觀篩選
-//   subgroups          → 第二層小分類：第一層只放「綱」這一級（鳥類、昆蟲類…），
-//                        「目」這一級（蝴蝶、蜻蜓…）放在第二層，之後加新類群時第一層不會一直變長
+// 首頁分頁（兩層）：單選，決定「看哪一類動物」
+//   kind: 'all'   → 全部動物，不顯示外觀篩選
+//   kind: 'group' → 依類群分（id 和 species-list.json 的 group 欄位一致），會出現外觀篩選面板
+//   subgroups     → 第二層小分類：第一層只放「綱」這一級（鳥類、昆蟲類…），
+//                   「目」這一級（蝴蝶、蜻蜓…）放在第二層，之後加新類群時第一層不會一直變長
 const byGroup = (...ids) => (s) => ids.includes(s.group)
 
 export const GROUPS = [
@@ -21,16 +21,23 @@ export const GROUPS = [
       { id: 'odonata', label: '蜻蜓', match: byGroup('odonata') },
     ],
   },
-  { id: 'endemic', label: '特有種', kind: 'collection', match: (s) => s.endemic },
-  { id: 'protected', label: '保育類', kind: 'collection', match: (s) => Boolean(s.protectedLevel) },
-  // 外來種＝所有不是原生的物種（入侵種、歸化種、栽培豢養），卡片上會標出是哪一種
-  {
-    id: 'alien',
-    label: '外來種',
-    kind: 'collection',
-    match: (s) => Boolean(s.alienType) && s.alienType !== 'native',
-  },
 ]
+
+// 主題（特有種、保育類、外來種）：可複選，疊加在分頁上，例如「鳥類＋特有種＋保育類」
+// 和顏色篩選一樣是「同時具備」：選越多範圍越小（網址上以逗號分隔，例如 tag=endemic,protected）
+export const COLLECTIONS = [
+  { id: 'endemic', label: '特有種', match: (s) => s.endemic },
+  { id: 'protected', label: '保育類', match: (s) => Boolean(s.protectedLevel) },
+  // 外來種＝所有不是原生的物種（入侵種、歸化種、栽培豢養），卡片上會標出是哪一種
+  { id: 'alien', label: '外來種', match: (s) => Boolean(s.alienType) && s.alienType !== 'native' },
+]
+
+export const parseTags = (value) =>
+  (value ? value.split(',') : []).filter((id) => COLLECTIONS.some((c) => c.id === id))
+
+// 物種是否同時符合所有選取的主題
+export const matchTags = (species, tagIds) =>
+  tagIds.every((id) => COLLECTIONS.find((c) => c.id === id).match(species))
 
 // 依網址參數找出目前的分頁：回傳 { group, subgroup }，還沒選分頁時 group 為 null
 // 舊網址（例如 /?group=lepidoptera）也能用：會自動找到它的上一層「昆蟲類」
