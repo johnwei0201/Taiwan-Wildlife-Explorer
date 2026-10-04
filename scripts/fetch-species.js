@@ -32,7 +32,12 @@ const EXCLUDED_NAMES = new Set([
   'Felis catus', // 家貓
   'Canis familiaris', // 家犬
   'Canis lupus familiaris', // 家犬（另一種寫法）
+  'Capra hircus', // 家羊
+  'Bubalus bubalis', // 水牛
 ])
+
+// 雜交個體（學名含 ×，例如 Anas platyrhynchos × Cairina moschata）不是一個物種，也排除
+const isExcluded = (taxon) => EXCLUDED_NAMES.has(taxon.name) || taxon.name.includes('×')
 
 // 從指令讀取 --limit=數字
 const limitArg = process.argv.find((arg) => arg.startsWith('--limit='))
@@ -41,12 +46,23 @@ const LIMIT = limitArg ? Number(limitArg.split('=')[1]) : Infinity
 // ---------- 小工具 ----------
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
 
-async function fetchJson(url) {
-  const res = await fetch(url, {
-    headers: { 'User-Agent': 'TaiwanWildlifeExplorer/0.1 (portfolio project)' },
-  })
-  if (!res.ok) throw new Error(`HTTP ${res.status}：${url}`)
-  return res.json()
+// 失敗時自動重試：跑上千個請求時，偶爾網路不穩或被限速（HTTP 429）很正常，
+// 不能因為一次失敗就讓整個腳本停下來。每次重試等待時間加倍（5 秒、10 秒、20 秒）
+async function fetchJson(url, retries = 3) {
+  for (let attempt = 0; ; attempt++) {
+    try {
+      const res = await fetch(url, {
+        headers: { 'User-Agent': 'TaiwanWildlifeExplorer/0.1 (portfolio project)' },
+      })
+      if (!res.ok) throw new Error(`HTTP ${res.status}：${url}`)
+      return await res.json()
+    } catch (error) {
+      if (attempt >= retries) throw error
+      const wait = 5000 * 2 ** attempt
+      console.warn(`  ⚠️ ${error.message}，${wait / 1000} 秒後重試…`)
+      await sleep(wait)
+    }
+  }
 }
 
 // 授權代碼轉成好讀的格式，例如 cc-by-nc → CC BY-NC
@@ -79,7 +95,7 @@ async function fetchInatSpecies(group) {
       `&taxon_id=${group.inatTaxonId}&quality_grade=research&locale=zh-TW` +
       `&per_page=${perPage}&page=${page}`
     const data = await fetchJson(url)
-    results.push(...data.results.filter((r) => !EXCLUDED_NAMES.has(r.taxon.name)))
+    results.push(...data.results.filter((r) => !isExcluded(r.taxon)))
     await sleep(REQUEST_DELAY_MS)
 
     if (page * perPage >= data.total_results) break
@@ -158,6 +174,9 @@ async function main() {
       console.log(`  ${species.nameZh ?? '（無中文名）'} ${species.nameSci} ${marks}`)
     }
   }
+
+  // 依台灣觀察數由多到少排序：「全部」分頁會先看到常見的動物，而不是 600 多種鳥類排在最前面
+  allSpecies.sort((a, b) => b.observationsCount - a.observationsCount)
 
   await mkdir(OUTPUT_DIR, { recursive: true })
   await writeFile(`${OUTPUT_DIR}/species-list.json`, JSON.stringify(allSpecies, null, 2))
