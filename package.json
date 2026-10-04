@@ -7,7 +7,8 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "data": "node scripts/fetch-species.js"
+    "data": "node scripts/fetch-species.js && node scripts/enrich-species.js",
+    "enrich": "node scripts/enrich-species.js"
   },
   "dependencies": {
     "leaflet": "^1.9.4",
