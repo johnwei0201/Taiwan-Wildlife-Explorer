@@ -1,0 +1,8 @@
+/* 高度跟著文字大小走（1.2 倍字高），寬度依原圖比例自動計算 */
+.icon {
+  display: inline-block;
+  width: auto;
+  height: 1.2em;
+  margin-right: 0.3em;
+  vertical-align: -0.25em;
+}

@@ -3,6 +3,7 @@ import { Link, useParams } from 'react-router-dom'
 import PhotoGallery from '../../components/PhotoGallery/PhotoGallery.jsx'
 import MonthChart from '../../components/MonthChart/MonthChart.jsx'
 import SpeciesMap from '../../components/SpeciesMap/SpeciesMap.jsx'
+import LocationIcon from '../../components/LocationIcon/LocationIcon.jsx'
 import TaxonomyTable from '../../components/TaxonomyTable/TaxonomyTable.jsx'
 import { fetchTaxon, fetchMonthlyCounts, fetchRecentObservations } from '../../api/inaturalist.js'
 import { useAsync } from '../../hooks/useAsync.js'
@@ -59,7 +60,8 @@ export default function SpeciesDetailPage() {
           <h2 className={styles.sectionTitle}>台灣出沒地圖</h2>
           {/* 我的位置：把地圖移到使用者附近，看看這種動物離自己多近 */}
           <button type="button" className={styles.locate} onClick={locate} disabled={isLocating}>
-            📍 {isLocating ? '定位中…' : '我的位置'}
+            <LocationIcon />
+            {isLocating ? '定位中…' : '我的位置'}
           </button>
         </div>
         <p className={styles.sectionNote}>

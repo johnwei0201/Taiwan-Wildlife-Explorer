@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import NearbyMap from '../../components/NearbyMap/NearbyMap.jsx'
 import SpeciesCard from '../../components/SpeciesCard/SpeciesCard.jsx'
+import LocationIcon from '../../components/LocationIcon/LocationIcon.jsx'
 import { fetchNearbySpecies, fetchNearbyObservations } from '../../api/inaturalist.js'
 import { useSpeciesList } from '../../hooks/useSpeciesList.js'
 import { useGeolocation } from '../../hooks/useGeolocation.js'
@@ -57,7 +58,8 @@ export default function NearbyPage() {
 
       <div className={styles.controls}>
         <button type="button" className={styles.locateButton} onClick={locateMe} disabled={isLocating}>
-          📍 {isLocating ? '定位中…' : '使用我的位置'}
+          <LocationIcon />
+          {isLocating ? '定位中…' : '使用我的位置'}
         </button>
 
         <div className={styles.radius} role="group" aria-label="搜尋半徑">
