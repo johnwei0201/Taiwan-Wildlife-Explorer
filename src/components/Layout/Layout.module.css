@@ -3,6 +3,9 @@
   display: flex;
   flex-direction: column;
   min-height: 100dvh;
+  /* 安全網：任何東西超出螢幕寬度都直接裁掉，頁面永遠不會左右滑動
+     用 clip 而不是 hidden，因為 hidden 會讓頁首的 position: sticky 失效 */
+  overflow-x: clip;
 }
 
 .main {

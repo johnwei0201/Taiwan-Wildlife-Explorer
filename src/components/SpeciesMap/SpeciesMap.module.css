@@ -2,6 +2,9 @@
 .map {
   position: relative;
   z-index: 0; /* 建立獨立圖層，避免 Leaflet 蓋住頁首 */
+  /* 修正 iPhone Safari 地圖內容跑出框外、撐寬頁面的問題（說明見 NearbyMap.module.css） */
+  overflow: hidden;
+  contain: paint;
   width: 100%;
   height: 360px;
   border-radius: var(--radius-md);

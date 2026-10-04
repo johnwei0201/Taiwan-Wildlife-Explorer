@@ -2,6 +2,10 @@
 .map {
   position: relative;
   z-index: 0; /* 建立獨立圖層，避免 Leaflet 的圖層蓋住固定在上方的頁首 */
+  /* iPhone Safari 的 bug：圓角 + overflow: hidden 時，用 translate3d 移動的子元素（地圖圖磚）不會被裁切，
+     會跑出地圖外面把整個頁面撐寬。contain: paint 強制把內容裁切在地圖框內 */
+  overflow: hidden;
+  contain: paint;
   width: 100%;
   height: 320px;
   border-radius: var(--radius-md);
