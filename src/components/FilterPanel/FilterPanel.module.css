@@ -118,18 +118,18 @@
   background-color: var(--swatch);
   border: 1px solid rgb(0 0 0 / 0.15);
   border-radius: var(--radius-sm);
-  transition: transform var(--transition), box-shadow var(--transition);
+  transition: transform var(--transition);
 }
 
+/* 滑鼠移上去：微微放大（比「已選取」小，才分得出只是滑過還是真的選了） */
 .swatch:hover:not(:disabled) {
-  transform: scale(1.12);
+  transform: scale(1.06);
 }
 
-/* 選取中：外圈加一道主色環 */
-.swatch[aria-pressed='true'] {
-  box-shadow:
-    0 0 0 2px var(--color-surface),
-    0 0 0 4px var(--color-primary);
+/* 已選取：放大一點點代表被選到，不另外加框線 */
+.swatch[aria-pressed='true'],
+.swatch[aria-pressed='true']:hover {
+  transform: scale(1.15);
 }
 
 /* 顯示已選顏色的長方形框：外觀和下拉選單一樣，但只用來顯示，不能點 */
@@ -162,24 +162,22 @@
   cursor: default;
 }
 
-/* 選了之後會變成 0 種的顏色：變淡、加一條斜線、不能點（只變淡的話，淡灰色會被誤認成白色） */
+/* 選了之後會變成 0 種的顏色：變淡、正中央一個小 ×、不能點（只變淡的話，淡灰色會被誤認成白色） */
 .swatch:disabled {
   opacity: 0.35;
   cursor: not-allowed;
 }
 
 .swatch:disabled::after {
-  content: '';
+  content: '×';
   position: absolute;
   inset: 0;
-  border-radius: inherit;
-  background: linear-gradient(
-    to top right,
-    transparent calc(50% - 1px),
-    var(--color-text) calc(50% - 1px),
-    var(--color-text) calc(50% + 1px),
-    transparent calc(50% + 1px)
-  );
+  display: grid;
+  place-items: center;
+  font-size: 0.875rem;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--color-text);
 }
 
 /* 平板：外型、大小並排；顏色獨佔下一列，9 個色塊＋清除才放得下一排 */
