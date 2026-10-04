@@ -1,22 +1,21 @@
 import { useEffect, useState } from 'react'
 import { fetchWikiSummary } from '../../api/wikipedia.js'
-import { RANK_LADDER } from '../../constants/labels.js'
 import styles from './TaxonomyTable.module.css'
 
 /**
  * 分類階層表（綱、目、科、屬），每一層後面有「？」按鈕
  * 點「？」會在表格下方展開說明：
- *   1. 分類小教室：這一層（例如「科」）是什麼意思
+ *   1. 分類小教室：界 › 門 › 綱 › 目 › 科 › 屬 › 種，每一階都可以點，切換到那一層的說明
  *   2. 這個分類（例如「鷺科」）的維基百科介紹
  *
- * items：[{ rank, label, intro, ancestor: { id, nameSci, nameZh } }]
+ * items：從界到種的完整分類 [{ rank, label, intro, inTable, taxon: { id, nameSci, nameZh } }]
  */
 export default function TaxonomyTable({ items, speciesNameSci }) {
   const [openRank, setOpenRank] = useState(null)
   const [wiki, setWiki] = useState({ status: 'idle', data: null })
 
   const openItem = items.find((item) => item.rank === openRank)
-  const openNameSci = openItem?.ancestor.nameSci
+  const openNameSci = openItem?.taxon.nameSci
 
   // 打開某一層時才去查維基百科（沒點就不查，節省請求）
   useEffect(() => {
@@ -32,48 +31,59 @@ export default function TaxonomyTable({ items, speciesNameSci }) {
   }, [openNameSci])
 
   const toggle = (rank) => setOpenRank((current) => (current === rank ? null : rank))
+  const [genus, epithet] = speciesNameSci.split(' ')
 
   return (
     <div className={styles.wrap}>
       <dl className={styles.table}>
-        {items.map(({ rank, label, ancestor }) => (
-          <div key={rank} className={styles.row}>
-            <dt>{label}</dt>
-            <dd>
-              {ancestor.nameZh ?? ''} <span className="scientific-name">{ancestor.nameSci}</span>
-              <button
-                type="button"
-                className={styles.help}
-                aria-expanded={openRank === rank}
-                aria-controls="taxonomy-explain"
-                aria-label={`什麼是${ancestor.nameZh ?? ancestor.nameSci}？`}
-                onClick={() => toggle(rank)}
-              >
-                ?
-              </button>
-            </dd>
-          </div>
-        ))}
+        {items
+          .filter((item) => item.inTable)
+          .map(({ rank, label, taxon }) => (
+            <div key={rank} className={styles.row}>
+              <dt>{label}</dt>
+              <dd>
+                {taxon.nameZh ?? ''} <span className="scientific-name">{taxon.nameSci}</span>
+                <button
+                  type="button"
+                  className={styles.help}
+                  aria-expanded={openRank === rank}
+                  aria-controls="taxonomy-explain"
+                  aria-label={`什麼是${taxon.nameZh ?? taxon.nameSci}？`}
+                  onClick={() => toggle(rank)}
+                >
+                  ?
+                </button>
+              </dd>
+            </div>
+          ))}
       </dl>
 
       {openItem && (
         <section id="taxonomy-explain" className={styles.explain} aria-live="polite">
           <div className={styles.explainHeader}>
             <h3 className={styles.explainTitle}>
-              {openItem.ancestor.nameZh ?? ''}{' '}
-              <span className="scientific-name">{openItem.ancestor.nameSci}</span> 是什麼？
+              {openItem.taxon.nameZh ?? ''}{' '}
+              <span className="scientific-name">{openItem.taxon.nameSci}</span> 是什麼？
             </h3>
             <button type="button" className={styles.close} aria-label="關閉說明" onClick={() => setOpenRank(null)}>
               ×
             </button>
           </div>
 
-          {/* 分類小教室：界 › 門 › 綱 › 目 › 科 › 屬 › 種，目前這一層標成金色 */}
+          {/* 分類小教室：界 › 門 › 綱 › 目 › 科 › 屬 › 種，點任何一階都能切換說明 */}
           <p className={styles.lessonLabel}>📚 分類小教室</p>
-          <ol className={styles.ladder}>
-            {RANK_LADDER.map(({ rank, label }) => (
-              <li key={rank} data-current={rank === openItem.rank}>
-                {label}
+          <ol className={styles.ladder} aria-label="分類階層，點選可查看說明">
+            {items.map(({ rank, label, taxon }) => (
+              <li key={rank}>
+                <button
+                  type="button"
+                  className={styles.step}
+                  aria-pressed={rank === openRank}
+                  title={`${label}：${taxon.nameZh ?? taxon.nameSci}`}
+                  onClick={() => setOpenRank(rank)}
+                >
+                  {label}
+                </button>
               </li>
             ))}
           </ol>
@@ -82,7 +92,14 @@ export default function TaxonomyTable({ items, speciesNameSci }) {
             {openItem.rank === 'genus' && (
               <>
                 這種動物的學名 <span className="scientific-name">{speciesNameSci}</span> 中，
-                <span className="scientific-name">{openItem.ancestor.nameSci}</span> 就是屬名。
+                <span className="scientific-name">{genus}</span> 就是屬名。
+              </>
+            )}
+            {openItem.rank === 'species' && epithet && (
+              <>
+                這種動物的學名 <span className="scientific-name">{speciesNameSci}</span> 中，
+                <span className="scientific-name">{genus}</span> 是屬名，
+                <span className="scientific-name">{epithet}</span> 是種小名。
               </>
             )}
           </p>
@@ -94,7 +111,7 @@ export default function TaxonomyTable({ items, speciesNameSci }) {
             {wiki.status === 'success' && !wiki.data && (
               <p className={styles.muted}>
                 維基百科目前沒有這個分類的中文介紹，可以到{' '}
-                <a href={`https://www.inaturalist.org/taxa/${openItem.ancestor.id}`} target="_blank" rel="noreferrer">
+                <a href={`https://www.inaturalist.org/taxa/${openItem.taxon.id}`} target="_blank" rel="noreferrer">
                   iNaturalist
                 </a>{' '}
                 查看

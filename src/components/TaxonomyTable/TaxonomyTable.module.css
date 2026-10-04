@@ -115,30 +115,46 @@
   font-weight: 700;
 }
 
-/* 階層圖：界 › 門 › 綱 › 目 › 科 › 屬 › 種 */
+/* 階層圖：界 › 門 › 綱 › 目 › 科 › 屬 › 種
+   整條是一個白色長條，每一階緊貼在一起，中間只用小小的 › 分隔 */
 .ladder {
-  display: flex;
+  display: inline-flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: var(--space-1);
   margin-block: var(--space-2);
-}
-
-.ladder li {
-  padding: 0 var(--space-2);
-  color: var(--color-text-muted);
+  padding: 3px;
   background-color: var(--color-surface);
   border-radius: var(--radius-sm);
 }
 
-.ladder li + li::before {
-  content: '›';
-  margin-right: var(--space-2);
-  margin-left: calc(var(--space-2) * -1);
-  color: var(--color-text-muted);
+.ladder li {
+  display: flex;
+  align-items: center;
 }
 
-.ladder li[data-current='true'] {
+.ladder li + li::before {
+  content: '›';
+  padding-inline: 1px;
+  font-size: 0.75rem;
+  color: var(--color-border);
+}
+
+/* 每一階都是可以點的按鈕 */
+.step {
+  min-width: 28px;
+  padding: 2px var(--space-2);
+  color: var(--color-text-muted);
+  border-radius: 4px;
+  transition: background-color var(--transition), color var(--transition);
+}
+
+.step:hover {
+  color: var(--color-primary-dark);
+  background-color: var(--color-primary-light);
+}
+
+/* 目前正在看的那一階 */
+.step[aria-pressed='true'] {
   font-weight: 700;
   color: #fff;
   background-color: var(--color-accent);

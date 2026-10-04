@@ -70,10 +70,14 @@ function SpeciesHero({ taxon, local, displayName }) {
   const endemic = local?.endemic ?? taxon.endemic
   const alienLabel = ALIEN_LABELS[local?.alienType]
   const redlistLabel = REDLIST_LABELS[local?.redlist]
+  // 從界到種的完整分類：「種」就是這個物種本身，其他層從 ancestors 找
   const taxonomy = TAXONOMY_RANKS.map((rankInfo) => ({
     ...rankInfo,
-    ancestor: taxon.ancestors.find((a) => a.rank === rankInfo.rank),
-  })).filter((item) => item.ancestor)
+    taxon:
+      rankInfo.rank === 'species'
+        ? { id: taxon.id, nameSci: taxon.nameSci, nameZh: displayName }
+        : taxon.ancestors.find((a) => a.rank === rankInfo.rank),
+  })).filter((item) => item.taxon)
 
   return (
     <section className={styles.hero}>
