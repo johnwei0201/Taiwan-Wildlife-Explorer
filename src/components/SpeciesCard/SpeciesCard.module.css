@@ -16,8 +16,24 @@
 
 /* 圖片固定 4:3 比例，圖片還沒載入時版面也不會跳動 */
 .imageWrap {
+  position: relative;
   aspect-ratio: 4 / 3;
   background-color: var(--color-primary-light);
+}
+
+/* 照片授權：疊在照片左下角，半透明底色確保看得清楚 */
+.credit {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 2px var(--space-2);
+  font-size: 0.625rem;
+  color: #fff;
+  background: linear-gradient(transparent, rgb(0 0 0 / 0.55));
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .image {
@@ -64,6 +80,7 @@
 
 .endemic   { background-color: var(--color-endemic); }
 .protected { background-color: var(--color-protected); }
+.alien     { background-color: var(--color-alien); }
 
 @media (min-width: 768px) {
   .body {

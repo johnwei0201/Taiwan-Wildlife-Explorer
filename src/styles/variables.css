@@ -28,6 +28,7 @@
   /* 保育等級標籤用色 */
   --color-endemic: #2f6b4f;        /* 特有種 */
   --color-protected: #b5452f;      /* 保育類 */
+  --color-alien: #6b6f76;          /* 外來種 */
 
   /* ---------- 字型 ---------- */
   --font-sans: 'Noto Sans TC', 'PingFang TC', 'Microsoft JhengHei', system-ui, sans-serif;

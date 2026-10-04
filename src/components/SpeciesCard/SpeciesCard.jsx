@@ -1,28 +1,45 @@
 import { Link } from 'react-router-dom'
 import styles from './SpeciesCard.module.css'
 
+// 外來種類型（TaiCOL 的 alien_type）
+const ALIEN_LABELS = {
+  naturalized: '歸化種',
+  invasive: '入侵種',
+  cultured: '栽培豢養',
+}
+
 // 物種卡片：列表頁和「我附近的動物」都會共用這個元件
 export default function SpeciesCard({ species }) {
-  const { id, nameZh, nameSci, photoUrl, endemic, protected: isProtected } = species
+  const { id, nameZh, nameSci, photo, endemic, protectedLevel, alienType } = species
+  const alienLabel = ALIEN_LABELS[alienType]
 
   return (
     <Link to={`/species/${id}`} className={styles.card}>
       <div className={styles.imageWrap}>
-        {photoUrl ? (
-          <img src={photoUrl} alt={nameZh} loading="lazy" className={styles.image} />
+        {photo ? (
+          <>
+            <img src={photo.url} alt={nameZh ?? nameSci} loading="lazy" className={styles.image} />
+            {/* CC 授權規定：必須標示作者與授權 */}
+            <p className={styles.credit}>
+              © {photo.author}・{photo.license}
+            </p>
+          </>
         ) : (
           <div className={styles.placeholder} aria-hidden="true">🐾</div>
         )}
       </div>
 
       <div className={styles.body}>
-        <h3 className={styles.nameZh}>{nameZh}</h3>
+        <h3 className={styles.nameZh}>{nameZh ?? nameSci}</h3>
         <p className={`scientific-name ${styles.nameSci}`}>{nameSci}</p>
 
-        {(endemic || isProtected) && (
+        {(endemic || protectedLevel || alienLabel) && (
           <ul className={styles.tags}>
             {endemic && <li className={`${styles.tag} ${styles.endemic}`}>特有</li>}
-            {isProtected && <li className={`${styles.tag} ${styles.protected}`}>保育類</li>}
+            {protectedLevel && (
+              <li className={`${styles.tag} ${styles.protected}`}>{protectedLevel} 級保育</li>
+            )}
+            {alienLabel && <li className={`${styles.tag} ${styles.alien}`}>{alienLabel}</li>}
           </ul>
         )}
       </div>
