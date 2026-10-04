@@ -1,0 +1,29 @@
+/* 手機：地圖高度 320px */
+.map {
+  position: relative;
+  z-index: 0; /* 建立獨立圖層，避免 Leaflet 的圖層蓋住固定在上方的頁首 */
+  width: 100%;
+  height: 320px;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  cursor: crosshair;
+}
+
+.obscuredNote {
+  color: var(--color-protected);
+}
+
+/* 平板：高一點 */
+@media (min-width: 768px) {
+  .map {
+    height: 420px;
+  }
+}
+
+/* 桌機：地圖固定在左側，高度接近整個畫面 */
+@media (min-width: 1200px) {
+  .map {
+    height: calc(100dvh - var(--header-height) - var(--space-12));
+    min-height: 480px;
+  }
+}

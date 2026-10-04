@@ -1,26 +1,12 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import SpeciesCard from '../../components/SpeciesCard/SpeciesCard.jsx'
 import { GROUPS } from '../../constants/groups.js'
+import { useSpeciesList } from '../../hooks/useSpeciesList.js'
 import styles from './HomePage.module.css'
 
 export default function HomePage() {
-  const [speciesList, setSpeciesList] = useState([])
-  const [status, setStatus] = useState('loading') // loading 載入中 / success 成功 / error 失敗
+  const { speciesList, status } = useSpeciesList()
   const [activeGroup, setActiveGroup] = useState('all')
-
-  // 頁面第一次出現時，讀取資料腳本產生的 JSON（放在 public/ 的檔案可以直接用網址讀）
-  useEffect(() => {
-    fetch('/data/species-list.json')
-      .then((res) => {
-        if (!res.ok) throw new Error(`HTTP ${res.status}`)
-        return res.json()
-      })
-      .then((data) => {
-        setSpeciesList(data)
-        setStatus('success')
-      })
-      .catch(() => setStatus('error'))
-  }, [])
 
   const filteredSpecies =
     activeGroup === 'all'
