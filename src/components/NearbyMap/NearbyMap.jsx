@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import L from 'leaflet'
 import { MapContainer, TileLayer, Circle, CircleMarker, Popup, useMap, useMapEvents } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css'
@@ -30,13 +30,27 @@ function FitToSearchArea({ location, radius }) {
 }
 
 export default function NearbyMap({ location, radius, observations, onPick }) {
+  // 圓圈與標點的繪圖範圍：預設只比地圖大 10%，拖動時超出的部分會被切掉
+  // padding: 1 代表上下左右各多畫一個地圖的大小（總共 3 倍），拖動時就不會看到切邊
+  // 每個地圖各自建立一個（離開頁面再回來時地圖會重建，不能共用）
+  const [vectorRenderer] = useState(() => L.svg({ padding: 1 }))
+
   return (
-    <MapContainer center={TAIWAN_CENTER} zoom={TAIWAN_ZOOM} className={styles.map}>
+    <MapContainer
+      center={TAIWAN_CENTER}
+      zoom={TAIWAN_ZOOM}
+      renderer={vectorRenderer}
+      className={styles.map}
+    >
       {/* OpenStreetMap 免費圖磚：免金鑰，但必須標示來源 */}
       <TileLayer
         url="https://tile.openstreetmap.org/{z}/{x}/{y}.png"
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         maxZoom={19}
+        // 手機預設要等手指放開才載入新圖磚，拖動時會看到空白，這裡改成邊拖邊載入
+        updateWhenIdle={false}
+        // 多保留周圍幾圈已載入的圖磚，拖回來時不用重新下載
+        keepBuffer={4}
       />
 
       <MapClickHandler onPick={onPick} />
