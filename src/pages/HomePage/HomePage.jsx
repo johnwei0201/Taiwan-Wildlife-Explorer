@@ -2,7 +2,7 @@ import { useMemo } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import SpeciesCard from '../../components/SpeciesCard/SpeciesCard.jsx'
 import FilterPanel from '../../components/FilterPanel/FilterPanel.jsx'
-import { GROUPS } from '../../constants/groups.js'
+import { GROUPS, findGroup } from '../../constants/groups.js'
 import { FILTERS, applyFilters } from '../../constants/filters.js'
 import { useSpeciesList } from '../../hooks/useSpeciesList.js'
 import styles from './HomePage.module.css'
@@ -22,10 +22,11 @@ function shuffle(list) {
 export default function HomePage() {
   const { speciesList, status } = useSpeciesList()
 
-  // 分頁與篩選條件存在網址上（例如 /?group=aves&color=藍）：
+  // 分頁與篩選條件存在網址上（例如 /?group=insecta&sub=lepidoptera&color=藍）：
   // 點進物種詳細頁再按「上一頁」回來，條件還會保留
   const [searchParams, setSearchParams] = useSearchParams()
-  const activeGroup = GROUPS.find((g) => g.id === searchParams.get('group')) ?? null // null＝還沒選，顯示隨機推薦
+  // activeGroup 為 null＝還沒選，顯示隨機推薦；activeSub 為 null＝第二層選「全部」
+  const { group: activeGroup, subgroup: activeSub } = findGroup(searchParams.get('group'), searchParams.get('sub'))
   const filters = Object.fromEntries(FILTERS.map((f) => [f.key, searchParams.get(f.key) ?? '']))
 
   // 一打開網頁先隨機推薦 30 種（只挑有照片的），每次重新整理都不一樣
@@ -36,6 +37,7 @@ export default function HomePage() {
 
   // 切換分頁時清空篩選條件（不同類群的選項不一樣）
   const selectGroup = (groupId) => setSearchParams({ group: groupId })
+  const selectSub = (subId) => setSearchParams(subId ? { group: activeGroup.id, sub: subId } : { group: activeGroup.id })
 
   const changeFilter = (key, value) => {
     const next = new URLSearchParams(searchParams)
@@ -45,17 +47,20 @@ export default function HomePage() {
     setSearchParams(next, { replace: true })
   }
 
-  const clearFilters = () => setSearchParams({ group: activeGroup.id }, { replace: true })
+  const clearFilters = () =>
+    setSearchParams(activeSub ? { group: activeGroup.id, sub: activeSub.id } : { group: activeGroup.id }, { replace: true })
 
   const showFilters = activeGroup?.kind === 'group'
-  const groupSpecies = activeGroup ? speciesList.filter(activeGroup.match) : []
+  // 有選第二層就用第二層的範圍，例如「昆蟲類 › 蝴蝶」只看蝴蝶
+  const scope = activeSub ?? activeGroup
+  const groupSpecies = scope ? speciesList.filter(scope.match) : []
   const filteredSpecies = showFilters ? applyFilters(groupSpecies, filters) : groupSpecies
 
   return (
     <div className="container">
       <section className={styles.hero}>
         <h1 className={styles.title}>發現台灣動物趣</h1>
-        <p className={styles.subtitle}>探索台灣的鳥類、哺乳類、爬蟲類、兩棲類、蝴蝶與蜻蜓</p>
+        <p className={styles.subtitle}>探索台灣的鳥類、哺乳類、爬蟲類、兩棲類與昆蟲類</p>
       </section>
 
       {/* 分頁：手機可以左右滑動，平板以上會自動換行 */}
@@ -75,12 +80,35 @@ export default function HomePage() {
         ))}
       </div>
 
-      {/* 選了類群才出現外觀篩選；key 讓切換類群時重新播放出現動畫 */}
+      {/* 第二層小分類：選了有小分類的類群（例如昆蟲類）才出現 */}
+      {activeGroup?.subgroups && (
+        <div className={styles.subtabs} role="tablist" aria-label={`${activeGroup.label}的小分類`}>
+          <span className={styles.subtabsLabel} aria-hidden="true">
+            {activeGroup.label} ›
+          </span>
+          {[{ id: null, label: '全部' }, ...activeGroup.subgroups].map((sub) => (
+            <button
+              key={sub.id ?? 'all'}
+              type="button"
+              role="tab"
+              aria-selected={(activeSub?.id ?? null) === sub.id}
+              className={styles.subtab}
+              onClick={() => selectSub(sub.id)}
+            >
+              {sub.label}
+            </button>
+          ))}
+        </div>
+      )}
+
+      {/* 選了類群才出現外觀篩選；key 讓切換類群時重新播放出現動畫
+          group 用最細的那一層（例如蝴蝶），大小的選項才對得上；
+          只選「昆蟲類」時，蝴蝶和蜻蜓的大小標準不同，大小篩選會請使用者先選小分類 */}
       {status === 'success' && showFilters && (
         <FilterPanel
-          key={activeGroup.id}
+          key={scope.id}
           list={groupSpecies}
-          group={activeGroup.id}
+          group={scope.id}
           filters={filters}
           onChange={changeFilter}
           onClear={clearFilters}

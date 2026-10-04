@@ -60,6 +60,49 @@
   color: #fff;
 }
 
+/* ---------- 第二層小分類（例如 昆蟲類 › 全部／蝴蝶／蜻蜓） ---------- */
+/* 比第一層小一號、沒有外框，看得出是「上一層底下的選項」 */
+.subtabs {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  margin-top: var(--space-2);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.subtabs::-webkit-scrollbar {
+  display: none;
+}
+
+.subtabsLabel {
+  flex-shrink: 0;
+  margin-right: var(--space-1);
+  font-size: var(--fs-sm);
+  color: var(--color-text-muted);
+}
+
+.subtab {
+  flex-shrink: 0;
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-sm);
+  font-size: var(--fs-sm);
+  color: var(--color-primary-dark);
+  white-space: nowrap;
+  transition: background-color var(--transition);
+}
+
+.subtab:hover {
+  background-color: var(--color-primary-light);
+}
+
+/* 選取：淺綠底＋粗體（第一層選取是實心深綠，第二層淡一階，互動回饋有層次） */
+.subtab[aria-selected='true'] {
+  background-color: var(--color-primary-light);
+  font-weight: 700;
+  box-shadow: inset 0 0 0 1px var(--color-primary);
+}
+
 .count {
   margin-block: var(--space-4);
   font-size: var(--fs-sm);

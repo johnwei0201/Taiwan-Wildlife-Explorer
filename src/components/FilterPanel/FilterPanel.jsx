@@ -54,6 +54,19 @@ function SelectFilter({ filter, list, group, filters, onChange }) {
   // 套用「其他」條件後的清單，用來計算這個選單每個選項的數量
   const base = applyFilters(list, filters, filter.key)
   const value = filters[filter.key] ?? ''
+  const options = filter.getOptions(list, group)
+
+  // 沒有選項：例如「昆蟲類」底下蝴蝶量展翅寬、蜻蜓量體長，標準不同，要先選小分類才能比大小
+  if (options.length === 0) {
+    return (
+      <label className={styles.field}>
+        <span className={styles.label}>{filter.label}</span>
+        <select className={styles.select} disabled>
+          <option>請先選上方的小分類</option>
+        </select>
+      </label>
+    )
+  }
 
   return (
     <label className={styles.field}>
@@ -65,7 +78,7 @@ function SelectFilter({ filter, list, group, filters, onChange }) {
         onChange={(event) => onChange(filter.key, event.target.value)}
       >
         <option value="">不確定</option>
-        {filter.getOptions(list, group).map((option) => {
+        {options.map((option) => {
           const count = base.filter((s) => filter.match(s, option.value)).length
           return (
             <option key={option.value} value={option.value} disabled={count === 0 && option.value !== value}>
