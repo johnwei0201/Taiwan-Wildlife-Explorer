@@ -98,8 +98,14 @@
 .swatches {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--space-2);
-  padding-block: var(--space-1);
+  align-items: center;
+  gap: 6px;
+  padding: var(--space-1) 4px; /* 左右留 4px：選取時的外環才不會被切到 */
+}
+
+/* 每個項目垂直置中，「清除」才會和色塊對齊（不然會依文字基線往下偏 2px） */
+.swatches li {
+  display: flex;
 }
 
 /* 圓形色塊：顏色由 --swatch 變數傳入 */
@@ -117,27 +123,40 @@
   transform: scale(1.12);
 }
 
-/* 選取中：外圈加一道主色環，中間打勾 */
+/* 選取中：外圈加一道主色環 */
 .swatch[aria-pressed='true'] {
   box-shadow:
     0 0 0 2px var(--color-surface),
     0 0 0 4px var(--color-primary);
 }
 
-.swatch[aria-pressed='true']::after {
-  content: '✓';
-  position: absolute;
-  inset: 0;
-  display: grid;
-  place-items: center;
-  font-size: 1rem;
-  font-weight: 700;
-  color: #fff;
+/* 顯示已選顏色的長方形框：外觀和下拉選單一樣，但只用來顯示，不能點 */
+.colorDisplay {
+  cursor: default;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
-/* 白色、黃色色塊上用深色的勾，才看得見 */
-.swatch[data-light='true'][aria-pressed='true']::after {
-  color: var(--color-text);
+/* 色塊最後面的「清除」 */
+.clearColors {
+  height: 32px;
+  padding: 0 var(--space-3);
+  font-size: var(--fs-sm);
+  color: var(--color-protected);
+  border: 1px solid currentColor;
+  border-radius: 999px;
+  transition: background-color var(--transition), color var(--transition);
+}
+
+.clearColors:hover:not(:disabled) {
+  color: #fff;
+  background-color: var(--color-protected);
+}
+
+.clearColors:disabled {
+  color: var(--color-text-muted);
+  opacity: 0.4;
+  cursor: default;
 }
 
 /* 選了之後會變成 0 種的顏色：變淡、加一條斜線、不能點（只變淡的話，淡灰色會被誤認成白色） */
@@ -160,20 +179,21 @@
   );
 }
 
-.selectedText {
-  font-size: 0.75rem;
-  color: var(--color-text-muted);
-}
-
-/* 平板以上：外型、大小、顏色三欄排成一列 */
+/* 平板：外型、大小並排；顏色獨佔下一列，9 個色塊＋清除才放得下一排 */
 @media (min-width: 768px) {
   .panel {
     padding: var(--space-6);
   }
 
   .grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr)) minmax(0, 1.3fr);
     gap: var(--space-4) var(--space-6);
+  }
+}
+
+/* 桌機：外型、大小、顏色三欄排成一列，顏色欄比較寬 */
+@media (min-width: 1200px) {
+  .grid {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1.6fr);
   }
 
   .colorField {

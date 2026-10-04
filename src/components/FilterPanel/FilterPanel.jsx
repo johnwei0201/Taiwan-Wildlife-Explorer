@@ -101,6 +101,10 @@ function ColorSwatches({ filter, list, filters, onChange }) {
         {filter.label}
         <span className={styles.labelHint}>（可複選）</span>
       </span>
+      {/* 和外型、大小一樣的長方形框：顯示目前選了哪些顏色 */}
+      <div className={`${styles.select} ${styles.colorDisplay}`} data-active={selected.length > 0} aria-live="polite">
+        {selected.length > 0 ? selected.map((c) => `${c}色`).join('＋') : '不確定'}
+      </div>
       <ul className={styles.swatches}>
         {COLORS.map(({ name, hex }) => {
           const isSelected = selected.includes(name)
@@ -112,7 +116,6 @@ function ColorSwatches({ filter, list, filters, onChange }) {
                 type="button"
                 className={styles.swatch}
                 style={{ '--swatch': hex }}
-                data-light={name === '白' || name === '黃'}
                 aria-pressed={isSelected}
                 aria-label={`${name}色（${count} 種）`}
                 title={`${name}色（${count} 種）`}
@@ -122,10 +125,17 @@ function ColorSwatches({ filter, list, filters, onChange }) {
             </li>
           )
         })}
+        <li>
+          <button
+            type="button"
+            className={styles.clearColors}
+            disabled={selected.length === 0}
+            onClick={() => onChange(filter.key, '')}
+          >
+            清除
+          </button>
+        </li>
       </ul>
-      <p className={styles.selectedText}>
-        {selected.length > 0 ? `已選：${selected.map((c) => `${c}色`).join('＋')}` : '點選動物身上有的顏色'}
-      </p>
     </div>
   )
 }
