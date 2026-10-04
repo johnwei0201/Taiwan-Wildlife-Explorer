@@ -3,14 +3,21 @@ import { Link, useParams } from 'react-router-dom'
 import PhotoGallery from '../../components/PhotoGallery/PhotoGallery.jsx'
 import MonthChart from '../../components/MonthChart/MonthChart.jsx'
 import SpeciesMap from '../../components/SpeciesMap/SpeciesMap.jsx'
+import SpeciesCard from '../../components/SpeciesCard/SpeciesCard.jsx'
 import LocationIcon from '../../components/LocationIcon/LocationIcon.jsx'
 import TaxonomyTable from '../../components/TaxonomyTable/TaxonomyTable.jsx'
-import { fetchTaxon, fetchMonthlyCounts, fetchRecentObservations, fetchSpeciesNearby } from '../../api/inaturalist.js'
+import InfoTag from '../../components/InfoTag/InfoTag.jsx'
+import {
+  fetchTaxon,
+  fetchMonthlyCounts,
+  fetchRecentObservations,
+  fetchSpeciesNearby,
+  fetchNearbySpecies,
+} from '../../api/inaturalist.js'
 import { formatKm } from '../../utils/geo.js'
 import { useAsync } from '../../hooks/useAsync.js'
-import { useSpeciesList } from '../../hooks/useSpeciesList.js'
+import { useSpeciesList, withLocalData } from '../../hooks/useSpeciesList.js'
 import { useGeolocation } from '../../hooks/useGeolocation.js'
-import InfoTag from '../../components/InfoTag/InfoTag.jsx'
 import {
   ALIEN_INFO,
   ALIEN_LABELS,
@@ -42,6 +49,11 @@ export default function SpeciesDetailPage() {
   const nearby = useAsync(
     (signal) => (userLocation ? fetchSpeciesNearby(id, userLocation, radius, signal) : Promise.resolve(null)),
     [id, userLocation, radius],
+  )
+  // 同一個範圍內還出現過哪些動物（右側清單，和「我附近的動物」頁面相同）
+  const nearbyAnimals = useAsync(
+    (signal) => (userLocation ? fetchNearbySpecies({ ...userLocation, radius }, signal) : Promise.resolve(null)),
+    [userLocation, radius],
   )
 
   // 瀏覽器分頁標題顯示物種名稱
@@ -122,12 +134,8 @@ export default function SpeciesDetailPage() {
           <div>
             {userLocation ? (
               <>
-                <h3 className={styles.listTitle}>離你最近的紀錄</h3>
-                <RecordList
-                  status={nearby.status}
-                  records={nearby.data?.observations ?? []}
-                  emptyText={`你附近 ${nearby.data?.searchedRadius ?? radius} 公里內都沒有紀錄`}
-                />
+                <h3 className={styles.listTitle}>你附近 {radius} 公里內的動物</h3>
+                <NearbyAnimals result={nearbyAnimals} speciesList={speciesList} currentId={Number(id)} />
               </>
             ) : (
               <>
@@ -293,7 +301,33 @@ function NearbySummary({ nearby, name }) {
   )
 }
 
-// ---------- 觀察紀錄列表（最新紀錄／離你最近的紀錄共用） ----------
+// ---------- 你附近的動物：和「我附近的動物」頁面相同的卡片清單 ----------
+function NearbyAnimals({ result, speciesList, currentId }) {
+  if (result.status === 'loading') return <div className={`skeleton ${styles.skeletonBlock}`} />
+  if (result.status === 'error' || !result.data) return <p className={styles.message}>暫時無法取得附近的動物</p>
+  if (result.data.total === 0) return <p className={styles.message}>這附近還沒有紀錄，試試擴大搜尋範圍</p>
+
+  const species = withLocalData(result.data.species, speciesList)
+
+  return (
+    <>
+      <p className={styles.nearbyCount}>
+        共發現 <strong>{result.data.total}</strong> 種
+        {result.data.total > species.length && `（顯示最常見的 ${species.length} 種）`}
+      </p>
+      <ul className={styles.nearbyGrid}>
+        {species.map((s) => (
+          // 目前正在看的物種如果也在附近，用框線標出來
+          <li key={s.id} data-current={s.id === currentId}>
+            <SpeciesCard species={s} />
+          </li>
+        ))}
+      </ul>
+    </>
+  )
+}
+
+// ---------- 觀察紀錄列表（最新紀錄） ----------
 function RecordList({ status, records, emptyText }) {
   if (status === 'loading') return <div className={`skeleton ${styles.skeletonBlock}`} />
   if (status === 'error') return <p className={styles.message}>暫時無法取得紀錄</p>
@@ -305,9 +339,6 @@ function RecordList({ status, records, emptyText }) {
         <li key={obs.id}>
           <a href={obs.url} target="_blank" rel="noreferrer" className={styles.record}>
             <span className={styles.recordDate}>{obs.observedOn ?? '日期不明'}</span>
-            {obs.distanceKm != null && (
-              <span className={styles.recordDistance}>距離約 {formatKm(obs.distanceKm)} 公里</span>
-            )}
             {obs.obscured && <span className={styles.obscuredBadge}>位置已模糊化</span>}
             <p className={styles.recordPlace}>{obs.placeGuess ?? '地點不明'}</p>
           </a>

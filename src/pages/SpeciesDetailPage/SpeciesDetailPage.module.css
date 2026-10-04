@@ -160,6 +160,11 @@
   background-color: var(--color-primary);
 }
 
+/* 按鈕變深綠色時，黑色圖示反轉成白色（白色圓環同時變黑），在深色底上才看得清楚 */
+.locate:hover img {
+  filter: invert(1);
+}
+
 .locate:disabled {
   opacity: 0.6;
   cursor: wait;
@@ -217,11 +222,25 @@
   color: var(--color-primary-dark);
 }
 
-.recordDistance {
-  margin-left: var(--space-2);
+/* ---------- 你附近的動物（定位後的右側卡片清單） ---------- */
+.nearbyCount {
+  margin-bottom: var(--space-3);
   font-size: var(--fs-sm);
-  font-weight: 700;
-  color: var(--color-primary);
+  color: var(--color-text-muted);
+}
+
+/* 手機：2 欄 */
+.nearbyGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-3);
+}
+
+/* 目前正在看的物種也出現在附近時，用金色框標出來 */
+.nearbyGrid li[data-current='true'] {
+  border-radius: var(--radius-md);
+  outline: 3px solid var(--color-accent);
+  outline-offset: 2px;
 }
 
 .geoError {
@@ -293,6 +312,14 @@
 .skeletonLine  { height: 1rem; margin-top: var(--space-3); }
 .skeletonBlock { height: 200px; }
 
+/* ---------- 平板：附近動物 3 欄（清單在地圖下方，寬度夠） ---------- */
+@media (min-width: 768px) {
+  .nearbyGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-4);
+  }
+}
+
 /* ---------- 桌機：照片與資料左右排列；地圖與紀錄左右排列 ---------- */
 @media (min-width: 1200px) {
   .hero {
@@ -309,5 +336,14 @@
   .records {
     max-height: 520px;
     overflow-y: auto;
+  }
+
+  /* 桌機的右側欄比較窄：2 欄，太長時在框內捲動 */
+  .nearbyGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-3);
+    max-height: 480px;
+    overflow-y: auto;
+    padding: 4px;
   }
 }

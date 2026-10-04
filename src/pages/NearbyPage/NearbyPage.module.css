@@ -33,6 +33,11 @@
   background-color: var(--color-primary-dark);
 }
 
+/* 按鈕是深綠色底：黑色圖示反轉成白色才看得清楚 */
+.locateButton img {
+  filter: invert(1);
+}
+
 .locateButton:disabled {
   opacity: 0.6;
   cursor: wait;

@@ -3,7 +3,7 @@ import NearbyMap from '../../components/NearbyMap/NearbyMap.jsx'
 import SpeciesCard from '../../components/SpeciesCard/SpeciesCard.jsx'
 import LocationIcon from '../../components/LocationIcon/LocationIcon.jsx'
 import { fetchNearbySpecies, fetchNearbyObservations } from '../../api/inaturalist.js'
-import { useSpeciesList } from '../../hooks/useSpeciesList.js'
+import { useSpeciesList, withLocalData } from '../../hooks/useSpeciesList.js'
 import { useGeolocation } from '../../hooks/useGeolocation.js'
 import styles from './NearbyPage.module.css'
 
@@ -46,8 +46,7 @@ export default function NearbyPage() {
   }, [location, radius])
 
   // 若物種已在我們整理好的清單中，改用清單資料（有 TaiCOL 的保育等級等資訊）
-  const localById = new Map(speciesList.map((species) => [species.id, species]))
-  const nearbySpecies = result.species.map((species) => localById.get(species.id) ?? species)
+  const nearbySpecies = withLocalData(result.species, speciesList)
 
   return (
     <div className="container">
