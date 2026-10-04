@@ -7,7 +7,7 @@
 
 .chart {
   display: grid;
-  grid-template-columns: repeat(12, 1fr);
+  grid-template-columns: repeat(12, minmax(0, 1fr));
   gap: 2px;
   height: 180px;
 }

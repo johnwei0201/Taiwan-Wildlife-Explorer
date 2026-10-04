@@ -6,16 +6,28 @@
   border-radius: var(--radius-md);
 }
 
+/* 不支援 aspect-ratio 的舊版瀏覽器：用 padding-top 撐出 4:3 */
+@supports not (aspect-ratio: 4 / 3) {
+  .main {
+    height: 0;
+    padding-top: 75%;
+  }
+}
+
+/* 照片絕對定位，照片本身尺寸不影響版面（修正 iPhone Safari 照片撐大版面，說明見 SpeciesCard） */
 .mainImage {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
 .placeholder {
+  position: absolute;
+  inset: 0;
   display: grid;
   place-items: center;
-  height: 100%;
   font-size: 4rem;
   opacity: 0.4;
 }
