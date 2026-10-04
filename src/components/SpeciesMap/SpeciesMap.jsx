@@ -1,6 +1,6 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import L from 'leaflet'
-import { MapContainer, TileLayer } from 'react-leaflet'
+import { MapContainer, TileLayer, CircleMarker, Popup, useMap } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css'
 import ObservationMarker from '../ObservationMarker/ObservationMarker.jsx'
 import { heatmapTileUrl } from '../../api/inaturalist.js'
@@ -9,8 +9,19 @@ import styles from './SpeciesMap.module.css'
 const TAIWAN_CENTER = [23.7, 120.95]
 const TAIWAN_ZOOM = 7
 
-// 物種在台灣的出沒地圖：熱點圖層（所有紀錄）＋最新觀察紀錄
-export default function SpeciesMap({ taxonId, observations }) {
+const USER_ZOOM = 12 // 大約看得到周圍 10 公里
+
+// 取得使用者位置後，把地圖移過去（不用動畫，避免 iPhone 上整頁縮放的問題）
+function MoveToUser({ location }) {
+  const map = useMap()
+  useEffect(() => {
+    if (location) map.setView([location.lat, location.lng], USER_ZOOM, { animate: false })
+  }, [map, location])
+  return null
+}
+
+// 物種在台灣的出沒地圖：熱點圖層（所有紀錄）＋最新觀察紀錄＋使用者位置（選用）
+export default function SpeciesMap({ taxonId, observations, userLocation }) {
   // 標點的繪圖範圍放大到地圖的 3 倍，拖動時不會被切掉（說明見 NearbyMap）
   const [vectorRenderer] = useState(() => L.svg({ padding: 1 }))
 
@@ -41,6 +52,17 @@ export default function SpeciesMap({ taxonId, observations }) {
         {observations.map((obs) => (
           <ObservationMarker key={obs.id} observation={obs} />
         ))}
+
+        <MoveToUser location={userLocation} />
+        {userLocation && (
+          <CircleMarker
+            center={userLocation}
+            radius={8}
+            pathOptions={{ color: '#fff', weight: 3, fillColor: '#2b6cd9', fillOpacity: 1 }}
+          >
+            <Popup>你的位置（約略）</Popup>
+          </CircleMarker>
+        )}
       </MapContainer>
     </div>
   )

@@ -85,6 +85,46 @@
   color: var(--color-primary-dark);
 }
 
+/* 區塊標題列：標題＋右側按鈕（例如地圖的「我的位置」） */
+.sectionHeader {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2) var(--space-4);
+  margin-bottom: var(--space-4);
+}
+
+.sectionHeader .sectionTitle {
+  margin-bottom: 0;
+}
+
+.locate {
+  padding: var(--space-1) var(--space-3);
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  color: var(--color-primary);
+  border: 1px solid var(--color-primary);
+  border-radius: var(--radius-sm);
+  transition: background-color var(--transition), color var(--transition);
+}
+
+.locate:hover {
+  color: #fff;
+  background-color: var(--color-primary);
+}
+
+.locate:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+.geoError {
+  margin-top: calc(var(--space-2) * -1);
+  margin-bottom: var(--space-4);
+  font-size: var(--fs-sm);
+  color: var(--color-protected);
+}
+
 .sectionNote {
   margin-top: calc(var(--space-3) * -1);
   margin-bottom: var(--space-4);

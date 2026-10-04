@@ -3,45 +3,23 @@ import NearbyMap from '../../components/NearbyMap/NearbyMap.jsx'
 import SpeciesCard from '../../components/SpeciesCard/SpeciesCard.jsx'
 import { fetchNearbySpecies, fetchNearbyObservations } from '../../api/inaturalist.js'
 import { useSpeciesList } from '../../hooks/useSpeciesList.js'
+import { useGeolocation } from '../../hooks/useGeolocation.js'
 import styles from './NearbyPage.module.css'
 
 const RADIUS_OPTIONS = [1, 5, 10] // 公里
 
-// 隱私：座標四捨五入到小數點後兩位（約 1 公里精度）再查詢
-const roundCoord = (value) => Math.round(value * 100) / 100
+const GEO_MESSAGES = {
+  unsupported: '你的瀏覽器不支援定位，請直接在地圖上點選位置',
+  denied: '無法取得你的位置（可能未允許定位），請直接在地圖上點選位置',
+}
 
 export default function NearbyPage() {
   const { speciesList } = useSpeciesList()
-  const [location, setLocation] = useState(null) // { lat, lng }
+  const { location, isLocating, error: geoError, locate: locateMe, pickLocation } = useGeolocation()
   const [radius, setRadius] = useState(5)
-  const [geoMessage, setGeoMessage] = useState('')
-  const [isLocating, setIsLocating] = useState(false)
   const [result, setResult] = useState({ status: 'idle', species: [], total: 0, observations: [] })
 
-  const pickLocation = ({ lat, lng }) => {
-    setLocation({ lat: roundCoord(lat), lng: roundCoord(lng) })
-    setGeoMessage('')
-  }
-
-  // 使用瀏覽器定位（需要使用者同意，而且網站必須是 HTTPS 或 localhost）
-  const locateMe = () => {
-    if (!navigator.geolocation) {
-      setGeoMessage('你的瀏覽器不支援定位，請直接在地圖上點選位置')
-      return
-    }
-    setIsLocating(true)
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        setIsLocating(false)
-        pickLocation({ lat: position.coords.latitude, lng: position.coords.longitude })
-      },
-      () => {
-        setIsLocating(false)
-        setGeoMessage('無法取得你的位置（可能未允許定位），請直接在地圖上點選位置')
-      },
-      { timeout: 10000 },
-    )
-  }
+  const geoMessage = GEO_MESSAGES[geoError] ?? ''
 
   // 位置或半徑改變時，重新查詢 iNaturalist
   useEffect(() => {

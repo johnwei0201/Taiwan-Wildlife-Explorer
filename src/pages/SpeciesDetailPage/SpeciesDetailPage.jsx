@@ -7,6 +7,7 @@ import TaxonomyTable from '../../components/TaxonomyTable/TaxonomyTable.jsx'
 import { fetchTaxon, fetchMonthlyCounts, fetchRecentObservations } from '../../api/inaturalist.js'
 import { useAsync } from '../../hooks/useAsync.js'
 import { useSpeciesList } from '../../hooks/useSpeciesList.js'
+import { useGeolocation } from '../../hooks/useGeolocation.js'
 import { ALIEN_LABELS, REDLIST_LABELS, TAXONOMY_RANKS } from '../../constants/labels.js'
 import styles from './SpeciesDetailPage.module.css'
 
@@ -21,6 +22,8 @@ export default function SpeciesDetailPage() {
   // 若物種在我們整理好的清單中，補上 TaiCOL 的資料（官方中文名、保育等級等）
   const { speciesList } = useSpeciesList()
   const local = speciesList.find((species) => species.id === Number(id))
+
+  const { location: userLocation, isLocating, error: geoError, locate } = useGeolocation()
 
   // 瀏覽器分頁標題顯示物種名稱
   const displayName = local?.nameZh ?? taxon.data?.nameZh ?? taxon.data?.nameSci
@@ -52,12 +55,24 @@ export default function SpeciesDetailPage() {
       </section>
 
       <section className={styles.section}>
-        <h2 className={styles.sectionTitle}>台灣出沒地圖</h2>
+        <div className={styles.sectionHeader}>
+          <h2 className={styles.sectionTitle}>台灣出沒地圖</h2>
+          {/* 我的位置：把地圖移到使用者附近，看看這種動物離自己多近 */}
+          <button type="button" className={styles.locate} onClick={locate} disabled={isLocating}>
+            📍 {isLocating ? '定位中…' : '我的位置'}
+          </button>
+        </div>
         <p className={styles.sectionNote}>
           色塊為所有紀錄的分布熱點，橘點為最新的觀察紀錄。為保護野生動物，敏感物種的位置已模糊化。
+          {userLocation && ' 藍點是你的約略位置，不會被儲存。'}
         </p>
+        {geoError && (
+          <p className={styles.geoError}>
+            {geoError === 'unsupported' ? '你的瀏覽器不支援定位' : '無法取得你的位置（可能未允許定位）'}
+          </p>
+        )}
         <div className={styles.mapLayout}>
-          <SpeciesMap taxonId={id} observations={recent.data ?? []} />
+          <SpeciesMap taxonId={id} observations={recent.data ?? []} userLocation={userLocation} />
           <RecentRecords recent={recent} />
         </div>
       </section>
