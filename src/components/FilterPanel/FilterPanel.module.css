@@ -95,12 +95,14 @@
   font-size: 0.75rem;
 }
 
+/* 手機：9 色＋清除排成兩排、每排 5 個
+   justify-content: space-between → 每排第一個貼齊左邊、最後一個貼齊右邊，總長和上方的框一樣 */
 .swatches {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 6px;
-  padding: var(--space-1) 4px; /* 左右留 4px：選取時的外環才不會被切到 */
+  display: grid;
+  grid-template-columns: repeat(5, 40px);
+  justify-content: space-between;
+  row-gap: var(--space-2);
+  padding-block: var(--space-1); /* 左右不留空：色塊邊緣和上方的框切齊（選取外環會稍微超出，面板四周有留白不會被切到） */
 }
 
 /* 每個項目垂直置中，「清除」才會和色塊對齊（不然會依文字基線往下偏 2px） */
@@ -108,14 +110,14 @@
   display: flex;
 }
 
-/* 圓形色塊：顏色由 --swatch 變數傳入 */
+/* 方形色塊（6px 微圓角，和上方分頁按鈕一致）：顏色由 --swatch 變數傳入；手機 40px，手指比較好點 */
 .swatch {
   position: relative;
-  width: 32px;
-  height: 32px;
+  width: 40px;
+  height: 40px;
   background-color: var(--swatch);
   border: 1px solid rgb(0 0 0 / 0.15);
-  border-radius: 50%;
+  border-radius: var(--radius-sm);
   transition: transform var(--transition), box-shadow var(--transition);
 }
 
@@ -137,14 +139,15 @@
   overflow: hidden;
 }
 
-/* 色塊最後面的「清除」 */
+/* 色塊最後面的「清除」：手機上做成和色塊一樣大的方形，才能排進格子裡對齊 */
 .clearColors {
-  height: 32px;
-  padding: 0 var(--space-3);
-  font-size: var(--fs-sm);
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  font-size: 0.75rem;
   color: var(--color-protected);
   border: 1px solid currentColor;
-  border-radius: 999px;
+  border-radius: var(--radius-sm);
   transition: background-color var(--transition), color var(--transition);
 }
 
@@ -169,7 +172,7 @@
   content: '';
   position: absolute;
   inset: 0;
-  border-radius: 50%;
+  border-radius: inherit;
   background: linear-gradient(
     to top right,
     transparent calc(50% - 1px),
@@ -187,6 +190,26 @@
 
   .grid {
     gap: var(--space-4) var(--space-6);
+  }
+
+  /* 平板以上寬度夠：9 色＋清除排成一排，色塊 32px，「清除」恢復長條形 */
+  .swatches {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .swatch {
+    width: 32px;
+    height: 32px;
+  }
+
+  .clearColors {
+    width: auto;
+    height: 32px;
+    padding: 0 var(--space-3);
+    font-size: var(--fs-sm);
   }
 }
 
