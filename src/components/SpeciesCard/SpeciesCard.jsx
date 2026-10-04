@@ -35,7 +35,7 @@ export default function SpeciesCard({ species }) {
             )}
             {/* 外來種分兩層顯示：外來種 › 入侵種／歸化種／栽培豢養 */}
             {alienLabel && (
-              <li className={`${styles.tag} ${styles.alien}`}>
+              <li className={`${styles.tag} ${alienType === 'invasive' ? styles.invasive : styles.alien}`}>
                 外來種<span className={styles.tagArrow} aria-hidden="true">›</span>
                 {alienLabel}
               </li>

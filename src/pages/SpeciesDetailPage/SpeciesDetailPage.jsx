@@ -225,7 +225,7 @@ function SpeciesHero({ taxon, local, displayName }) {
               <InfoTag
                 label={`外來種 › ${alienLabel}`}
                 title={ALIEN_INFO[local.alienType].title}
-                className={`${styles.tag} ${styles.alien}`}
+                className={`${styles.tag} ${local.alienType === 'invasive' ? styles.invasive : styles.alien}`}
               >
                 <p className={styles.infoLead}>{ALIEN_GENERAL}</p>
                 <p>{ALIEN_INFO[local.alienType].text}</p>

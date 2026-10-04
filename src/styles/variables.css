@@ -25,10 +25,16 @@
   --color-surface: #ffffff;
   --color-border: #dde3dd;
 
-  /* 保育等級標籤用色 */
-  --color-endemic: #2f6b4f;        /* 特有種 */
-  --color-protected: #b5452f;      /* 保育類 */
-  --color-alien: #6b6f76;          /* 外來種 */
+  /* 警示紅：清除按鈕、錯誤訊息、位置已模糊化等提示用 */
+  --color-protected: #b5452f;
+
+  /* 物種身份標籤用色（卡片、詳細頁的標籤專用）
+     底色都偏亮，所以文字用深色，才看得清楚 */
+  --tag-endemic: #eeac43;          /* 特有種：橘 */
+  --tag-protected: #47c18f;        /* 保育類：綠 */
+  --tag-invasive: #f43f48;         /* 外來種 › 入侵種：紅 */
+  --tag-alien: #afe594;            /* 外來種 › 歸化種、栽培豢養：淺綠 */
+  --tag-text: #1f2a24;
 
   /* ---------- 字型 ---------- */
   --font-sans: 'Noto Sans TC', 'PingFang TC', 'Microsoft JhengHei', system-ui, sans-serif;

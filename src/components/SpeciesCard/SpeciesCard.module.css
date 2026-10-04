@@ -89,13 +89,15 @@
 .tag {
   padding: 2px var(--space-2);
   font-size: 0.75rem;
-  color: #fff;
+  color: var(--tag-text); /* 標籤底色偏亮，用深色字才看得清楚 */
   border-radius: 999px;
 }
 
-.endemic   { background-color: var(--color-endemic); }
-.protected { background-color: var(--color-protected); }
-.alien     { background-color: var(--color-alien); }
+.endemic   { background-color: var(--tag-endemic); }
+.protected { background-color: var(--tag-protected); }
+/* 外來種：入侵種用紅色警示，歸化種、栽培豢養用淺綠色 */
+.invasive  { background-color: var(--tag-invasive); }
+.alien     { background-color: var(--tag-alien); }
 
 /* 「外來種 › 入侵種」中間的箭頭 */
 .tagArrow {
