@@ -55,6 +55,36 @@
 /* 外來種：入侵種用紅色警示，歸化種、栽培豢養用淺綠色 */
 .invasive  { background-color: var(--tag-invasive); }
 .alien     { background-color: var(--tag-alien); }
+
+/* ---------- 外來種的兩段式標籤 ----------
+   整個標籤的底色＝右段細項的顏色；左段「外來種」另外蓋上橘紅色
+   （用 .tag.splitTag 提高優先順序，蓋過 InfoTag 元件本身的內距） */
+.tag.splitTag {
+  align-items: stretch;
+  gap: 0;
+  padding: 0 var(--space-3) 0 0;
+  overflow: hidden;
+}
+
+.alienRoot {
+  display: flex;
+  align-items: center;
+  padding: var(--space-1) 6px var(--space-1) var(--space-3);
+  background-color: var(--tag-alien-root);
+}
+
+.alienSub {
+  display: flex;
+  align-items: center;
+  padding-left: 6px;
+}
+
+/* 最後面的 ⓘ 提示 */
+.tag.splitTag > :last-child {
+  display: flex;
+  align-items: center;
+  margin-left: 4px;
+}
 .redlist {
   color: var(--color-text);
   background-color: var(--color-primary-light);

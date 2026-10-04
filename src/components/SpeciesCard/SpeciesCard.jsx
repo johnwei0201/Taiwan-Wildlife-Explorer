@@ -33,11 +33,15 @@ export default function SpeciesCard({ species }) {
             {protectedLevel && (
               <li className={`${styles.tag} ${styles.protected}`}>{protectedLevel} 級保育</li>
             )}
-            {/* 外來種分兩層顯示：外來種 › 入侵種／歸化種／栽培豢養 */}
+            {/* 外來種分兩段顯示：左段「外來種」橘紅色，右段是細項（入侵種紅、歸化種／栽培豢養淺綠） */}
             {alienLabel && (
-              <li className={`${styles.tag} ${alienType === 'invasive' ? styles.invasive : styles.alien}`}>
-                外來種<span className={styles.tagArrow} aria-hidden="true">›</span>
-                {alienLabel}
+              <li
+                className={`${styles.tag} ${styles.splitTag} ${alienType === 'invasive' ? styles.invasive : styles.alien}`}
+              >
+                <span className={styles.alienRoot}>
+                  外來種<span className={styles.tagArrow} aria-hidden="true">›</span>
+                </span>
+                <span className={styles.alienSub}>{alienLabel}</span>
               </li>
             )}
           </ul>

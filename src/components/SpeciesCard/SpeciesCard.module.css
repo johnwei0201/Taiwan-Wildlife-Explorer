@@ -99,9 +99,31 @@
 .invasive  { background-color: var(--tag-invasive); }
 .alien     { background-color: var(--tag-alien); }
 
-/* 「外來種 › 入侵種」中間的箭頭 */
+/* ---------- 外來種的兩段式標籤 ----------
+   整個標籤的底色＝右段細項的顏色；左段「外來種」另外蓋上橘紅色 */
+.splitTag {
+  display: inline-flex;
+  align-items: stretch;
+  padding: 0;
+  overflow: hidden;
+}
+
+.alienRoot {
+  display: flex;
+  align-items: center;
+  padding: 2px 4px 2px var(--space-2);
+  background-color: var(--tag-alien-root);
+}
+
+.alienSub {
+  display: flex;
+  align-items: center;
+  padding: 2px var(--space-2) 2px 5px;
+}
+
+/* 「外來種 ›」的箭頭 */
 .tagArrow {
-  margin-inline: 3px;
+  margin-left: 3px;
   opacity: 0.7;
 }
 
