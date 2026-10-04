@@ -96,7 +96,7 @@
 .endemic   { background-color: var(--tag-endemic); }
 .protected { background-color: var(--tag-protected); }
 /* 外來種：入侵種用紅色警示，歸化種、栽培豢養用淺綠色 */
-.invasive  { background-color: var(--tag-invasive); }
+.invasive  { background-color: var(--tag-invasive); color: #fff; } /* 深紅底配白字 */
 .alien     { background-color: var(--tag-alien); }
 
 /* 「外來種 › 入侵種」中間的箭頭 */
