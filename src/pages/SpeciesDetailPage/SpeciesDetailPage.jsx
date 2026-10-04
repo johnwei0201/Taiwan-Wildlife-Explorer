@@ -223,14 +223,9 @@ function SpeciesHero({ taxon, local, displayName }) {
             <li>
               {/* 外來種分兩層：外來種 › 入侵種／歸化種／栽培豢養；彈窗先說明外來種，再說明細項 */}
               <InfoTag
-                label={
-                  <>
-                    <span className={styles.alienRoot}>外來種 ›</span>
-                    <span className={styles.alienSub}>{alienLabel}</span>
-                  </>
-                }
+                label={`外來種 › ${alienLabel}`}
                 title={ALIEN_INFO[local.alienType].title}
-                className={`${styles.tag} ${styles.splitTag} ${local.alienType === 'invasive' ? styles.invasive : styles.alien}`}
+                className={`${styles.tag} ${local.alienType === 'invasive' ? styles.invasive : styles.alien}`}
               >
                 <p className={styles.infoLead}>{ALIEN_GENERAL}</p>
                 <p>{ALIEN_INFO[local.alienType].text}</p>

@@ -32,7 +32,6 @@
      底色都偏亮，所以文字用深色，才看得清楚 */
   --tag-endemic: #eeac43;          /* 特有種：橘 */
   --tag-protected: #47c18f;        /* 保育類：綠 */
-  --tag-alien-root: #ee7244;       /* 外來種（標籤左段）：橘紅 */
   --tag-invasive: #f43f48;         /* 外來種 › 入侵種：紅 */
   --tag-alien: #afe594;            /* 外來種 › 歸化種、栽培豢養：淺綠 */
   --tag-text: #1f2a24;
