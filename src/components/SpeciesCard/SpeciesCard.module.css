@@ -97,6 +97,12 @@
 .protected { background-color: var(--color-protected); }
 .alien     { background-color: var(--color-alien); }
 
+/* 「外來種 › 入侵種」中間的箭頭 */
+.tagArrow {
+  margin-inline: 3px;
+  opacity: 0.7;
+}
+
 @media (min-width: 768px) {
   .body {
     padding: var(--space-4);

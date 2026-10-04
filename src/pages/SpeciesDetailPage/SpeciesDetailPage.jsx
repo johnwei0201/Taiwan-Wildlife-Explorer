@@ -20,6 +20,7 @@ import { useAsync } from '../../hooks/useAsync.js'
 import { useSpeciesList, withLocalData } from '../../hooks/useSpeciesList.js'
 import { useGeolocation } from '../../hooks/useGeolocation.js'
 import {
+  ALIEN_GENERAL,
   ALIEN_INFO,
   ALIEN_LABELS,
   ENDEMIC_INFO,
@@ -220,11 +221,13 @@ function SpeciesHero({ taxon, local, displayName }) {
           )}
           {alienLabel && (
             <li>
+              {/* 外來種分兩層：外來種 › 入侵種／歸化種／栽培豢養；彈窗先說明外來種，再說明細項 */}
               <InfoTag
-                label={alienLabel}
+                label={`外來種 › ${alienLabel}`}
                 title={ALIEN_INFO[local.alienType].title}
                 className={`${styles.tag} ${styles.alien}`}
               >
+                <p className={styles.infoLead}>{ALIEN_GENERAL}</p>
                 <p>{ALIEN_INFO[local.alienType].text}</p>
               </InfoTag>
             </li>

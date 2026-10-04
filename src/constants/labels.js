@@ -35,6 +35,9 @@ export const PROTECTED_INFO = {
   },
 }
 
+// 外來種的總說明（彈窗第一段），下面再接各類型的說明
+export const ALIEN_GENERAL = '外來種：原本不在臺灣，因為人類有意或無意引進而來到臺灣的物種。依照對環境的影響，再分成入侵種、歸化種、栽培豢養。'
+
 export const ALIEN_INFO = {
   naturalized: {
     title: '什麼是歸化種？',

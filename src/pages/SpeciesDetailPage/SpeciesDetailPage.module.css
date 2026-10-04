@@ -59,6 +59,14 @@
 }
 
 /* ---------- 標籤彈窗裡的內容 ---------- */
+/* 彈窗中的總說明段落（例如外來種），和下方細項說明隔開 */
+.infoLead {
+  margin-bottom: var(--space-2);
+  padding-bottom: var(--space-2);
+  color: var(--color-text-muted);
+  border-bottom: 1px dashed var(--color-border);
+}
+
 /* 保育等級清單：目前等級加粗並用紅色標示 */
 .infoList {
   margin-top: var(--space-2);

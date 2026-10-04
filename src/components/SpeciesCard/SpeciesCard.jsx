@@ -33,7 +33,13 @@ export default function SpeciesCard({ species }) {
             {protectedLevel && (
               <li className={`${styles.tag} ${styles.protected}`}>{protectedLevel} 級保育</li>
             )}
-            {alienLabel && <li className={`${styles.tag} ${styles.alien}`}>{alienLabel}</li>}
+            {/* 外來種分兩層顯示：外來種 › 入侵種／歸化種／栽培豢養 */}
+            {alienLabel && (
+              <li className={`${styles.tag} ${styles.alien}`}>
+                外來種<span className={styles.tagArrow} aria-hidden="true">›</span>
+                {alienLabel}
+              </li>
+            )}
           </ul>
         )}
       </div>
