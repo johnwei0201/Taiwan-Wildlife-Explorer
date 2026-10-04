@@ -15,30 +15,33 @@ export default function SpeciesMap({ taxonId, observations }) {
   const [vectorRenderer] = useState(() => L.svg({ padding: 1 }))
 
   return (
-    <MapContainer
-      center={TAIWAN_CENTER}
-      zoom={TAIWAN_ZOOM}
-      renderer={vectorRenderer}
-      className={styles.map}
-    >
-      <TileLayer
-        url="https://tile.openstreetmap.org/{z}/{x}/{y}.png"
-        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        maxZoom={19}
-        updateWhenIdle={false}
-        keepBuffer={4}
-      />
-      {/* iNaturalist 熱點圖層：顏色越深代表紀錄越多 */}
-      <TileLayer
-        url={heatmapTileUrl(taxonId)}
-        attribution='&copy; <a href="https://www.inaturalist.org/">iNaturalist</a>'
-        opacity={0.75}
-        updateWhenIdle={false}
-        keepBuffer={4}
-      />
-      {observations.map((obs) => (
-        <ObservationMarker key={obs.id} observation={obs} />
-      ))}
-    </MapContainer>
+    // 外框負責圓角與裁切（避開 iPhone Safari 的裁切 bug，說明見 NearbyMap.module.css）
+    <div className={styles.frame}>
+      <MapContainer
+        center={TAIWAN_CENTER}
+        zoom={TAIWAN_ZOOM}
+        renderer={vectorRenderer}
+        className={styles.map}
+      >
+        <TileLayer
+          url="https://tile.openstreetmap.org/{z}/{x}/{y}.png"
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          maxZoom={19}
+          updateWhenIdle={false}
+          keepBuffer={4}
+        />
+        {/* iNaturalist 熱點圖層：顏色越深代表紀錄越多 */}
+        <TileLayer
+          url={heatmapTileUrl(taxonId)}
+          attribution='&copy; <a href="https://www.inaturalist.org/">iNaturalist</a>'
+          opacity={0.75}
+          updateWhenIdle={false}
+          keepBuffer={4}
+        />
+        {observations.map((obs) => (
+          <ObservationMarker key={obs.id} observation={obs} />
+        ))}
+      </MapContainer>
+    </div>
   )
 }

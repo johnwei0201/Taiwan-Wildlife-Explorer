@@ -1,16 +1,30 @@
+/* ----------------------------------------------------------
+   外框：負責圓角與裁切
+   iPhone Safari 的 bug：圓角 + overflow: hidden 時，用 translate3d 移動的子元素（地圖圖磚、SVG）
+   不會被裁切，會跑出地圖外面撐寬整個頁面，造成整頁縮放、左右晃動。
+   解法：
+   1. 圓角放在外框，不放在 Leaflet 的容器上
+   2. -webkit-mask-image：強制 Safari 真正裁切（各版本 iOS 都有效的老牌解法）
+   3. isolation + contain：建立獨立圖層，內容不會影響外面的版面
+   ---------------------------------------------------------- */
+.frame {
+  position: relative;
+  z-index: 0; /* 避免 Leaflet 的圖層蓋住固定在上方的頁首 */
+  overflow: hidden;
+  isolation: isolate;
+  contain: paint;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  -webkit-mask-image: -webkit-radial-gradient(white, black);
+}
+
 /* 手機：地圖高度 320px */
 .map {
-  position: relative;
-  z-index: 0; /* 建立獨立圖層，避免 Leaflet 的圖層蓋住固定在上方的頁首 */
-  /* iPhone Safari 的 bug：圓角 + overflow: hidden 時，用 translate3d 移動的子元素（地圖圖磚）不會被裁切，
-     會跑出地圖外面把整個頁面撐寬。contain: paint 強制把內容裁切在地圖框內 */
-  overflow: hidden;
-  contain: paint;
   width: 100%;
   height: 320px;
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-sm);
   cursor: crosshair;
+  /* 手指在地圖上的拖動、縮放都交給地圖處理，不要讓整個頁面跟著移動或放大 */
+  touch-action: none;
 }
 
 /* 平板：高一點 */

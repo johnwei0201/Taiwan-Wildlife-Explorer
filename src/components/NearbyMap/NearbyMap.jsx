@@ -23,7 +23,9 @@ function FitToSearchArea({ location, radius }) {
   useEffect(() => {
     if (!location) return
     const bounds = L.latLng(location.lat, location.lng).toBounds(radius * 2000) // 直徑，單位公尺
-    map.flyToBounds(bounds, { duration: 0.8 })
+    // 不用飛行動畫：動畫過程中 Leaflet 會把圖磚暫時放大到數十倍，
+    // 在 iPhone Safari 上可能撐寬頁面，造成整頁縮放、左右晃動
+    map.fitBounds(bounds, { animate: false })
   }, [map, location, radius])
 
   return null
@@ -36,48 +38,51 @@ export default function NearbyMap({ location, radius, observations, onPick }) {
   const [vectorRenderer] = useState(() => L.svg({ padding: 1 }))
 
   return (
-    <MapContainer
-      center={TAIWAN_CENTER}
-      zoom={TAIWAN_ZOOM}
-      renderer={vectorRenderer}
-      className={styles.map}
-    >
-      {/* OpenStreetMap 免費圖磚：免金鑰，但必須標示來源 */}
-      <TileLayer
-        url="https://tile.openstreetmap.org/{z}/{x}/{y}.png"
-        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        maxZoom={19}
-        // 手機預設要等手指放開才載入新圖磚，拖動時會看到空白，這裡改成邊拖邊載入
-        updateWhenIdle={false}
-        // 多保留周圍幾圈已載入的圖磚，拖回來時不用重新下載
-        keepBuffer={4}
-      />
+    // 外框負責圓角與裁切，地圖本身不加圓角（避開 iPhone Safari 的裁切 bug）
+    <div className={styles.frame}>
+      <MapContainer
+        center={TAIWAN_CENTER}
+        zoom={TAIWAN_ZOOM}
+        renderer={vectorRenderer}
+        className={styles.map}
+      >
+        {/* OpenStreetMap 免費圖磚：免金鑰，但必須標示來源 */}
+        <TileLayer
+          url="https://tile.openstreetmap.org/{z}/{x}/{y}.png"
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          maxZoom={19}
+          // 手機預設要等手指放開才載入新圖磚，拖動時會看到空白，這裡改成邊拖邊載入
+          updateWhenIdle={false}
+          // 多保留周圍幾圈已載入的圖磚，拖回來時不用重新下載
+          keepBuffer={4}
+        />
 
-      <MapClickHandler onPick={onPick} />
-      <FitToSearchArea location={location} radius={radius} />
+        <MapClickHandler onPick={onPick} />
+        <FitToSearchArea location={location} radius={radius} />
 
-      {location && (
-        <>
-          {/* 搜尋範圍 */}
-          <Circle
-            center={location}
-            radius={radius * 1000}
-            pathOptions={{ color: '#2f6b4f', weight: 2, fillOpacity: 0.06 }}
-          />
-          {/* 你的位置 */}
-          <CircleMarker
-            center={location}
-            radius={8}
-            pathOptions={{ color: '#fff', weight: 3, fillColor: '#2b6cd9', fillOpacity: 1 }}
-          >
-            <Popup>搜尋中心（約略位置）</Popup>
-          </CircleMarker>
-        </>
-      )}
+        {location && (
+          <>
+            {/* 搜尋範圍 */}
+            <Circle
+              center={location}
+              radius={radius * 1000}
+              pathOptions={{ color: '#2f6b4f', weight: 2, fillOpacity: 0.06 }}
+            />
+            {/* 你的位置 */}
+            <CircleMarker
+              center={location}
+              radius={8}
+              pathOptions={{ color: '#fff', weight: 3, fillColor: '#2b6cd9', fillOpacity: 1 }}
+            >
+              <Popup>搜尋中心（約略位置）</Popup>
+            </CircleMarker>
+          </>
+        )}
 
-      {observations.map((obs) => (
-        <ObservationMarker key={obs.id} observation={obs} />
-      ))}
-    </MapContainer>
+        {observations.map((obs) => (
+          <ObservationMarker key={obs.id} observation={obs} />
+        ))}
+      </MapContainer>
+    </div>
   )
 }
