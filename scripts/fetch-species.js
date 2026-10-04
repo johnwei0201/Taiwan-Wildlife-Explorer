@@ -7,10 +7,12 @@
  *   ③ 合併兩邊資料，輸出 JSON
  *
  * 使用方式：
- *   npm run data                 → 每個類群抓全部物種
- *   npm run data -- --limit=5    → 每個類群只抓 5 種（測試用）
+ *   npm run data                              → 每個類群抓全部物種
+ *   npm run data -- --limit=5                 → 每個類群只抓 5 種（測試用）
+ *   npm run data -- --groups=lepidoptera,odonata
+ *     → 只重抓指定的類群，其他類群保留原本的資料（加入新類群時用，不必全部重抓）
  */
-import { mkdir, writeFile } from 'node:fs/promises'
+import { mkdir, readFile, writeFile } from 'node:fs/promises'
 
 // ---------- 設定 ----------
 const INAT_API = 'https://api.inaturalist.org/v1'
@@ -19,12 +21,16 @@ const TAIWAN_PLACE_ID = 7887
 const REQUEST_DELAY_MS = 1000 // iNaturalist 建議每秒最多 1 個請求
 const OUTPUT_DIR = 'public/data'
 
-// 第一版的四個類群（數字是 iNaturalist 的 taxon_id）
+// 收錄的類群（數字是 iNaturalist 的 taxon_id）
+//   minCount：台灣研究級觀察數的門檻，低於門檻的物種先不收
+//   （昆蟲有些物種只有幾筆紀錄，照片和資料都不完整，先求「完成」再求「完整」）
 const GROUPS = [
   { id: 'aves', label: '鳥類', inatTaxonId: 3 },
   { id: 'mammalia', label: '哺乳類', inatTaxonId: 40151 },
   { id: 'reptilia', label: '爬蟲類', inatTaxonId: 26036 },
   { id: 'amphibia', label: '兩棲類', inatTaxonId: 20978 },
+  { id: 'lepidoptera', label: '蝴蝶', inatTaxonId: 47224, minCount: 20 }, // 鳳蝶總科（不含蛾）
+  { id: 'odonata', label: '蜻蜓', inatTaxonId: 47792, minCount: 20 }, // 蜻蛉目（蜻蜓＋豆娘）
 ]
 
 // 排除清單：家養動物不屬於野生動物圖鑑
@@ -42,6 +48,10 @@ const isExcluded = (taxon) => EXCLUDED_NAMES.has(taxon.name) || taxon.name.inclu
 // 從指令讀取 --limit=數字
 const limitArg = process.argv.find((arg) => arg.startsWith('--limit='))
 const LIMIT = limitArg ? Number(limitArg.split('=')[1]) : Infinity
+
+// 從指令讀取 --groups=a,b（沒有指定就是全部類群）
+const groupsArg = process.argv.find((arg) => arg.startsWith('--groups='))
+const ONLY_GROUPS = groupsArg ? groupsArg.split('=')[1].split(',') : null
 
 // ---------- 小工具 ----------
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
@@ -95,10 +105,13 @@ async function fetchInatSpecies(group) {
       `&taxon_id=${group.inatTaxonId}&quality_grade=research&locale=zh-TW` +
       `&per_page=${perPage}&page=${page}`
     const data = await fetchJson(url)
-    results.push(...data.results.filter((r) => !isExcluded(r.taxon)))
+    const minCount = group.minCount ?? 0
+    results.push(...data.results.filter((r) => !isExcluded(r.taxon) && r.count >= minCount))
     await sleep(REQUEST_DELAY_MS)
 
     if (page * perPage >= data.total_results) break
+    // 結果依觀察數由多到少排列，這一頁最後一筆已經低於門檻，後面的頁就不用查了
+    if (data.results.at(-1).count < minCount) break
     page++
   }
 
@@ -156,10 +169,21 @@ async function buildSpecies(group, inatResult) {
 
 async function main() {
   console.log(`開始整理資料（每個類群上限：${LIMIT === Infinity ? '全部' : LIMIT}）\n`)
+  const groups = ONLY_GROUPS ? GROUPS.filter((g) => ONLY_GROUPS.includes(g.id)) : GROUPS
   const allSpecies = []
   const unmatched = [] // TaiCOL 對不上的物種，之後放進手動對照表
 
-  for (const group of GROUPS) {
+  // 只重抓部分類群時，先保留其他類群原本的資料（包含 enrich 補上的分類、外型、大小、顏色）
+  if (ONLY_GROUPS) {
+    const previous = JSON.parse(await readFile(`${OUTPUT_DIR}/species-list.json`, 'utf8'))
+    const previousMeta = JSON.parse(await readFile(`${OUTPUT_DIR}/meta.json`, 'utf8'))
+    const kept = previous.filter((s) => !ONLY_GROUPS.includes(s.group))
+    allSpecies.push(...kept)
+    unmatched.push(...previousMeta.unmatched.filter((name) => kept.some((s) => s.nameSci === name)))
+    console.log(`保留其他類群原本的資料：${kept.length} 種\n`)
+  }
+
+  for (const group of groups) {
     const inatResults = await fetchInatSpecies(group)
     console.log(`【${group.label}】iNaturalist 取得 ${inatResults.length} 種`)
 

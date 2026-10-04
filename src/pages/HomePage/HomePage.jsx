@@ -55,7 +55,7 @@ export default function HomePage() {
     <div className="container">
       <section className={styles.hero}>
         <h1 className={styles.title}>發現台灣動物趣</h1>
-        <p className={styles.subtitle}>探索台灣的鳥類、哺乳類、爬蟲類與兩棲類</p>
+        <p className={styles.subtitle}>探索台灣的鳥類、哺乳類、爬蟲類、兩棲類、蝴蝶與蜻蜓</p>
       </section>
 
       {/* 分頁：手機可以左右滑動，平板以上會自動換行 */}

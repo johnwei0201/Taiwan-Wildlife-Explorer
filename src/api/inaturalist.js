@@ -4,8 +4,8 @@ import { distanceKm } from '../utils/geo.js'
 const INAT_API = 'https://api.inaturalist.org/v1'
 export const TAIWAN_PLACE_ID = 7887
 
-// 第一版的四個類群：鳥類、哺乳類、爬蟲類、兩棲類
-const VERTEBRATE_TAXON_IDS = '3,40151,26036,20978'
+// 收錄的類群：鳥類、哺乳類、爬蟲類、兩棲類、蝴蝶（鳳蝶總科）、蜻蜓（蜻蛉目）
+const GROUP_TAXON_IDS = '3,40151,26036,20978,47224,47792'
 
 const ICONIC_TO_GROUP = {
   Aves: 'aves',
@@ -55,7 +55,7 @@ function buildNearbyParams({ lat, lng, radius }) {
     lat,
     lng,
     radius, // 單位：公里
-    taxon_id: VERTEBRATE_TAXON_IDS,
+    taxon_id: GROUP_TAXON_IDS,
     quality_grade: 'research',
     locale: 'zh-TW',
   })

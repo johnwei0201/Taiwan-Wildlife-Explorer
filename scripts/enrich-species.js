@@ -63,6 +63,7 @@ async function addTaxonomy(speciesList) {
         return a ? { nameSci: a.name, nameZh: a.preferred_common_name ?? null } : null
       }
       species.order = pick('order')
+      species.suborder = pick('suborder') // 蜻蜓、豆娘要靠「亞目」區分
       species.family = pick('family')
     }
     console.log(`  已查詢 ${Math.min(i + BATCH_SIZE, missing.length)} / ${missing.length}`)
@@ -94,8 +95,12 @@ async function main() {
   const traits = await readTraits()
 
   for (const species of speciesList) {
-    // 外型只依「目、科」判斷：規則簡單，重跑結果也一致
-    species.shape = findShape(species.group, [species.order?.nameSci, species.family?.nameSci])
+    // 外型只依「目、亞目、科」判斷：規則簡單，重跑結果也一致
+    species.shape = findShape(species.group, [
+      species.order?.nameSci,
+      species.suborder?.nameSci,
+      species.family?.nameSci,
+    ])
 
     const trait = traits.get(species.nameSci)
     species.size = trait?.size ?? null

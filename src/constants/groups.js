@@ -7,6 +7,8 @@ export const GROUPS = [
   { id: 'mammalia', label: '哺乳類', kind: 'group', match: (s) => s.group === 'mammalia' },
   { id: 'reptilia', label: '爬蟲類', kind: 'group', match: (s) => s.group === 'reptilia' },
   { id: 'amphibia', label: '兩棲類', kind: 'group', match: (s) => s.group === 'amphibia' },
+  { id: 'lepidoptera', label: '蝴蝶', kind: 'group', match: (s) => s.group === 'lepidoptera' },
+  { id: 'odonata', label: '蜻蜓', kind: 'group', match: (s) => s.group === 'odonata' },
   { id: 'endemic', label: '特有種', kind: 'collection', match: (s) => s.endemic },
   { id: 'protected', label: '保育類', kind: 'collection', match: (s) => Boolean(s.protectedLevel) },
   // 外來種＝所有不是原生的物種（入侵種、歸化種、栽培豢養），卡片上會標出是哪一種

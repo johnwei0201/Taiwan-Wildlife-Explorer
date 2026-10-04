@@ -1,7 +1,7 @@
 /**
  * 外型規則：把「目、科」分類轉成一般人會用的白話描述
  *
- * - 依類群分開，每條規則的 match 是「目」或「科」的學名
+ * - 依類群分開，每條規則的 match 是「目」、「亞目」或「科」的學名
  * - 由上往下比對，第一個符合的就採用，所以「科」的規則要放在「目」前面
  *   （例如鳥類的「雀形目」放最後，當作其他小型鳥的總稱）
  * - 都不符合的會歸為「其他」
@@ -55,5 +55,16 @@ export const SHAPE_RULES = {
     { label: '樹蛙（腳趾有吸盤）', match: ['Rhacophoridae', 'Hylidae'] },
     { label: '青蛙', match: ['Anura'] },
     { label: '山椒魚（有尾巴）', match: ['Caudata'] },
+  ],
+  lepidoptera: [
+    { label: '鳳蝶（體型大，很多有尾突）', match: ['Papilionidae'] },
+    { label: '粉蝶（白色、黃色為主）', match: ['Pieridae'] },
+    { label: '蛺蝶（停下來常張開翅膀）', match: ['Nymphalidae'] },
+    { label: '灰蝶（小型，翅膀背面有細紋）', match: ['Lycaenidae', 'Riodinidae'] },
+    { label: '弄蝶（身體粗壯，像小飛機）', match: ['Hesperiidae'] },
+  ],
+  odonata: [
+    { label: '豆娘（身體細長，停下來翅膀合起來）', match: ['Zygoptera'] },
+    { label: '蜻蜓（停下來翅膀攤平）', match: ['Anisoptera', 'Odonata'] },
   ],
 }
