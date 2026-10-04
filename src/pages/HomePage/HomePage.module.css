@@ -45,10 +45,53 @@
   color: #fff;
 }
 
+/* 主題分頁（特有種、保育類、入侵種）：用金色區分，和前面的類群分頁隔開一點 */
+.tab[data-kind='collection'] {
+  border-color: var(--color-accent);
+  color: #9a5f12;
+}
+
+.tab[data-kind='group'] + .tab[data-kind='collection'] {
+  margin-left: var(--space-3);
+}
+
+.tab[data-kind='collection'][aria-selected='true'] {
+  background-color: var(--color-accent);
+  color: #fff;
+}
+
 .count {
   margin-block: var(--space-4);
   font-size: var(--fs-sm);
   color: var(--color-text-muted);
+}
+
+/* 隨機推薦的標題列：說明文字＋「換一批」按鈕 */
+.randomHeader {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  margin-block: var(--space-4);
+}
+
+.randomHeader .count {
+  margin-block: 0;
+}
+
+.shuffle {
+  padding: var(--space-1) var(--space-4);
+  font-size: var(--fs-sm);
+  color: var(--color-primary);
+  border: 1px solid var(--color-primary);
+  border-radius: 999px;
+  transition: background-color var(--transition), color var(--transition);
+}
+
+.shuffle:hover {
+  color: #fff;
+  background-color: var(--color-primary);
 }
 
 .message {

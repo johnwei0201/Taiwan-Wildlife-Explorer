@@ -3,6 +3,7 @@ import { Link, useParams } from 'react-router-dom'
 import PhotoGallery from '../../components/PhotoGallery/PhotoGallery.jsx'
 import MonthChart from '../../components/MonthChart/MonthChart.jsx'
 import SpeciesMap from '../../components/SpeciesMap/SpeciesMap.jsx'
+import TaxonomyTable from '../../components/TaxonomyTable/TaxonomyTable.jsx'
 import { fetchTaxon, fetchMonthlyCounts, fetchRecentObservations } from '../../api/inaturalist.js'
 import { useAsync } from '../../hooks/useAsync.js'
 import { useSpeciesList } from '../../hooks/useSpeciesList.js'
@@ -69,9 +70,9 @@ function SpeciesHero({ taxon, local, displayName }) {
   const endemic = local?.endemic ?? taxon.endemic
   const alienLabel = ALIEN_LABELS[local?.alienType]
   const redlistLabel = REDLIST_LABELS[local?.redlist]
-  const taxonomy = TAXONOMY_RANKS.map(({ rank, label }) => ({
-    label,
-    ancestor: taxon.ancestors.find((a) => a.rank === rank),
+  const taxonomy = TAXONOMY_RANKS.map((rankInfo) => ({
+    ...rankInfo,
+    ancestor: taxon.ancestors.find((a) => a.rank === rankInfo.rank),
   })).filter((item) => item.ancestor)
 
   return (
@@ -93,17 +94,8 @@ function SpeciesHero({ taxon, local, displayName }) {
         </ul>
 
         {taxonomy.length > 0 && (
-          <dl className={styles.taxonomy}>
-            {taxonomy.map(({ label, ancestor }) => (
-              <div key={label} style={{ display: 'contents' }}>
-                <dt>{label}</dt>
-                <dd>
-                  {ancestor.nameZh ?? ''}{' '}
-                  <span className="scientific-name">{ancestor.nameSci}</span>
-                </dd>
-              </div>
-            ))}
-          </dl>
+          // key：換到別的物種時重新建立，展開中的說明會自動關閉
+          <TaxonomyTable key={taxon.id} items={taxonomy} speciesNameSci={taxon.nameSci} />
         )}
 
         {taxon.summary && (

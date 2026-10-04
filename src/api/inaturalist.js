@@ -107,6 +107,7 @@ export async function fetchTaxon(taxonId, signal) {
     endemic: taxon.preferred_establishment_means === 'endemic',
     photos: (taxon.taxon_photos ?? []).map(({ photo }) => toPhoto(photo)).filter(Boolean),
     ancestors: (taxon.ancestors ?? []).map((a) => ({
+      id: a.id,
       rank: a.rank,
       nameSci: a.name,
       nameZh: a.preferred_common_name ?? null,

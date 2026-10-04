@@ -1,0 +1,176 @@
+.wrap {
+  margin-top: var(--space-6);
+}
+
+/* 手機：一行一層 */
+.table {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-2) var(--space-4);
+  padding: var(--space-4);
+  font-size: var(--fs-sm);
+  background-color: var(--color-surface);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.row dt {
+  flex-shrink: 0;
+  color: var(--color-text-muted);
+}
+
+.row dd {
+  margin: 0;
+}
+
+/* 「？」按鈕：小圓圈 */
+.help {
+  position: relative;
+  display: inline-grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  margin-left: var(--space-2);
+  font-size: 0.75rem;
+  font-weight: 700;
+  line-height: 1;
+  vertical-align: middle;
+  color: var(--color-primary);
+  border: 1.5px solid var(--color-primary);
+  border-radius: 50%;
+  transition: background-color var(--transition), color var(--transition);
+}
+
+/* 手機上手指比較粗：用透明的外框把點擊範圍放大到約 40px，外觀不變 */
+.help::after {
+  content: '';
+  position: absolute;
+  inset: -9px;
+}
+
+.help:hover,
+.help[aria-expanded='true'] {
+  color: #fff;
+  background-color: var(--color-primary);
+}
+
+/* ---------- 展開的說明 ---------- */
+.explain {
+  margin-top: var(--space-3);
+  padding: var(--space-4);
+  font-size: var(--fs-sm);
+  line-height: 1.8;
+  background-color: var(--color-primary-light);
+  border-left: 4px solid var(--color-primary);
+  border-radius: var(--radius-sm);
+  animation: explain-in 0.2s ease-out;
+}
+
+@keyframes explain-in {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.explainHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-2);
+}
+
+.explainTitle {
+  font-size: var(--fs-base);
+  font-weight: 700;
+  color: var(--color-primary-dark);
+}
+
+.close {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  font-size: 1.25rem;
+  line-height: 1;
+  color: var(--color-text-muted);
+  border-radius: 50%;
+}
+
+.close:hover {
+  background-color: rgb(0 0 0 / 0.06);
+}
+
+.lessonLabel {
+  margin-top: var(--space-3);
+  font-weight: 700;
+}
+
+/* 階層圖：界 › 門 › 綱 › 目 › 科 › 屬 › 種 */
+.ladder {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-1);
+  margin-block: var(--space-2);
+}
+
+.ladder li {
+  padding: 0 var(--space-2);
+  color: var(--color-text-muted);
+  background-color: var(--color-surface);
+  border-radius: var(--radius-sm);
+}
+
+.ladder li + li::before {
+  content: '›';
+  margin-right: var(--space-2);
+  margin-left: calc(var(--space-2) * -1);
+  color: var(--color-text-muted);
+}
+
+.ladder li[data-current='true'] {
+  font-weight: 700;
+  color: #fff;
+  background-color: var(--color-accent);
+}
+
+.intro {
+  margin-bottom: var(--space-3);
+}
+
+.wiki {
+  padding-top: var(--space-3);
+  border-top: 1px dashed var(--color-border);
+}
+
+.muted {
+  color: var(--color-text-muted);
+}
+
+.source {
+  margin-top: var(--space-1);
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+}
+
+.source a,
+.muted a {
+  text-decoration: underline;
+}
+
+/* 平板以上：兩欄（綱、目一行；科、屬一行） */
+@media (min-width: 768px) {
+  .table {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
