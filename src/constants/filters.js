@@ -1,5 +1,7 @@
-// 篩選條件設定：首頁點選類群後出現的下拉選單
-// 每個篩選的 match 決定「這個物種符不符合這個選項」
+// 篩選條件設定：首頁點選類群後出現的「用外觀找找看」
+//   type: 'select' → 下拉選單（單選）
+//   type: 'swatch' → 顏色色塊（可複選，網址上以逗號分隔，例如 color=黑,白）
+// 每個篩選的 match 決定「這個物種符不符合目前選的值」
 
 // 大小：1~5 的意思依類群不同（和 scripts/traits.csv 的標準一致）
 const SIZE_LABELS = {
@@ -9,25 +11,28 @@ const SIZE_LABELS = {
   amphibia: ['比十元硬幣小', '十元硬幣到手掌大', '比手掌還大'],
 }
 
-const COLORS = ['黑', '白', '灰', '褐', '紅', '橙', '黃', '綠', '藍']
+// 顏色色塊：name 對應 traits.csv 的顏色文字，hex 是色塊的顯示顏色
+export const COLORS = [
+  { name: '黑', hex: '#222222' },
+  { name: '白', hex: '#ffffff' },
+  { name: '灰', hex: '#9e9e9e' },
+  { name: '褐', hex: '#8b5a2b' },
+  { name: '紅', hex: '#d32f2f' },
+  { name: '橙', hex: '#f57c00' },
+  { name: '黃', hex: '#fbc02d' },
+  { name: '綠', hex: '#388e3c' },
+  { name: '藍', hex: '#1e66c8' },
+]
 
-const TAGS = {
-  endemic: { label: '臺灣特有種', match: (s) => s.endemic },
-  protected: { label: '保育類', match: (s) => Boolean(s.protectedLevel) },
-  alien: { label: '外來種', match: (s) => Boolean(s.alienType) && s.alienType !== 'native' },
-}
-
-// 常見程度：依台灣的研究級觀察數
-const RARITY = {
-  common: { label: '常見', match: (s) => s.observationsCount >= 500 },
-  occasional: { label: '偶爾可見', match: (s) => s.observationsCount >= 50 && s.observationsCount < 500 },
-  rare: { label: '少見', match: (s) => s.observationsCount < 50 },
-}
+// 複選的顏色在網址上用逗號分隔：'黑,白' ↔ ['黑', '白']
+export const parseColors = (value) => (value ? value.split(',').filter(Boolean) : [])
+export const joinColors = (colors) => colors.join(',')
 
 export const FILTERS = [
   {
     key: 'shape',
     label: '外型',
+    type: 'select',
     // 選項從資料產生，依物種數由多到少排列
     getOptions: (list) => {
       const counts = new Map()
@@ -39,6 +44,7 @@ export const FILTERS = [
   {
     key: 'size',
     label: '大小',
+    type: 'select',
     getOptions: (_list, group) =>
       (SIZE_LABELS[group] ?? []).map((label, index) => ({ value: String(index + 1), label })),
     match: (s, value) => s.size === Number(value),
@@ -46,24 +52,13 @@ export const FILTERS = [
   {
     key: 'color',
     label: '顏色',
-    getOptions: () => COLORS.map((color) => ({ value: color, label: `有${color}色` })),
-    match: (s, value) => s.colors?.includes(value),
-  },
-  {
-    key: 'tag',
-    label: '標籤',
-    getOptions: () => Object.entries(TAGS).map(([value, { label }]) => ({ value, label })),
-    match: (s, value) => TAGS[value]?.match(s),
-  },
-  {
-    key: 'rarity',
-    label: '常見程度',
-    getOptions: () => Object.entries(RARITY).map(([value, { label }]) => ({ value, label })),
-    match: (s, value) => RARITY[value]?.match(s),
+    type: 'swatch',
+    // 複選＝「同時具備」：選了黑＋白，就只留下身上同時有黑色和白色的動物，選越多範圍越小
+    match: (s, value) => parseColors(value).every((color) => s.colors?.includes(color)),
   },
 ]
 
-// 套用所有篩選條件（可以指定略過某一個，用來計算該選單每個選項還剩幾種）
+// 套用所有篩選條件（可以指定略過某一個，用來計算該選項還剩幾種）
 export function applyFilters(list, filters, skipKey) {
   return list.filter((s) =>
     FILTERS.every((f) => f.key === skipKey || !filters[f.key] || f.match(s, filters[f.key])),

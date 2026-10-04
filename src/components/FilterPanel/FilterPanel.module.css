@@ -85,21 +85,98 @@
   color: var(--color-text-muted);
 }
 
-/* 平板：3 欄 */
+/* ---------- 顏色色塊 ---------- */
+/* 手機：外型、大小並排，顏色獨佔下一整列 */
+.colorField {
+  grid-column: 1 / -1;
+}
+
+.labelHint {
+  font-size: 0.75rem;
+}
+
+.swatches {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  padding-block: var(--space-1);
+}
+
+/* 圓形色塊：顏色由 --swatch 變數傳入 */
+.swatch {
+  position: relative;
+  width: 32px;
+  height: 32px;
+  background-color: var(--swatch);
+  border: 1px solid rgb(0 0 0 / 0.15);
+  border-radius: 50%;
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.swatch:hover:not(:disabled) {
+  transform: scale(1.12);
+}
+
+/* 選取中：外圈加一道主色環，中間打勾 */
+.swatch[aria-pressed='true'] {
+  box-shadow:
+    0 0 0 2px var(--color-surface),
+    0 0 0 4px var(--color-primary);
+}
+
+.swatch[aria-pressed='true']::after {
+  content: '✓';
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+/* 白色、黃色色塊上用深色的勾，才看得見 */
+.swatch[data-light='true'][aria-pressed='true']::after {
+  color: var(--color-text);
+}
+
+/* 選了之後會變成 0 種的顏色：變淡、加一條斜線、不能點（只變淡的話，淡灰色會被誤認成白色） */
+.swatch:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.swatch:disabled::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: linear-gradient(
+    to top right,
+    transparent calc(50% - 1px),
+    var(--color-text) calc(50% - 1px),
+    var(--color-text) calc(50% + 1px),
+    transparent calc(50% + 1px)
+  );
+}
+
+.selectedText {
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+}
+
+/* 平板以上：外型、大小、顏色三欄排成一列 */
 @media (min-width: 768px) {
   .panel {
     padding: var(--space-6);
   }
 
   .grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: var(--space-4);
+    grid-template-columns: repeat(2, minmax(0, 1fr)) minmax(0, 1.3fr);
+    gap: var(--space-4) var(--space-6);
   }
-}
 
-/* 桌機：5 個選單排成一列 */
-@media (min-width: 1200px) {
-  .grid {
-    grid-template-columns: repeat(5, minmax(0, 1fr));
+  .colorField {
+    grid-column: auto;
   }
 }
