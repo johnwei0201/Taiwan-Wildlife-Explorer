@@ -118,6 +118,65 @@
   cursor: wait;
 }
 
+/* ---------- 定位後：半徑選擇＋結果摘要 ---------- */
+.nearbyBar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-4);
+  padding: var(--space-3) var(--space-4);
+  background-color: var(--color-primary-light);
+  border-radius: var(--radius-md);
+}
+
+.radius {
+  display: flex;
+  flex-shrink: 0;
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background-color: var(--color-surface);
+}
+
+.radiusButton {
+  padding: var(--space-1) var(--space-3);
+  font-size: var(--fs-sm);
+  transition: background-color var(--transition), color var(--transition);
+}
+
+.radiusButton[aria-pressed='true'] {
+  color: #fff;
+  background-color: var(--color-primary);
+}
+
+.nearbySummary {
+  flex: 1;
+  min-width: 220px;
+  font-size: var(--fs-sm);
+  line-height: 1.7;
+}
+
+.nearbySummary strong {
+  font-size: var(--fs-base);
+  color: var(--color-primary-dark);
+}
+
+/* 右側清單的標題（最新紀錄／離你最近的紀錄） */
+.listTitle {
+  margin-bottom: var(--space-2);
+  font-size: var(--fs-base);
+  font-weight: 700;
+  color: var(--color-primary-dark);
+}
+
+.recordDistance {
+  margin-left: var(--space-2);
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
 .geoError {
   margin-top: calc(var(--space-2) * -1);
   margin-bottom: var(--space-4);

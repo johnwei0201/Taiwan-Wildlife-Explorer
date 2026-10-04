@@ -1,4 +1,5 @@
 import { CircleMarker, Popup } from 'react-leaflet'
+import { formatKm } from '../../utils/geo.js'
 import styles from './ObservationMarker.module.css'
 
 // 地圖上的一筆觀察紀錄：一般為實心橘點；位置已模糊化的為空心虛線
@@ -19,6 +20,12 @@ export default function ObservationMarker({ observation: obs }) {
         <i>{obs.nameSci}</i>
         <br />
         觀察日期：{obs.observedOn ?? '不明'}
+        {obs.distanceKm != null && (
+          <>
+            <br />
+            距離你約 {formatKm(obs.distanceKm)} 公里
+          </>
+        )}
         {obs.obscured && (
           <>
             <br />

@@ -1,16 +1,19 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import PhotoGallery from '../../components/PhotoGallery/PhotoGallery.jsx'
 import MonthChart from '../../components/MonthChart/MonthChart.jsx'
 import SpeciesMap from '../../components/SpeciesMap/SpeciesMap.jsx'
 import LocationIcon from '../../components/LocationIcon/LocationIcon.jsx'
 import TaxonomyTable from '../../components/TaxonomyTable/TaxonomyTable.jsx'
-import { fetchTaxon, fetchMonthlyCounts, fetchRecentObservations } from '../../api/inaturalist.js'
+import { fetchTaxon, fetchMonthlyCounts, fetchRecentObservations, fetchSpeciesNearby } from '../../api/inaturalist.js'
+import { formatKm } from '../../utils/geo.js'
 import { useAsync } from '../../hooks/useAsync.js'
 import { useSpeciesList } from '../../hooks/useSpeciesList.js'
 import { useGeolocation } from '../../hooks/useGeolocation.js'
 import { ALIEN_LABELS, REDLIST_LABELS, TAXONOMY_RANKS } from '../../constants/labels.js'
 import styles from './SpeciesDetailPage.module.css'
+
+const RADIUS_OPTIONS = [1, 5, 10] // 公里
 
 export default function SpeciesDetailPage() {
   const { id } = useParams()
@@ -24,7 +27,13 @@ export default function SpeciesDetailPage() {
   const { speciesList } = useSpeciesList()
   const local = speciesList.find((species) => species.id === Number(id))
 
+  // 我的位置：定位後查詢這個物種在使用者附近的紀錄（半徑可切換）
   const { location: userLocation, isLocating, error: geoError, locate } = useGeolocation()
+  const [radius, setRadius] = useState(5)
+  const nearby = useAsync(
+    (signal) => (userLocation ? fetchSpeciesNearby(id, userLocation, radius, signal) : Promise.resolve(null)),
+    [id, userLocation, radius],
+  )
 
   // 瀏覽器分頁標題顯示物種名稱
   const displayName = local?.nameZh ?? taxon.data?.nameZh ?? taxon.data?.nameSci
@@ -58,14 +67,14 @@ export default function SpeciesDetailPage() {
       <section className={styles.section}>
         <div className={styles.sectionHeader}>
           <h2 className={styles.sectionTitle}>台灣出沒地圖</h2>
-          {/* 我的位置：把地圖移到使用者附近，看看這種動物離自己多近 */}
+          {/* 我的位置：看看這種動物離自己多遠、附近有沒有出現過 */}
           <button type="button" className={styles.locate} onClick={locate} disabled={isLocating}>
             <LocationIcon />
             {isLocating ? '定位中…' : '我的位置'}
           </button>
         </div>
         <p className={styles.sectionNote}>
-          色塊為所有紀錄的分布熱點，橘點為最新的觀察紀錄。為保護野生動物，敏感物種的位置已模糊化。
+          色塊為所有紀錄的分布熱點，橘點為觀察紀錄。為保護野生動物，敏感物種的位置已模糊化。
           {userLocation && ' 藍點是你的約略位置，不會被儲存。'}
         </p>
         {geoError && (
@@ -73,9 +82,51 @@ export default function SpeciesDetailPage() {
             {geoError === 'unsupported' ? '你的瀏覽器不支援定位' : '無法取得你的位置（可能未允許定位）'}
           </p>
         )}
+
+        {userLocation && (
+          <div className={styles.nearbyBar}>
+            <div className={styles.radius} role="group" aria-label="搜尋半徑">
+              {RADIUS_OPTIONS.map((km) => (
+                <button
+                  key={km}
+                  type="button"
+                  aria-pressed={radius === km}
+                  className={styles.radiusButton}
+                  onClick={() => setRadius(km)}
+                >
+                  {km} 公里
+                </button>
+              ))}
+            </div>
+            <NearbySummary nearby={nearby} name={displayName} />
+          </div>
+        )}
+
         <div className={styles.mapLayout}>
-          <SpeciesMap taxonId={id} observations={recent.data ?? []} userLocation={userLocation} />
-          <RecentRecords recent={recent} />
+          <SpeciesMap
+            taxonId={id}
+            observations={(userLocation ? nearby.data?.observations : recent.data) ?? []}
+            userLocation={userLocation}
+            radius={radius}
+            nearest={nearby.data?.total === 0 ? nearby.data.observations[0] : null}
+          />
+          <div>
+            {userLocation ? (
+              <>
+                <h3 className={styles.listTitle}>離你最近的紀錄</h3>
+                <RecordList
+                  status={nearby.status}
+                  records={nearby.data?.observations ?? []}
+                  emptyText={`你附近 ${nearby.data?.searchedRadius ?? radius} 公里內都沒有紀錄`}
+                />
+              </>
+            ) : (
+              <>
+                <h3 className={styles.listTitle}>最新紀錄</h3>
+                <RecordList status={recent.status} records={recent.data ?? []} emptyText="台灣目前還沒有觀察紀錄" />
+              </>
+            )}
+          </div>
         </div>
       </section>
     </div>
@@ -136,18 +187,54 @@ function SpeciesHero({ taxon, local, displayName }) {
   )
 }
 
-// ---------- 最新觀察紀錄列表 ----------
-function RecentRecords({ recent }) {
-  if (recent.status === 'loading') return <div className={`skeleton ${styles.skeletonBlock}`} />
-  if (recent.status === 'error') return <p className={styles.message}>暫時無法取得最新紀錄</p>
-  if (recent.data.length === 0) return <p className={styles.message}>台灣目前還沒有觀察紀錄</p>
+// ---------- 定位後的結果摘要：附近有幾筆、最近的在多遠 ----------
+function NearbySummary({ nearby, name }) {
+  if (nearby.status === 'loading') return <p className={styles.nearbySummary}>正在搜尋你附近的紀錄…</p>
+  if (nearby.status === 'error' || !nearby.data) {
+    return <p className={styles.nearbySummary}>暫時無法取得附近的紀錄，請稍後再試</p>
+  }
+
+  const { radius, total, observations, searchedRadius } = nearby.data
+  const nearest = observations[0]
+  const where = nearest && `（${nearest.observedOn ?? '日期不明'}，${nearest.placeGuess ?? '地點不明'}）`
+
+  if (total > 0) {
+    return (
+      <p className={styles.nearbySummary}>
+        你附近 {radius} 公里內有 <strong>{total}</strong> 筆{name}的紀錄，最近一筆約{' '}
+        <strong>{formatKm(nearest.distanceKm)}</strong> 公里{where}
+      </p>
+    )
+  }
+  if (nearest) {
+    return (
+      <p className={styles.nearbySummary}>
+        你附近 {radius} 公里內沒有紀錄。最近的紀錄約在 <strong>{formatKm(nearest.distanceKm)}</strong> 公里外{where}
+      </p>
+    )
+  }
+  return (
+    <p className={styles.nearbySummary}>
+      你附近 <strong>{searchedRadius}</strong> 公里內都沒有{name}的紀錄，可以看看上方的分布熱點
+    </p>
+  )
+}
+
+// ---------- 觀察紀錄列表（最新紀錄／離你最近的紀錄共用） ----------
+function RecordList({ status, records, emptyText }) {
+  if (status === 'loading') return <div className={`skeleton ${styles.skeletonBlock}`} />
+  if (status === 'error') return <p className={styles.message}>暫時無法取得紀錄</p>
+  if (records.length === 0) return <p className={styles.message}>{emptyText}</p>
 
   return (
     <ul className={styles.records}>
-      {recent.data.map((obs) => (
+      {records.map((obs) => (
         <li key={obs.id}>
           <a href={obs.url} target="_blank" rel="noreferrer" className={styles.record}>
             <span className={styles.recordDate}>{obs.observedOn ?? '日期不明'}</span>
+            {obs.distanceKm != null && (
+              <span className={styles.recordDistance}>距離約 {formatKm(obs.distanceKm)} 公里</span>
+            )}
             {obs.obscured && <span className={styles.obscuredBadge}>位置已模糊化</span>}
             <p className={styles.recordPlace}>{obs.placeGuess ?? '地點不明'}</p>
           </a>

@@ -1,4 +1,6 @@
 // iNaturalist API（免金鑰）：即時查詢用
+import { distanceKm } from '../utils/geo.js'
+
 const INAT_API = 'https://api.inaturalist.org/v1'
 export const TAIWAN_PLACE_ID = 7887
 
@@ -142,6 +144,38 @@ export async function fetchRecentObservations(taxonId, signal) {
   })
   const data = await fetchJson(`${INAT_API}/observations?${params}`, signal)
   return data.results.filter((obs) => obs.location).map(toObservation)
+}
+
+// 某物種在使用者附近的紀錄：依距離由近到遠排序，每筆加上 distanceKm
+// 半徑內沒有紀錄時，自動擴大到 FALLBACK_RADIUS 公里，找出「最近的紀錄在多遠」
+const FALLBACK_RADIUS = 50
+
+async function fetchSpeciesWithin(taxonId, { lat, lng }, radius, signal) {
+  const params = new URLSearchParams({
+    taxon_id: taxonId,
+    lat,
+    lng,
+    radius,
+    quality_grade: 'research',
+    per_page: 200,
+    locale: 'zh-TW',
+  })
+  const data = await fetchJson(`${INAT_API}/observations?${params}`, signal)
+  const observations = data.results
+    .filter((obs) => obs.location)
+    .map(toObservation)
+    .map((obs) => ({ ...obs, distanceKm: distanceKm({ lat, lng }, obs) }))
+    .sort((a, b) => a.distanceKm - b.distanceKm)
+  return { total: data.total_results, observations }
+}
+
+export async function fetchSpeciesNearby(taxonId, location, radius, signal) {
+  const within = await fetchSpeciesWithin(taxonId, location, radius, signal)
+  if (within.total > 0 || radius >= FALLBACK_RADIUS) {
+    return { radius, ...within, searchedRadius: radius }
+  }
+  const wider = await fetchSpeciesWithin(taxonId, location, FALLBACK_RADIUS, signal)
+  return { radius, total: 0, observations: wider.observations, searchedRadius: FALLBACK_RADIUS }
 }
 
 // iNaturalist 熱點圖層（疊在 Leaflet 地圖上，顯示所有紀錄的分布）
