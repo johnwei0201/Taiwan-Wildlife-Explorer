@@ -165,28 +165,38 @@ export default function HomePage() {
           ))}
         </div>
 
-        {/* 主題（可複選）：疊加在分頁上，選越多範圍越小 */}
-        <div className={styles.tabs} role="group" aria-label="主題（可複選）">
-          {COLLECTIONS.map((tag) => {
-            const isSelected = activeTags.includes(tag.id)
-            const count = status === 'success' ? countWithTag(tag.id) : null
-            return (
-              <button
-                key={tag.id}
-                type="button"
-                aria-pressed={isSelected}
-                data-kind="collection"
-                className={styles.tab}
-                title={count === null ? tag.label : `${tag.label}（${count} 種）`}
-                disabled={count === 0 && !isSelected}
-                onClick={() => toggleTag(tag.id)}
-              >
-                {/* 打勾：不只靠顏色，也用符號表示「已選取」 */}
-                {isSelected && <span aria-hidden="true">✓ </span>}
-                {tag.label}
-              </button>
-            )
-          })}
+        {/* 主題＋刷新推薦同一行：主題靠左，刷新推薦推到最右邊 */}
+        <div className={styles.tagRow}>
+          {/* 主題（可複選）：疊加在分頁上，選越多範圍越小 */}
+          <div className={styles.tabs} role="group" aria-label="主題（可複選）">
+            {COLLECTIONS.map((tag) => {
+              const isSelected = activeTags.includes(tag.id)
+              const count = status === 'success' ? countWithTag(tag.id) : null
+              return (
+                <button
+                  key={tag.id}
+                  type="button"
+                  aria-pressed={isSelected}
+                  data-kind="collection"
+                  className={styles.tab}
+                  title={count === null ? tag.label : `${tag.label}（${count} 種）`}
+                  disabled={count === 0 && !isSelected}
+                  onClick={() => toggleTag(tag.id)}
+                >
+                  {/* 打勾：不只靠顏色，也用符號表示「已選取」 */}
+                  {isSelected && <span aria-hidden="true">✓ </span>}
+                  {tag.label}
+                </button>
+              )
+            })}
+          </div>
+
+          {/* 刷新推薦：只在首頁隨機推薦時出現 */}
+          {status === 'success' && !activeGroup && (
+            <button type="button" className={styles.refresh} onClick={() => setRefreshCount((n) => n + 1)}>
+              <span aria-hidden="true">↻</span> 刷新推薦
+            </button>
+          )}
         </div>
       </div>
 
@@ -231,9 +241,6 @@ export default function HomePage() {
       {/* 還沒選分頁：隨機推薦 */}
       {status === 'success' && !activeGroup && (
         <>
-          <button type="button" className={styles.refresh} onClick={() => setRefreshCount((n) => n + 1)}>
-            <span aria-hidden="true">↻</span> 刷新推薦
-          </button>
           <p className={styles.count}>
             隨機推薦 {randomSpecies.length} 種（全台共 {speciesList.length} 種，點上方分類看更多）
           </p>

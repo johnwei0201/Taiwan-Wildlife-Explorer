@@ -67,6 +67,19 @@
   border-color: var(--color-accent);
 }
 
+/* 主題＋刷新推薦同一行：刷新推薦用 margin-left: auto 推到最右邊 */
+.tagRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-width: 0;
+}
+
+/* 手機：主題按鈕左右內距縮小一點，三個主題＋刷新推薦才放得進同一行（字級不變） */
+.tagRow .tab {
+  padding-inline: var(--space-3);
+}
+
 /* ---------- 第二層小分類（例如 昆蟲類 › 全部／蝴蝶／蜻蜓） ---------- */
 /* 比第一層小一號、沒有外框，看得出是「上一層底下的選項」 */
 .subtabs {
@@ -113,10 +126,13 @@
 /* 刷新推薦：和分頁同樣 6px 圓角，用主色框線，和分頁、主題區分開 */
 .refresh {
   display: inline-flex;
+  flex-shrink: 0;
   align-items: center;
   gap: var(--space-1);
-  margin-top: var(--space-2);
+  margin-left: auto;
+  margin-bottom: var(--space-2); /* 和主題按鈕下方的留白一致，上下才會對齊 */
   padding: var(--space-1) var(--space-3);
+  white-space: nowrap;
   font-size: var(--fs-sm);
   color: var(--color-primary-dark);
   border: 1px solid var(--color-primary);
@@ -155,6 +171,15 @@
     flex-direction: row;
     flex-wrap: wrap;
     column-gap: var(--space-3);
+  }
+
+  /* 主題那一行撐滿剩下的寬度，刷新推薦才會到整排的最右邊 */
+  .tagRow {
+    flex: 1 1 auto;
+  }
+
+  .tagRow .tab {
+    padding-inline: var(--space-4);
   }
 
   .tabs {
