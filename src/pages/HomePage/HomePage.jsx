@@ -11,8 +11,8 @@ const RANDOM_COUNT = 30
 
 // 首頁隨機推薦不放昆蟲類、蛛形類、爬蟲類：有些人看到蟲、蜘蛛或蛇的照片會不舒服，
 // 一打開網頁就看到可能直接離開；想看的人點對應的分頁就看得到
-const RANDOM_EXCLUDED_GROUPS = GROUPS.filter((g) => ['insecta', 'arachnida', 'reptilia'].includes(g.id))
-const isRandomCandidate = (s) => s.photo && !RANDOM_EXCLUDED_GROUPS.some((g) => g.match(s))
+const RANDOM_EXCLUDED_IDS = ['insecta', 'arachnida', 'reptilia']
+const RANDOM_GROUPS = GROUPS.filter((g) => g.kind === 'group' && !RANDOM_EXCLUDED_IDS.includes(g.id))
 
 // 洗牌（Fisher–Yates）：從最後一張開始，每張都和前面隨機一張交換，每種排列機率相同
 function shuffle(list) {
@@ -22,6 +22,20 @@ function shuffle(list) {
     ;[result[i], result[j]] = [result[j], result[i]]
   }
   return result
+}
+
+// 各類群平均挑選：直接從全部物種隨機挑，鳥類佔一半以上，推薦幾乎都是鳥；
+// 改成每個類群輪流各拿一種，直到湊滿 30 種（某類群挑完了就跳過它），最後再整體洗牌
+function pickBalanced(speciesList, count) {
+  const pools = RANDOM_GROUPS.map((g) => shuffle(speciesList.filter((s) => s.photo && g.match(s))))
+  const picked = []
+  while (picked.length < count && pools.some((pool) => pool.length > 0)) {
+    for (const pool of shuffle(pools)) {
+      if (picked.length >= count) break
+      if (pool.length > 0) picked.push(pool.pop())
+    }
+  }
+  return shuffle(picked)
 }
 
 export default function HomePage() {
@@ -54,11 +68,11 @@ export default function HomePage() {
     }
   }, [activeGroup?.id, activeSub?.id])
 
-  // 一打開網頁先隨機推薦 30 種（只挑有照片、不是昆蟲和蜘蛛的），每次重新整理都不一樣
+  // 一打開網頁先隨機推薦 30 種（各類群平均、只挑有照片的），每次重新整理都不一樣
   // 按「刷新推薦」時把 refreshCount 加 1，useMemo 就會重新洗牌，不用重新載入整個網頁
   const [refreshCount, setRefreshCount] = useState(0)
   const randomSpecies = useMemo(
-    () => shuffle(speciesList.filter(isRandomCandidate)).slice(0, RANDOM_COUNT),
+    () => pickBalanced(speciesList, RANDOM_COUNT),
     [speciesList, refreshCount],
   )
 
