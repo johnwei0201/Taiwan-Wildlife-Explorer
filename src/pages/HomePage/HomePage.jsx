@@ -87,28 +87,7 @@ export default function HomePage() {
     [speciesList, refreshCount],
   )
 
-  // 搜尋框：打字時先更新畫面上的文字，停手 0.3 秒後才寫進網址並開始篩選，
-  // 避免每打一個字就重新篩選一次、也避免瀏覽紀錄被灌滿
-  const [query, setQuery] = useState(queryParam)
-  useEffect(() => {
-    if (query === queryParam) return
-    const timer = setTimeout(() => {
-      setSearchParams(
-        (prev) => {
-          const next = new URLSearchParams(prev)
-          if (query.trim()) next.set('q', query)
-          else next.delete('q')
-          return next
-        },
-        { replace: true },
-      )
-    }, 300)
-    return () => clearTimeout(timer)
-  }, [query])
-
-  // 網址的搜尋字被別的方式改掉時（例如按「上一頁」），搜尋框跟著更新
-  useEffect(() => setQuery(queryParam), [queryParam])
-
+  // 搜尋框在頁首（SearchBox），這裡只負責依網址上的搜尋字篩選
   // 每個物種可以被搜尋到的文字（中文名、學名、科、目…），資料載入後算一次就好
   const searchTexts = useMemo(() => new Map(speciesList.map((s) => [s.id, searchText(s)])), [speciesList])
   const matchSearch = (s) => matchQuery(searchTexts.get(s.id), queryTerms)
@@ -167,22 +146,6 @@ export default function HomePage() {
         {/* 畫面上的大標題拿掉（頁首已經有網站名稱），但保留給螢幕閱讀器和搜尋引擎：每頁都該有一個 h1 */}
         <h1 className="visually-hidden">發現台灣動物趣</h1>
         <p className={styles.subtitle}>探索台灣的鳥類、哺乳類、爬蟲類、兩棲類、魚類、昆蟲、蜘蛛與甲殼類</p>
-
-        {/* 文字搜尋：送出表單不需要做任何事（打字時就會自動篩選），只是讓手機鍵盤出現「搜尋」鍵 */}
-        <form className={styles.search} role="search" onSubmit={(event) => event.preventDefault()}>
-          <svg className={styles.searchIcon} viewBox="0 0 24 24" aria-hidden="true">
-            <circle cx="11" cy="11" r="7" />
-            <path d="M16.5 16.5 21 21" />
-          </svg>
-          <input
-            type="search"
-            className={styles.searchInput}
-            placeholder="搜尋名稱，例如：藍鵲、台灣 蛙"
-            aria-label="搜尋物種名稱（可用空格隔開多個關鍵字）"
-            value={query}
-            onChange={(event) => setQuery(event.target.value)}
-          />
-        </form>
       </section>
 
       <div className={styles.tabBar}>

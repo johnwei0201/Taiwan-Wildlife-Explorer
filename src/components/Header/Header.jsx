@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Link, NavLink } from 'react-router-dom'
+import SearchBox from '../SearchBox/SearchBox.jsx'
 import styles from './Header.module.css'
 
 const NAV_ITEMS = [
@@ -51,6 +52,9 @@ export default function Header() {
             ))}
           </ul>
         </nav>
+
+        {/* 搜尋框：手機排在第二行（整行寬），平板以上排在選單右邊 */}
+        <SearchBox className={styles.search} />
       </div>
     </header>
   )
