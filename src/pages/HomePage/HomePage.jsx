@@ -9,9 +9,9 @@ import styles from './HomePage.module.css'
 
 const RANDOM_COUNT = 30
 
-// 首頁隨機推薦不放昆蟲類、蛛形類：有些人看到蟲或蜘蛛的照片會不舒服，
-// 一打開網頁就看到可能直接離開；想看的人點「昆蟲類」「蛛形類」分頁就看得到
-const RANDOM_EXCLUDED_GROUPS = GROUPS.filter((g) => ['insecta', 'arachnida'].includes(g.id))
+// 首頁隨機推薦不放昆蟲類、蛛形類、爬蟲類：有些人看到蟲、蜘蛛或蛇的照片會不舒服，
+// 一打開網頁就看到可能直接離開；想看的人點對應的分頁就看得到
+const RANDOM_EXCLUDED_GROUPS = GROUPS.filter((g) => ['insecta', 'arachnida', 'reptilia'].includes(g.id))
 const isRandomCandidate = (s) => s.photo && !RANDOM_EXCLUDED_GROUPS.some((g) => g.match(s))
 
 // 洗牌（Fisher–Yates）：從最後一張開始，每張都和前面隨機一張交換，每種排列機率相同
