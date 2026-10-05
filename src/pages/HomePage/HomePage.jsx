@@ -14,6 +14,11 @@ const RANDOM_COUNT = 30
 const RANDOM_EXCLUDED_IDS = ['insecta', 'arachnida', 'reptilia']
 const RANDOM_GROUPS = GROUPS.filter((g) => g.kind === 'group' && !RANDOM_EXCLUDED_IDS.includes(g.id))
 
+// 類群裡再排除部分分類（目或科的學名）：老鼠（鼠科）、蝙蝠（翼手目，包含蝙蝠科、葉鼻蝠科等所有蝙蝠）
+const RANDOM_EXCLUDED_TAXA = ['Muridae', 'Chiroptera']
+const isRandomCandidate = (s) =>
+  s.photo && !RANDOM_EXCLUDED_TAXA.includes(s.order?.nameSci) && !RANDOM_EXCLUDED_TAXA.includes(s.family?.nameSci)
+
 // 洗牌（Fisher–Yates）：從最後一張開始，每張都和前面隨機一張交換，每種排列機率相同
 function shuffle(list) {
   const result = [...list]
@@ -27,7 +32,7 @@ function shuffle(list) {
 // 各類群平均挑選：直接從全部物種隨機挑，鳥類佔一半以上，推薦幾乎都是鳥；
 // 改成每個類群輪流各拿一種，直到湊滿 30 種（某類群挑完了就跳過它），最後再整體洗牌
 function pickBalanced(speciesList, count) {
-  const pools = RANDOM_GROUPS.map((g) => shuffle(speciesList.filter((s) => s.photo && g.match(s))))
+  const pools = RANDOM_GROUPS.map((g) => shuffle(speciesList.filter((s) => isRandomCandidate(s) && g.match(s))))
   const picked = []
   while (picked.length < count && pools.some((pool) => pool.length > 0)) {
     for (const pool of shuffle(pools)) {
