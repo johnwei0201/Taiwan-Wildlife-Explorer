@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import SpeciesCard from '../../components/SpeciesCard/SpeciesCard.jsx'
 import FilterPanel from '../../components/FilterPanel/FilterPanel.jsx'
@@ -55,9 +55,11 @@ export default function HomePage() {
   }, [activeGroup?.id, activeSub?.id])
 
   // 一打開網頁先隨機推薦 30 種（只挑有照片、不是昆蟲和蜘蛛的），每次重新整理都不一樣
+  // 按「刷新推薦」時把 refreshCount 加 1，useMemo 就會重新洗牌，不用重新載入整個網頁
+  const [refreshCount, setRefreshCount] = useState(0)
   const randomSpecies = useMemo(
     () => shuffle(speciesList.filter(isRandomCandidate)).slice(0, RANDOM_COUNT),
-    [speciesList],
+    [speciesList, refreshCount],
   )
 
   // 組出網址參數：分頁、小分類、主題（外觀篩選另外加）
@@ -197,6 +199,9 @@ export default function HomePage() {
       {/* 還沒選分頁：隨機推薦 */}
       {status === 'success' && !activeGroup && (
         <>
+          <button type="button" className={styles.refresh} onClick={() => setRefreshCount((n) => n + 1)}>
+            <span aria-hidden="true">↻</span> 刷新推薦
+          </button>
           <p className={styles.count}>
             隨機推薦 {randomSpecies.length} 種（全台共 {speciesList.length} 種，點上方分類看更多）
           </p>
