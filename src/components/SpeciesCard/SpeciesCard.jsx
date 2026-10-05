@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { ALIEN_LABELS } from '../../constants/labels.js'
 import styles from './SpeciesCard.module.css'
@@ -7,16 +8,42 @@ export default function SpeciesCard({ species }) {
   const { id, nameZh, nameSci, photo, endemic, protectedLevel, alienType } = species
   const alienLabel = ALIEN_LABELS[alienType]
 
+  // 照片放在 iNaturalist 的伺服器上，有時要好幾秒才載入完成，甚至失敗：
+  //   loading 下載中 → 閃爍動畫，讓人知道「正在載入」而不是壞掉
+  //   loaded  完成   → 照片淡入
+  //   error   失敗   → 改顯示 🐾，和沒有照片的物種一樣
+  const [photoStatus, setPhotoStatus] = useState('loading')
+  const imgRef = useRef(null)
+
+  // 照片已經在瀏覽器快取裡時，可能在 React 綁定 onLoad 之前就載完了，這裡補檢查一次
+  useEffect(() => {
+    const img = imgRef.current
+    if (img?.complete) setPhotoStatus(img.naturalWidth > 0 ? 'loaded' : 'error')
+  }, [])
+
+  const showPhoto = photo && photoStatus !== 'error'
+
   return (
     <Link to={`/species/${id}`} className={styles.card}>
-      <div className={styles.imageWrap}>
-        {photo ? (
+      <div className={`${styles.imageWrap} ${showPhoto && photoStatus === 'loading' ? 'skeleton' : ''}`}>
+        {showPhoto ? (
           <>
-            <img src={photo.url} alt={nameZh ?? nameSci} loading="lazy" className={styles.image} />
+            <img
+              ref={imgRef}
+              src={photo.url}
+              alt={nameZh ?? nameSci}
+              loading="lazy"
+              className={styles.image}
+              data-loaded={photoStatus === 'loaded'}
+              onLoad={() => setPhotoStatus('loaded')}
+              onError={() => setPhotoStatus('error')}
+            />
             {/* CC 授權規定：必須標示作者與授權 */}
-            <p className={styles.credit}>
-              © {photo.author}・{photo.license}
-            </p>
+            {photoStatus === 'loaded' && (
+              <p className={styles.credit}>
+                © {photo.author}・{photo.license}
+              </p>
+            )}
           </>
         ) : (
           <div className={styles.placeholder} aria-hidden="true">🐾</div>

@@ -100,9 +100,11 @@ export default function HomePage() {
   const filteredSpecies = applyAppearance(groupSpecies)
 
   // 每個主題「加選之後還剩幾種」：會變成 0 種的不能選（例如特有種＋外來種不可能同時成立）
+  // 還沒選分頁（首頁隨機推薦）時，點主題會從「全部」裡篩選，所以用全部物種來計算
+  const tagScopeSpecies = scope ? scopeSpecies : speciesList
   const countWithTag = (tagId) => {
     const tags = activeTags.includes(tagId) ? activeTags : [...activeTags, tagId]
-    return applyAppearance(scopeSpecies.filter((s) => matchTags(s, tags))).length
+    return applyAppearance(tagScopeSpecies.filter((s) => matchTags(s, tags))).length
   }
 
   return (

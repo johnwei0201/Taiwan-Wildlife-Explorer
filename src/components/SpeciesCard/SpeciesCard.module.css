@@ -23,6 +23,11 @@
   background-color: var(--color-primary-light);
 }
 
+/* 照片下載中：沿用全站的 skeleton 閃爍動畫，但圓角交給卡片本身處理 */
+.imageWrap:global(.skeleton) {
+  border-radius: 0;
+}
+
 /* 不支援 aspect-ratio 的舊版瀏覽器：用 padding-top 75%（= 3/4）撐出 4:3 */
 @supports not (aspect-ratio: 4 / 3) {
   .imageWrap {
@@ -54,6 +59,13 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+/* 下載完成才淡入，避免照片一塊一塊由上往下畫出來 */
+.image[data-loaded='true'] {
+  opacity: 1;
 }
 
 .placeholder {
