@@ -36,6 +36,13 @@ const GROUPS = [
   { id: 'coleoptera', label: '甲蟲', inatTaxonId: 47208, minCount: 20 }, // 鞘翅目
   { id: 'mantodea', label: '螳螂', inatTaxonId: 48112, minCount: 20 }, // 螳螂目
   { id: 'phasmida', label: '竹節蟲', inatTaxonId: 47198, minCount: 20 }, // 竹節蟲目
+  { id: 'hemiptera', label: '蟬、椿象', inatTaxonId: 47744, minCount: 20 }, // 半翅目
+  { id: 'orthoptera', label: '蚱蜢、蟋蟀', inatTaxonId: 47651, minCount: 20 }, // 直翅目
+  // 魚類在分類上分成好幾綱，這裡兩個設定共用同一個 id，資料會合併成一個類群
+  { id: 'fish', label: '魚類（硬骨魚）', inatTaxonId: 47178, minCount: 20 }, // 輻鰭魚綱
+  { id: 'fish', label: '魚類（鯊魚、魟魚）', inatTaxonId: 47273, minCount: 20 }, // 板鰓亞綱
+  { id: 'crustacea', label: '甲殼類', inatTaxonId: 85493, minCount: 20 }, // 甲殼亞門
+  { id: 'araneae', label: '蜘蛛', inatTaxonId: 47118, minCount: 20 }, // 蜘蛛目
 ]
 
 // 排除清單：家養動物不屬於野生動物圖鑑

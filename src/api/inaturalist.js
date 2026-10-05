@@ -4,8 +4,9 @@ import { distanceKm } from '../utils/geo.js'
 const INAT_API = 'https://api.inaturalist.org/v1'
 export const TAIWAN_PLACE_ID = 7887
 
-// 收錄的類群：鳥類、哺乳類、爬蟲類、兩棲類、鱗翅目（蝴蝶＋蛾）、蜻蛉目、鞘翅目、螳螂目、竹節蟲目
-const GROUP_TAXON_IDS = '3,40151,26036,20978,47157,47792,47208,48112,47198'
+// 收錄的類群：鳥類、哺乳類、爬蟲類、兩棲類、
+//   硬骨魚、鯊魚魟魚、鱗翅目（蝴蝶＋蛾）、蜻蛉目、鞘翅目、半翅目、直翅目、螳螂目、竹節蟲目、蜘蛛目、甲殼類
+const GROUP_TAXON_IDS = '3,40151,26036,20978,47178,47273,47157,47792,47208,47744,47651,48112,47198,47118,85493'
 
 const ICONIC_TO_GROUP = {
   Aves: 'aves',

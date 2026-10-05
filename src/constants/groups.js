@@ -11,20 +11,26 @@ export const GROUPS = [
   { id: 'mammalia', label: '哺乳類', kind: 'group', match: byGroup('mammalia') },
   { id: 'reptilia', label: '爬蟲類', kind: 'group', match: byGroup('reptilia') },
   { id: 'amphibia', label: '兩棲類', kind: 'group', match: byGroup('amphibia') },
+  { id: 'fish', label: '魚類', kind: 'group', match: byGroup('fish') },
   {
     id: 'insecta',
     label: '昆蟲類',
     kind: 'group',
-    match: byGroup('lepidoptera', 'moth', 'odonata', 'coleoptera', 'mantodea', 'phasmida'),
+    match: byGroup('lepidoptera', 'moth', 'odonata', 'coleoptera', 'hemiptera', 'orthoptera', 'mantodea', 'phasmida'),
     subgroups: [
       { id: 'lepidoptera', label: '蝴蝶', match: byGroup('lepidoptera') },
       { id: 'moth', label: '蛾', match: byGroup('moth') },
       { id: 'odonata', label: '蜻蜓', match: byGroup('odonata') },
       { id: 'coleoptera', label: '甲蟲', match: byGroup('coleoptera') },
+      { id: 'hemiptera', label: '蟬、椿象', match: byGroup('hemiptera') },
+      { id: 'orthoptera', label: '蚱蜢、蟋蟀', match: byGroup('orthoptera') },
       { id: 'mantodea', label: '螳螂', match: byGroup('mantodea') },
       { id: 'phasmida', label: '竹節蟲', match: byGroup('phasmida') },
     ],
   },
+  // 蜘蛛有 8 隻腳、身體分兩段，不是昆蟲，屬於蛛形綱；之後的蠍子、盲蛛也放在這裡
+  { id: 'arachnida', label: '蛛形類', kind: 'group', match: byGroup('araneae') },
+  { id: 'crustacea', label: '甲殼類', kind: 'group', match: byGroup('crustacea') },
 ]
 
 // 主題（特有種、保育類、外來種）：可複選，疊加在分頁上，例如「鳥類＋特有種＋保育類」

@@ -104,7 +104,7 @@ export default function HomePage() {
     <div className="container">
       <section className={styles.hero}>
         <h1 className={styles.title}>發現台灣動物趣</h1>
-        <p className={styles.subtitle}>探索台灣的鳥類、哺乳類、爬蟲類、兩棲類與昆蟲類</p>
+        <p className={styles.subtitle}>探索台灣的鳥類、哺乳類、爬蟲類、兩棲類、魚類、昆蟲、蜘蛛與甲殼類</p>
       </section>
 
       <div className={styles.tabBar}>

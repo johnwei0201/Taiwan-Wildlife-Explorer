@@ -1,8 +1,9 @@
 /**
  * 外型規則：把「目、科」分類轉成一般人會用的白話描述
  *
- * - 依類群分開，每條規則的 match 是「目」、「亞目」、「科」或「亞科」的學名
- *   （亞科用在同一科裡外型差很多的情況，例如裳蛾科裡的燈蛾、毒蛾）
+ * - 依類群分開，每條規則的 match 是「綱」、「目」、「亞目」、「下目」、「科」或「亞科」的學名
+ *   （亞科用在同一科裡外型差很多的情況，例如裳蛾科裡的燈蛾、毒蛾；
+ *     下目用在甲殼類，例如短尾下目＝螃蟹、異尾下目＝寄居蟹）
  * - 由上往下比對，第一個符合的就採用，所以「科」的規則要放在「目」前面
  *   （例如鳥類的「雀形目」放最後，當作其他小型鳥的總稱）
  * - 都不符合的會歸為「其他」
@@ -98,6 +99,58 @@ export const SHAPE_RULES = {
   phasmida: [
     { label: '葉䗛（扁平，像一片葉子）', match: ['Phylliidae'] },
     { label: '竹節蟲（細長，像一根樹枝）', match: ['Phasmida'] },
+  ],
+  hemiptera: [
+    { label: '蟬（夏天會大聲鳴叫）', match: ['Cicadidae'] },
+    { label: '沫蟬、蠟蟬、葉蟬（小型，很會跳）', match: ['Auchenorrhyncha'] },
+    { label: '獵椿象（嘴巴像針，會捕食其他蟲）', match: ['Reduviidae'] },
+    { label: '水黽、水生椿象（在水面或水裡生活）', match: ['Gerridae', 'Veliidae', 'Nepidae', 'Belostomatidae', 'Notonectidae'] },
+    { label: '盾背椿象（背部像一面盾牌）', match: ['Scutelleridae', 'Plataspidae'] },
+    { label: '椿象（身體扁平，會放臭味）', match: ['Heteroptera'] },
+    { label: '其他（蚜蟲、介殼蟲等）', match: ['Hemiptera'] },
+  ],
+  orthoptera: [
+    { label: '螽斯（觸角比身體長）', match: ['Tettigoniidae'] },
+    { label: '蟋蟀、螻蛄（身體圓胖，會鳴叫）', match: ['Ensifera'] },
+    { label: '蚱蜢、蝗蟲（觸角短，很會跳）', match: ['Caelifera'] },
+    { label: '其他', match: ['Orthoptera'] },
+  ],
+  fish: [
+    { label: '鯊魚、魟魚（骨頭是軟骨）', match: ['Chondrichthyes', 'Elasmobranchii'] },
+    { label: '鰕虎、彈塗魚（住在溪底或潮間帶）', match: ['Gobiidae', 'Oxudercidae', 'Eleotridae', 'Butidae', 'Rhyacichthyidae'] },
+    { label: '鯉魚、溪哥、泥鰍等溪流魚', match: ['Cypriniformes'] },
+    { label: '鯰魚（嘴邊有鬍鬚）', match: ['Siluriformes'] },
+    { label: '吳郭魚、慈鯛', match: ['Cichlidae'] },
+    { label: '大肚魚、青鱂魚（小型水溝魚）', match: ['Poeciliidae', 'Adrianichthyidae', 'Aplocheilidae'] },
+    { label: '鰻魚、海鱔（身體細長像蛇）', match: ['Anguilliformes'] },
+    { label: '河豚、剝皮魚', match: ['Tetraodontiformes'] },
+    { label: '海馬、海龍', match: ['Syngnathidae'] },
+    { label: '雀鯛、蝴蝶魚、隆頭魚（珊瑚礁的彩色魚）', match: ['Pomacentridae', 'Chaetodontidae', 'Pomacanthidae', 'Labridae', 'Scaridae', 'Acanthuridae', 'Zanclidae', 'Siganidae'] },
+    { label: '鳚（躲在礁岩縫的小魚）', match: ['Blenniidae', 'Tripterygiidae'] },
+    { label: '石斑、天竺鯛', match: ['Serranidae', 'Epinephelidae', 'Apogonidae'] },
+    { label: '笛鯛、石鱸、鯛魚（海邊常見的魚）', match: ['Lutjanidae', 'Haemulidae', 'Sparidae', 'Nemipteridae', 'Lethrinidae', 'Carangidae', 'Mullidae', 'Terapontidae', 'Kuhliidae'] },
+    { label: '獅子魚、石狗公（背鰭有毒刺）', match: ['Scorpaenidae'] },
+    { label: '鱧魚、鬥魚（能直接呼吸空氣）', match: ['Channidae', 'Osphronemidae'] },
+    { label: '其他魚類', match: ['Actinopterygii'] },
+  ],
+  crustacea: [
+    { label: '螃蟹（橫著走）', match: ['Brachyura'] },
+    { label: '寄居蟹、瓷蟹', match: ['Anomura'] },
+    { label: '蝦子', match: ['Caridea', 'Dendrobranchiata', 'Stenopodidea'] },
+    { label: '龍蝦、螯蝦', match: ['Achelata', 'Astacidea', 'Axiidea', 'Gebiidea'] },
+    { label: '鼠婦、海蟑螂（等足類）', match: ['Isopoda'] },
+    { label: '藤壺、茗荷（黏在礁岩或漂流物上）', match: ['Balanomorpha', 'Pollicipedomorpha', 'Scalpellomorpha', 'Thecostraca', 'Cirripedia'] },
+    { label: '蝦蛄（又叫螳螂蝦）', match: ['Stomatopoda'] },
+    { label: '其他甲殼類', match: ['Malacostraca', 'Hexanauplia', 'Maxillopoda', 'Ostracoda', 'Branchiopoda'] },
+  ],
+  araneae: [
+    { label: '跳蛛（眼睛大，會跳）', match: ['Salticidae'] },
+    { label: '高腳蛛（腳很長，跑很快）', match: ['Sparassidae'] },
+    { label: '蟹蛛（像螃蟹一樣橫著走）', match: ['Thomisidae'] },
+    { label: '園蛛、金蛛、長腳蛛（會結圓網）', match: ['Araneidae', 'Tetragnathidae', 'Nephilidae'] },
+    { label: '姬蛛、幽靈蛛（結不規則的網）', match: ['Theridiidae', 'Pholcidae'] },
+    { label: '狼蛛、貓蛛（在地面或葉上遊走捕食）', match: ['Lycosidae', 'Pisauridae', 'Oxyopidae'] },
+    { label: '其他蜘蛛', match: ['Araneae'] },
   ],
   odonata: [
     { label: '豆娘（身體細長，停下來翅膀合起來）', match: ['Zygoptera'] },

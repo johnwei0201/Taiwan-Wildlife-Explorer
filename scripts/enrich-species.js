@@ -62,8 +62,10 @@ async function addTaxonomy(speciesList) {
         const a = ancestors.find((x) => x.rank === rank)
         return a ? { nameSci: a.name, nameZh: a.preferred_common_name ?? null } : null
       }
+      species.class = pick('class') // 硬骨魚、鯊魚要靠「綱」區分
       species.order = pick('order')
       species.suborder = pick('suborder') // 蜻蜓、豆娘要靠「亞目」區分
+      species.infraorder = pick('infraorder') // 螃蟹、寄居蟹、蝦要靠「下目」區分
       species.family = pick('family')
       species.subfamily = pick('subfamily') // 裳蛾科裡的燈蛾、毒蛾要靠「亞科」區分
     }
@@ -96,10 +98,12 @@ async function main() {
   const traits = await readTraits()
 
   for (const species of speciesList) {
-    // 外型只依「目、亞目、科、亞科」判斷：規則簡單，重跑結果也一致
+    // 外型只依分類階層（綱、目、亞目、下目、科、亞科）判斷：規則簡單，重跑結果也一致
     species.shape = findShape(species.group, [
+      species.class?.nameSci,
       species.order?.nameSci,
       species.suborder?.nameSci,
+      species.infraorder?.nameSci,
       species.family?.nameSci,
       species.subfamily?.nameSci,
     ])
