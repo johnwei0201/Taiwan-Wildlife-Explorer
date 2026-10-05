@@ -1,15 +1,50 @@
+/* 說明文字＋搜尋框：手機上下排，平板以上左右排（搜尋框靠右） */
 .hero {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
   margin-bottom: var(--space-6);
-}
-
-.title {
-  font-size: var(--fs-2xl);
-  font-weight: 700;
-  color: var(--color-primary-dark);
 }
 
 .subtitle {
   color: var(--color-text-muted);
+}
+
+/* ---------- 文字搜尋 ---------- */
+.search {
+  position: relative;
+  width: 100%;
+}
+
+.searchIcon {
+  position: absolute;
+  left: var(--space-3);
+  top: 50%;
+  width: 18px;
+  height: 18px;
+  transform: translateY(-50%);
+  fill: none;
+  stroke: var(--color-text-muted);
+  stroke-width: 2;
+  stroke-linecap: round;
+  pointer-events: none; /* 點到圖示也等於點到輸入框 */
+}
+
+.searchInput {
+  width: 100%;
+  /* 16px：iPhone 上低於 16px 的輸入框在點擊時會自動放大頁面 */
+  font-size: 16px;
+  padding: var(--space-2) var(--space-3) var(--space-2) 2.25rem; /* 左邊留位置給放大鏡圖示 */
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm); /* 和分頁按鈕一樣 6px 圓角 */
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+.searchInput:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px var(--color-primary-light);
 }
 
 /* ---------- 類群切換 ---------- */
@@ -157,6 +192,16 @@
 
 /* 平板：3 欄 */
 @media (min-width: 768px) {
+  .hero {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between; /* 說明文字靠左、搜尋框靠右 */
+  }
+
+  .search {
+    flex: 0 0 320px;
+  }
+
   .tabBar {
     flex-direction: row;
     flex-wrap: wrap;

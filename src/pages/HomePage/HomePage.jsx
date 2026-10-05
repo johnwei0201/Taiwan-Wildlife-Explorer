@@ -5,6 +5,7 @@ import FilterPanel from '../../components/FilterPanel/FilterPanel.jsx'
 import { COLLECTIONS, GROUPS, findGroup, matchTags, parseTags } from '../../constants/groups.js'
 import { FILTERS, applyFilters } from '../../constants/filters.js'
 import { useSpeciesList } from '../../hooks/useSpeciesList.js'
+import { matchQuery, parseQuery, searchText } from '../../utils/search.js'
 import styles from './HomePage.module.css'
 
 const RANDOM_COUNT = 30
@@ -55,8 +56,11 @@ export default function HomePage() {
   // 主題可複選；舊網址（例如 /?group=endemic）把主題放在 group，也一併讀進來
   const activeTags = [...new Set([...parseTags(searchParams.get('tag')), ...parseTags(groupParam)])]
   const found = findGroup(groupParam, searchParams.get('sub'))
-  // activeGroup 為 null＝還沒選，顯示隨機推薦；只選了主題時，範圍是「全部」
-  const activeGroup = found.group ?? (activeTags.length > 0 ? GROUPS[0] : null)
+  // 搜尋字也存在網址上（q），點進詳細頁再回來，搜尋結果還在
+  const queryParam = searchParams.get('q') ?? ''
+  const queryTerms = parseQuery(queryParam)
+  // activeGroup 為 null＝還沒選，顯示隨機推薦；只選了主題或有搜尋字時，範圍是「全部」
+  const activeGroup = found.group ?? (activeTags.length > 0 || queryTerms.length > 0 ? GROUPS[0] : null)
   const activeSub = found.subgroup // null＝第二層選「全部」
   const filters = Object.fromEntries(FILTERS.map((f) => [f.key, searchParams.get(f.key) ?? '']))
 
@@ -83,15 +87,42 @@ export default function HomePage() {
     [speciesList, refreshCount],
   )
 
-  // 組出網址參數：分頁、小分類、主題（外觀篩選另外加）
+  // 搜尋框：打字時先更新畫面上的文字，停手 0.3 秒後才寫進網址並開始篩選，
+  // 避免每打一個字就重新篩選一次、也避免瀏覽紀錄被灌滿
+  const [query, setQuery] = useState(queryParam)
+  useEffect(() => {
+    if (query === queryParam) return
+    const timer = setTimeout(() => {
+      setSearchParams(
+        (prev) => {
+          const next = new URLSearchParams(prev)
+          if (query.trim()) next.set('q', query)
+          else next.delete('q')
+          return next
+        },
+        { replace: true },
+      )
+    }, 300)
+    return () => clearTimeout(timer)
+  }, [query])
+
+  // 網址的搜尋字被別的方式改掉時（例如按「上一頁」），搜尋框跟著更新
+  useEffect(() => setQuery(queryParam), [queryParam])
+
+  // 每個物種可以被搜尋到的文字（中文名、學名、科、目…），資料載入後算一次就好
+  const searchTexts = useMemo(() => new Map(speciesList.map((s) => [s.id, searchText(s)])), [speciesList])
+  const matchSearch = (s) => matchQuery(searchTexts.get(s.id), queryTerms)
+
+  // 組出網址參數：分頁、小分類、主題、搜尋字（外觀篩選另外加）
   const buildParams = (groupId, subId, tags) => {
     const params = { group: groupId }
     if (subId) params.sub = subId
     if (tags.length > 0) params.tag = tags.join(',')
+    if (queryParam.trim()) params.q = queryParam
     return params
   }
 
-  // 切換分頁時清空外觀篩選（不同類群的選項不一樣），但保留主題：主題跨類群都適用
+  // 切換分頁時清空外觀篩選（不同類群的選項不一樣），但保留主題和搜尋字：它們跨類群都適用
   const selectGroup = (groupId) => setSearchParams(buildParams(groupId, null, activeTags))
   const selectSub = (subId) => setSearchParams(buildParams(activeGroup.id, subId, activeTags))
 
@@ -116,10 +147,10 @@ export default function HomePage() {
   const showFilters = activeGroup?.kind === 'group'
   const applyAppearance = (list) => (showFilters ? applyFilters(list, filters) : list)
 
-  // 篩選順序：分頁（有選第二層就用第二層，例如「昆蟲類 › 蝴蝶」）→ 主題 → 外觀
+  // 篩選順序：分頁（有選第二層就用第二層，例如「昆蟲類 › 蝴蝶」）→ 主題 → 搜尋字 → 外觀
   const scope = activeSub ?? activeGroup
   const scopeSpecies = scope ? speciesList.filter(scope.match) : []
-  const groupSpecies = scopeSpecies.filter((s) => matchTags(s, activeTags))
+  const groupSpecies = scopeSpecies.filter((s) => matchTags(s, activeTags) && matchSearch(s))
   const filteredSpecies = applyAppearance(groupSpecies)
 
   // 每個主題「加選之後還剩幾種」：會變成 0 種的不能選（例如特有種＋外來種不可能同時成立）
@@ -127,14 +158,31 @@ export default function HomePage() {
   const tagScopeSpecies = scope ? scopeSpecies : speciesList
   const countWithTag = (tagId) => {
     const tags = activeTags.includes(tagId) ? activeTags : [...activeTags, tagId]
-    return applyAppearance(tagScopeSpecies.filter((s) => matchTags(s, tags))).length
+    return applyAppearance(tagScopeSpecies.filter((s) => matchTags(s, tags) && matchSearch(s))).length
   }
 
   return (
     <div className="container">
       <section className={styles.hero}>
-        <h1 className={styles.title}>發現台灣動物趣</h1>
+        {/* 畫面上的大標題拿掉（頁首已經有網站名稱），但保留給螢幕閱讀器和搜尋引擎：每頁都該有一個 h1 */}
+        <h1 className="visually-hidden">發現台灣動物趣</h1>
         <p className={styles.subtitle}>探索台灣的鳥類、哺乳類、爬蟲類、兩棲類、魚類、昆蟲、蜘蛛與甲殼類</p>
+
+        {/* 文字搜尋：送出表單不需要做任何事（打字時就會自動篩選），只是讓手機鍵盤出現「搜尋」鍵 */}
+        <form className={styles.search} role="search" onSubmit={(event) => event.preventDefault()}>
+          <svg className={styles.searchIcon} viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="11" cy="11" r="7" />
+            <path d="M16.5 16.5 21 21" />
+          </svg>
+          <input
+            type="search"
+            className={styles.searchInput}
+            placeholder="搜尋名稱，例如：藍鵲、台灣 蛙"
+            aria-label="搜尋物種名稱（可用空格隔開多個關鍵字）"
+            value={query}
+            onChange={(event) => setQuery(event.target.value)}
+          />
+        </form>
       </section>
 
       <div className={styles.tabBar}>

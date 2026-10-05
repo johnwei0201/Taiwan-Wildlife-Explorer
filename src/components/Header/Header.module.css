@@ -15,16 +15,20 @@
   height: var(--header-height);
 }
 
+/* 網站名稱：首頁的大標題拿掉後，這裡就是網站的主要名稱，字放大、點擊範圍也加大 */
 .logo {
   display: flex;
   flex-direction: column;
-  font-size: var(--fs-lg);
+  justify-content: center;
+  height: 100%; /* 點擊範圍撐滿整個頁首高度 */
+  padding-right: var(--space-4);
+  font-size: var(--fs-xl);
   font-weight: 700;
   line-height: 1.2;
 }
 
 .logoEn {
-  font-size: 0.7rem;
+  font-size: 0.75rem;
   font-weight: 400;
   letter-spacing: 0.05em;
   opacity: 0.8;
@@ -143,6 +147,10 @@
 /* ---------- 桌機：Logo 再大一點 ---------- */
 @media (min-width: 1200px) {
   .logo {
-    font-size: var(--fs-xl);
+    font-size: 1.75rem; /* 28px */
+  }
+
+  .logoEn {
+    font-size: 0.85rem;
   }
 }
