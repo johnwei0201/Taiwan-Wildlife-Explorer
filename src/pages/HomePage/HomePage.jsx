@@ -14,8 +14,10 @@ const RANDOM_COUNT = 30
 const RANDOM_EXCLUDED_IDS = ['insecta', 'arachnida', 'reptilia']
 const RANDOM_GROUPS = GROUPS.filter((g) => g.kind === 'group' && !RANDOM_EXCLUDED_IDS.includes(g.id))
 
-// 類群裡再排除部分分類（目或科的學名）：老鼠（鼠科）、蝙蝠（翼手目，包含蝙蝠科、葉鼻蝠科等所有蝙蝠）
-const RANDOM_EXCLUDED_TAXA = ['Muridae', 'Chiroptera']
+// 類群裡再排除部分分類（目或科的學名）：
+//   老鼠和長得像老鼠的：鼠科、倉鼠科（田鼠）、尖鼠科（鼩鼱）
+//   蝙蝠：翼手目，包含蝙蝠科、葉鼻蝠科等所有蝙蝠
+const RANDOM_EXCLUDED_TAXA = ['Muridae', 'Cricetidae', 'Soricidae', 'Chiroptera']
 const isRandomCandidate = (s) =>
   s.photo && !RANDOM_EXCLUDED_TAXA.includes(s.order?.nameSci) && !RANDOM_EXCLUDED_TAXA.includes(s.family?.nameSci)
 
