@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
-import SpeciesCard from '../../components/SpeciesCard/SpeciesCard.jsx'
+import SpeciesGrid from '../../components/SpeciesGrid/SpeciesGrid.jsx'
 import FilterPanel from '../../components/FilterPanel/FilterPanel.jsx'
 import { COLLECTIONS, GROUPS, findGroup, matchTags, parseTags } from '../../constants/groups.js'
 import { FILTERS, applyFilters } from '../../constants/filters.js'
@@ -263,17 +263,5 @@ export default function HomePage() {
         </>
       )}
     </div>
-  )
-}
-
-function SpeciesGrid({ list }) {
-  return (
-    <ul className={styles.grid}>
-      {list.map((species) => (
-        <li key={species.id}>
-          <SpeciesCard species={species} />
-        </li>
-      ))}
-    </ul>
   )
 }

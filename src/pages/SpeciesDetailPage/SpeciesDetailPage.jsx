@@ -76,7 +76,7 @@ export default function SpeciesDetailPage() {
         <p className={styles.message}>找不到這個物種，或暫時無法取得資料，請稍後再試</p>
       )}
       {taxon.status === 'success' && (
-        <SpeciesHero taxon={taxon.data} local={local} displayName={displayName} />
+        <SpeciesHero taxon={taxon.data} local={local} displayName={displayName} speciesList={speciesList} />
       )}
 
       <section className={styles.section}>
@@ -170,7 +170,7 @@ export default function SpeciesDetailPage() {
 }
 
 // ---------- 上半部：照片與基本資料 ----------
-function SpeciesHero({ taxon, local, displayName }) {
+function SpeciesHero({ taxon, local, displayName, speciesList }) {
   const endemic = local?.endemic ?? taxon.endemic
   const alienLabel = ALIEN_LABELS[local?.alienType]
   const redlistLabel = REDLIST_LABELS[local?.redlist]
@@ -247,7 +247,7 @@ function SpeciesHero({ taxon, local, displayName }) {
 
         {taxonomy.length > 0 && (
           // key：換到別的物種時重新建立，展開中的說明會自動關閉
-          <TaxonomyTable key={taxon.id} items={taxonomy} speciesNameSci={taxon.nameSci} />
+          <TaxonomyTable key={taxon.id} items={taxonomy} speciesNameSci={taxon.nameSci} speciesList={speciesList} />
         )}
 
         <SpeciesSummary taxon={taxon} nameZh={displayName} />

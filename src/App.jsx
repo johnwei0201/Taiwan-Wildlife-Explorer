@@ -3,6 +3,7 @@ import Layout from './components/Layout/Layout.jsx'
 import HomePage from './pages/HomePage/HomePage.jsx'
 import SpeciesDetailPage from './pages/SpeciesDetailPage/SpeciesDetailPage.jsx'
 import NearbyPage from './pages/NearbyPage/NearbyPage.jsx'
+import TaxonPage from './pages/TaxonPage/TaxonPage.jsx'
 import NotFoundPage from './pages/NotFoundPage/NotFoundPage.jsx'
 
 // 路由表：網址 → 對應的頁面
@@ -14,6 +15,8 @@ export default function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/species/:id" element={<SpeciesDetailPage />} />
         <Route path="/nearby" element={<NearbyPage />} />
+        {/* 分類頁：rank 是 class／order／family／genus，name 是學名 */}
+        <Route path="/taxon/:rank/:name" element={<TaxonPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Route>
     </Routes>

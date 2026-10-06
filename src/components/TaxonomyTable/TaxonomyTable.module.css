@@ -25,8 +25,19 @@
   color: var(--color-text-muted);
 }
 
+/* 名稱在左（太長會自己換行），「看同科」固定在最右邊，每一列的連結才會對齊成一欄 */
 .row dd {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  gap: var(--space-2);
+  min-width: 0;
   margin: 0;
+}
+
+.name {
+  flex: 1;
+  min-width: 0;
 }
 
 /* 「？」按鈕：小圓圈 */
@@ -56,6 +67,25 @@
 
 .help:hover,
 .help[aria-expanded='true'] {
+  color: #fff;
+  background-color: var(--color-primary);
+}
+
+/* 「看同科 12 種 ›」：小膠囊，和「？」按鈕同一行，點了到分類頁 */
+.more {
+  flex-shrink: 0;
+  padding: 2px var(--space-2);
+  font-size: 0.75rem;
+  line-height: 1.6;
+  white-space: nowrap;
+  vertical-align: middle;
+  color: var(--color-primary-dark);
+  background-color: var(--color-primary-light);
+  border-radius: 999px;
+  transition: background-color var(--transition), color var(--transition);
+}
+
+.more:hover {
   color: #fff;
   background-color: var(--color-primary);
 }

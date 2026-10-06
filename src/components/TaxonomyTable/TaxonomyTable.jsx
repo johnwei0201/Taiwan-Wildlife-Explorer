@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 import { fetchWikiSummary } from '../../api/wikipedia.js'
+import { TAXON_RANKS, cleanZh, filterByTaxon, taxonPath } from '../../utils/taxon.js'
 import styles from './TaxonomyTable.module.css'
 
 /**
@@ -8,9 +10,12 @@ import styles from './TaxonomyTable.module.css'
  *   1. 分類小教室：界 › 門 › 綱 › 目 › 科 › 屬 › 種，每一階都可以點，切換到那一層的說明
  *   2. 這個分類（例如「鷺科」）的維基百科介紹
  *
+ * 每一層最後面還有「看同科 12 種 ›」：點了會到該分類的專屬頁面（/taxon/family/…）
+ *
  * items：從界到種的完整分類 [{ rank, label, intro, inTable, taxon: { id, nameSci, nameZh } }]
+ * speciesList：網站收錄的物種，用來計算每一層有幾種（只有自己一種時不顯示連結）
  */
-export default function TaxonomyTable({ items, speciesNameSci }) {
+export default function TaxonomyTable({ items, speciesNameSci, speciesList = [] }) {
   const [openRank, setOpenRank] = useState(null)
   const [wiki, setWiki] = useState({ status: 'idle', data: null })
 
@@ -38,24 +43,41 @@ export default function TaxonomyTable({ items, speciesNameSci }) {
       <dl className={styles.table}>
         {items
           .filter((item) => item.inTable)
-          .map(({ rank, label, taxon }) => (
-            <div key={rank} className={styles.row}>
-              <dt>{label}</dt>
-              <dd>
-                {taxon.nameZh ?? ''} <span className="scientific-name">{taxon.nameSci}</span>
-                <button
-                  type="button"
-                  className={styles.help}
-                  aria-expanded={openRank === rank}
-                  aria-controls="taxonomy-explain"
-                  aria-label={`什麼是${taxon.nameZh ?? taxon.nameSci}？`}
-                  onClick={() => toggle(rank)}
-                >
-                  ?
-                </button>
-              </dd>
-            </div>
-          ))}
+          .map(({ rank, label, taxon }) => {
+            const count = TAXON_RANKS[rank] ? filterByTaxon(speciesList, rank, taxon.nameSci).length : 0
+            const nameZh = cleanZh(taxon.nameZh)
+            return (
+              <div key={rank} className={styles.row}>
+                <dt>{label}</dt>
+                <dd>
+                  <span className={styles.name}>
+                    {nameZh ?? ''} <span className="scientific-name">{taxon.nameSci}</span>
+                    <button
+                      type="button"
+                      className={styles.help}
+                      aria-expanded={openRank === rank}
+                      aria-controls="taxonomy-explain"
+                      aria-label={`什麼是${nameZh ?? taxon.nameSci}？`}
+                      onClick={() => toggle(rank)}
+                    >
+                      ?
+                    </button>
+                  </span>
+                  {/* 同一個分類還有其他物種才顯示；中文名一起帶過去（屬的中文名資料裡沒有） */}
+                  {count > 1 && (
+                    <Link
+                      to={taxonPath(rank, taxon.nameSci)}
+                      state={{ nameZh }}
+                      className={styles.more}
+                      aria-label={`看看其他的${nameZh ?? taxon.nameSci}動物（${count} 種）`}
+                    >
+                      看同{label} {count} 種 ›
+                    </Link>
+                  )}
+                </dd>
+              </div>
+            )
+          })}
       </dl>
 
       {openItem && (

@@ -45,7 +45,8 @@ function findShape(group, taxonNames) {
 }
 
 async function addTaxonomy(speciesList) {
-  const missing = speciesList.filter((s) => !s.family)
+  // 缺「科」、「綱」或「屬」的都要查（早期的類群當時沒有記錄，分類頁需要用到）
+  const missing = speciesList.filter((s) => !s.family || !s.class || !s.genus)
   console.log(`需要查詢分類：${missing.length} 種`)
 
   for (let i = 0; i < missing.length; i += BATCH_SIZE) {
@@ -68,6 +69,7 @@ async function addTaxonomy(speciesList) {
       species.infraorder = pick('infraorder') // 螃蟹、寄居蟹、蝦要靠「下目」區分
       species.family = pick('family')
       species.subfamily = pick('subfamily') // 裳蛾科裡的燈蛾、毒蛾要靠「亞科」區分
+      species.genus = pick('genus') // 分類頁的「屬」要顯示中文名
     }
     console.log(`  已查詢 ${Math.min(i + BATCH_SIZE, missing.length)} / ${missing.length}`)
   }

@@ -1,0 +1,160 @@
+.back {
+  display: inline-block;
+  margin-bottom: var(--space-4);
+  color: var(--color-primary);
+  font-weight: 700;
+}
+
+.back:hover {
+  text-decoration: underline;
+}
+
+/* ---------- 往上的路徑：鳥類 › 雀形目 › 鵯科 ---------- */
+.path {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-1);
+  font-size: var(--fs-sm);
+  color: var(--color-text-muted);
+}
+
+/* 分類有上下層時，用「›」表示層級 */
+.path li + li::before {
+  content: '›';
+  margin-right: var(--space-1);
+}
+
+.path a {
+  color: var(--color-primary);
+}
+
+.path a:hover {
+  text-decoration: underline;
+}
+
+.path [aria-current='page'] {
+  color: var(--color-text);
+  font-weight: 700;
+}
+
+/* ---------- 標題 ---------- */
+.hero {
+  margin-block: var(--space-4) var(--space-6);
+}
+
+.rank {
+  display: inline-block;
+  padding: 2px var(--space-2);
+  font-size: 0.75rem;
+  color: var(--color-primary-dark);
+  background-color: var(--color-primary-light);
+  border-radius: 999px;
+}
+
+.title {
+  margin-top: var(--space-2);
+  font-size: var(--fs-2xl);
+  font-weight: 700;
+  color: var(--color-primary-dark);
+}
+
+.sci {
+  font-size: var(--fs-lg);
+  font-weight: 400;
+  color: var(--color-text-muted);
+}
+
+.summary {
+  margin-top: var(--space-1);
+  color: var(--color-text-muted);
+}
+
+/* ---------- 往下一層：小分類的膠囊按鈕 ---------- */
+.children {
+  margin-bottom: var(--space-6);
+}
+
+.childrenTitle {
+  margin-bottom: var(--space-2);
+  font-size: var(--fs-base);
+  font-weight: 700;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-1) var(--space-3);
+  font-size: var(--fs-sm);
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm); /* 和首頁分頁按鈕一樣 6px 圓角 */
+  transition: border-color var(--transition), background-color var(--transition);
+}
+
+.chip:hover {
+  border-color: var(--color-primary);
+  background-color: var(--color-primary-light);
+}
+
+/* 種數：淡色小字，和名稱區分 */
+.chipCount {
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+}
+
+/* ---------- 分類內搜尋 ---------- */
+.search {
+  position: relative;
+  max-width: 400px;
+}
+
+.searchIcon {
+  position: absolute;
+  left: var(--space-3);
+  top: 50%;
+  width: 18px;
+  height: 18px;
+  transform: translateY(-50%);
+  fill: none;
+  stroke: var(--color-text-muted);
+  stroke-width: 2;
+  stroke-linecap: round;
+  pointer-events: none;
+}
+
+.searchInput {
+  width: 100%;
+  /* 16px：iPhone 上低於 16px 的輸入框在點擊時會自動放大頁面 */
+  font-size: 16px;
+  padding: var(--space-2) var(--space-3) var(--space-2) 2.25rem;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+.searchInput:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px var(--color-primary-light);
+}
+
+.count {
+  margin-block: var(--space-4);
+  font-size: var(--fs-sm);
+  color: var(--color-text-muted);
+}
+
+.message {
+  padding-block: var(--space-12);
+  text-align: center;
+  color: var(--color-text-muted);
+}
