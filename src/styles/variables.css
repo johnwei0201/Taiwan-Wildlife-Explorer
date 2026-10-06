@@ -37,11 +37,11 @@
   --tag-text: #1f2a24;
 
   /* 分類頁的路徑標籤：綱 → 目 → 科 → 屬，由深灰漸淡（略帶綠，和主色調和）
-     前兩個底色深，配白字；後兩個底色淺，配深色字 */
-  --rank-class: #3f4541;   /* 深灰 */
-  --rank-order: #656c67;   /* 灰（白字對比約 5.4:1，小字也看得清楚） */
-  --rank-family: #c2c8c3;  /* 淺灰 */
-  --rank-genus: #e4e8e4;   /* 淡灰 */
+     四個都配白字，所以最淺的也不能太淡：白字對比都在 4.5:1 以上，小字也看得清楚 */
+  --rank-class: #363c38;   /* 深灰：白字對比 11.3:1 */
+  --rank-order: #4b524e;   /* 灰：8.0:1 */
+  --rank-family: #5c635e;  /* 淺灰：6.2:1 */
+  --rank-genus: #6e7570;   /* 淡灰：4.7:1 */
 
   /* ---------- 字型 ---------- */
   --font-sans: 'Noto Sans TC', 'PingFang TC', 'Microsoft JhengHei', system-ui, sans-serif;

@@ -62,11 +62,12 @@
   font-weight: 700;
 }
 
-/* 顏色依層級由深到淺：文字顏色看底色的明暗決定 */
-.step[data-rank='class']  { background-color: var(--rank-class);  color: #fff; }
-.step[data-rank='order']  { background-color: var(--rank-order);  color: #fff; }
-.step[data-rank='family'] { background-color: var(--rank-family); color: var(--color-text); }
-.step[data-rank='genus']  { background-color: var(--rank-genus);  color: var(--color-text); }
+/* 顏色依層級由深到淺，四個都用白字（底色都夠深，白字看得清楚） */
+.step { color: #fff; }
+.step[data-rank='class']  { background-color: var(--rank-class); }
+.step[data-rank='order']  { background-color: var(--rank-order); }
+.step[data-rank='family'] { background-color: var(--rank-family); }
+.step[data-rank='genus']  { background-color: var(--rank-genus); }
 
 /* 可以點的標籤：滑過時稍微變暗 */
 a.step:hover {
