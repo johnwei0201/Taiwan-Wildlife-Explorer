@@ -23,13 +23,17 @@ export default function TaxonPage() {
   // 中文名：從物種詳細頁點過來時有帶（和詳細頁顯示的一致），直接開網址時改從資料裡找
   const nameZh = cleanZh(state?.nameZh) ?? (sample && config ? cleanZh(config.getZh(sample)) : null)
 
-  // 往上的路徑，例如科 → [綱, 目]
+  // 往上的路徑，例如科 → [綱, 目]，每一層附上網站收錄的種數
   const ancestors = sample
-    ? RANK_ORDER.slice(0, RANK_ORDER.indexOf(rank)).map((r) => ({
-        rank: r,
-        nameSci: TAXON_RANKS[r].get(sample),
-        nameZh: cleanZh(TAXON_RANKS[r].getZh(sample)),
-      }))
+    ? RANK_ORDER.slice(0, RANK_ORDER.indexOf(rank)).map((r) => {
+        const nameSci = TAXON_RANKS[r].get(sample)
+        return {
+          rank: r,
+          nameSci,
+          nameZh: cleanZh(TAXON_RANKS[r].getZh(sample)),
+          count: filterByTaxon(speciesList, r, nameSci).length,
+        }
+      })
     : []
 
   // 往下一層：把成員依下一層分組並計算種數，種數多的排前面
@@ -68,18 +72,31 @@ export default function TaxonPage() {
         ← 回到圖鑑
       </Link>
 
-      {/* 往上的路徑：綱 › 目 › 科（目前這一層不是連結） */}
+      {/* 分類路徑：一層接一層的箭頭標籤（綱 → 目 → 科 → 屬），上方是種數；
+          顏色依層級由深到淺（data-rank），目前這一層不是連結 */}
       {ancestors.length > 0 && (
         <nav aria-label="分類路徑">
           <ol className={styles.path}>
             {ancestors.map((a) => (
               <li key={a.rank}>
-                <Link to={taxonPath(a.rank, a.nameSci)} state={{ nameZh: a.nameZh }}>
-                  {a.nameZh ?? a.nameSci}
+                <Link
+                  to={taxonPath(a.rank, a.nameSci)}
+                  state={{ nameZh: a.nameZh }}
+                  className={styles.step}
+                  data-rank={a.rank}
+                  aria-label={`${a.nameZh ?? a.nameSci}（${TAXON_RANKS[a.rank].label}，${a.count} 種）`}
+                >
+                  <span className={styles.stepCount}>{a.count} 種</span>
+                  <span className={styles.stepName}>{a.nameZh ?? a.nameSci}</span>
                 </Link>
               </li>
             ))}
-            <li aria-current="page">{title}</li>
+            <li>
+              <span className={styles.step} data-rank={rank} aria-current="page">
+                <span className={styles.stepCount}>{members.length} 種</span>
+                <span className={styles.stepName}>{title}</span>
+              </span>
+            </li>
           </ol>
         </nav>
       )}
