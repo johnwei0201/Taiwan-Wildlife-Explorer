@@ -10,7 +10,7 @@ import styles from './TaxonomyTable.module.css'
  *   1. 分類小教室：界 › 門 › 綱 › 目 › 科 › 屬 › 種，每一階都可以點，切換到那一層的說明
  *   2. 這個分類（例如「鷺科」）的維基百科介紹
  *
- * 每一層最後面還有「同科 12 種 ›」：點了會到該分類的專屬頁面（/taxon/family/…）
+ * 每一層最後面還有「科 12 種」：點了會到該分類的專屬頁面（/taxon/family/…）
  *
  * items：從界到種的完整分類 [{ rank, label, intro, inTable, taxon: { id, nameSci, nameZh } }]
  * speciesList：網站收錄的物種，用來計算每一層有幾種（只有自己一種時不顯示連結）
@@ -71,7 +71,7 @@ export default function TaxonomyTable({ items, speciesNameSci, speciesList = [] 
                       className={styles.more}
                       aria-label={`看看其他的${nameZh ?? taxon.nameSci}動物（${count} 種）`}
                     >
-                      同{label} {count} 種 ›
+                      {label} {count} 種
                     </Link>
                   )}
                 </dd>

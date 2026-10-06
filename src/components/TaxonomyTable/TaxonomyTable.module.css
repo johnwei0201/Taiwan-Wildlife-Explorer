@@ -25,7 +25,7 @@
   color: var(--color-text-muted);
 }
 
-/* 名稱在左（太長會自己換行），「同科 N 種」固定在最右邊，每一列的連結才會對齊成一欄 */
+/* 名稱在左（太長會自己換行），「科 N 種」固定在最右邊，每一列的連結才會對齊成一欄 */
 .row dd {
   display: flex;
   flex: 1;
@@ -71,7 +71,7 @@
   background-color: var(--color-primary);
 }
 
-/* 「同科 12 種 ›」：小膠囊，和「？」按鈕同一行，點了到分類頁 */
+/* 「科 12 種」：小膠囊，和「？」按鈕同一行，點了到分類頁 */
 .more {
   flex-shrink: 0;
   padding: 2px var(--space-2);
