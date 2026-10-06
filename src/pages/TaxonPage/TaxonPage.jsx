@@ -1,8 +1,7 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo } from 'react'
 import { Link, useLocation, useParams } from 'react-router-dom'
 import SpeciesGrid from '../../components/SpeciesGrid/SpeciesGrid.jsx'
 import { useSpeciesList } from '../../hooks/useSpeciesList.js'
-import { matchQuery, parseQuery, searchText } from '../../utils/search.js'
 import { RANK_ORDER, TAXON_RANKS, cleanZh, filterByTaxon, taxonPath } from '../../utils/taxon.js'
 import styles from './TaxonPage.module.css'
 
@@ -10,7 +9,6 @@ import styles from './TaxonPage.module.css'
  * 分類頁：/taxon/:rank/:name，例如 /taxon/family/Tetraodontidae（四齒魨科）
  *   - 上方路徑：綱 › 目 › 科 › 屬，每一層都可以點，往上看更大的分類
  *   - 下一層：這個分類底下有哪些更小的分類（例如目 → 各科），附上種數，往下細看
- *   - 搜尋框：只在這個分類裡搜尋
  *   - 物種卡片：網站收錄、屬於這個分類的所有物種
  */
 export default function TaxonPage() {
@@ -47,12 +45,6 @@ export default function TaxonPage() {
     }
     return [...groups.values()].sort((a, b) => b.count - a.count)
   }, [members, childRank])
-
-  // 分類內搜尋：換到別的分類時清空
-  const [query, setQuery] = useState('')
-  useEffect(() => setQuery(''), [rank, name])
-  const terms = parseQuery(query)
-  const filtered = terms.length > 0 ? members.filter((s) => matchQuery(searchText(s), terms)) : members
 
   const title = nameZh ?? name
   useEffect(() => {
@@ -134,30 +126,8 @@ export default function TaxonPage() {
 
       {members.length > 0 && (
         <>
-          {/* 只在這個分類裡搜尋（規則和頁首的搜尋一樣：空格隔開多個關鍵字） */}
-          <form className={styles.search} role="search" onSubmit={(event) => event.preventDefault()}>
-            <svg className={styles.searchIcon} viewBox="0 0 24 24" aria-hidden="true">
-              <circle cx="11" cy="11" r="7" />
-              <path d="M16.5 16.5 21 21" />
-            </svg>
-            <input
-              type="search"
-              className={styles.searchInput}
-              placeholder={`在${title}裡搜尋`}
-              aria-label={`在${title}裡搜尋物種名稱`}
-              value={query}
-              onChange={(event) => setQuery(event.target.value)}
-            />
-          </form>
-
-          <p className={styles.count}>
-            共 {filtered.length} 種{filtered.length < members.length && `（從 ${members.length} 種中篩選）`}
-          </p>
-          {filtered.length === 0 ? (
-            <p className={styles.message}>沒有符合的動物，試試其他關鍵字</p>
-          ) : (
-            <SpeciesGrid list={filtered} />
-          )}
+          <p className={styles.count}>共 {members.length} 種</p>
+          <SpeciesGrid list={members} />
         </>
       )}
     </div>
