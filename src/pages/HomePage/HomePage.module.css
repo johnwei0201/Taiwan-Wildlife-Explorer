@@ -67,7 +67,7 @@
   border-color: var(--color-accent);
 }
 
-/* 主題＋刷新推薦同一行：刷新推薦用 margin-left: auto 推到最右邊 */
+/* 主題＋推薦按鈕同一行：推薦按鈕用 margin-left: auto 推到最右邊 */
 .tagRow {
   display: flex;
   align-items: center;
@@ -75,7 +75,7 @@
   min-width: 0;
 }
 
-/* 手機：主題按鈕左右內距縮小一點，三個主題＋刷新推薦才放得進同一行（字級不變） */
+/* 手機：主題按鈕左右內距縮小一點，三個主題＋推薦按鈕才放得進同一行（字級不變） */
 .tagRow .tab {
   padding-inline: var(--space-3);
 }
@@ -123,7 +123,7 @@
   box-shadow: inset 0 0 0 1px var(--color-primary);
 }
 
-/* 刷新推薦：和分頁同樣 6px 圓角，用主色框線，和分頁、主題區分開 */
+/* 推薦按鈕：和分頁同樣 6px 圓角，用主色框線，和分頁、主題區分開 */
 .refresh {
   display: inline-flex;
   flex-shrink: 0;
@@ -173,7 +173,7 @@
     column-gap: var(--space-3);
   }
 
-  /* 主題那一行撐滿剩下的寬度，刷新推薦才會到整排的最右邊 */
+  /* 主題那一行撐滿剩下的寬度，推薦按鈕才會到整排的最右邊 */
   .tagRow {
     flex: 1 1 auto;
   }

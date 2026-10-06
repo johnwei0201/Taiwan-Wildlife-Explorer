@@ -19,7 +19,8 @@
 .search {
   order: 1; /* 排在最後一行 */
   flex: 1 0 100%;
-  padding-bottom: var(--space-3);
+  /* 用 margin 不用 padding：padding 會把表單撐高，放大鏡（以表單高度置中）就會往下偏 */
+  margin-bottom: var(--space-3);
 }
 
 /* 網站名稱：首頁的大標題拿掉後，這裡就是網站的主要名稱，字放大、點擊範圍也加大 */
@@ -162,7 +163,7 @@
   .search {
     flex: 0 0 240px;
     margin-left: var(--space-4);
-    padding-bottom: 0;
+    margin-bottom: 0;
   }
 }
 

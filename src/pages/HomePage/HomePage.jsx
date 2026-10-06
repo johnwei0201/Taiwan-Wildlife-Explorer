@@ -80,7 +80,7 @@ export default function HomePage() {
   }, [activeGroup?.id, activeSub?.id])
 
   // 一打開網頁先隨機推薦 30 種（各類群平均、只挑有照片的），每次重新整理都不一樣
-  // 按「刷新推薦」時把 refreshCount 加 1，useMemo 就會重新洗牌，不用重新載入整個網頁
+  // 按「推薦」按鈕時把 refreshCount 加 1，useMemo 就會重新洗牌，不用重新載入整個網頁
   const [refreshCount, setRefreshCount] = useState(0)
   const randomSpecies = useMemo(
     () => pickBalanced(speciesList, RANDOM_COUNT),
@@ -165,7 +165,7 @@ export default function HomePage() {
           ))}
         </div>
 
-        {/* 主題＋刷新推薦同一行：主題靠左，刷新推薦推到最右邊 */}
+        {/* 主題＋推薦按鈕同一行：主題靠左，推薦按鈕推到最右邊 */}
         <div className={styles.tagRow}>
           {/* 主題（可複選）：疊加在分頁上，選越多範圍越小 */}
           <div className={styles.tabs} role="group" aria-label="主題（可複選）">
@@ -191,10 +191,10 @@ export default function HomePage() {
             })}
           </div>
 
-          {/* 刷新推薦：只在首頁隨機推薦時出現 */}
+          {/* 推薦按鈕（重新隨機挑一批）：只在首頁隨機推薦時出現 */}
           {status === 'success' && !activeGroup && (
             <button type="button" className={styles.refresh} onClick={() => setRefreshCount((n) => n + 1)}>
-              <span aria-hidden="true">↻</span> 刷新推薦
+              <span aria-hidden="true">↻</span> 推薦
             </button>
           )}
         </div>
