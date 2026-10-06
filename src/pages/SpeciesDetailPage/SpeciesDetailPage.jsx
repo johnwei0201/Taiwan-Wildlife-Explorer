@@ -21,6 +21,7 @@ import { formatKm } from '../../utils/geo.js'
 import { useAsync } from '../../hooks/useAsync.js'
 import { useSpeciesList, withLocalData } from '../../hooks/useSpeciesList.js'
 import { useGeolocation } from '../../hooks/useGeolocation.js'
+import { useMediaQuery } from '../../hooks/useMediaQuery.js'
 import {
   ALIEN_GENERAL,
   ALIEN_INFO,
@@ -159,10 +160,7 @@ export default function SpeciesDetailPage() {
                 <NearbyAnimals result={nearbyAnimals} speciesList={speciesList} currentId={Number(id)} />
               </>
             ) : (
-              <>
-                <h3 className={styles.listTitle}>最新紀錄</h3>
-                <RecordList status={recent.status} records={recent.data ?? []} emptyText="台灣目前還沒有觀察紀錄" />
-              </>
+              <RecentRecords status={recent.status} records={recent.data ?? []} />
             )}
           </div>
         </div>
@@ -401,7 +399,46 @@ function NearbyAnimals({ result, speciesList, currentId }) {
   )
 }
 
-// ---------- 觀察紀錄列表（最新紀錄） ----------
+// ---------- 發現記錄：手機上預設收起，點標題才展開 ----------
+// 手機的版面是上下排列，紀錄清單很長，會把下面的內容推得很遠；平板以上排在地圖旁邊，直接展開
+function RecentRecords({ status, records }) {
+  const isMobile = useMediaQuery('(max-width: 767px)')
+  const [isOpen, setIsOpen] = useState(false)
+
+  const list = <RecordList status={status} records={records} emptyText="台灣目前還沒有觀察紀錄" />
+
+  if (!isMobile) {
+    return (
+      <>
+        <h3 className={styles.listTitle}>發現記錄</h3>
+        {list}
+      </>
+    )
+  }
+
+  return (
+    <>
+      <h3 className={styles.listTitle}>
+        <button
+          type="button"
+          className={styles.collapseButton}
+          aria-expanded={isOpen}
+          aria-controls="recent-records"
+          onClick={() => setIsOpen((open) => !open)}
+        >
+          發現記錄
+          {status === 'success' && records.length > 0 && <span className={styles.collapseCount}>{records.length} 筆</span>}
+          <span className={styles.chevron} aria-hidden="true" />
+        </button>
+      </h3>
+      <div id="recent-records" hidden={!isOpen}>
+        {list}
+      </div>
+    </>
+  )
+}
+
+// ---------- 觀察紀錄列表（發現記錄） ----------
 function RecordList({ status, records, emptyText }) {
   if (status === 'loading') return <div className={`skeleton ${styles.skeletonBlock}`} />
   if (status === 'error') return <p className={styles.message}>暫時無法取得紀錄</p>

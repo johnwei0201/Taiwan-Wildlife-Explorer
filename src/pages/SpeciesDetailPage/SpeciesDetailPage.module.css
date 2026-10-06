@@ -260,12 +260,49 @@
   color: var(--color-primary-dark);
 }
 
-/* 右側清單的標題（最新紀錄／離你最近的紀錄） */
+/* 右側清單的標題（發現記錄／你附近的動物） */
 .listTitle {
   margin-bottom: var(--space-2);
   font-size: var(--fs-base);
   font-weight: 700;
   color: var(--color-primary-dark);
+}
+
+/* 手機：「發現記錄」整條是一個可以點的按鈕，右邊箭頭表示可以展開 */
+.collapseButton {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  width: 100%;
+  min-height: 44px; /* 手指點擊的建議最小高度 */
+  padding: var(--space-2) var(--space-4);
+  font: inherit;
+  color: inherit;
+  text-align: left;
+  background-color: var(--color-surface);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+}
+
+.collapseCount {
+  font-size: var(--fs-sm);
+  font-weight: 400;
+  color: var(--color-text-muted);
+}
+
+/* 向下的箭頭（用框線畫），展開時轉成向上 */
+.chevron {
+  width: 8px;
+  height: 8px;
+  margin-left: auto;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: translateY(-2px) rotate(45deg);
+  transition: transform var(--transition);
+}
+
+.collapseButton[aria-expanded='true'] .chevron {
+  transform: translateY(2px) rotate(-135deg);
 }
 
 /* ---------- 你附近的動物（定位後的右側卡片清單） ---------- */
