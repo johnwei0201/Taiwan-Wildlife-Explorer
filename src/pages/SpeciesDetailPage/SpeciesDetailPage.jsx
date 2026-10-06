@@ -6,6 +6,8 @@ import SpeciesMap from '../../components/SpeciesMap/SpeciesMap.jsx'
 import SpeciesCard from '../../components/SpeciesCard/SpeciesCard.jsx'
 import LocationIcon from '../../components/LocationIcon/LocationIcon.jsx'
 import TaxonomyTable from '../../components/TaxonomyTable/TaxonomyTable.jsx'
+import TaxonPath from '../../components/TaxonPath/TaxonPath.jsx'
+import { RANK_ORDER, cleanZh, filterByTaxon } from '../../utils/taxon.js'
 import InfoTag from '../../components/InfoTag/InfoTag.jsx'
 import {
   fetchTaxon,
@@ -183,6 +185,16 @@ function SpeciesHero({ taxon, local, displayName, speciesList }) {
         : taxon.ancestors.find((a) => a.rank === rankInfo.rank),
   })).filter((item) => item.taxon)
 
+  // 分類路徑（綱 → 目 → 科 → 屬）：每一層附上網站收錄的種數，點了到該層的分類頁
+  const pathSteps = RANK_ORDER.map((rank) => taxonomy.find((item) => item.rank === rank))
+    .filter(Boolean)
+    .map(({ rank, taxon: t }) => ({
+      rank,
+      nameSci: t.nameSci,
+      nameZh: cleanZh(t.nameZh),
+      count: filterByTaxon(speciesList, rank, t.nameSci).length,
+    }))
+
   return (
     <section className={styles.hero}>
       <PhotoGallery photos={taxon.photos} alt={displayName} />
@@ -191,6 +203,8 @@ function SpeciesHero({ taxon, local, displayName, speciesList }) {
         <h1 className={styles.nameZh}>{displayName}</h1>
         <p className={`scientific-name ${styles.nameSci}`}>{taxon.nameSci}</p>
         {taxon.nameEn && <p className={styles.nameEn}>{taxon.nameEn}</p>}
+
+        <TaxonPath steps={pathSteps} className={styles.taxonPath} />
 
         {/* 標籤：滑鼠移上去（手機點一下）會出現說明 */}
         <ul className={styles.tags}>

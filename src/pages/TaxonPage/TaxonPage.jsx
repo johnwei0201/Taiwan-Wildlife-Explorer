@@ -1,6 +1,7 @@
 import { useEffect, useMemo } from 'react'
 import { Link, useLocation, useParams } from 'react-router-dom'
 import SpeciesGrid from '../../components/SpeciesGrid/SpeciesGrid.jsx'
+import TaxonPath from '../../components/TaxonPath/TaxonPath.jsx'
 import { useSpeciesList } from '../../hooks/useSpeciesList.js'
 import { RANK_ORDER, TAXON_RANKS, cleanZh, filterByTaxon, taxonPath } from '../../utils/taxon.js'
 import styles from './TaxonPage.module.css'
@@ -72,33 +73,12 @@ export default function TaxonPage() {
         ← 回到圖鑑
       </Link>
 
-      {/* 分類路徑：一層接一層的箭頭標籤（綱 → 目 → 科 → 屬），上方是種數；
-          顏色依層級由深到淺（data-rank），目前這一層不是連結 */}
-      {ancestors.length > 0 && (
-        <nav aria-label="分類路徑">
-          <ol className={styles.path}>
-            {ancestors.map((a) => (
-              <li key={a.rank}>
-                <Link
-                  to={taxonPath(a.rank, a.nameSci)}
-                  state={{ nameZh: a.nameZh }}
-                  className={styles.step}
-                  data-rank={a.rank}
-                  aria-label={`${a.nameZh ?? a.nameSci}（${TAXON_RANKS[a.rank].label}，${a.count} 種）`}
-                >
-                  <span className={styles.stepCount}>{a.count} 種</span>
-                  <span className={styles.stepName}>{a.nameZh ?? a.nameSci}</span>
-                </Link>
-              </li>
-            ))}
-            <li>
-              <span className={styles.step} data-rank={rank} aria-current="page">
-                <span className={styles.stepCount}>{members.length} 種</span>
-                <span className={styles.stepName}>{title}</span>
-              </span>
-            </li>
-          </ol>
-        </nav>
+      {/* 分類路徑：綱 → 目 → 科 → 屬，最後一個是目前這一層 */}
+      {sample && (
+        <TaxonPath
+          steps={[...ancestors, { rank, nameSci: name, nameZh, count: members.length }]}
+          currentRank={rank}
+        />
       )}
 
       <header className={styles.hero}>

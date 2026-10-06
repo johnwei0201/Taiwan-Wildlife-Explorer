@@ -36,11 +36,21 @@
   color: var(--color-text-muted);
 }
 
+/* 分類路徑（綱 → 目 → 科 → 屬）：在英文名下方 */
+.taxonPath {
+  margin-top: var(--space-4);
+}
+
 .tags {
   display: flex;
   flex-wrap: wrap;
   gap: var(--space-2);
   margin-top: var(--space-4);
+}
+
+/* 沒有任何標籤時（不是特有種、保育類…），不留空白 */
+.tags:empty {
+  display: none;
 }
 
 .tag {

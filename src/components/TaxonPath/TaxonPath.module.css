@@ -1,0 +1,69 @@
+/* ---------- 分類路徑：一層接一層的箭頭標籤 ---------- */
+/* 手機放不下時可以左右滑動，不會換行（箭頭斷成兩行會看不出順序） */
+.path {
+  --arrow: 12px; /* 箭頭尖角的深度 */
+  display: flex;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.path::-webkit-scrollbar {
+  display: none;
+}
+
+/* 後一個標籤往左疊一點，剛好嵌進前一個的尖角，中間留 3px 縫隙 */
+.path li + li {
+  margin-left: calc(var(--arrow) * -1 + 3px);
+}
+
+/* 每個標籤：左邊凹口、右邊尖角（第一個左邊是平的） */
+.step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: var(--space-1) calc(var(--arrow) + var(--space-2));
+  line-height: 1.3;
+  white-space: nowrap;
+  color: #fff; /* 四種底色都夠深，白字看得清楚（對比皆 ≥ 4.5:1） */
+  clip-path: polygon(
+    0 0,
+    calc(100% - var(--arrow)) 0,
+    100% 50%,
+    calc(100% - var(--arrow)) 100%,
+    0 100%,
+    var(--arrow) 50%
+  );
+  transition: filter var(--transition);
+}
+
+.path li:first-child .step {
+  padding-left: var(--space-3);
+  clip-path: polygon(0 0, calc(100% - var(--arrow)) 0, 100% 50%, calc(100% - var(--arrow)) 100%, 0 100%);
+}
+
+/* 種數在上、名稱在下 */
+.count {
+  font-size: 0.7rem;
+  opacity: 0.85;
+}
+
+.name {
+  font-size: var(--fs-sm);
+  font-weight: 700;
+}
+
+/* 顏色依層級由深到淺 */
+.step[data-rank='class']  { background-color: var(--rank-class); }
+.step[data-rank='order']  { background-color: var(--rank-order); }
+.step[data-rank='family'] { background-color: var(--rank-family); }
+.step[data-rank='genus']  { background-color: var(--rank-genus); }
+
+/* 可以點的標籤：滑過時稍微變暗 */
+a.step:hover {
+  filter: brightness(0.9);
+}
+
+/* 目前這一層：加上主色底線，表示「你在這裡」 */
+.step[aria-current='page'] {
+  box-shadow: inset 0 -3px 0 var(--color-primary);
+}
