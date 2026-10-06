@@ -51,7 +51,9 @@ export default function TaxonomyTable({ items, speciesNameSci, speciesList = [] 
                 <dt>{label}</dt>
                 <dd>
                   <span className={styles.name}>
-                    {nameZh ?? ''} <span className="scientific-name">{taxon.nameSci}</span>
+                    <span className={styles.nameText}>
+                      {nameZh ?? ''} <span className="scientific-name">{taxon.nameSci}</span>
+                    </span>
                     <button
                       type="button"
                       className={styles.help}
