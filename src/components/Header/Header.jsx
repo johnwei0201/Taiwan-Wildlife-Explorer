@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import SearchBox from '../SearchBox/SearchBox.jsx'
-import logoUrl from '../../assets/發現台灣動物趣_logo_web.png'
+import logoUrl from '../../assets/發現台灣動物趣_logo.png'
 import styles from './Header.module.css'
 
 const NAV_ITEMS = [
@@ -19,8 +19,7 @@ export default function Header() {
     <header className={styles.header}>
       <div className={`container ${styles.inner}`}>
         {/* Logo：點了回到首頁並重新整理（用一般的 <a> 而不是 Link：
-            Link 只在網站內切換畫面，已經在首頁時點了沒有反應；<a> 會重新載入，隨機推薦也會換一批）
-            圖檔是 發現台灣動物趣_logo.png 縮成 640px 寬的網頁版（原圖 1602px、560KB，太大） */}
+            Link 只在網站內切換畫面，已經在首頁時點了沒有反應；<a> 會重新載入，隨機推薦也會換一批） */}
         <a href="/" className={styles.logo}>
           <img src={logoUrl} alt="發現台灣動物趣 Taiwan Wildlife Explorer" className={styles.logoImage} />
         </a>
