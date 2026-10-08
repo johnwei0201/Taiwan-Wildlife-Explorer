@@ -163,6 +163,7 @@ export default function HomePage() {
               onClick={() => selectGroup(group.id)}
             >
               {group.label}
+              <span className={styles.tabEn}>{group.labelEn}</span>
             </button>
           ))}
         </div>
@@ -186,8 +187,11 @@ export default function HomePage() {
                   onClick={() => toggleTag(tag.id)}
                 >
                   {/* 打勾：不只靠顏色，也用符號表示「已選取」 */}
-                  {isSelected && <span aria-hidden="true">✓ </span>}
-                  {tag.label}
+                  <span>
+                    {isSelected && <span aria-hidden="true">✓ </span>}
+                    {tag.label}
+                  </span>
+                  <span className={styles.tabEn}>{tag.labelEn}</span>
                 </button>
               )
             })}

@@ -59,6 +59,20 @@
   color: var(--color-text-muted);
 }
 
+/* 標題、欄位名稱右邊的英文：小一號、淡一點 */
+.titleEn,
+.labelEn {
+  margin-left: var(--space-2);
+  font-size: 0.75rem; /* 12px */
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  opacity: 0.75;
+}
+
+.titleEn {
+  font-size: 0.875rem; /* 14px：標題比較大，英文也跟著大一點 */
+}
+
 .select {
   width: 100%;
   min-width: 0;

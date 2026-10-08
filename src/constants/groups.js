@@ -7,16 +7,18 @@ const byGroup = (...ids) => (s) => ids.includes(s.group)
 // 依「目」的學名分小分類（例如蛛形類底下的蠍子、盲蛛）
 const byOrder = (...names) => (s) => names.includes(s.order?.nameSci)
 
+// labelEn：英文名稱，顯示在分頁按鈕中文的下方
 export const GROUPS = [
-  { id: 'all', label: '全部', kind: 'all', match: () => true },
-  { id: 'aves', label: '鳥類', kind: 'group', match: byGroup('aves') },
-  { id: 'mammalia', label: '哺乳類', kind: 'group', match: byGroup('mammalia') },
-  { id: 'reptilia', label: '爬蟲類', kind: 'group', match: byGroup('reptilia') },
-  { id: 'amphibia', label: '兩棲類', kind: 'group', match: byGroup('amphibia') },
-  { id: 'fish', label: '魚類', kind: 'group', match: byGroup('fish') },
+  { id: 'all', label: '全部', labelEn: 'All', kind: 'all', match: () => true },
+  { id: 'aves', label: '鳥類', labelEn: 'Birds', kind: 'group', match: byGroup('aves') },
+  { id: 'mammalia', label: '哺乳類', labelEn: 'Mammals', kind: 'group', match: byGroup('mammalia') },
+  { id: 'reptilia', label: '爬蟲類', labelEn: 'Reptiles', kind: 'group', match: byGroup('reptilia') },
+  { id: 'amphibia', label: '兩棲類', labelEn: 'Amphibians', kind: 'group', match: byGroup('amphibia') },
+  { id: 'fish', label: '魚類', labelEn: 'Fish', kind: 'group', match: byGroup('fish') },
   {
     id: 'insecta',
     label: '昆蟲類',
+    labelEn: 'Insects',
     kind: 'group',
     match: byGroup(
       'lepidoptera', 'moth', 'odonata', 'coleoptera', 'hemiptera', 'orthoptera', 'mantodea', 'phasmida',
@@ -48,6 +50,7 @@ export const GROUPS = [
   {
     id: 'arachnida',
     label: '蛛形類',
+    labelEn: 'Arachnids',
     kind: 'group',
     match: byGroup('araneae', 'arachnid_other'),
     subgroups: [
@@ -62,6 +65,7 @@ export const GROUPS = [
   {
     id: 'myriapoda',
     label: '多足類',
+    labelEn: 'Myriapods',
     kind: 'group',
     match: byGroup('myriapoda'),
     subgroups: [
@@ -70,12 +74,13 @@ export const GROUPS = [
       { id: 'diplopoda', label: '馬陸', match: (s) => s.group === 'myriapoda' && s.class?.nameSci === 'Diplopoda' },
     ],
   },
-  { id: 'crustacea', label: '甲殼類', kind: 'group', match: byGroup('crustacea') },
+  { id: 'crustacea', label: '甲殼類', labelEn: 'Crustaceans', kind: 'group', match: byGroup('crustacea') },
   // 家養動物（貓、狗、兔、豬、牛、羊、雞、鴨、鵝、火雞）：資料腳本手動收錄的，不是野生動物，
   //   獨立一個分頁，不和野生的哺乳類、鳥類混在一起；第二層依用途分，大小標準跟著分（哺乳類／鳥類）
   {
     id: 'domestic',
     label: '家養動物',
+    labelEn: 'Domestic Animals',
     kind: 'group',
     match: byGroup('domestic'),
     subgroups: [
@@ -89,10 +94,10 @@ export const GROUPS = [
 // 主題（特有種、保育類、外來種）：可複選，疊加在分頁上，例如「鳥類＋特有種＋保育類」
 // 和顏色篩選一樣是「同時具備」：選越多範圍越小（網址上以逗號分隔，例如 tag=endemic,protected）
 export const COLLECTIONS = [
-  { id: 'endemic', label: '特有種', match: (s) => s.endemic },
-  { id: 'protected', label: '保育類', match: (s) => Boolean(s.protectedLevel) },
+  { id: 'endemic', label: '特有種', labelEn: 'Endemic', match: (s) => s.endemic },
+  { id: 'protected', label: '保育類', labelEn: 'Protected', match: (s) => Boolean(s.protectedLevel) },
   // 外來種＝所有不是原生的物種（入侵種、歸化種、栽培豢養），卡片上會標出是哪一種
-  { id: 'alien', label: '外來種', match: (s) => Boolean(s.alienType) && s.alienType !== 'native' },
+  { id: 'alien', label: '外來種', labelEn: 'Introduced', match: (s) => Boolean(s.alienType) && s.alienType !== 'native' },
 ]
 
 export const parseTags = (value) =>

@@ -61,6 +61,7 @@ export const joinColors = (colors) => colors.join(',')
 const COLOR_FILTER = {
   key: 'color',
   label: '顏色',
+  labelEn: 'Color',
   type: 'swatch',
   // 複選＝「同時具備」：選了黑＋白，就只留下身上同時有黑色和白色的動物，選越多範圍越小
   match: (s, value) => parseColors(value).every((color) => s.colors?.includes(color)),
@@ -70,6 +71,7 @@ export const FILTERS = [
   {
     key: 'shape',
     label: '外型',
+    labelEn: 'Shape',
     type: 'select',
     // 選項從資料產生，依物種數由多到少排列
     getOptions: (list) => {
@@ -82,6 +84,7 @@ export const FILTERS = [
   {
     key: 'size',
     label: '大小',
+    labelEn: 'Size',
     type: 'select',
     getOptions: (_list, group) =>
       (SIZE_LABELS[group] ?? []).map((label, index) => ({ value: String(index + 1), label })),
@@ -103,6 +106,7 @@ export const BREED_FILTERS = [
   {
     key: 'size',
     label: '體型',
+    labelEn: 'Size',
     type: 'select',
     getOptions: (_list, kind) =>
       (BREED_SIZE_LABELS[kind] ?? []).map((label, index) => ({ value: String(index + 1), label })),
@@ -111,6 +115,7 @@ export const BREED_FILTERS = [
   {
     key: 'coat',
     label: '毛',
+    labelEn: 'Coat',
     type: 'select',
     // 只列出這一類（貓或狗）有出現的毛種，例如貓沒有「硬毛」
     getOptions: (list) =>

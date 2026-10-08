@@ -26,7 +26,11 @@
   display: none;
 }
 
+/* 按鈕裡中文在上、英文在下（直向排列、置中） */
 .tab {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   flex-shrink: 0;
   padding: var(--space-2) var(--space-4);
   border: 1px solid var(--color-border);
@@ -34,6 +38,14 @@
   background-color: var(--color-surface);
   white-space: nowrap;
   transition: background-color var(--transition), color var(--transition);
+}
+
+/* 英文名稱：小一號、淡一點，當作輔助說明；顏色跟著按鈕（選取時一起變白） */
+.tabEn {
+  font-size: 0.6875rem; /* 11px */
+  line-height: 1.2;
+  letter-spacing: 0.02em;
+  opacity: 0.75;
 }
 
 .tab:hover {

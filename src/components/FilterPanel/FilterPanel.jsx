@@ -23,7 +23,9 @@ export default function FilterPanel({
   return (
     <section className={styles.panel} aria-label="外觀篩選">
       <div className={styles.header}>
-        <h2 className={styles.title}>用外型找找</h2>
+        <h2 className={styles.title}>
+          用外型找找<span className={styles.titleEn}>Find by Appearance</span>
+        </h2>
         {activeCount > 0 && (
           <button type="button" className={styles.clear} onClick={onClear}>
             清除條件
@@ -72,7 +74,10 @@ function SelectFilter({ filter, list, group, filters, defs, onChange }) {
   if (options.length === 0) {
     return (
       <label className={styles.field}>
-        <span className={styles.label}>{filter.label}</span>
+        <span className={styles.label}>
+          {filter.label}
+          <span className={styles.labelEn}>{filter.labelEn}</span>
+        </span>
         <select className={styles.select} disabled>
           <option>先選小分類</option>
         </select>
@@ -82,7 +87,10 @@ function SelectFilter({ filter, list, group, filters, defs, onChange }) {
 
   return (
     <label className={styles.field}>
-      <span className={styles.label}>{filter.label}</span>
+      <span className={styles.label}>
+          {filter.label}
+          <span className={styles.labelEn}>{filter.labelEn}</span>
+        </span>
       <select
         className={styles.select}
         data-active={Boolean(value)}
@@ -125,6 +133,7 @@ function ColorSwatches({ filter, list, filters, defs, onChange }) {
       <span className={styles.label}>
         {filter.label}
         <span className={styles.labelHint}>（可複選）</span>
+        <span className={styles.labelEn}>{filter.labelEn}</span>
       </span>
       {/* 和外型、大小一樣的長方形框：顯示目前選了哪些顏色 */}
       <div className={`${styles.select} ${styles.colorDisplay}`} data-active={selected.length > 0} aria-live="polite">
