@@ -15,7 +15,14 @@
       "author": "Erick Drumss Hernández",
       "license": "CC BY-SA 4.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Pastor_aleman_a.jpg"
-    }
+    },
+    "size": 4,
+    "coat": "短毛",
+    "colors": [
+      "黑",
+      "褐",
+      "黃"
+    ]
   },
   {
     "id": "Q38726",
@@ -35,7 +42,14 @@
       "author": "SixtyWeb",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Yellow_Labrador_Retriever_2.jpg"
-    }
+    },
+    "size": 4,
+    "coat": "短毛",
+    "colors": [
+      "黑",
+      "黃",
+      "褐"
+    ]
   },
   {
     "id": "Q21102",
@@ -53,7 +67,14 @@
       "author": "Jonatan De Geest",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:MiloSmet.JPG"
-    }
+    },
+    "size": 2,
+    "coat": "短毛",
+    "colors": [
+      "黑",
+      "白",
+      "褐"
+    ]
   },
   {
     "id": "Q653",
@@ -71,7 +92,15 @@
       "author": "Caterinarufo",
       "license": "Public domain",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Chihuahuas-_Holly,_Nina,_Doralice.jpg"
-    }
+    },
+    "size": 1,
+    "coat": "短毛",
+    "colors": [
+      "黃",
+      "黑",
+      "白",
+      "褐"
+    ]
   },
   {
     "id": "Q38686",
@@ -90,7 +119,12 @@
       "author": "Dukedestiny01.jpg: \"Janneke Vreugdenhil\" derivative work: An",
       "license": "Public domain",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Golden_Retriever_Dukedestiny01_drvd.jpg"
-    }
+    },
+    "size": 4,
+    "coat": "長毛",
+    "colors": [
+      "黃"
+    ]
   },
   {
     "id": "Q38383",
@@ -108,7 +142,14 @@
       "author": "Pleple2000",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Racib%C3%B3rz_2007_082.jpg"
-    }
+    },
+    "size": 3,
+    "coat": "短毛",
+    "colors": [
+      "白",
+      "黃",
+      "褐"
+    ]
   },
   {
     "id": "Q29099",
@@ -126,7 +167,14 @@
       "author": "Ellen Levy Finch (Elf)",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:MiniDachshund1_wb.jpg"
-    }
+    },
+    "size": 2,
+    "coat": "短毛",
+    "colors": [
+      "紅",
+      "褐",
+      "黑"
+    ]
   },
   {
     "id": "Q39093",
@@ -144,7 +192,13 @@
       "author": "Томасина",
       "license": "CC BY-SA 4.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Rottweiler_Moletai_May_2014.2.jpg"
-    }
+    },
+    "size": 4,
+    "coat": "短毛",
+    "colors": [
+      "黑",
+      "褐"
+    ]
   },
   {
     "id": "Q29164",
@@ -163,7 +217,14 @@
       "author": "TsutsuiKennel",
       "license": "CC BY-SA 4.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Akita_inu_criado_por_Tsutsui_Kennel.jpg"
-    }
+    },
+    "size": 4,
+    "coat": "短毛",
+    "colors": [
+      "紅",
+      "白",
+      "黃"
+    ]
   },
   {
     "id": "Q38698",
@@ -181,7 +242,13 @@
       "author": "Abuk SABUK",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:2.5-year-old_fawn_male_pug.jpg"
-    }
+    },
+    "size": 2,
+    "coat": "短毛",
+    "colors": [
+      "黃",
+      "黑"
+    ]
   },
   {
     "id": "Q17504",
@@ -199,7 +266,13 @@
       "author": "Desaix83, d'après le travail de Le dalmatien",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Dalmatien.jpg"
-    }
+    },
+    "size": 4,
+    "coat": "短毛",
+    "colors": [
+      "白",
+      "黑"
+    ]
   },
   {
     "id": "Q38904",
@@ -215,7 +288,15 @@
       "author": "Boxerista96",
       "license": "CC BY 4.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Miniature_poodle.jpg"
-    }
+    },
+    "size": 3,
+    "coat": "捲毛",
+    "colors": [
+      "白",
+      "黑",
+      "褐",
+      "灰"
+    ]
   },
   {
     "id": "Q38496",
@@ -233,7 +314,14 @@
       "author": "Flickr user boxercab",
       "license": "CC BY 2.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Boxer_female_brown.jpg"
-    }
+    },
+    "size": 4,
+    "coat": "短毛",
+    "colors": [
+      "黃",
+      "褐",
+      "白"
+    ]
   },
   {
     "id": "Q39295",
@@ -251,7 +339,15 @@
       "author": "ShonMichaeli",
       "license": "CC BY-SA 4.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Siberian_Husky_-_Mika.jpg"
-    }
+    },
+    "size": 3,
+    "coat": "長毛",
+    "colors": [
+      "灰",
+      "白",
+      "黑",
+      "紅"
+    ]
   },
   {
     "id": "Q5414",
@@ -269,7 +365,15 @@
       "author": "Original uploader was Markovade.pero at sr.wikipedia",
       "license": "CC BY-SA 3.0 rs",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:8675eds_win.jpg"
-    }
+    },
+    "size": 5,
+    "coat": "短毛",
+    "colors": [
+      "黑",
+      "黃",
+      "灰",
+      "白"
+    ]
   },
   {
     "id": "Q38358",
@@ -287,7 +391,13 @@
       "author": "Fran Hogan",
       "license": "CC BY 2.5",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Dobermann_Father-and-son.jpg"
-    }
+    },
+    "size": 4,
+    "coat": "短毛",
+    "colors": [
+      "黑",
+      "褐"
+    ]
   },
   {
     "id": "Q37710",
@@ -307,7 +417,13 @@
       "author": "Horacio Cambeiro",
       "license": "CC BY-SA 4.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Argentine_border_collie.jpg"
-    }
+    },
+    "size": 3,
+    "coat": "長毛",
+    "colors": [
+      "黑",
+      "白"
+    ]
   },
   {
     "id": "Q29013",
@@ -325,7 +441,14 @@
       "author": "Prayitno/more than 2.5 millions views: thank you!",
       "license": "CC BY 2.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:01_Chow_Chow.jpg"
-    }
+    },
+    "size": 4,
+    "coat": "長毛",
+    "colors": [
+      "紅",
+      "黑",
+      "黃"
+    ]
   },
   {
     "id": "Q38090",
@@ -341,7 +464,14 @@
       "author": "Rafael Dominguez Rodriguez",
       "license": "CC BY-SA 4.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Rey_nieve.jpg"
-    }
+    },
+    "size": 5,
+    "coat": "長毛",
+    "colors": [
+      "白",
+      "紅",
+      "褐"
+    ]
   },
   {
     "id": "Q39330",
@@ -359,7 +489,14 @@
       "author": "Gandalfelrojo2",
       "license": "CC BY-SA 4.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Imageyorkie.png"
-    }
+    },
+    "size": 1,
+    "coat": "長毛",
+    "colors": [
+      "灰",
+      "黃",
+      "褐"
+    ]
   },
   {
     "id": "Q21080",
@@ -377,7 +514,14 @@
       "author": "SheltieBoy",
       "license": "CC BY 2.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:AKC_Helena_Fall_Dog_Show_2011.jpg"
-    }
+    },
+    "size": 4,
+    "coat": "長毛",
+    "colors": [
+      "黃",
+      "白",
+      "黑"
+    ]
   },
   {
     "id": "Q38991",
@@ -395,7 +539,13 @@
       "author": "Ludivine HOUDAS",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Bukadai.jpg"
-    }
+    },
+    "size": 5,
+    "coat": "短毛",
+    "colors": [
+      "紅",
+      "黃"
+    ]
   },
   {
     "id": "Q38571",
@@ -413,7 +563,15 @@
       "author": "Neurodoc",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:GraceTheGreyhound.jpg"
-    }
+    },
+    "size": 4,
+    "coat": "短毛",
+    "colors": [
+      "灰",
+      "黑",
+      "黃",
+      "白"
+    ]
   },
   {
     "id": "Q37871",
@@ -431,7 +589,14 @@
       "author": "Novoklimov",
       "license": "CC0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:%D0%91%D0%B0%D1%81%D0%B5%D0%BD%D0%B4%D0%B6%D0%B8_(Basenji)_02.jpg"
-    }
+    },
+    "size": 2,
+    "coat": "短毛",
+    "colors": [
+      "紅",
+      "白",
+      "黑"
+    ]
   },
   {
     "id": "Q39357",
@@ -449,7 +614,15 @@
       "author": "danny O.",
       "license": "CC BY 2.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Shih_Tzu_portrait_show_dog.jpg"
-    }
+    },
+    "size": 1,
+    "coat": "長毛",
+    "colors": [
+      "白",
+      "黃",
+      "黑",
+      "褐"
+    ]
   },
   {
     "id": "Q38706",
@@ -465,7 +638,13 @@
       "author": "Hartmann Linge",
       "license": "CC BY-SA 4.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:201210071658d.jpg"
-    }
+    },
+    "size": 5,
+    "coat": "長毛",
+    "colors": [
+      "黑",
+      "褐"
+    ]
   },
   {
     "id": "Q38751",
@@ -481,7 +660,12 @@
       "author": "Maltezervereniging",
       "license": "Public domain",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Maltezer_Vereniging_Belgie.jpg"
-    }
+    },
+    "size": 1,
+    "coat": "長毛",
+    "colors": [
+      "白"
+    ]
   },
   {
     "id": "Q39002",
@@ -497,7 +681,12 @@
       "author": "No machine-readable author provided. Pleple2000 assumed (bas",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Samojed00.jpg"
-    }
+    },
+    "size": 4,
+    "coat": "長毛",
+    "colors": [
+      "白"
+    ]
   },
   {
     "id": "Q38322",
@@ -515,7 +704,13 @@
       "author": "Lilly M",
       "license": "CC BY-SA 2.5",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Bullterier_089_LM.jpg"
-    }
+    },
+    "size": 3,
+    "coat": "短毛",
+    "colors": [
+      "白",
+      "黑"
+    ]
   },
   {
     "id": "Q21206",
@@ -533,7 +728,14 @@
       "author": "SCMW",
       "license": "CC BY 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Alaskan_Malamute.jpg"
-    }
+    },
+    "size": 4,
+    "coat": "長毛",
+    "colors": [
+      "灰",
+      "白",
+      "黑"
+    ]
   },
   {
     "id": "Q38959",
@@ -551,7 +753,14 @@
       "author": "SheltieBoy",
       "license": "CC BY 2.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:1AKC_Pekingese_Dog_Show_2011.jpg"
-    }
+    },
+    "size": 1,
+    "coat": "長毛",
+    "colors": [
+      "黃",
+      "白",
+      "黑"
+    ]
   },
   {
     "id": "Q39315",
@@ -569,7 +778,15 @@
       "author": "Roberto Vasarri",
       "license": "Public domain",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Shiba_inu_taiki.jpg"
-    }
+    },
+    "size": 2,
+    "coat": "短毛",
+    "colors": [
+      "紅",
+      "黑",
+      "白",
+      "黃"
+    ]
   },
   {
     "id": "Q29149",
@@ -587,7 +804,14 @@
       "author": "User:Frosya a",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:%D0%A4%D1%80%D0%B0%D0%BD%D1%86%D1%83%D0%B7%D1%81%D0%BA%D0%B8%D0%B5_%D0%B1%D1%83%D0%BB%D1%8C%D0%B4%D0%BE%D0%B3%D0%B8_2013-09-02_11-36.JPG"
-    }
+    },
+    "size": 2,
+    "coat": "短毛",
+    "colors": [
+      "黃",
+      "白",
+      "黑"
+    ]
   },
   {
     "id": "Q39322",
@@ -605,7 +829,14 @@
       "author": "Pets Adviser from Brooklyn, USA",
       "license": "CC BY 2.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:2013_Westminster_Kennel_Club_Dog_Show-_Tibetan_Mastiff_GCH_Sierras%27Sasha-Yakone_Nanuk_(8469240739)_(cropped).jpg"
-    }
+    },
+    "size": 5,
+    "coat": "長毛",
+    "colors": [
+      "黑",
+      "褐",
+      "紅"
+    ]
   },
   {
     "id": "Q38972",
@@ -623,7 +854,14 @@
       "author": "UpdOWN. Original uploader was UpdOWN at ru.wikipedia",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Shar_pei.jpg"
-    }
+    },
+    "size": 3,
+    "coat": "短毛",
+    "colors": [
+      "黃",
+      "黑",
+      "紅"
+    ]
   },
   {
     "id": "Q37617",
@@ -641,7 +879,13 @@
       "author": "by Jane@rangeairevision.com",
       "license": "Copyrighted free use",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Airedale_Terrier.jpg"
-    }
+    },
+    "size": 3,
+    "coat": "硬毛",
+    "colors": [
+      "黑",
+      "褐"
+    ]
   },
   {
     "id": "Q38287",
@@ -660,7 +904,14 @@
       "author": "Plank",
       "license": "CC BY 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Jack_Russell_Terrier_1.jpg"
-    }
+    },
+    "size": 2,
+    "coat": "短毛",
+    "colors": [
+      "白",
+      "褐",
+      "黑"
+    ]
   },
   {
     "id": "Q37629",
@@ -679,7 +930,15 @@
       "author": "Christoph Aeschlimann",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Aussi.jpg"
-    }
+    },
+    "size": 3,
+    "coat": "長毛",
+    "colors": [
+      "灰",
+      "黑",
+      "白",
+      "紅"
+    ]
   },
   {
     "id": "Q17510",
@@ -697,7 +956,12 @@
       "author": "Christopher Walker from Krakow, Poland",
       "license": "CC BY 2.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:West_Highland_White_Terrier_Krakow.jpg"
-    }
+    },
+    "size": 2,
+    "coat": "硬毛",
+    "colors": [
+      "白"
+    ]
   },
   {
     "id": "Q37909",
@@ -715,7 +979,12 @@
       "author": "Paul Hermans",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Dogo_Argentino_-Argentijnse_dog_14-04-2010_17-00-50.jpg"
-    }
+    },
+    "size": 4,
+    "coat": "短毛",
+    "colors": [
+      "白"
+    ]
   },
   {
     "id": "Q38950",
@@ -731,7 +1000,13 @@
       "author": "未知",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Landseer.jpg"
-    }
+    },
+    "size": 5,
+    "coat": "長毛",
+    "colors": [
+      "黑",
+      "白"
+    ]
   },
   {
     "id": "Q38668",
@@ -749,7 +1024,13 @@
       "author": "Camillo 60",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Irish_wolfhound_giaccomo.JPG"
-    }
+    },
+    "size": 5,
+    "coat": "硬毛",
+    "colors": [
+      "灰",
+      "黃"
+    ]
   },
   {
     "id": "Q38576",
@@ -765,7 +1046,14 @@
       "author": "Pleple2000",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Owczarek_kaukaski_65556.jpg"
-    }
+    },
+    "size": 5,
+    "coat": "長毛",
+    "colors": [
+      "灰",
+      "黃",
+      "白"
+    ]
   },
   {
     "id": "Q37866",
@@ -783,7 +1071,13 @@
       "author": "Taru T Torpström",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Borzoi_female.jpg"
-    }
+    },
+    "size": 4,
+    "coat": "長毛",
+    "colors": [
+      "白",
+      "黃"
+    ]
   },
   {
     "id": "Q21098",
@@ -801,7 +1095,14 @@
       "author": "Mary Bloom, American Kennel Club",
       "license": "CC BY-SA 4.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Perro_de_San_Huberto.jpg"
-    }
+    },
+    "size": 4,
+    "coat": "短毛",
+    "colors": [
+      "紅",
+      "褐",
+      "黑"
+    ]
   },
   {
     "id": "Q38080",
@@ -819,7 +1120,13 @@
       "author": "未知",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Dog_Bullmastiff_600.jpg"
-    }
+    },
+    "size": 5,
+    "coat": "短毛",
+    "colors": [
+      "黃",
+      "紅"
+    ]
   },
   {
     "id": "Q38309",
@@ -837,7 +1144,14 @@
       "author": "未知",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:English_setter.jpg"
-    }
+    },
+    "size": 4,
+    "coat": "長毛",
+    "colors": [
+      "白",
+      "黑",
+      "橙"
+    ]
   },
   {
     "id": "Q38570",
@@ -855,7 +1169,14 @@
       "author": "https://kara-yulduz.com/asian_shepherd_dogs/breeding/breedin",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:%D0%A1%D1%80%D0%B5%D0%B4%D0%BD%D0%B5%D0%B0%D0%B7%D0%B8%D0%B0%D1%82%D1%81%D0%BA%D0%B0%D1%8F_%D0%BE%D0%B2%D1%87%D0%B0%D1%80%D0%BA%D0%B0,_%D0%BC%D0%BE%D0%BB%D0%BE%D0%B4%D0%BE%D0%B9_%D0%BA%D0%BE%D0%B1%D0%B5%D0%BB%D1%8C.jpg"
-    }
+    },
+    "size": 5,
+    "coat": "短毛",
+    "colors": [
+      "白",
+      "黃",
+      "黑"
+    ]
   },
   {
     "id": "Q39108",
@@ -873,7 +1194,13 @@
       "author": "r.",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Red_Smooth_Saluki.jpg"
-    }
+    },
+    "size": 4,
+    "coat": "短毛",
+    "colors": [
+      "黃",
+      "白"
+    ]
   },
   {
     "id": "Q37595",
@@ -891,7 +1218,13 @@
       "author": "Zingpix",
       "license": "CC BY 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:ACD-blue-spud.jpg"
-    }
+    },
+    "size": 3,
+    "coat": "短毛",
+    "colors": [
+      "灰",
+      "紅"
+    ]
   },
   {
     "id": "Q37608",
@@ -909,7 +1242,14 @@
       "author": "Ganjo http://fr.wikipedia.org/wiki/Utilisateur:Ganjo",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Bouviers_Bernois_Ganjo.jpg"
-    }
+    },
+    "size": 5,
+    "coat": "長毛",
+    "colors": [
+      "黑",
+      "白",
+      "褐"
+    ]
   },
   {
     "id": "Q39058",
@@ -927,7 +1267,14 @@
       "author": "未知",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:ShetlandShpdogBlue2_wb.jpg"
-    }
+    },
+    "size": 2,
+    "coat": "長毛",
+    "colors": [
+      "褐",
+      "白",
+      "黑"
+    ]
   },
   {
     "id": "Q37888",
@@ -945,7 +1292,13 @@
       "author": "Ronald Müller-Hagen (Ketterechts)",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cairn-Terrier-Garten1.jpg"
-    }
+    },
+    "size": 2,
+    "coat": "硬毛",
+    "colors": [
+      "黃",
+      "灰"
+    ]
   },
   {
     "id": "Q37716",
@@ -963,7 +1316,14 @@
       "author": "未知",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Basset_Hound_600.jpg"
-    }
+    },
+    "size": 3,
+    "coat": "短毛",
+    "colors": [
+      "白",
+      "褐",
+      "黑"
+    ]
   },
   {
     "id": "Q37612",
@@ -981,7 +1341,14 @@
       "author": "Kpo!:D",
       "license": "Public domain",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:American_Pitbull_001.jpg"
-    }
+    },
+    "size": 3,
+    "coat": "短毛",
+    "colors": [
+      "灰",
+      "褐",
+      "白"
+    ]
   },
   {
     "id": "Q38864",
@@ -999,7 +1366,12 @@
       "author": "Sannse",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Puli_600.jpg"
-    }
+    },
+    "size": 3,
+    "coat": "捲毛",
+    "colors": [
+      "黑"
+    ]
   },
   {
     "id": "Q39035",
@@ -1017,7 +1389,12 @@
       "author": "Mider",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Scotish_terrier_burleska_2005.jpg"
-    }
+    },
+    "size": 2,
+    "coat": "硬毛",
+    "colors": [
+      "黑"
+    ]
   },
   {
     "id": "Q37688",
@@ -1035,7 +1412,14 @@
       "author": "Svenska Mässan from Sweden",
       "license": "CC BY-SA 4.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:AMERICAN_STAFFORDSHIRE_TERRIER,_Zican%E2%80%99s_Bz_Ez_Dragon_(24208348891).2.jpg"
-    }
+    },
+    "size": 3,
+    "coat": "短毛",
+    "colors": [
+      "灰",
+      "褐",
+      "白"
+    ]
   },
   {
     "id": "Q37600",
@@ -1051,7 +1435,12 @@
       "author": "Julia",
       "license": "CC BY-SA 4.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Bichon_Fris%C3%A9_sitting.jpg"
-    }
+    },
+    "size": 1,
+    "coat": "捲毛",
+    "colors": [
+      "白"
+    ]
   },
   {
     "id": "Q38651",
@@ -1069,7 +1458,12 @@
       "author": "Margo-CzW at Dutch Wikipedia",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:TWH-jolly.JPG"
-    }
+    },
+    "size": 4,
+    "coat": "短毛",
+    "colors": [
+      "灰"
+    ]
   },
   {
     "id": "Q38675",
@@ -1087,7 +1481,12 @@
       "author": "Photo taken by Flickr user whartonds. Edit (cropped) by Phar",
       "license": "CC BY-SA 2.5",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Komondor_Westminster_Dog_Show_crop.jpg"
-    }
+    },
+    "size": 5,
+    "coat": "捲毛",
+    "colors": [
+      "白"
+    ]
   },
   {
     "id": "Q38533",
@@ -1103,7 +1502,14 @@
       "author": "Jean-Pol GRANDMONT",
       "license": "CC BY 4.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:%22Bill%22_-_Cocker_spaniel_anglais_1.jpg"
-    }
+    },
+    "size": 2,
+    "coat": "長毛",
+    "colors": [
+      "紅",
+      "黑",
+      "褐"
+    ]
   },
   {
     "id": "Q37859",
@@ -1121,7 +1527,13 @@
       "author": "ToB (2004)",
       "license": "Public domain",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Azawakh_bitch_Shira-tb.jpg"
-    }
+    },
+    "size": 4,
+    "coat": "短毛",
+    "colors": [
+      "黃",
+      "紅"
+    ]
   },
   {
     "id": "Q38063",
@@ -1139,7 +1551,14 @@
       "author": "The original uploader was Deskana at English Wikipedia.",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cocker_Spaniel_Puppy.jpg"
-    }
+    },
+    "size": 2,
+    "coat": "長毛",
+    "colors": [
+      "黃",
+      "黑",
+      "褐"
+    ]
   },
   {
     "id": "Q38990",
@@ -1157,7 +1576,14 @@
       "author": "Sanacorekennel",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Zwergpinscher_adult_Ch._Mirzan_del_Piervez.jpg"
-    }
+    },
+    "size": 1,
+    "coat": "短毛",
+    "colors": [
+      "黑",
+      "紅",
+      "褐"
+    ]
   },
   {
     "id": "Q37550",
@@ -1175,7 +1601,13 @@
       "author": "Svenska Mässan from Sweden",
       "license": "CC BY 2.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:BOSTON_TERRIER,_Ving%C3%A5rdens_Essi_von_Richards_(23995273800).2.jpg"
-    }
+    },
+    "size": 2,
+    "coat": "短毛",
+    "colors": [
+      "黑",
+      "白"
+    ]
   },
   {
     "id": "Q37624",
@@ -1193,7 +1625,13 @@
       "author": "Various, see description. Compiled by User:Adventurous36",
       "license": "CC BY-SA 4.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:04_-_Belgian_shepherd_dog_varieties_-_Groenendael,Tervuren,_Malinois,_Laekenois.jpg"
-    }
+    },
+    "size": 4,
+    "coat": "長毛",
+    "colors": [
+      "黑",
+      "黃"
+    ]
   },
   {
     "id": "Q38352",
@@ -1211,7 +1649,14 @@
       "author": "Svenska Mässan from Sweden",
       "license": "CC BY 2.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Grupp_9,_LHASA_APSO,_DK_JV-13_DK_V-14_DK_V-15_NO_UCH_NO_V-15_SE_UCH_Chic_Choix_Some_Like_It_Chic_(24014621720).jpg"
-    }
+    },
+    "size": 1,
+    "coat": "長毛",
+    "colors": [
+      "黃",
+      "白",
+      "黑"
+    ]
   },
   {
     "id": "Q38418",
@@ -1229,7 +1674,13 @@
       "author": "Pleple2000",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Mastif_angielski_pregowany_nn.jpg"
-    }
+    },
+    "size": 5,
+    "coat": "短毛",
+    "colors": [
+      "黃",
+      "黑"
+    ]
   },
   {
     "id": "Q38644",
@@ -1245,7 +1696,12 @@
       "author": "Goldmull",
       "license": "CC BY-SA 4.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Irish_Terrier_P1060074.jpg"
-    }
+    },
+    "size": 3,
+    "coat": "硬毛",
+    "colors": [
+      "紅"
+    ]
   },
   {
     "id": "Q37704",
@@ -1263,7 +1719,13 @@
       "author": "Mona (uploaded by Caronna 08:14, 15 Apr 2005 (UTC))",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Bobtail.JPG"
-    }
+    },
+    "size": 4,
+    "coat": "長毛",
+    "colors": [
+      "灰",
+      "白"
+    ]
   },
   {
     "id": "Q37803",
@@ -1281,7 +1743,12 @@
       "author": "未知",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Pyrenean_Mountain_Dog_600.jpg"
-    }
+    },
+    "size": 5,
+    "coat": "長毛",
+    "colors": [
+      "白"
+    ]
   },
   {
     "id": "Q38999",
@@ -1299,7 +1766,14 @@
       "author": "Zorik07",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:%D0%9F%D0%B8%D1%82%D0%BE%D0%BC%D0%BD%D0%B8%D0%BA_%22%D0%90%D1%81%D1%81%D0%BE%D0%BD_%D0%90%D1%80%D0%B8%22_%D0%A6%D0%B2%D0%B5%D1%80%D0%B3%D1%88%D0%BD%D0%B0%D1%83%D1%86%D0%B5%D1%80%D1%8B_%D0%B1%D0%B5%D0%BB%D1%8B%D0%B5_%D0%B8_%D1%87%D0%B5%D1%80%D0%BD%D1%8B%D0%B5_%D1%81_%D1%81%D0%B5%D1%80%D0%B5%D0%B1%D1%80%D0%BE%D0%BC_12.jpg"
-    }
+    },
+    "size": 2,
+    "coat": "硬毛",
+    "colors": [
+      "灰",
+      "黑",
+      "白"
+    ]
   },
   {
     "id": "Q39220",
@@ -1317,7 +1791,14 @@
       "author": "State Farm",
       "license": "CC BY 2.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:01_Wire_Fox_terrier.jpg"
-    }
+    },
+    "size": 2,
+    "coat": "短毛",
+    "colors": [
+      "白",
+      "褐",
+      "黑"
+    ]
   },
   {
     "id": "Q39122",
@@ -1335,7 +1816,14 @@
       "author": "Sagaciousphil",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Whippet_stacked.jpg"
-    }
+    },
+    "size": 3,
+    "coat": "短毛",
+    "colors": [
+      "灰",
+      "白",
+      "黃"
+    ]
   },
   {
     "id": "Q7254",
@@ -1353,7 +1841,12 @@
       "author": "Futurebreak",
       "license": "CC0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Affenpinscher_breed.jpg"
-    }
+    },
+    "size": 1,
+    "coat": "硬毛",
+    "colors": [
+      "黑"
+    ]
   },
   {
     "id": "Q38808",
@@ -1371,7 +1864,12 @@
       "author": "Pleple2000",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Pies_faraona_e34.jpg"
-    }
+    },
+    "size": 3,
+    "coat": "短毛",
+    "colors": [
+      "紅"
+    ]
   },
   {
     "id": "Q38084",
@@ -1389,7 +1887,13 @@
       "author": "Bonnie van den Born, http://www.bonfoto.nl",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Duitse_staande_korthaar_10-10-2.jpg"
-    }
+    },
+    "size": 4,
+    "coat": "短毛",
+    "colors": [
+      "褐",
+      "白"
+    ]
   },
   {
     "id": "Q37558",
@@ -1407,7 +1911,13 @@
       "author": "Floris16",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Border_Terri%C3%ABr.JPG"
-    }
+    },
+    "size": 2,
+    "coat": "硬毛",
+    "colors": [
+      "黃",
+      "褐"
+    ]
   },
   {
     "id": "Q769804",
@@ -1425,7 +1935,15 @@
       "author": "未知",
       "license": "GFDL 1.2",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:English_pointer.jpg"
-    }
+    },
+    "size": 4,
+    "coat": "短毛",
+    "colors": [
+      "白",
+      "黑",
+      "橙",
+      "褐"
+    ]
   },
   {
     "id": "Q38529",
@@ -1443,7 +1961,13 @@
       "author": "Philip Thompson",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Neapolitan_Mastiff_Male_Head.JPG"
-    }
+    },
+    "size": 5,
+    "coat": "短毛",
+    "colors": [
+      "灰",
+      "黑"
+    ]
   },
   {
     "id": "Q38856",
@@ -1461,7 +1985,13 @@
       "author": "Canarian",
       "license": "CC BY-SA 4.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:XoloLarge1.jpg"
-    }
+    },
+    "size": 3,
+    "coat": "無毛",
+    "colors": [
+      "黑",
+      "灰"
+    ]
   },
   {
     "id": "Q38238",
@@ -1479,7 +2009,12 @@
       "author": "未知",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Bergamasco_600.jpg"
-    }
+    },
+    "size": 4,
+    "coat": "捲毛",
+    "colors": [
+      "灰"
+    ]
   },
   {
     "id": "Q858459",
@@ -1498,7 +2033,14 @@
       "author": "Dog breed facts",
       "license": "CC BY-SA 4.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Pembroke_and_Cardigan_Welsh_Corgi.jpg"
-    }
+    },
+    "size": 2,
+    "coat": "短毛",
+    "colors": [
+      "紅",
+      "白",
+      "黃"
+    ]
   },
   {
     "id": "Q38602",
@@ -1517,7 +2059,13 @@
       "author": "Samorodokhanaana http://www.ruscanaan.ru",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:CanaanDogChakede1.jpg"
-    }
+    },
+    "size": 3,
+    "coat": "短毛",
+    "colors": [
+      "黃",
+      "白"
+    ]
   },
   {
     "id": "Q39285",
@@ -1535,7 +2083,14 @@
       "author": "No machine-readable author provided. Aixeneta assumed (based",
       "license": "Public domain",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Staffie.jpg"
-    }
+    },
+    "size": 3,
+    "coat": "短毛",
+    "colors": [
+      "紅",
+      "黑",
+      "白"
+    ]
   },
   {
     "id": "Q38710",
@@ -1553,7 +2108,13 @@
       "author": "User Zonjah on en.wikipedia",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ulfur.jpg"
-    }
+    },
+    "size": 3,
+    "coat": "長毛",
+    "colors": [
+      "黃",
+      "白"
+    ]
   },
   {
     "id": "Q38965",
@@ -1571,7 +2132,12 @@
       "author": "Alexander Gratz",
       "license": "Public domain",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Weimaraner_Amigo.jpg"
-    }
+    },
+    "size": 4,
+    "coat": "短毛",
+    "colors": [
+      "灰"
+    ]
   },
   {
     "id": "Q37892",
@@ -1589,7 +2155,14 @@
       "author": "Tommy Gildseth",
       "license": "CC BY 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:IndyStands.jpg"
-    }
+    },
+    "size": 1,
+    "coat": "無毛",
+    "colors": [
+      "白",
+      "黑",
+      "灰"
+    ]
   },
   {
     "id": "Q37604",
@@ -1607,7 +2180,13 @@
       "author": "Atsme",
       "license": "CC BY-SA 4.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Warrior_American_Bulldog_puppy.jpg"
-    }
+    },
+    "size": 4,
+    "coat": "短毛",
+    "colors": [
+      "白",
+      "褐"
+    ]
   },
   {
     "id": "Q38115",
@@ -1625,7 +2204,14 @@
       "author": "Gvdmoort",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Outdoor_Continental_Toy_Spaniel_Papillon.jpeg"
-    }
+    },
+    "size": 1,
+    "coat": "長毛",
+    "colors": [
+      "白",
+      "黑",
+      "褐"
+    ]
   },
   {
     "id": "Q29195",
@@ -1643,7 +2229,12 @@
       "author": "未知",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Finnish_Spitz_600.jpg"
-    }
+    },
+    "size": 2,
+    "coat": "長毛",
+    "colors": [
+      "紅"
+    ]
   },
   {
     "id": "Q38796",
@@ -1661,7 +2252,14 @@
       "author": "Flickr user skaty222",
       "license": "CC BY 2.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Tibetan_Terrier_Image_001.jpg"
-    }
+    },
+    "size": 3,
+    "coat": "長毛",
+    "colors": [
+      "白",
+      "黃",
+      "黑"
+    ]
   },
   {
     "id": "Q37566",
@@ -1679,7 +2277,12 @@
       "author": "Grace",
       "license": "CC BY 2.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Bolognese_Image_2.jpg"
-    }
+    },
+    "size": 1,
+    "coat": "捲毛",
+    "colors": [
+      "白"
+    ]
   },
   {
     "id": "Q38503",
@@ -1697,7 +2300,13 @@
       "author": "Tesori di Carli",
       "license": "CC BY-SA 4.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Charciki_W%C5%82oskie,_doros%C5%82y_i_szczeniak.jpg"
-    }
+    },
+    "size": 2,
+    "coat": "短毛",
+    "colors": [
+      "灰",
+      "黃"
+    ]
   },
   {
     "id": "Q38688",
@@ -1715,7 +2324,12 @@
       "author": "No machine-readable author provided. Kkrzysiu o2 assumed (ba",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Stablemaster%27s_NORTHERN_HOPE(Poznan2006).jpg"
-    }
+    },
+    "size": 4,
+    "coat": "硬毛",
+    "colors": [
+      "黑"
+    ]
   },
   {
     "id": "Q38515",
@@ -1733,7 +2347,14 @@
       "author": "Slaunger, edited by Thegreenj",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Greenland_dog_upernavik_2007-06-02_sample.jpg"
-    }
+    },
+    "size": 4,
+    "coat": "長毛",
+    "colors": [
+      "白",
+      "黑",
+      "灰"
+    ]
   },
   {
     "id": "Q38884",
@@ -1749,7 +2370,13 @@
       "author": "Patti McNeal",
       "license": "CC BY 2.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:New_Guinea_Singing_Dog_on_trail-Cropped.jpg"
-    }
+    },
+    "size": 2,
+    "coat": "短毛",
+    "colors": [
+      "紅",
+      "黃"
+    ]
   },
   {
     "id": "Q38025",
@@ -1765,7 +2392,12 @@
       "author": "Peter Kumpert, Germany",
       "license": "CC BY-SA 3.0 de",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Kerry_Blue_Terrier.jpg"
-    }
+    },
+    "size": 3,
+    "coat": "捲毛",
+    "colors": [
+      "灰"
+    ]
   },
   {
     "id": "Q21074",
@@ -1783,7 +2415,12 @@
       "author": "The original uploader was MGerety at English Wikipedia.",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cane_Pastore_Abruzzese_Abruzzo.jpg"
-    }
+    },
+    "size": 5,
+    "coat": "長毛",
+    "colors": [
+      "白"
+    ]
   },
   {
     "id": "Q38783",
@@ -1801,7 +2438,14 @@
       "author": "Dog breed facts",
       "license": "CC BY-SA 4.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Welsh_Pembroke_Corgi.jpg"
-    }
+    },
+    "size": 2,
+    "coat": "短毛",
+    "colors": [
+      "紅",
+      "白",
+      "黃"
+    ]
   },
   {
     "id": "Q39041",
@@ -1819,7 +2463,13 @@
       "author": "Fotograf: Ebba Persson. The original uploader was Ebbsson at",
       "license": "CC BY-SA 2.5",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Welshterrier.jpg"
-    }
+    },
+    "size": 2,
+    "coat": "硬毛",
+    "colors": [
+      "黑",
+      "褐"
+    ]
   },
   {
     "id": "Q38494",
@@ -1837,7 +2487,13 @@
       "author": "SheltieBoy from USA",
       "license": "CC BY 2.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:HMKC_Christmas_Fun_Run_2012_(8265428196).jpg"
-    }
+    },
+    "size": 4,
+    "coat": "短毛",
+    "colors": [
+      "黃",
+      "黑"
+    ]
   },
   {
     "id": "Q37808",
@@ -1855,7 +2511,13 @@
       "author": "Doglover",
       "license": "CC BY 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Yacare_De_El_Siledin.JPG"
-    }
+    },
+    "size": 5,
+    "coat": "短毛",
+    "colors": [
+      "黃",
+      "紅"
+    ]
   },
   {
     "id": "Q37934",
@@ -1873,7 +2535,12 @@
       "author": "SarahWoltz",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:WhiteShepherd.jpg"
-    }
+    },
+    "size": 4,
+    "coat": "長毛",
+    "colors": [
+      "白"
+    ]
   },
   {
     "id": "Q38126",
@@ -1891,7 +2558,12 @@
       "author": "Hakumichi",
       "license": "Public domain",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:JapaneseSpitzPhoto1_-_hiro.jpg"
-    }
+    },
+    "size": 2,
+    "coat": "長毛",
+    "colors": [
+      "白"
+    ]
   },
   {
     "id": "Q38146",
@@ -1909,7 +2581,13 @@
       "author": "en:User:Trysha",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Japanese_Chin_adult.jpg"
-    }
+    },
+    "size": 1,
+    "coat": "長毛",
+    "colors": [
+      "白",
+      "黑"
+    ]
   },
   {
     "id": "Q38824",
@@ -1927,7 +2605,14 @@
       "author": "Cal119 at English Wikipedia",
       "license": "Public domain",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Duck_Toller.jpg"
-    }
+    },
+    "size": 3,
+    "coat": "長毛",
+    "colors": [
+      "橙",
+      "紅",
+      "白"
+    ]
   },
   {
     "id": "Q38449",
@@ -1945,7 +2630,13 @@
       "author": "QHuge",
       "license": "CC BY 4.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:A_havanese_dog.jpg"
-    }
+    },
+    "size": 1,
+    "coat": "長毛",
+    "colors": [
+      "白",
+      "黃"
+    ]
   },
   {
     "id": "Q39052",
@@ -1963,7 +2654,13 @@
       "author": "Pleple2000",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Skye_terrier_800.jpg"
-    }
+    },
+    "size": 2,
+    "coat": "長毛",
+    "colors": [
+      "灰",
+      "黑"
+    ]
   },
   {
     "id": "Q38919",
@@ -1981,7 +2678,13 @@
       "author": "Taru T Torpström",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Hungarianpumi.JPG"
-    }
+    },
+    "size": 2,
+    "coat": "捲毛",
+    "colors": [
+      "灰",
+      "黑"
+    ]
   },
   {
     "id": "Q37530",
@@ -1999,7 +2702,13 @@
       "author": "Lilly M",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Australian_Terrier_002_U.jpg"
-    }
+    },
+    "size": 2,
+    "coat": "硬毛",
+    "colors": [
+      "灰",
+      "褐"
+    ]
   },
   {
     "id": "Q38295",
@@ -2017,7 +2726,12 @@
       "author": "Uschi Goess (eingestellt von Caronna)",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Coton_de_Tular_2.jpg"
-    }
+    },
+    "size": 1,
+    "coat": "長毛",
+    "colors": [
+      "白"
+    ]
   },
   {
     "id": "Q37699",
@@ -2035,7 +2749,12 @@
       "author": "Christmas w/a K",
       "license": "CC BY-SA 2.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:American_Eskimo_Dog_1.jpg"
-    }
+    },
+    "size": 2,
+    "coat": "長毛",
+    "colors": [
+      "白"
+    ]
   },
   {
     "id": "Q38559",
@@ -2053,7 +2772,14 @@
       "author": "Silke Hollje-Schumacher",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:C%C3%A3o_de_agua_Portugu%C3%AAs_2.jpg"
-    }
+    },
+    "size": 3,
+    "coat": "捲毛",
+    "colors": [
+      "黑",
+      "白",
+      "褐"
+    ]
   },
   {
     "id": "Q37793",
@@ -2071,7 +2797,13 @@
       "author": "未知",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:German_Pinscher.JPG"
-    }
+    },
+    "size": 3,
+    "coat": "短毛",
+    "colors": [
+      "黑",
+      "紅"
+    ]
   },
   {
     "id": "Q37856",
@@ -2089,7 +2821,12 @@
       "author": "未知",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:AmWaterSpan1.jpg"
-    }
+    },
+    "size": 3,
+    "coat": "捲毛",
+    "colors": [
+      "褐"
+    ]
   },
   {
     "id": "Q38889",
@@ -2107,7 +2844,13 @@
       "author": "Arne Fagerholt",
       "license": "CC BY 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Monkey_Bizniz_Drama_Queen.jpg"
-    }
+    },
+    "size": 1,
+    "coat": "硬毛",
+    "colors": [
+      "紅",
+      "黑"
+    ]
   },
   {
     "id": "Q37524",
@@ -2123,7 +2866,13 @@
       "author": "island silks",
       "license": "CC BY 2.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:02_Australian_Silky_Terrier,_Zack,_spring_2012.jpg"
-    }
+    },
+    "size": 1,
+    "coat": "長毛",
+    "colors": [
+      "灰",
+      "褐"
+    ]
   },
   {
     "id": "Q38836",
@@ -2141,7 +2890,13 @@
       "author": "未知",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Polski_owczarek_nizinny.jpg"
-    }
+    },
+    "size": 3,
+    "coat": "長毛",
+    "colors": [
+      "白",
+      "灰"
+    ]
   },
   {
     "id": "Q39181",
@@ -2159,7 +2914,13 @@
       "author": "No machine-readable author provided. Wolfman1 assumed (based",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Tibetansk_spaniel.jpg"
-    }
+    },
+    "size": 1,
+    "coat": "長毛",
+    "colors": [
+      "黃",
+      "紅"
+    ]
   },
   {
     "id": "Q37750",
@@ -2175,7 +2936,13 @@
       "author": "Canarian",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Canary_Mastiff_red-brindle2.JPG"
-    }
+    },
+    "size": 5,
+    "coat": "短毛",
+    "colors": [
+      "黃",
+      "黑"
+    ]
   },
   {
     "id": "Q39147",
@@ -2193,7 +2960,14 @@
       "author": "Bigsteeve (en.wikipedia)",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Shikoku_dog.jpg"
-    }
+    },
+    "size": 3,
+    "coat": "短毛",
+    "colors": [
+      "紅",
+      "黑",
+      "白"
+    ]
   },
   {
     "id": "Q38655",
@@ -2211,7 +2985,14 @@
       "author": "The original uploader was Teuteul at French Wikipedia. Later",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Un_chien_Spitz_allemand.jpg"
-    }
+    },
+    "size": 2,
+    "coat": "長毛",
+    "colors": [
+      "白",
+      "橙",
+      "黑"
+    ]
   },
   {
     "id": "Q37920",
@@ -2229,7 +3010,13 @@
       "author": "Tux-Man",
       "license": "CC0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Galgo_espagnol_005.jpg"
-    }
+    },
+    "size": 4,
+    "coat": "短毛",
+    "colors": [
+      "黃",
+      "黑"
+    ]
   },
   {
     "id": "Q37950",
@@ -2247,7 +3034,13 @@
       "author": "Fraczek.marcin",
       "license": "CC BY-SA 4.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Karelski_pies_na_nied%C5%BAwiedzie_sylwetka.JPG"
-    }
+    },
+    "size": 3,
+    "coat": "短毛",
+    "colors": [
+      "黑",
+      "白"
+    ]
   },
   {
     "id": "Q23853",
@@ -2265,7 +3058,13 @@
       "author": "Magdalena Niemiec",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Hokkaido_02.jpg"
-    }
+    },
+    "size": 3,
+    "coat": "短毛",
+    "colors": [
+      "白",
+      "紅"
+    ]
   },
   {
     "id": "Q37508",
@@ -2283,7 +3082,13 @@
       "author": "Nyaah",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:American_Hairless_Terrier_Adelor.jpg"
-    }
+    },
+    "size": 2,
+    "coat": "無毛",
+    "colors": [
+      "黑",
+      "白"
+    ]
   },
   {
     "id": "Q38255",
@@ -2301,7 +3106,14 @@
       "author": "Svenska Mässan from Sweden",
       "license": "CC BY 2.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:BIR_Grupp_7-_BRACCO_ITALIANO,_Nuits_Di_Montemassi_(23866391829).jpg"
-    }
+    },
+    "size": 4,
+    "coat": "短毛",
+    "colors": [
+      "白",
+      "橙",
+      "褐"
+    ]
   },
   {
     "id": "Q38175",
@@ -2319,7 +3131,12 @@
       "author": "OrysiaD",
       "license": "CC BY-SA 4.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Akbash_Dog_male_2016.jpg"
-    }
+    },
+    "size": 5,
+    "coat": "長毛",
+    "colors": [
+      "白"
+    ]
   },
   {
     "id": "Q29177",
@@ -2337,7 +3154,13 @@
       "author": "Pleple2000",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Field_spaniel_581.jpg"
-    }
+    },
+    "size": 3,
+    "coat": "長毛",
+    "colors": [
+      "黑",
+      "褐"
+    ]
   },
   {
     "id": "Q38634",
@@ -2355,7 +3178,12 @@
       "author": "未知",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Russianblack.jpg"
-    }
+    },
+    "size": 5,
+    "coat": "硬毛",
+    "colors": [
+      "黑"
+    ]
   },
   {
     "id": "Q29040",
@@ -2373,7 +3201,14 @@
       "author": "Winterwindmals",
       "license": "Public domain",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cedpup.jpg"
-    }
+    },
+    "size": 4,
+    "coat": "長毛",
+    "colors": [
+      "白",
+      "黑",
+      "灰"
+    ]
   },
   {
     "id": "Q29084",
@@ -2391,7 +3226,12 @@
       "author": "Nevilley",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Chesapeakebayretriever01-l.jpg"
-    }
+    },
+    "size": 4,
+    "coat": "短毛",
+    "colors": [
+      "褐"
+    ]
   },
   {
     "id": "Q29022",
@@ -2407,7 +3247,13 @@
       "author": "SuviLindholm",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Englishspringerspaniel_Winston.jpg"
-    }
+    },
+    "size": 3,
+    "coat": "長毛",
+    "colors": [
+      "褐",
+      "白"
+    ]
   },
   {
     "id": "Q38110",
@@ -2425,7 +3271,13 @@
       "author": "sannse",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Lakeland_Terrier.jpg"
-    }
+    },
+    "size": 2,
+    "coat": "硬毛",
+    "colors": [
+      "黑",
+      "褐"
+    ]
   },
   {
     "id": "Q29188",
@@ -2443,7 +3295,13 @@
       "author": "SandyA at Dutch Wikipedia (Original text: Sandy)",
       "license": "Public domain",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Finselappenhond_louhi-no_watermark.jpg"
-    }
+    },
+    "size": 3,
+    "coat": "長毛",
+    "colors": [
+      "黑",
+      "褐"
+    ]
   },
   {
     "id": "Q29200",
@@ -2461,7 +3319,12 @@
       "author": "Gunnandreassen",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Flat_Coated_Retriever_-_black.jpg"
-    }
+    },
+    "size": 4,
+    "coat": "長毛",
+    "colors": [
+      "黑"
+    ]
   },
   {
     "id": "Q39068",
@@ -2479,7 +3342,12 @@
       "author": "Dr. Sabine Schumann",
       "license": "Public domain",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:SealyhamTerrier01.jpg"
-    }
+    },
+    "size": 2,
+    "coat": "硬毛",
+    "colors": [
+      "白"
+    ]
   },
   {
     "id": "Q38940",
@@ -2497,7 +3365,12 @@
       "author": "Robin Wellmann",
       "license": "Public domain",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Charmonty_Norfolkterrier.jpg"
-    }
+    },
+    "size": 1,
+    "coat": "硬毛",
+    "colors": [
+      "紅"
+    ]
   },
   {
     "id": "Q38621",
@@ -2515,7 +3388,14 @@
       "author": "Svenska Mässan from Sweden",
       "license": "CC BY-SA 4.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:TERRIER_BRASILEIRO,_DK_JV-15_DK_V-15_Jyv%C3%A4m%C3%A4en_Zircon_Zr_(24265479706).2.jpg"
-    }
+    },
+    "size": 2,
+    "coat": "短毛",
+    "colors": [
+      "白",
+      "黑",
+      "褐"
+    ]
   },
   {
     "id": "Q38426",
@@ -2533,7 +3413,13 @@
       "author": "Przykuta",
       "license": "CC BY-SA 2.5",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Pinczer_austiacki_678.jpg"
-    }
+    },
+    "size": 3,
+    "coat": "短毛",
+    "colors": [
+      "黃",
+      "紅"
+    ]
   },
   {
     "id": "Q38020",
@@ -2551,7 +3437,13 @@
       "author": "Yras",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:618736210a13.jpg"
-    }
+    },
+    "size": 3,
+    "coat": "長毛",
+    "colors": [
+      "白",
+      "黑"
+    ]
   },
   {
     "id": "Q29072",
@@ -2569,7 +3461,14 @@
       "author": "未知",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cardigan_Welsh_Corgi_600.jpg"
-    }
+    },
+    "size": 2,
+    "coat": "短毛",
+    "colors": [
+      "灰",
+      "紅",
+      "白"
+    ]
   },
   {
     "id": "Q38223",
@@ -2587,7 +3486,13 @@
       "author": "未知",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Image_of_Kai_(dog).jpg"
-    }
+    },
+    "size": 3,
+    "coat": "短毛",
+    "colors": [
+      "黑",
+      "褐"
+    ]
   },
   {
     "id": "Q38162",
@@ -2603,7 +3508,12 @@
       "author": "Pleple2000",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Irlandzki_spaniel_wodny_676.jpg"
-    }
+    },
+    "size": 4,
+    "coat": "捲毛",
+    "colors": [
+      "褐"
+    ]
   },
   {
     "id": "Q37755",
@@ -2621,7 +3531,13 @@
       "author": "Jan Eduard, corrected by Pleple2000",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Podenco_z_ibizy_645.jpg"
-    }
+    },
+    "size": 4,
+    "coat": "短毛",
+    "colors": [
+      "紅",
+      "白"
+    ]
   },
   {
     "id": "Q38342",
@@ -2639,7 +3555,12 @@
       "author": "Sabine, user of DogWiki",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Kishu.jpg"
-    }
+    },
+    "size": 3,
+    "coat": "短毛",
+    "colors": [
+      "白"
+    ]
   },
   {
     "id": "Q4227301",
@@ -2655,7 +3576,14 @@
       "author": "Allymcpink",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Zahir_the_English_Cocker_Spaniel.jpg"
-    }
+    },
+    "size": 2,
+    "coat": "長毛",
+    "colors": [
+      "黃",
+      "黑",
+      "褐"
+    ]
   },
   {
     "id": "Q38508",
@@ -2673,7 +3601,13 @@
       "author": "Canarian",
       "license": "CC BY-SA 4.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Kangal1.jpg"
-    }
+    },
+    "size": 5,
+    "coat": "短毛",
+    "colors": [
+      "黃",
+      "黑"
+    ]
   },
   {
     "id": "Q38716",
@@ -2691,7 +3625,13 @@
       "author": "未知",
       "license": "CC BY 2.5",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Kooiker03.jpg"
-    }
+    },
+    "size": 2,
+    "coat": "長毛",
+    "colors": [
+      "橙",
+      "白"
+    ]
   },
   {
     "id": "Q38027",
@@ -2709,7 +3649,13 @@
       "author": "Jappitoo",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:LowchenFemale.jpg"
-    }
+    },
+    "size": 1,
+    "coat": "長毛",
+    "colors": [
+      "白",
+      "黃"
+    ]
   },
   {
     "id": "Q38196",
@@ -2727,7 +3673,12 @@
       "author": "未知",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Volpino04.jpg"
-    }
+    },
+    "size": 1,
+    "coat": "長毛",
+    "colors": [
+      "白"
+    ]
   },
   {
     "id": "Q37585",
@@ -2745,7 +3696,13 @@
       "author": "未知",
       "license": "Public domain",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Chien_de_race_Barbet.jpg"
-    }
+    },
+    "size": 3,
+    "coat": "捲毛",
+    "colors": [
+      "黑",
+      "褐"
+    ]
   },
   {
     "id": "Q38945",
@@ -2761,7 +3718,15 @@
       "author": "Smallbones (talk)",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Poligraf_Poligrafovich.JPG"
-    }
+    },
+    "size": 3,
+    "coat": "短毛",
+    "colors": [
+      "黑",
+      "白",
+      "褐",
+      "黃"
+    ]
   },
   {
     "id": "Q39605",
@@ -2779,7 +3744,13 @@
       "author": "Original uploader was Ninalle at fi.wikipedia",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Emppumenossa.jpg"
-    }
+    },
+    "size": 3,
+    "coat": "硬毛",
+    "colors": [
+      "灰",
+      "黑"
+    ]
   },
   {
     "id": "Q37782",
@@ -2797,7 +3768,13 @@
       "author": "sannse (contrast by Pleple2000)",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:English_Toy_Terrier_600_01.jpg"
-    }
+    },
+    "size": 1,
+    "coat": "短毛",
+    "colors": [
+      "黑",
+      "褐"
+    ]
   },
   {
     "id": "Q38874",
@@ -2815,7 +3792,13 @@
       "author": "Tuomas Rinta, Trinta at fi.wikipedia",
       "license": "CC BY 2.5",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Taru_metsa.jpg"
-    }
+    },
+    "size": 3,
+    "coat": "無毛",
+    "colors": [
+      "黑",
+      "灰"
+    ]
   },
   {
     "id": "Q38189",
@@ -2833,7 +3816,13 @@
       "author": "photo by Scoo",
       "license": "CC BY-SA 2.5",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Adult_Glen_of_Imaal_terrier.jpg"
-    }
+    },
+    "size": 2,
+    "coat": "硬毛",
+    "colors": [
+      "黃",
+      "灰"
+    ]
   },
   {
     "id": "Q38910",
@@ -2851,7 +3840,13 @@
       "author": "未知",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Lagotto_Romagnolo.jpg"
-    }
+    },
+    "size": 3,
+    "coat": "捲毛",
+    "colors": [
+      "白",
+      "褐"
+    ]
   },
   {
     "id": "Q39075",
@@ -2869,7 +3864,13 @@
       "author": "未知",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:SwedishVallhundAgility_wb.jpg"
-    }
+    },
+    "size": 2,
+    "coat": "短毛",
+    "colors": [
+      "灰",
+      "紅"
+    ]
   },
   {
     "id": "Q38262",
@@ -2887,7 +3888,12 @@
       "author": "de:Benutzer:Jan Eduard, contrast Pleple2000",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cirneco_dell_Etna_611.jpg"
-    }
+    },
+    "size": 2,
+    "coat": "短毛",
+    "colors": [
+      "紅"
+    ]
   },
   {
     "id": "Q39491",
@@ -2905,7 +3911,14 @@
       "author": "Simona Nováková, owner",
       "license": "Public domain",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Elias1%C4%8Derven2006.jpg"
-    }
+    },
+    "size": 2,
+    "coat": "硬毛",
+    "colors": [
+      "白",
+      "褐",
+      "黑"
+    ]
   },
   {
     "id": "Q37976",
@@ -2923,7 +3936,13 @@
       "author": "Pleple2000",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Japanese_Terrier_22.04.2012_2pl.jpg"
-    }
+    },
+    "size": 1,
+    "coat": "短毛",
+    "colors": [
+      "白",
+      "黑"
+    ]
   },
   {
     "id": "Q38096",
@@ -2941,7 +3960,13 @@
       "author": "Traceywashere at English Wikipedia",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Estrela_Mountain_Dog_6_month_old_male.jpg"
-    }
+    },
+    "size": 5,
+    "coat": "長毛",
+    "colors": [
+      "黃",
+      "灰"
+    ]
   },
   {
     "id": "Q39176",
@@ -2959,7 +3984,13 @@
       "author": "未知",
       "license": "Public domain",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:RusskiyToyWelpe9Mon.JPG"
-    }
+    },
+    "size": 1,
+    "coat": "短毛",
+    "colors": [
+      "黑",
+      "褐"
+    ]
   },
   {
     "id": "Q38362",
@@ -2977,7 +4008,12 @@
       "author": "Patrik Fors",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Lapskvallhund.jpg"
-    }
+    },
+    "size": 3,
+    "coat": "長毛",
+    "colors": [
+      "黑"
+    ]
   },
   {
     "id": "Q38375",
@@ -2995,7 +4031,13 @@
       "author": "Mattias Agar",
       "license": "CC BY-SA 2.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Curley_coated_retriever5.jpg"
-    }
+    },
+    "size": 4,
+    "coat": "捲毛",
+    "colors": [
+      "黑",
+      "褐"
+    ]
   },
   {
     "id": "Q1196071",
@@ -3013,7 +4055,14 @@
       "author": "未知",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Border_collie_(dog).jpg"
-    }
+    },
+    "size": 4,
+    "coat": "長毛",
+    "colors": [
+      "褐",
+      "白",
+      "黑"
+    ]
   },
   {
     "id": "Q37830",
@@ -3031,7 +4080,14 @@
       "author": "Dsurber at English Wikipedia",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:TricolorEnglishShepherdDog.jpg"
-    }
+    },
+    "size": 3,
+    "coat": "長毛",
+    "colors": [
+      "黑",
+      "白",
+      "褐"
+    ]
   },
   {
     "id": "Q20860",
@@ -3049,7 +4105,13 @@
       "author": "Pleple2000",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Fryzyjski_pies_wodny_u68.jpg"
-    }
+    },
+    "size": 3,
+    "coat": "捲毛",
+    "colors": [
+      "黑",
+      "白"
+    ]
   },
   {
     "id": "Q39083",
@@ -3067,7 +4129,13 @@
       "author": "Pleple2000",
       "license": "CC BY-SA 4.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Porcelaine_2009_pl4.jpg"
-    }
+    },
+    "size": 3,
+    "coat": "短毛",
+    "colors": [
+      "白",
+      "橙"
+    ]
   },
   {
     "id": "Q39192",
@@ -3083,7 +4151,13 @@
       "author": "mjk23",
       "license": "CC BY 2.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Frisianstaby.jpg"
-    }
+    },
+    "size": 3,
+    "coat": "長毛",
+    "colors": [
+      "黑",
+      "白"
+    ]
   },
   {
     "id": "Q38416",
@@ -3101,7 +4175,14 @@
       "author": "No machine-readable author provided. PrzemekL assumed (based",
       "license": "Public domain",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:East_Siberian_Laika_03.jpg"
-    }
+    },
+    "size": 3,
+    "coat": "長毛",
+    "colors": [
+      "黑",
+      "白",
+      "灰"
+    ]
   },
   {
     "id": "Q37503",
@@ -3119,7 +4200,13 @@
       "author": "Wendy Hodges",
       "license": "CC BY 2.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Australian_Stumpy_Tail_Cattle_Dog.jpg"
-    }
+    },
+    "size": 3,
+    "coat": "短毛",
+    "colors": [
+      "灰",
+      "紅"
+    ]
   },
   {
     "id": "Q37510",
@@ -3137,7 +4224,14 @@
       "author": "Terry Best",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Toy_Fox_Terrier_2.jpg"
-    }
+    },
+    "size": 1,
+    "coat": "短毛",
+    "colors": [
+      "白",
+      "黑",
+      "褐"
+    ]
   },
   {
     "id": "Q38787",
@@ -3155,7 +4249,14 @@
       "author": "Hans863",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Terrier_mix_sh_klaas.jpg"
-    }
+    },
+    "size": 2,
+    "coat": "短毛",
+    "colors": [
+      "白",
+      "褐",
+      "黑"
+    ]
   },
   {
     "id": "Q37494",
@@ -3173,7 +4274,13 @@
       "author": "Pleple2000",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Wy%C5%BCe%C5%82_du%C5%84ski_123.jpg"
-    }
+    },
+    "size": 4,
+    "coat": "短毛",
+    "colors": [
+      "白",
+      "褐"
+    ]
   },
   {
     "id": "Q38165",
@@ -3191,7 +4298,13 @@
       "author": "No machine-readable author provided. Afonso Silva~commonswik",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Portuguese_pointer_11yo.jpg"
-    }
+    },
+    "size": 3,
+    "coat": "短毛",
+    "colors": [
+      "黃",
+      "白"
+    ]
   },
   {
     "id": "Q29127",
@@ -3207,7 +4320,14 @@
       "author": "Medico80 at English Wikipedia",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Danish_Swedish_Farmdog_cropped.jpg"
-    }
+    },
+    "size": 2,
+    "coat": "短毛",
+    "colors": [
+      "白",
+      "褐",
+      "黑"
+    ]
   },
   {
     "id": "Q38932",
@@ -3225,7 +4345,13 @@
       "author": "未知",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Podenco_Canario_2.jpg"
-    }
+    },
+    "size": 3,
+    "coat": "短毛",
+    "colors": [
+      "紅",
+      "白"
+    ]
   },
   {
     "id": "Q37722",
@@ -3243,7 +4369,12 @@
       "author": "未知",
       "license": "Copyrighted free use",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Mountan_Laurel_Ajax_the_Chinook_dog.jpg"
-    }
+    },
+    "size": 4,
+    "coat": "短毛",
+    "colors": [
+      "黃"
+    ]
   },
   {
     "id": "Q39332",
@@ -3259,7 +4390,13 @@
       "author": "Konrad Loesch",
       "license": "CC BY 2.5",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Russo_European_Laika.jpg"
-    }
+    },
+    "size": 3,
+    "coat": "長毛",
+    "colors": [
+      "黑",
+      "白"
+    ]
   },
   {
     "id": "Q11294205",
@@ -3277,7 +4414,14 @@
       "author": "Bugaflee",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:SasquatchCatahoulaCurDog.jpg"
-    }
+    },
+    "size": 4,
+    "coat": "短毛",
+    "colors": [
+      "灰",
+      "黑",
+      "白"
+    ]
   },
   {
     "id": "Q37798",
@@ -3295,7 +4439,13 @@
       "author": "Pleple2000",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Epagneul_bleu_de_picardie_g%C5%82owa_098.jpg"
-    }
+    },
+    "size": 3,
+    "coat": "長毛",
+    "colors": [
+      "灰",
+      "黑"
+    ]
   },
   {
     "id": "Q38869",
@@ -3313,7 +4463,13 @@
       "author": "Elf at English Wikipedia",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Korthalsgriffon.jpg"
-    }
+    },
+    "size": 3,
+    "coat": "硬毛",
+    "colors": [
+      "灰",
+      "褐"
+    ]
   },
   {
     "id": "Q37967",
@@ -3331,7 +4487,12 @@
       "author": "Desaix83, d'après le travail de Darmaninjl",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Bull_Terrier_Miniature.jpg"
-    }
+    },
+    "size": 2,
+    "coat": "短毛",
+    "colors": [
+      "白"
+    ]
   },
   {
     "id": "Q29212",
@@ -3349,7 +4510,14 @@
       "author": "Aechris at English Wikipedia",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Formosan_nina.jpg"
-    }
+    },
+    "size": 3,
+    "coat": "短毛",
+    "colors": [
+      "黑",
+      "黃",
+      "白"
+    ]
   },
   {
     "id": "Q39200",
@@ -3365,7 +4533,14 @@
       "author": "No machine-readable author provided. Brindis320~commonswiki ",
       "license": "Public domain",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Perro_agua.jpg"
-    }
+    },
+    "size": 3,
+    "coat": "捲毛",
+    "colors": [
+      "黑",
+      "褐",
+      "白"
+    ]
   },
   {
     "id": "Q37721",
@@ -3383,7 +4558,12 @@
       "author": "Dolezalovaelis",
       "license": "CC BY-SA 4.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Karol%C3%ADnsk%C3%BD_pes.jpeg"
-    }
+    },
+    "size": 3,
+    "coat": "短毛",
+    "colors": [
+      "黃"
+    ]
   },
   {
     "id": "Q38925",
@@ -3401,7 +4581,13 @@
       "author": "未知",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Nordic_Spitz.jpg"
-    }
+    },
+    "size": 2,
+    "coat": "短毛",
+    "colors": [
+      "白",
+      "紅"
+    ]
   },
   {
     "id": "Q39063",
@@ -3419,7 +4605,12 @@
       "author": "未知",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Podengo_Portugues.jpg"
-    }
+    },
+    "size": 2,
+    "coat": "短毛",
+    "colors": [
+      "黃"
+    ]
   },
   {
     "id": "Q37678",
@@ -3437,7 +4628,13 @@
       "author": "未知",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Hortaya_Borzaya.jpg"
-    }
+    },
+    "size": 4,
+    "coat": "短毛",
+    "colors": [
+      "白",
+      "黃"
+    ]
   },
   {
     "id": "Q38504",
@@ -3453,7 +4650,13 @@
       "author": "Meikel175",
       "license": "CC BY-SA 4.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Vostochno_Evropeiskaya_Ovcharka.jpg"
-    }
+    },
+    "size": 4,
+    "coat": "短毛",
+    "colors": [
+      "黑",
+      "褐"
+    ]
   },
   {
     "id": "Q39254",
@@ -3471,7 +4674,14 @@
       "author": "Pleple2000",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Spaniel_miniaturowy_kontynentalny_phalene_00.jpg"
-    }
+    },
+    "size": 1,
+    "coat": "長毛",
+    "colors": [
+      "白",
+      "黑",
+      "褐"
+    ]
   },
   {
     "id": "Q38452",
@@ -3489,7 +4699,13 @@
       "author": "Andreas Wolber",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Karakatschan.jpg"
-    }
+    },
+    "size": 5,
+    "coat": "長毛",
+    "colors": [
+      "白",
+      "黑"
+    ]
   },
   {
     "id": "Q37664",
@@ -3507,7 +4723,13 @@
       "author": "not specified (except those with signature on image)",
       "license": "Public domain",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Pointer_of_Ariege_from_1915.JPG"
-    }
+    },
+    "size": 4,
+    "coat": "短毛",
+    "colors": [
+      "白",
+      "橙"
+    ]
   },
   {
     "id": "Q37969",
@@ -3525,7 +4747,12 @@
       "author": "Jovare at Dutch Wikipedia",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Hollandsche_smoushonden_2.JPG"
-    }
+    },
+    "size": 2,
+    "coat": "硬毛",
+    "colors": [
+      "黃"
+    ]
   },
   {
     "id": "Q37844",
@@ -3543,7 +4770,13 @@
       "author": "Alephalpha",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:04031158_Epagneul_Pont_Audemer.jpg"
-    }
+    },
+    "size": 3,
+    "coat": "捲毛",
+    "colors": [
+      "褐",
+      "白"
+    ]
   },
   {
     "id": "Q38233",
@@ -3559,7 +4792,13 @@
       "author": "Hellinikos_Ichnilatis_(Georging).jpg: Georging (Georging91) ",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Hellinikos_Ichnilatis_(Georging)_cropped.jpg"
-    }
+    },
+    "size": 3,
+    "coat": "短毛",
+    "colors": [
+      "黑",
+      "褐"
+    ]
   },
   {
     "id": "Q1742290",
@@ -3577,7 +4816,12 @@
       "author": "Imk0278 en.wikipedia",
       "license": "Public domain",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Kintamani.jpg"
-    }
+    },
+    "size": 3,
+    "coat": "長毛",
+    "colors": [
+      "白"
+    ]
   },
   {
     "id": "Q38431",
@@ -3595,7 +4839,14 @@
       "author": "Elf at English Wikipedia",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:AmRatTerr11_fx_wb.jpg"
-    }
+    },
+    "size": 2,
+    "coat": "短毛",
+    "colors": [
+      "白",
+      "黑",
+      "褐"
+    ]
   },
   {
     "id": "Q38820",
@@ -3613,7 +4864,12 @@
       "author": "The original uploader was Arlawson at English Wikipedia.",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Memphis_the_Redbone_Coonhound_(7_Nov_2004).jpg"
-    }
+    },
+    "size": 4,
+    "coat": "短毛",
+    "colors": [
+      "紅"
+    ]
   },
   {
     "id": "Q38263",
@@ -3631,7 +4887,14 @@
       "author": "Grebdnil",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Irsika.jpg"
-    }
+    },
+    "size": 1,
+    "coat": "捲毛",
+    "colors": [
+      "褐",
+      "黑",
+      "灰"
+    ]
   },
   {
     "id": "Q39608",
@@ -3649,7 +4912,12 @@
       "author": "Broneder",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Anka_vom_Rudolfsforst.jpg"
-    }
+    },
+    "size": 4,
+    "coat": "硬毛",
+    "colors": [
+      "紅"
+    ]
   },
   {
     "id": "Q37673",
@@ -3667,7 +4935,12 @@
       "author": "Markus Monroe",
       "license": "CC BY-SA 4.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Chinese_Chongqing_Dog_H%C3%BCndin.jpg"
-    }
+    },
+    "size": 3,
+    "coat": "短毛",
+    "colors": [
+      "紅"
+    ]
   },
   {
     "id": "Q37489",
@@ -3685,7 +4958,13 @@
       "author": "Mjrustline",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Alapaha_blue_blood_bulldog2.jpg"
-    }
+    },
+    "size": 4,
+    "coat": "短毛",
+    "colors": [
+      "白",
+      "灰"
+    ]
   },
   {
     "id": "Q38179",
@@ -3703,7 +4982,13 @@
       "author": "P.Marlow at English Wikipedia",
       "license": "Public domain",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Rampurgreyhound.jpg"
-    }
+    },
+    "size": 4,
+    "coat": "短毛",
+    "colors": [
+      "灰",
+      "黑"
+    ]
   },
   {
     "id": "Q37579",
@@ -3721,7 +5006,12 @@
       "author": "TrueBlueLacys",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:BlueLacyPhoto1.jpg"
-    }
+    },
+    "size": 3,
+    "coat": "短毛",
+    "colors": [
+      "灰"
+    ]
   },
   {
     "id": "Q29174",
@@ -3739,7 +5029,12 @@
       "author": "Maeng9981",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Poongsandogs.JPG"
-    }
+    },
+    "size": 4,
+    "coat": "長毛",
+    "colors": [
+      "白"
+    ]
   },
   {
     "id": "Q3343819",
@@ -3755,7 +5050,13 @@
       "author": "Аркадий Зарубин",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Hotosho-1.jpg"
-    }
+    },
+    "size": 5,
+    "coat": "長毛",
+    "colors": [
+      "黑",
+      "褐"
+    ]
   },
   {
     "id": "Q39210",
@@ -3773,7 +5074,12 @@
       "author": "Martina Vernerová (breeders HP (Ing. Urban Michal))",
       "license": "Public domain",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Bella_z_Milhostovskych_poli.jpg"
-    }
+    },
+    "size": 4,
+    "coat": "硬毛",
+    "colors": [
+      "灰"
+    ]
   },
   {
     "id": "Q13217219",
@@ -3791,7 +5097,13 @@
       "author": "Photograph by Mike Peel (www.mikepeel.net).",
       "license": "CC BY-SA 4.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Molossian_Hound,_British_Museum.jpg"
-    }
+    },
+    "size": 5,
+    "coat": "短毛",
+    "colors": [
+      "黑",
+      "褐"
+    ]
   },
   {
     "id": "Q37880",
@@ -3809,7 +5121,13 @@
       "author": "Canarian",
       "license": "CC BY-SA 4.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Thai_Bangkaew_Dog_2.jpg"
-    }
+    },
+    "size": 3,
+    "coat": "長毛",
+    "colors": [
+      "白",
+      "褐"
+    ]
   },
   {
     "id": "Q37575",
@@ -3825,7 +5143,14 @@
       "author": "JUAN ÁNGEL BRAVO CASERO",
       "license": "CC BY-SA 4.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Macho_Biewer._.jpg"
-    }
+    },
+    "size": 1,
+    "coat": "長毛",
+    "colors": [
+      "白",
+      "黑",
+      "褐"
+    ]
   },
   {
     "id": "Q29178",
@@ -3843,7 +5168,13 @@
       "author": "Sungdo Cho from Seoul",
       "license": "CC BY 2.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Korea-Jeonju-Sapsal_dog_in_front_of_a_Hanok_Village-01.jpg"
-    }
+    },
+    "size": 3,
+    "coat": "長毛",
+    "colors": [
+      "灰",
+      "黃"
+    ]
   },
   {
     "id": "Q37764",
@@ -3861,7 +5192,13 @@
       "author": "Pitsch",
       "license": "CC0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Pitsch-Dog.jpg"
-    }
+    },
+    "size": 3,
+    "coat": "短毛",
+    "colors": [
+      "黃",
+      "白"
+    ]
   },
   {
     "id": "Q38209",
@@ -3879,7 +5216,14 @@
       "author": "Torsten Dickmann",
       "license": "CC BY-SA 3.0 de",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Bodeguero_young.jpg"
-    }
+    },
+    "size": 2,
+    "coat": "短毛",
+    "colors": [
+      "白",
+      "黑",
+      "褐"
+    ]
   },
   {
     "id": "Q38168",
@@ -3897,7 +5241,13 @@
       "author": "Don Pelon",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Olde_English_Bulldogge_Crop.jpg"
-    }
+    },
+    "size": 3,
+    "coat": "短毛",
+    "colors": [
+      "白",
+      "褐"
+    ]
   },
   {
     "id": "Q38074",
@@ -3913,7 +5263,13 @@
       "author": "www.kritikosichnilatis.gr",
       "license": "Copyrighted free use",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Kritikosichnilatis_1.jpg"
-    }
+    },
+    "size": 3,
+    "coat": "短毛",
+    "colors": [
+      "黃",
+      "白"
+    ]
   },
   {
     "id": "Q2642504",
@@ -3931,7 +5287,12 @@
       "author": "Павел Трофимов (Pavel Trofimov)",
       "license": "CC BY 2.5",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Karelo_Finnish_Laika.jpg"
-    }
+    },
+    "size": 2,
+    "coat": "長毛",
+    "colors": [
+      "紅"
+    ]
   },
   {
     "id": "Q1135818",
@@ -3949,7 +5310,12 @@
       "author": "배부른 아이",
       "license": "CC BY 2.0 kr",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Korean_Yellow_Spitz,_Gyeyang,_South_Korea,_29_August_2022_2.jpg"
-    }
+    },
+    "size": 3,
+    "coat": "短毛",
+    "colors": [
+      "黃"
+    ]
   },
   {
     "id": "Q39278",
@@ -3967,7 +5333,13 @@
       "author": "en:Richard New Forest",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Welsh_Sheepdog.jpg"
-    }
+    },
+    "size": 3,
+    "coat": "長毛",
+    "colors": [
+      "黑",
+      "白"
+    ]
   },
   {
     "id": "Q38206",
@@ -3985,7 +5357,14 @@
       "author": "Monimex",
       "license": "Public domain",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ratonero_valenciano_dunkel.jpg"
-    }
+    },
+    "size": 2,
+    "coat": "短毛",
+    "colors": [
+      "白",
+      "黑",
+      "褐"
+    ]
   },
   {
     "id": "Q38921",
@@ -4003,7 +5382,12 @@
       "author": "Harryroger (talk)",
       "license": "Public domain",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Indian_spitz.jpg"
-    }
+    },
+    "size": 2,
+    "coat": "長毛",
+    "colors": [
+      "白"
+    ]
   },
   {
     "id": "Q38938",
@@ -4019,7 +5403,13 @@
       "author": "L. Shyamal",
       "license": "CC0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Himalayan_sheepdog2.jpg"
-    }
+    },
+    "size": 4,
+    "coat": "長毛",
+    "colors": [
+      "黑",
+      "褐"
+    ]
   },
   {
     "id": "Q38948",
@@ -4037,7 +5427,13 @@
       "author": "Bigsteeve at English Wikipedia",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Kunming_Dog.jpg"
-    }
+    },
+    "size": 4,
+    "coat": "短毛",
+    "colors": [
+      "黑",
+      "褐"
+    ]
   },
   {
     "id": "Q6865130",
@@ -4055,7 +5451,14 @@
       "author": "TanSinVic",
       "license": "CC BY-SA 4.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Miniature-american-shepherd-energies.jpg"
-    }
+    },
+    "size": 2,
+    "coat": "長毛",
+    "colors": [
+      "灰",
+      "黑",
+      "紅"
+    ]
   },
   {
     "id": "Q39207",
@@ -4073,7 +5476,13 @@
       "author": "Talismanhound",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Fallon_the_Silken_Windhound.jpg"
-    }
+    },
+    "size": 3,
+    "coat": "長毛",
+    "colors": [
+      "白",
+      "黃"
+    ]
   },
   {
     "id": "Q39262",
@@ -4089,7 +5498,13 @@
       "author": "Podencoclub",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Sheila_(podenco_andaluz).jpg"
-    }
+    },
+    "size": 3,
+    "coat": "短毛",
+    "colors": [
+      "黃",
+      "白"
+    ]
   },
   {
     "id": "Q12206278",
@@ -4105,7 +5520,13 @@
       "author": "tajai's photos (Upload by: TBjornstad 13:20, 18 July 2006 (U",
       "license": "CC BY 2.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Borneo_dogs_feeding.jpg"
-    }
+    },
+    "size": 3,
+    "coat": "短毛",
+    "colors": [
+      "黃",
+      "黑"
+    ]
   },
   {
     "id": "Q38510",
@@ -4123,7 +5544,13 @@
       "author": "L. CREMIÈRE, PHOT",
       "license": "CC0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:01._Bull_and_Terrier,_Paris_1863._%22Rose%22.png"
-    }
+    },
+    "size": 3,
+    "coat": "短毛",
+    "colors": [
+      "白",
+      "褐"
+    ]
   },
   {
     "id": "Q1779696",
@@ -4141,7 +5568,12 @@
       "author": "Jozef",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Dansk_spids.jpg"
-    }
+    },
+    "size": 3,
+    "coat": "長毛",
+    "colors": [
+      "白"
+    ]
   },
   {
     "id": "Q1000049",
@@ -4159,7 +5591,12 @@
       "author": "LauraKelsch",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Xiasi_Quan_dog.jpg"
-    }
+    },
+    "size": 3,
+    "coat": "硬毛",
+    "colors": [
+      "白"
+    ]
   },
   {
     "id": "Q39116",
@@ -4177,7 +5614,13 @@
       "author": "Stefan from Dresden, Germany",
       "license": "CC BY 2.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Phu_Quoc_dog.jpg"
-    }
+    },
+    "size": 3,
+    "coat": "短毛",
+    "colors": [
+      "黑",
+      "黃"
+    ]
   },
   {
     "id": "Q38556",
@@ -4193,7 +5636,13 @@
       "author": "Photo by Greg Hume (Greg5030)",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:BlackMouthCurPortrait.jpg"
-    }
+    },
+    "size": 4,
+    "coat": "短毛",
+    "colors": [
+      "黃",
+      "紅"
+    ]
   },
   {
     "id": "Q39587",
@@ -4209,7 +5658,14 @@
       "author": "未知",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Rough_Collie_600.jpg"
-    }
+    },
+    "size": 4,
+    "coat": "長毛",
+    "colors": [
+      "褐",
+      "白",
+      "黑"
+    ]
   },
   {
     "id": "Q1958596",
@@ -4225,7 +5681,13 @@
       "author": "Vanzetti",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:MexicaanseHairless.jpg"
-    }
+    },
+    "size": 3,
+    "coat": "無毛",
+    "colors": [
+      "黑",
+      "灰"
+    ]
   },
   {
     "id": "Q6915548",
@@ -4243,7 +5705,12 @@
       "author": "Unknown authorUnknown author",
       "license": "Public domain",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Moscow-Water_dog.jpg"
-    }
+    },
+    "size": 4,
+    "coat": "捲毛",
+    "colors": [
+      "黑"
+    ]
   },
   {
     "id": "Q38468",
@@ -4261,7 +5728,13 @@
       "author": "Abujoy",
       "license": "CC BY 4.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Fran%C3%A7ais_noir_et_blanc.JPG"
-    }
+    },
+    "size": 4,
+    "coat": "短毛",
+    "colors": [
+      "白",
+      "黑"
+    ]
   },
   {
     "id": "Q37766",
@@ -4277,7 +5750,13 @@
       "author": "127177p",
       "license": "CC BY-SA 4.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:A_female_redbone-coonhound-1.jpg"
-    }
+    },
+    "size": 4,
+    "coat": "短毛",
+    "colors": [
+      "黑",
+      "褐"
+    ]
   },
   {
     "id": "Q29047",
@@ -4293,7 +5772,12 @@
       "author": "Empresa Perro de Agua del Cantábrico",
       "license": "CC BY 4.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Perro_de_Agua_del_Cant%C3%A1brico_Macho_Exposici%C3%B3n.jpg"
-    }
+    },
+    "size": 3,
+    "coat": "捲毛",
+    "colors": [
+      "白"
+    ]
   },
   {
     "id": "Q38103",
@@ -4309,7 +5793,12 @@
       "author": "Brindis320",
       "license": "Public domain",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Maneto1.jpg"
-    }
+    },
+    "size": 2,
+    "coat": "短毛",
+    "colors": [
+      "黃"
+    ]
   },
   {
     "id": "Q3438758",
@@ -4325,7 +5814,13 @@
       "author": "Sergey.vlad.popov",
       "license": "CC BY-SA 4.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:%D0%9D%D0%B5%D0%BD%D0%B5%D1%86%D0%BA%D0%B0%D1%8F_%D0%BB%D0%B0%D0%B9%D0%BA%D0%B0_10.jpg"
-    }
+    },
+    "size": 2,
+    "coat": "長毛",
+    "colors": [
+      "白",
+      "黑"
+    ]
   },
   {
     "id": "Q6003137",
@@ -4343,7 +5838,13 @@
       "author": "Annwfwn",
       "license": "CC BY-SA 4.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Zerdava_dog.jpg"
-    }
+    },
+    "size": 3,
+    "coat": "短毛",
+    "colors": [
+      "紅",
+      "黃"
+    ]
   },
   {
     "id": "Q1806071",
@@ -4359,7 +5860,12 @@
       "author": "Sarah Hartwell",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Africanhairless.jpg"
-    }
+    },
+    "size": 3,
+    "coat": "無毛",
+    "colors": [
+      "灰"
+    ]
   },
   {
     "id": "Q1106478",
@@ -4377,7 +5883,13 @@
       "author": "Tacosunday",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Bull_Arab_(dog).jpg"
-    }
+    },
+    "size": 4,
+    "coat": "短毛",
+    "colors": [
+      "白",
+      "褐"
+    ]
   },
   {
     "id": "Q38440",
@@ -4395,7 +5907,13 @@
       "author": "various",
       "license": "Public domain",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Die_Gartenlaube_(1882)_b_829.jpg"
-    }
+    },
+    "size": 4,
+    "coat": "長毛",
+    "colors": [
+      "黑",
+      "白"
+    ]
   },
   {
     "id": "Q38443",
@@ -4413,7 +5931,13 @@
       "author": "Hummelong",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Sienna_TTBD.jpg"
-    }
+    },
+    "size": 3,
+    "coat": "短毛",
+    "colors": [
+      "褐",
+      "黑"
+    ]
   },
   {
     "id": "Q37659",
@@ -4431,7 +5955,13 @@
       "author": "Bertet",
       "license": "CC BY-SA 4.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ratero_mallorquin.JPG"
-    }
+    },
+    "size": 2,
+    "coat": "短毛",
+    "colors": [
+      "黑",
+      "褐"
+    ]
   },
   {
     "id": "Q39407",
@@ -4449,7 +5979,13 @@
       "author": "User Coneslayer on en.wikipedia",
       "license": "CC BY-SA 2.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Toy-manchester-terrier-weave.png"
-    }
+    },
+    "size": 1,
+    "coat": "短毛",
+    "colors": [
+      "黑",
+      "褐"
+    ]
   },
   {
     "id": "Q38892",
@@ -4467,7 +6003,13 @@
       "author": "ThoHug",
       "license": "CC BY-SA 4.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Mtncur.png"
-    }
+    },
+    "size": 4,
+    "coat": "短毛",
+    "colors": [
+      "黃",
+      "黑"
+    ]
   },
   {
     "id": "Q492644",
@@ -4485,7 +6027,13 @@
       "author": "Jeju Special Self-Governing Province",
       "license": "KOGL Type 1",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Jeju_dog.jpg"
-    }
+    },
+    "size": 3,
+    "coat": "短毛",
+    "colors": [
+      "黃",
+      "紅"
+    ]
   },
   {
     "id": "Q5401146",
@@ -4501,7 +6049,13 @@
       "author": "Ryukyu Mike",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ryukyu_dog_pair.jpg"
-    }
+    },
+    "size": 3,
+    "coat": "短毛",
+    "colors": [
+      "褐",
+      "黑"
+    ]
   },
   {
     "id": "Q9053651",
@@ -4519,7 +6073,13 @@
       "author": "Gernikatar",
       "license": "CC BY-SA 4.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ovejero_magall%C3%A1nico_2.jpg"
-    }
+    },
+    "size": 3,
+    "coat": "長毛",
+    "colors": [
+      "黑",
+      "灰"
+    ]
   },
   {
     "id": "Q11698316",
@@ -4535,7 +6095,12 @@
       "author": "No machine-readable author provided. Kerstone assumed (based",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Kandestack_62406.jpg"
-    }
+    },
+    "size": 4,
+    "coat": "長毛",
+    "colors": [
+      "白"
+    ]
   },
   {
     "id": "Q12593214",
@@ -4551,7 +6116,13 @@
       "author": "한국교육방송공사(EBS)",
       "license": "CC BY-SA 4.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:White_Donggyeongi_(Baekgu)_18_September_2017.jpg"
-    }
+    },
+    "size": 3,
+    "coat": "短毛",
+    "colors": [
+      "黃",
+      "白"
+    ]
   },
   {
     "id": "Q38442",
@@ -4569,7 +6140,12 @@
       "author": "Oscar E. Lorenzana Gallusser",
       "license": "Public domain",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Dogo1.jpg"
-    }
+    },
+    "size": 4,
+    "coat": "短毛",
+    "colors": [
+      "白"
+    ]
   },
   {
     "id": "Q37473",
@@ -4585,7 +6161,12 @@
       "author": "Nelsonismyhero",
       "license": "Attribution",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Staghound.jpg"
-    }
+    },
+    "size": 4,
+    "coat": "硬毛",
+    "colors": [
+      "灰"
+    ]
   },
   {
     "id": "Q6865135",
@@ -4603,7 +6184,14 @@
       "author": "Mruserbox1",
       "license": "CC BY 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Miniature_Fox_Terrier.jpg"
-    }
+    },
+    "size": 1,
+    "coat": "短毛",
+    "colors": [
+      "白",
+      "黑",
+      "褐"
+    ]
   },
   {
     "id": "Q17023476",
@@ -4619,7 +6207,13 @@
       "author": "Suitoop RAiv Tickemp",
       "license": "CC BY-SA 4.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:HK_SW_QR_West_pet_Dog_walking_May_2021_SS2_08.jpg"
-    }
+    },
+    "size": 3,
+    "coat": "短毛",
+    "colors": [
+      "黑",
+      "黃"
+    ]
   },
   {
     "id": "Q113640408",
@@ -4637,7 +6231,13 @@
       "author": "Stephanie See",
       "license": "Public domain",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:B%E1%BA%AFc_H%C3%A0_dog_side.jpg"
-    }
+    },
+    "size": 3,
+    "coat": "長毛",
+    "colors": [
+      "黑",
+      "黃"
+    ]
   },
   {
     "id": "Q113714849",
@@ -4653,7 +6253,13 @@
       "author": "Stephanie See",
       "license": "Public domain",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Hmong_Bobtail_1.jpg"
-    }
+    },
+    "size": 3,
+    "coat": "短毛",
+    "colors": [
+      "黑",
+      "黃"
+    ]
   },
   {
     "id": "Q2887401",
@@ -4669,7 +6275,14 @@
       "author": "Desaix83, d'après le travail de Canarian",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Basset_Art%C3%A9sien_Normand_Fond_Blanc.jpg"
-    }
+    },
+    "size": 3,
+    "coat": "短毛",
+    "colors": [
+      "白",
+      "褐",
+      "黑"
+    ]
   },
   {
     "id": "Q44116",
@@ -4687,7 +6300,13 @@
       "author": "Govern de les Illes Balears",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ca_de_conills_de_Menorca_01.jpg"
-    }
+    },
+    "size": 3,
+    "coat": "短毛",
+    "colors": [
+      "紅",
+      "白"
+    ]
   },
   {
     "id": "Q30891717",
@@ -4703,7 +6322,12 @@
       "author": "Unknown authorUnknown author",
       "license": "Public domain",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:%D0%9C%D0%B5%D0%B4%D0%B5%D0%BB%D1%8F%D0%BD_(%D0%BF%D0%BE%D1%80%D0%BE%D0%B4%D0%B0_%D1%81%D0%BE%D0%B1%D0%B0%D0%BA).jpg"
-    }
+    },
+    "size": 5,
+    "coat": "短毛",
+    "colors": [
+      "黃"
+    ]
   },
   {
     "id": "Q123030292",
@@ -4719,7 +6343,12 @@
       "author": "Canarian",
       "license": "CC BY-SA 4.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Laizhoureddog6.jpg"
-    }
+    },
+    "size": 4,
+    "coat": "短毛",
+    "colors": [
+      "紅"
+    ]
   },
   {
     "id": "Q14766993",
@@ -4737,7 +6366,13 @@
       "author": "No machine-readable author provided. Inuyasya1106 assumed (b",
       "license": "Public domain",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Shar-Pei_bone_mouth.JPG"
-    }
+    },
+    "size": 3,
+    "coat": "短毛",
+    "colors": [
+      "黃",
+      "黑"
+    ]
   },
   {
     "id": "Q107444250",
@@ -4753,7 +6388,12 @@
       "author": "Unknown authorUnknown author",
       "license": "Public domain",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:North_Devon_Staghounds.jpg"
-    }
+    },
+    "size": 4,
+    "coat": "硬毛",
+    "colors": [
+      "灰"
+    ]
   },
   {
     "id": "Q16892010",
@@ -4771,7 +6411,13 @@
       "author": "BorzayaChortaja",
       "license": "CC BY-SA 4.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Tibetan_Kyi_Apso.jpg"
-    }
+    },
+    "size": 4,
+    "coat": "長毛",
+    "colors": [
+      "黑",
+      "黃"
+    ]
   },
   {
     "id": "Q12664827",
@@ -4787,7 +6433,14 @@
       "author": "Ellen Levy Finch (Elf)",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:MiniDachshund1_wb.jpg"
-    }
+    },
+    "size": 1,
+    "coat": "短毛",
+    "colors": [
+      "紅",
+      "褐",
+      "黑"
+    ]
   },
   {
     "id": "Q42604",
@@ -4806,7 +6459,13 @@
       "author": "Ulics676767",
       "license": "CC0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Gatosiames.jpg"
-    }
+    },
+    "size": 2,
+    "coat": "短毛",
+    "colors": [
+      "白",
+      "褐"
+    ]
   },
   {
     "id": "Q42610",
@@ -4824,7 +6483,15 @@
       "author": "Cindy See",
       "license": "CC BY-SA 2.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Chocolate_Persian.jpg"
-    }
+    },
+    "size": 2,
+    "coat": "長毛",
+    "colors": [
+      "白",
+      "灰",
+      "橙",
+      "黑"
+    ]
   },
   {
     "id": "Q7955",
@@ -4844,7 +6511,13 @@
       "author": "Karin Langner-Bahmann",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Gustav_chocolate.jpg"
-    }
+    },
+    "size": 2,
+    "coat": "短毛",
+    "colors": [
+      "褐",
+      "橙"
+    ]
   },
   {
     "id": "Q42659",
@@ -4862,7 +6535,14 @@
       "author": "T. Bjornstad",
       "license": "CC BY-SA 4.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Maine_Coon_male_NO_Sigdalskauen_Balder.jpg"
-    }
+    },
+    "size": 3,
+    "coat": "長毛",
+    "colors": [
+      "褐",
+      "灰",
+      "黑"
+    ]
   },
   {
     "id": "Q42583",
@@ -4880,7 +6560,14 @@
       "author": "User:Lightburst",
       "license": "CC BY-SA 4.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Paintedcats_Red_Star_standing.jpg"
-    }
+    },
+    "size": 2,
+    "coat": "短毛",
+    "colors": [
+      "黃",
+      "黑",
+      "褐"
+    ]
   },
   {
     "id": "Q42720",
@@ -4898,7 +6585,12 @@
       "author": "Empire.ottoman",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Fantine_de_l%27Empire_Ottoman.jpg"
-    }
+    },
+    "size": 2,
+    "coat": "長毛",
+    "colors": [
+      "白"
+    ]
   },
   {
     "id": "Q42675",
@@ -4916,7 +6608,15 @@
       "author": "Karen Weaver",
       "license": "CC BY 2.5",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Manx_cat_by_Karen_Weaver.jpg"
-    }
+    },
+    "size": 2,
+    "coat": "短毛",
+    "colors": [
+      "灰",
+      "黑",
+      "橙",
+      "白"
+    ]
   },
   {
     "id": "Q29273",
@@ -4934,7 +6634,12 @@
       "author": "BritishEmpire",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Mystica_from_British_Empire_Cattery.jpg"
-    }
+    },
+    "size": 2,
+    "coat": "短毛",
+    "colors": [
+      "灰"
+    ]
   },
   {
     "id": "Q42712",
@@ -4952,7 +6657,13 @@
       "author": "Dmitry Makeev",
       "license": "CC BY-SA 4.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cat_Sphynx._img_025.jpg"
-    }
+    },
+    "size": 2,
+    "coat": "無毛",
+    "colors": [
+      "白",
+      "灰"
+    ]
   },
   {
     "id": "Q42654",
@@ -4970,7 +6681,12 @@
       "author": "ruskis",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ruskis_dimka_3_(cropped).jpg"
-    }
+    },
+    "size": 2,
+    "coat": "短毛",
+    "colors": [
+      "灰"
+    ]
   },
   {
     "id": "Q42667",
@@ -4988,7 +6704,14 @@
       "author": "Gangburgondes",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Dalaja-Doll-norv%C3%A9gien-ambre-blotched-tabby_avec-blanc_2008_(cropped).jpg"
-    }
+    },
+    "size": 3,
+    "coat": "長毛",
+    "colors": [
+      "褐",
+      "白",
+      "灰"
+    ]
   },
   {
     "id": "Q42688",
@@ -5006,7 +6729,14 @@
       "author": "Cgomez766",
       "license": "CC0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Seal_Point_mitted_Ragdoll_BreedingCat.jpg"
-    }
+    },
+    "size": 3,
+    "coat": "長毛",
+    "colors": [
+      "白",
+      "褐",
+      "灰"
+    ]
   },
   {
     "id": "Q42563",
@@ -5024,7 +6754,13 @@
       "author": "Claudia Zaino",
       "license": "CC BY-SA 2.5 it",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Minerva-25.jpg"
-    }
+    },
+    "size": 2,
+    "coat": "長毛",
+    "colors": [
+      "白",
+      "褐"
+    ]
   },
   {
     "id": "Q42573",
@@ -5042,7 +6778,12 @@
       "author": "Sergey Lubov",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:BurMau_Vega_Star,_champagne_burmese_kitten_(cropped).jpg"
-    }
+    },
+    "size": 2,
+    "coat": "短毛",
+    "colors": [
+      "褐"
+    ]
   },
   {
     "id": "Q42630",
@@ -5060,7 +6801,14 @@
       "author": "Heikki Siltala https://catza.net/",
       "license": "CC BY 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:SC_Alizarin_Animal_Beat_SIB_a_23.jpg"
-    }
+    },
+    "size": 3,
+    "coat": "長毛",
+    "colors": [
+      "褐",
+      "灰",
+      "白"
+    ]
   },
   {
     "id": "Q42636",
@@ -5078,7 +6826,13 @@
       "author": "Kostj, cropped by Zanaq.",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Purple-scottish-fold.png"
-    }
+    },
+    "size": 2,
+    "coat": "短毛",
+    "colors": [
+      "灰",
+      "白"
+    ]
   },
   {
     "id": "Q42670",
@@ -5094,7 +6848,13 @@
       "author": "Jason Douglas",
       "license": "Public domain",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Savannah_Cat_portrait.jpg"
-    }
+    },
+    "size": 3,
+    "coat": "短毛",
+    "colors": [
+      "黃",
+      "黑"
+    ]
   },
   {
     "id": "Q42588",
@@ -5112,7 +6872,12 @@
       "author": "Fureur Bleu",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:CertosinoFemmina.JPG"
-    }
+    },
+    "size": 2,
+    "coat": "短毛",
+    "colors": [
+      "灰"
+    ]
   },
   {
     "id": "Q42691",
@@ -5130,7 +6895,12 @@
       "author": "Heikki Siltala, catza.net",
       "license": "CC BY 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:KOR_1149.jpg"
-    }
+    },
+    "size": 1,
+    "coat": "短毛",
+    "colors": [
+      "灰"
+    ]
   },
   {
     "id": "Q7295",
@@ -5148,7 +6918,13 @@
       "author": "Desaix83, d'après le travail d'Heikki Siltala",
       "license": "CC BY 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Mau_Egytien.jpg"
-    }
+    },
+    "size": 2,
+    "coat": "短毛",
+    "colors": [
+      "灰",
+      "黑"
+    ]
   },
   {
     "id": "Q42566",
@@ -5166,7 +6942,12 @@
       "author": "Bombaykatze",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Bombay_Katze_Ebene_of_Blue_Sinfonie.JPG"
-    }
+    },
+    "size": 2,
+    "coat": "短毛",
+    "colors": [
+      "黑"
+    ]
   },
   {
     "id": "Q42685",
@@ -5184,7 +6965,14 @@
       "author": "Desaix83, d'après le travail d'Heikki Siltala",
       "license": "CC BY 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ocicat_Fond_Blanc.jpg"
-    }
+    },
+    "size": 2,
+    "coat": "短毛",
+    "colors": [
+      "黃",
+      "褐",
+      "黑"
+    ]
   },
   {
     "id": "Q9665",
@@ -5202,7 +6990,13 @@
       "author": "Фотограф:Анна Утехина",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ghislaine_6028.jpg"
-    }
+    },
+    "size": 2,
+    "coat": "長毛",
+    "colors": [
+      "白",
+      "褐"
+    ]
   },
   {
     "id": "Q20793",
@@ -5220,7 +7014,16 @@
       "author": "Tessa",
       "license": "CC BY-SA 4.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:European_Shorthair_EUR_d_22.jpg"
-    }
+    },
+    "size": 2,
+    "coat": "短毛",
+    "colors": [
+      "灰",
+      "褐",
+      "黑",
+      "白",
+      "橙"
+    ]
   },
   {
     "id": "Q42570",
@@ -5238,7 +7041,14 @@
       "author": "Anna Belial",
       "license": "CC BY 4.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Devon_Rex_Cassini.jpeg"
-    }
+    },
+    "size": 1,
+    "coat": "捲毛",
+    "colors": [
+      "白",
+      "灰",
+      "黑"
+    ]
   },
   {
     "id": "Q7960",
@@ -5256,7 +7066,14 @@
       "author": "未知",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:American_curl_2.jpg"
-    }
+    },
+    "size": 2,
+    "coat": "長毛",
+    "colors": [
+      "白",
+      "灰",
+      "橙"
+    ]
   },
   {
     "id": "Q42724",
@@ -5274,7 +7091,13 @@
       "author": "Matsu1024",
       "license": "CC BY-SA 4.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Turkish_Van_cat_transparent.png"
-    }
+    },
+    "size": 3,
+    "coat": "長毛",
+    "colors": [
+      "白",
+      "橙"
+    ]
   },
   {
     "id": "Q7962",
@@ -5292,7 +7115,14 @@
       "author": "odin_aka_zero-one",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Jewelkatz_Romeo_Of_Stalker-Bars.jpg"
-    }
+    },
+    "size": 2,
+    "coat": "短毛",
+    "colors": [
+      "灰",
+      "黑",
+      "白"
+    ]
   },
   {
     "id": "Q42559",
@@ -5310,7 +7140,14 @@
       "author": "Alexandre Gonçalves",
       "license": "CC BY-SA 4.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cornish_Rex_-_Gatos_(cropped).jpg"
-    }
+    },
+    "size": 1,
+    "coat": "捲毛",
+    "colors": [
+      "白",
+      "黑",
+      "灰"
+    ]
   },
   {
     "id": "Q42959",
@@ -5328,7 +7165,13 @@
       "author": "Cindy See",
       "license": "CC BY-SA 2.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Sonny_Bunny.jpg"
-    }
+    },
+    "size": 2,
+    "coat": "長毛",
+    "colors": [
+      "白",
+      "褐"
+    ]
   },
   {
     "id": "Q42715",
@@ -5346,7 +7189,13 @@
       "author": "Heikki Siltala https://catza.net/",
       "license": "CC BY 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Bluestream%27s_QuiQui2_SOM_o.jpg"
-    }
+    },
+    "size": 2,
+    "coat": "長毛",
+    "colors": [
+      "橙",
+      "褐"
+    ]
   },
   {
     "id": "Q42673",
@@ -5364,7 +7213,14 @@
       "author": "ようてい",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:JapaneseBobtailBlueEyedMi-ke.JPG"
-    }
+    },
+    "size": 2,
+    "coat": "短毛",
+    "colors": [
+      "白",
+      "黑",
+      "橙"
+    ]
   },
   {
     "id": "Q42555",
@@ -5382,7 +7238,14 @@
       "author": "Heikki Siltala from catza.net",
       "license": "CC BY-SA 4.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Exotic_cat_transparent.png"
-    }
+    },
+    "size": 2,
+    "coat": "短毛",
+    "colors": [
+      "灰",
+      "白",
+      "橙"
+    ]
   },
   {
     "id": "Q42578",
@@ -5400,7 +7263,14 @@
       "author": "Desaix83, d'après le travail d'Heikki Siltala",
       "license": "CC BY 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cymric_Fond_Blanc.jpg"
-    }
+    },
+    "size": 2,
+    "coat": "長毛",
+    "colors": [
+      "灰",
+      "黑",
+      "白"
+    ]
   },
   {
     "id": "Q42726",
@@ -5418,7 +7288,12 @@
       "author": "Edenvane",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Chat_tonkinois_lilac_mink_(chatterie_de_l%27Esprit_d%27Edenvane)..jpg"
-    }
+    },
+    "size": 2,
+    "coat": "短毛",
+    "colors": [
+      "褐"
+    ]
   },
   {
     "id": "Q686698",
@@ -5436,7 +7311,14 @@
       "author": "Tasy Hong",
       "license": "CC0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Munchkin_cat_2_(cropped).jpg"
-    }
+    },
+    "size": 1,
+    "coat": "短毛",
+    "colors": [
+      "灰",
+      "白",
+      "橙"
+    ]
   },
   {
     "id": "Q42633",
@@ -5454,7 +7336,13 @@
       "author": "Heikki Siltala",
       "license": "CC BY 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Hattikatin_Lumipyry.JPG"
-    }
+    },
+    "size": 2,
+    "coat": "短毛",
+    "colors": [
+      "白",
+      "褐"
+    ]
   },
   {
     "id": "Q42696",
@@ -5472,7 +7360,14 @@
       "author": "Felinlove",
       "license": "CC BY-SA 4.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Oriental_Shorthair._Black_smoke.jpg"
-    }
+    },
+    "size": 2,
+    "coat": "短毛",
+    "colors": [
+      "黑",
+      "白",
+      "灰"
+    ]
   },
   {
     "id": "Q42679",
@@ -5488,7 +7383,13 @@
       "author": "Straits Singapuras",
       "license": "CC BY-SA 4.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Singapura_Cats_(cropped).jpg"
-    }
+    },
+    "size": 1,
+    "coat": "短毛",
+    "colors": [
+      "褐",
+      "黃"
+    ]
   },
   {
     "id": "Q7338",
@@ -5506,7 +7407,14 @@
       "author": "TRUE KURILIANS",
       "license": "CC BY-SA 4.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:KURILIAN_BOBTAIL_Maschio_Veika_2011_(cropped).JPG"
-    }
+    },
+    "size": 2,
+    "coat": "短毛",
+    "colors": [
+      "灰",
+      "褐",
+      "白"
+    ]
   },
   {
     "id": "Q42551",
@@ -5524,7 +7432,14 @@
       "author": "Desaix83, d'après le travail d'Heikki Siltala",
       "license": "CC BY 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:German_Rex.jpg"
-    }
+    },
+    "size": 2,
+    "coat": "捲毛",
+    "colors": [
+      "黑",
+      "白",
+      "灰"
+    ]
   },
   {
     "id": "Q7957",
@@ -5542,7 +7457,14 @@
       "author": "Sam Holt",
       "license": "CC BY-SA 4.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Aegean_Island_Cat.jpg"
-    }
+    },
+    "size": 2,
+    "coat": "短毛",
+    "colors": [
+      "白",
+      "黑",
+      "橙"
+    ]
   },
   {
     "id": "Q42637",
@@ -5560,7 +7482,14 @@
       "author": "\"Iris Preyler-Hamertinger\"",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:20050922AmarilloRes.jpg"
-    }
+    },
+    "size": 3,
+    "coat": "長毛",
+    "colors": [
+      "白",
+      "灰",
+      "褐"
+    ]
   },
   {
     "id": "Q42556",
@@ -5578,7 +7507,14 @@
       "author": "Flamingice007sg",
       "license": "Public domain",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Star_Spangled_Cat.jpg"
-    }
+    },
+    "size": 2,
+    "coat": "短毛",
+    "colors": [
+      "灰",
+      "黑",
+      "褐"
+    ]
   },
   {
     "id": "Q12648",
@@ -5594,7 +7530,16 @@
       "author": "Huggle dev team",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Domestic_short-haired_cat.jpg"
-    }
+    },
+    "size": 2,
+    "coat": "短毛",
+    "colors": [
+      "黑",
+      "白",
+      "灰",
+      "褐",
+      "橙"
+    ]
   },
   {
     "id": "Q6965006",
@@ -5612,7 +7557,14 @@
       "author": "Parkerwh",
       "license": "CC BY-SA 4.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Minuet_Cat_(cropped).png"
-    }
+    },
+    "size": 1,
+    "coat": "長毛",
+    "colors": [
+      "白",
+      "灰",
+      "橙"
+    ]
   },
   {
     "id": "Q16889346",
@@ -5628,6 +7580,12 @@
       "author": "Alex Opryatin",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Mekong_bobtail_female,_Cofein_Pride_cattery.jpg"
-    }
+    },
+    "size": 2,
+    "coat": "短毛",
+    "colors": [
+      "白",
+      "褐"
+    ]
   }
 ]

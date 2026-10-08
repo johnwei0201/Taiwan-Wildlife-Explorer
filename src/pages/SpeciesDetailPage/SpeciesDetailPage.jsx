@@ -103,7 +103,8 @@ export default function SpeciesDetailPage() {
         <section className={styles.section}>
           <h2 className={styles.sectionTitle}>{petKind === 'cat' ? '貓' : '狗'}的品種</h2>
           <p className={styles.sectionNote}>依知名度排序，點卡片可以到維基百科看完整介紹</p>
-          <BreedList kind={petKind} />
+          {/* key：從家犬換到家貓時重新建立，篩選條件才不會沿用（貓沒有「紅色」，會變成 0 種） */}
+          <BreedList key={petKind} kind={petKind} />
         </section>
       )}
 

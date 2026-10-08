@@ -11,6 +11,12 @@
   border-radius: var(--radius-md);
 }
 
+.count {
+  margin-bottom: var(--space-4);
+  font-size: var(--fs-sm);
+  color: var(--color-text-muted);
+}
+
 /* 手機 2 欄、平板 3 欄、桌機 4 欄 */
 .grid {
   display: grid;
@@ -107,6 +113,12 @@
 .name {
   font-size: var(--fs-base);
   font-weight: 700;
+}
+
+.features {
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  color: var(--color-primary);
 }
 
 .nameEn,

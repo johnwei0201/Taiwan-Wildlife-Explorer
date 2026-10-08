@@ -5,12 +5,17 @@
  *   ① Wikidata（CC0）：查出所有「犬種」、「貓種」，只留有中文維基百科條目和照片的
  *   ② 中文維基百科（CC BY-SA）：用台灣用語（zh-tw）取得品種名稱與簡介
  *   ③ Wikimedia Commons：查照片的作者與授權（網站上必須標示）
+ *   ④ scripts/breed-traits.csv：合併體型、毛、顏色（外觀篩選用，可以用 Excel 直接修改）
  *
- * 使用方式：npm run breeds
+ * 使用方式：
+ *   npm run breeds                  → 全部重抓（約 6 分鐘）
+ *   npm run breeds -- --traits      → 只把 breed-traits.csv 合併進現有的 breeds.json（幾秒鐘）
  */
-import { writeFile } from 'node:fs/promises'
+import { readFile, writeFile } from 'node:fs/promises'
 
 const OUTPUT_PATH = 'public/data/breeds.json'
+const TRAITS_PATH = 'scripts/breed-traits.csv'
+const TRAITS_ONLY = process.argv.includes('--traits')
 // 維基百科的 API 請求太快會被限速（HTTP 429），每次間隔 1 秒
 const REQUEST_DELAY_MS = 1000
 // Wikimedia 要求 User-Agent 附上聯絡方式（網址或信箱），沒有的話很容易被限速
@@ -138,7 +143,46 @@ async function fetchImageInfo(files) {
 
 // ---------- 主程式 ----------
 
+// ---------- ④ 外觀特徵（breed-traits.csv） ----------
+
+// CSV 格式：Wikidata 編號,英文名,體型(1~5),毛,顏色(用 / 分隔)
+async function readTraits() {
+  const text = await readFile(TRAITS_PATH, 'utf8')
+  const traits = new Map()
+  for (const line of text.split(/\r?\n/)) {
+    if (!line.trim() || line.startsWith('#') || line.startsWith('id,')) continue
+    const [id, , size, coat, colors] = line.split(',').map((v) => v.trim())
+    traits.set(id, {
+      size: size ? Number(size) : null,
+      coat: coat || null,
+      colors: colors ? colors.split('/').filter(Boolean) : [],
+    })
+  }
+  return traits
+}
+
+async function addTraits(breeds) {
+  const traits = await readTraits()
+  for (const breed of breeds) Object.assign(breed, traits.get(breed.id) ?? { size: null, coat: null, colors: [] })
+  const missing = breeds.filter((b) => !traits.has(b.id))
+  if (missing.length > 0) {
+    console.log(`\n⚠️ 還沒有外觀特徵的品種（請加到 ${TRAITS_PATH}）：`)
+    for (const b of missing) console.log(`  ${b.id},${b.nameEn},,,  # ${b.nameZh}`)
+  }
+}
+
+// ---------- 主程式 ----------
+
 async function main() {
+  // 只修改 breed-traits.csv 時，不必重新查 Wikidata、維基百科，直接把特徵合併進現有的 breeds.json
+  if (TRAITS_ONLY) {
+    const breeds = JSON.parse(await readFile(OUTPUT_PATH, 'utf8'))
+    await addTraits(breeds)
+    await writeFile(OUTPUT_PATH, JSON.stringify(breeds, null, 2))
+    console.log(`已更新 ${breeds.length} 個品種的外觀特徵：${OUTPUT_PATH}`)
+    return
+  }
+
   const output = []
 
   for (const { kind, wikidataClass } of KINDS) {
@@ -169,6 +213,7 @@ async function main() {
     }
   }
 
+  await addTraits(output)
   await writeFile(OUTPUT_PATH, JSON.stringify(output, null, 2))
   const count = (kind) => output.filter((b) => b.kind === kind).length
   console.log(`\n犬種 ${count('dog')} 種、貓種 ${count('cat')} 種，已輸出：${OUTPUT_PATH}`)

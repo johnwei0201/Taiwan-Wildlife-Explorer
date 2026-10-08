@@ -1,0 +1,331 @@
+# 貓狗品種外觀特徵：體型、毛、顏色（AI 協助標記，可能有少數錯誤，歡迎直接修改）
+# 欄位：Wikidata 編號,英文名（方便辨認，不影響資料）,體型,毛,顏色
+#
+# 體型（依成犬、成貓的體重）
+#   狗：1 迷你(<4kg)、2 小型(4~10kg)、3 中型(10~25kg)、4 大型(25~45kg)、5 超大型(>45kg)
+#   貓：1 小型(<4kg)、2 中型(4~6kg)、3 大型(>6kg)
+# 毛：短毛、長毛、捲毛、硬毛（粗硬的剛毛，常見於㹴犬、雪納瑞）、無毛
+# 顏色（用 / 分隔，列出這個品種常見的毛色）：黑、白、灰、褐、紅、橙、黃
+#   狗：黃＝奶油色、淡黃、金黃；紅＝紅棕色（例如愛爾蘭㹴、柴犬的赤色）；灰＝灰色、藍灰色
+#   貓：橙＝橘貓的橘色；灰＝灰色、藍灰色（例如俄羅斯藍貓）
+id,nameEn,size,coat,colors
+# ---------- 狗 ----------
+Q38280,German Shepherd,4,短毛,黑/褐/黃
+Q38726,Labrador Retriever,4,短毛,黑/黃/褐
+Q21102,beagle,2,短毛,黑/白/褐
+Q653,Chihuahua,1,短毛,黃/黑/白/褐
+Q38686,Golden Retriever,4,長毛,黃
+Q38383,Bulldog,3,短毛,白/黃/褐
+Q29099,dachshund,2,短毛,紅/褐/黑
+Q39093,Rottweiler,4,短毛,黑/褐
+Q29164,Akita,4,短毛,紅/白/黃
+Q38698,pug,2,短毛,黃/黑
+Q17504,Dalmatian,4,短毛,白/黑
+Q38904,poodle,3,捲毛,白/黑/褐/灰
+Q38496,Boxer,4,短毛,黃/褐/白
+Q39295,Siberian Husky,3,長毛,灰/白/黑/紅
+Q5414,Great Dane,5,短毛,黑/黃/灰/白
+Q38358,Dobermann,4,短毛,黑/褐
+Q37710,border collie,3,長毛,黑/白
+Q29013,Chow Chow,4,長毛,紅/黑/黃
+Q38090,St. Bernard,5,長毛,白/紅/褐
+Q39330,Yorkshire Terrier,1,長毛,灰/黃/褐
+Q21080,Afghan Hound,4,長毛,黃/白/黑
+Q38991,Tosa,5,短毛,紅/黃
+Q38571,greyhound,4,短毛,灰/黑/黃/白
+Q37871,Basenji,2,短毛,紅/白/黑
+Q39357,Shih Tzu,1,長毛,白/黃/黑/褐
+Q38706,Newfoundland dog,5,長毛,黑/褐
+Q38751,Maltese,1,長毛,白
+Q39002,Samoyed,4,長毛,白
+Q38322,Bull Terrier,3,短毛,白/黑
+Q21206,Alaskan Malamute,4,長毛,灰/白/黑
+Q38959,Pekingese,1,長毛,黃/白/黑
+Q39315,Shiba Inu,2,短毛,紅/黑/白/黃
+Q29149,French Bulldog,2,短毛,黃/白/黑
+Q39322,Tibetan Mastiff,5,長毛,黑/褐/紅
+Q38972,Shar Pei,3,短毛,黃/黑/紅
+Q37617,Airedale Terrier,3,硬毛,黑/褐
+Q38287,Jack Russell Terrier,2,短毛,白/褐/黑
+Q37629,Australian Shepherd,3,長毛,灰/黑/白/紅
+Q17510,West Highland White Terrier,2,硬毛,白
+Q37909,Dogo Argentino,4,短毛,白
+Q38950,Landseer,5,長毛,黑/白
+Q38668,Irish wolfhound,5,硬毛,灰/黃
+Q38576,Caucasian Shepherd Dog,5,長毛,灰/黃/白
+Q37866,Borzoi,4,長毛,白/黃
+Q21098,bloodhound,4,短毛,紅/褐/黑
+Q38080,Bullmastiff,5,短毛,黃/紅
+Q38309,English Setter,4,長毛,白/黑/橙
+Q38570,Central Asian Shepherd Dog,5,短毛,白/黃/黑
+Q39108,Saluki,4,短毛,黃/白
+Q37595,Australian Cattle Dog,3,短毛,灰/紅
+Q37608,Bernese Mountain Dog,5,長毛,黑/白/褐
+Q39058,Shetland Sheepdog,2,長毛,褐/白/黑
+Q37888,Cairn Terrier,2,硬毛,黃/灰
+Q37716,basset hound,3,短毛,白/褐/黑
+Q37612,American Pit Bull Terrier,3,短毛,灰/褐/白
+Q38864,Puli,3,捲毛,黑
+Q39035,Scottish Terrier,2,硬毛,黑
+Q37688,American Staffordshire Terrier,3,短毛,灰/褐/白
+Q37600,Bichon Frisé,1,捲毛,白
+Q38651,Czechoslovakian Wolfdog,4,短毛,灰
+Q38675,Komondor,5,捲毛,白
+Q38533,English Cocker Spaniel,2,長毛,紅/黑/褐
+Q37859,Azawakh,4,短毛,黃/紅
+Q38063,American Cocker Spaniel,2,長毛,黃/黑/褐
+Q38990,Miniature Pinscher,1,短毛,黑/紅/褐
+Q37550,Boston Terrier,2,短毛,黑/白
+Q37624,Belgian Shepherd,4,長毛,黑/黃
+Q38352,Lhasa Apso,1,長毛,黃/白/黑
+Q38418,English Mastiff,5,短毛,黃/黑
+Q38644,Irish Terrier,3,硬毛,紅
+Q37704,Old English sheepdog,4,長毛,灰/白
+Q37803,Pyrenean Mountain Dog,5,長毛,白
+Q38999,Miniature Schnauzer,2,硬毛,灰/黑/白
+Q39220,Fox Terrier,2,短毛,白/褐/黑
+Q39122,Whippet,3,短毛,灰/白/黃
+Q7254,Affenpinscher,1,硬毛,黑
+Q38808,Pharaoh Hound,3,短毛,紅
+Q38084,German Shorthaired Pointer,4,短毛,褐/白
+Q37558,Border Terrier,2,硬毛,黃/褐
+Q769804,English Pointer,4,短毛,白/黑/橙/褐
+Q38529,Neapolitan Mastiff,5,短毛,灰/黑
+Q38856,Xoloitzcuintle,3,無毛,黑/灰
+Q38238,Bergamasco Shepherd,4,捲毛,灰
+Q858459,Welsh Corgi,2,短毛,紅/白/黃
+Q38602,Canaan Dog,3,短毛,黃/白
+Q39285,Staffordshire Bull Terrier,3,短毛,紅/黑/白
+Q38710,Icelandic Sheepdog,3,長毛,黃/白
+Q38965,Weimaraner,4,短毛,灰
+Q37892,Chinese Crested Dog,1,無毛,白/黑/灰
+Q37604,American Bulldog,4,短毛,白/褐
+Q38115,Papillon,1,長毛,白/黑/褐
+Q29195,Finnish Spitz,2,長毛,紅
+Q38796,Tibetan Terrier,3,長毛,白/黃/黑
+Q37566,Bolognese,1,捲毛,白
+Q38503,Italian Greyhound,2,短毛,灰/黃
+Q38688,Giant Schnauzer,4,硬毛,黑
+Q38515,Greenland Dog,4,長毛,白/黑/灰
+Q38884,New Guinea singing dog,2,短毛,紅/黃
+Q38025,Kerry Blue Terrier,3,捲毛,灰
+Q21074,Abruzzo-Maremma Sheepdog,5,長毛,白
+Q38783,Pembroke Welsh Corgi,2,短毛,紅/白/黃
+Q39041,Welsh Terrier,2,硬毛,黑/褐
+Q38494,Belgian Malinois,4,短毛,黃/黑
+Q37808,Fila Brasileiro,5,短毛,黃/紅
+Q37934,White Swiss Shepherd,4,長毛,白
+Q38126,Japanese Spitz,2,長毛,白
+Q38146,Japanese Chin,1,長毛,白/黑
+Q38824,Nova Scotia Duck Tolling Retriever,3,長毛,橙/紅/白
+Q38449,Havanese,1,長毛,白/黃
+Q39052,Skye Terrier,2,長毛,灰/黑
+Q38919,Pumi,2,捲毛,灰/黑
+Q37530,Australian Terrier,2,硬毛,灰/褐
+Q38295,Coton de Tulear,1,長毛,白
+Q37699,American Eskimo Dog,2,長毛,白
+Q38559,Portuguese water dog,3,捲毛,黑/白/褐
+Q37793,German Pinscher,3,短毛,黑/紅
+Q37856,American Water Spaniel,3,捲毛,褐
+Q38889,Griffon Bruxellois,1,硬毛,紅/黑
+Q37524,Australian Silky Terrier,1,長毛,灰/褐
+Q38836,Polish Lowland Sheepdog,3,長毛,白/灰
+Q39181,Tibetan Spaniel,1,長毛,黃/紅
+Q37750,Presa Canario,5,短毛,黃/黑
+Q39147,Shikoku Ken,3,短毛,紅/黑/白
+Q38655,German Spitz,2,長毛,白/橙/黑
+Q37920,Galgo Español,4,短毛,黃/黑
+Q37950,Karelian Bear Dog,3,短毛,黑/白
+Q23853,Hokkaido inu,3,短毛,白/紅
+Q37508,American Hairless Terrier,2,無毛,黑/白
+Q38255,Bracco Italiano,4,短毛,白/橙/褐
+Q38175,Akbash,5,長毛,白
+Q29177,Field Spaniel,3,長毛,黑/褐
+Q38634,Black Russian Terrier,5,硬毛,黑
+Q29040,Canadian Eskimo Dog,4,長毛,白/黑/灰
+Q29084,Chesapeake Bay Retriever,4,短毛,褐
+Q29022,English Springer Spaniel,3,長毛,褐/白
+Q38110,Lakeland Terrier,2,硬毛,黑/褐
+Q29188,Finnish Lapphund,3,長毛,黑/褐
+Q29200,Flat-Coated Retriever,4,長毛,黑
+Q39068,Sealyham Terrier,2,硬毛,白
+Q38940,Norfolk Terrier,1,硬毛,紅
+Q38621,Brazilian Terrier,2,短毛,白/黑/褐
+Q38426,Austrian Pinscher,3,短毛,黃/紅
+Q38020,Yakutian Laika,3,長毛,白/黑
+Q29072,Cardigan Welsh Corgi,2,短毛,灰/紅/白
+Q38223,Kai Ken,3,短毛,黑/褐
+Q38162,Irish Water Spaniel,4,捲毛,褐
+Q37755,Ibizan Hound,4,短毛,紅/白
+Q38342,Kishu,3,短毛,白
+Q4227301,cocker spaniel,2,長毛,黃/黑/褐
+Q38508,Kangal Shepherd Dog,5,短毛,黃/黑
+Q38716,Kooikerhondje,2,長毛,橙/白
+Q38027,Löwchen,1,長毛,白/黃
+Q38196,Volpino Italiano,1,長毛,白
+Q37585,Barbet,3,捲毛,黑/褐
+Q38945,mongrel,3,短毛,黑/白/褐/黃
+Q39605,Standard Schnauzer,3,硬毛,灰/黑
+Q37782,English Toy Terrier,1,短毛,黑/褐
+Q38874,Peruvian Hairless Dog,3,無毛,黑/灰
+Q38189,Glen of Imaal Terrier,2,硬毛,黃/灰
+Q38910,Lagotto Romagnolo,3,捲毛,白/褐
+Q39075,Swedish Vallhund,2,短毛,灰/紅
+Q38262,Cirneco dell'Etna,2,短毛,紅
+Q39491,Wire Fox Terrier,2,硬毛,白/褐/黑
+Q37976,Japanese Terrier,1,短毛,白/黑
+Q38096,Estrela Mountain Dog,5,長毛,黃/灰
+Q39176,Russkiy Toy,1,短毛,黑/褐
+Q38362,Lapponian Herder,3,長毛,黑
+Q38375,Curly Coated Retriever,4,捲毛,黑/褐
+Q1196071,collie,4,長毛,褐/白/黑
+Q37830,English Shepherd,3,長毛,黑/白/褐
+Q20860,Wetterhoun,3,捲毛,黑/白
+Q39083,Porcelaine,3,短毛,白/橙
+Q39192,Stabijhoun,3,長毛,黑/白
+Q38416,East Siberian Laika,3,長毛,黑/白/灰
+Q37503,Australian Stumpy Tail Cattle Dog,3,短毛,灰/紅
+Q37510,Toy Fox Terrier,1,短毛,白/黑/褐
+Q38787,Smooth Fox Terrier,2,短毛,白/褐/黑
+Q37494,Old Danish Pointer,4,短毛,白/褐
+Q38165,Portuguese Pointer,3,短毛,黃/白
+Q29127,Danish Swedish Farmdog,2,短毛,白/褐/黑
+Q38932,Podenco Canario,3,短毛,紅/白
+Q37722,Chinook,4,短毛,黃
+Q39332,Russo-European Laika,3,長毛,黑/白
+Q11294205,Catahoula Leopard Dog,4,短毛,灰/黑/白
+Q37798,Blue Picardy Spaniel,3,長毛,灰/黑
+Q38869,Wirehaired Pointing Griffon,3,硬毛,灰/褐
+Q37967,Miniature Bull Terrier,2,短毛,白
+Q29212,Formosan Mountain Dog,3,短毛,黑/黃/白
+Q39200,Spanish Water Dog,3,捲毛,黑/褐/白
+Q37721,Carolina Dog,3,短毛,黃
+Q38925,Norrbottenspets,2,短毛,白/紅
+Q39063,Portuguese Podengo,2,短毛,黃
+Q37678,Chortai,4,短毛,白/黃
+Q38504,East-European Shepherd,4,短毛,黑/褐
+Q39254,Phalène,1,長毛,白/黑/褐
+Q38452,Karakachan Dog,5,長毛,白/黑
+Q37664,Ariege Pointer,4,短毛,白/橙
+Q37969,Dutch Smoushond,2,硬毛,黃
+Q37844,Pont-Audemer Spaniel,3,捲毛,褐/白
+Q38233,Greek Harehound,3,短毛,黑/褐
+Q1742290,Kintamani,3,長毛,白
+Q38431,Rat Terrier,2,短毛,白/黑/褐
+Q38820,Redbone Coonhound,4,短毛,紅
+Q38263,Russkaya tsvetnaya bolonka,1,捲毛,褐/黑/灰
+Q39608,Wirehaired Vizsla,4,硬毛,紅
+Q37673,Chinese Chongqing Dog,3,短毛,紅
+Q37489,Alapaha Blue Blood Bulldog,4,短毛,白/灰
+Q38179,Rampur Greyhound,4,短毛,灰/黑
+Q37579,Blue Lacy,3,短毛,灰
+Q29174,Pungsan,4,長毛,白
+Q3343819,Buryat-Mongolian Wolfhound,5,長毛,黑/褐
+Q39210,Slovakian Rough-haired Pointer,4,硬毛,灰
+Q13217219,Molossian hound,5,短毛,黑/褐
+Q37880,Thai Bangkaew Dog,3,長毛,白/褐
+Q37575,Biewer Terrier,1,長毛,白/黑/褐
+Q29178,Sapsali,3,長毛,灰/黃
+Q37764,continental bulldog,3,短毛,黃/白
+Q38209,Ratonero Bodeguero Andaluz COOPER,2,短毛,白/黑/褐
+Q38168,Olde English Bulldogge,3,短毛,白/褐
+Q38074,Cretan Hound,3,短毛,黃/白
+Q2642504,Karelo-Finnish Laika,2,長毛,紅
+Q1135818,nureongi,3,短毛,黃
+Q39278,Welsh Sheepdog,3,長毛,黑/白
+Q38206,Gos Rater Valencià,2,短毛,白/黑/褐
+Q38921,Indian Spitz,2,長毛,白
+Q38938,Himalayan Sheepdog,4,長毛,黑/褐
+Q38948,Kunming wolfdog,4,短毛,黑/褐
+Q6865130,Miniature American Shepherd,2,長毛,灰/黑/紅
+Q39207,Silken Windhound,3,長毛,白/黃
+Q39262,Andalusian Hound,3,短毛,黃/白
+Q12206278,Pariah dog,3,短毛,黃/黑
+Q38510,Bull and Terrier,3,短毛,白/褐
+Q1779696,Danish Spitz,3,長毛,白
+Q1000049,Xiasi Dog,3,硬毛,白
+Q39116,Phu Quoc ridgeback dog,3,短毛,黑/黃
+Q38556,Black Mouth Cur,4,短毛,黃/紅
+Q39587,Scotch collie,4,長毛,褐/白/黑
+Q1958596,hairless dog,3,無毛,黑/灰
+Q6915548,Moscow Water Dog,4,捲毛,黑
+Q38468,Chien Français Blanc et Noir,4,短毛,白/黑
+Q37766,Coonhound,4,短毛,黑/褐
+Q29047,Cantabrian Water Dog,3,捲毛,白
+Q38103,Maneto,2,短毛,黃
+Q3438758,Nenets Herding Laika,2,長毛,白/黑
+Q6003137,Zerdava,3,短毛,紅/黃
+Q1806071,Abyssinian Sand Terrier,3,無毛,灰
+Q1106478,Bull Arab,4,短毛,白/褐
+Q38440,Chukotka sled dog,4,長毛,黑/白
+Q38443,Treeing Tennessee Brindle,3,短毛,褐/黑
+Q37659,Mallorcan ratter,2,短毛,黑/褐
+Q39407,Toy Manchester Terrier,1,短毛,黑/褐
+Q38892,Mountain Cur,4,短毛,黃/黑
+Q492644,Jeju dog,3,短毛,黃/紅
+Q5401146,Ryukyu Inu,3,短毛,褐/黑
+Q9053651,Patagonian Sheepdog,3,長毛,黑/灰
+Q11698316,White Shepherd Dog,4,長毛,白
+Q12593214,Dong-gyeong,3,短毛,黃/白
+Q38442,Guatemalan Dogo,4,短毛,白
+Q37473,American Staghound,4,硬毛,灰
+Q6865135,Miniature Fox Terrier,1,短毛,白/黑/褐
+Q17023476,Tong gau,3,短毛,黑/黃
+Q113640408,Bắc Hà dog,3,長毛,黑/黃
+Q113714849,Hmong bobtail dog,3,短毛,黑/黃
+Q2887401,basset,3,短毛,白/褐/黑
+Q44116,Ca de Conills,3,短毛,紅/白
+Q30891717,Medelyan,5,短毛,黃
+Q123030292,Laizhou Red Dog,4,短毛,紅
+Q14766993,Bone-mouth,3,短毛,黃/黑
+Q107444250,Staghound,4,硬毛,灰
+Q16892010,Tibetan kyi apso,4,長毛,黑/黃
+Q12664827,miniature dachshund,1,短毛,紅/褐/黑
+# ---------- 貓 ----------
+Q42604,Siamese,2,短毛,白/褐
+Q42610,Persian cat,2,長毛,白/灰/橙/黑
+Q7955,Abyssinian,2,短毛,褐/橙
+Q42659,Maine coon,3,長毛,褐/灰/黑
+Q42583,Bengal cat,2,短毛,黃/黑/褐
+Q42720,Turkish Angora,2,長毛,白
+Q42675,Manx,2,短毛,灰/黑/橙/白
+Q29273,British Shorthair,2,短毛,灰
+Q42712,Sphynx,2,無毛,白/灰
+Q42654,Russian Blue,2,短毛,灰
+Q42667,Norwegian Forest Cat,3,長毛,褐/白/灰
+Q42688,Ragdoll,3,長毛,白/褐/灰
+Q42563,Birman cat,2,長毛,白/褐
+Q42573,Burmese,2,短毛,褐
+Q42630,Siberian,3,長毛,褐/灰/白
+Q42636,Scottish Fold,2,短毛,灰/白
+Q42670,Savannah,3,短毛,黃/黑
+Q42588,Chartreux,2,短毛,灰
+Q42691,Korat,1,短毛,灰
+Q7295,Egyptian Mau,2,短毛,灰/黑
+Q42566,Bombay,2,短毛,黑
+Q42685,Ocicat,2,短毛,黃/褐/黑
+Q9665,Balinese cat,2,長毛,白/褐
+Q20793,European Shorthair,2,短毛,灰/褐/黑/白/橙
+Q42570,Devon Rex,1,捲毛,白/灰/黑
+Q7960,American Curl,2,長毛,白/灰/橙
+Q42724,Turkish Van,3,長毛,白/橙
+Q7962,American Shorthair,2,短毛,灰/黑/白
+Q42559,Cornish Rex,1,捲毛,白/黑/灰
+Q42959,Himalayan,2,長毛,白/褐
+Q42715,Somali,2,長毛,橙/褐
+Q42673,Japanese Bobtail,2,短毛,白/黑/橙
+Q42555,Exotic Shorthair,2,短毛,灰/白/橙
+Q42578,Cymric,2,長毛,灰/黑/白
+Q42726,Tonkinese,2,短毛,褐
+Q686698,Munchkin cat,1,短毛,灰/白/橙
+Q42633,snowshoe,2,短毛,白/褐
+Q42696,Oriental Shorthair,2,短毛,黑/白/灰
+Q42679,Singapura,1,短毛,褐/黃
+Q7338,Kurilian Bobtail,2,短毛,灰/褐/白
+Q42551,German Rex,2,捲毛,黑/白/灰
+Q7957,Aegean cat,2,短毛,白/黑/橙
+Q42637,Ragamuffin,3,長毛,白/灰/褐
+Q42556,California Spangled,2,短毛,灰/黑/褐
+Q12648,domestic short-haired cat,2,短毛,黑/白/灰/褐/橙
+Q6965006,Minuet cat,1,長毛,白/灰/橙
+Q16889346,Mekong Bobtail,2,短毛,白/褐

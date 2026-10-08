@@ -55,6 +55,15 @@ export const COLORS = [
 export const parseColors = (value) => (value ? value.split(',').filter(Boolean) : [])
 export const joinColors = (colors) => colors.join(',')
 
+// 顏色：物種和品種共用（色塊可複選）
+const COLOR_FILTER = {
+  key: 'color',
+  label: '顏色',
+  type: 'swatch',
+  // 複選＝「同時具備」：選了黑＋白，就只留下身上同時有黑色和白色的動物，選越多範圍越小
+  match: (s, value) => parseColors(value).every((color) => s.colors?.includes(color)),
+}
+
 export const FILTERS = [
   {
     key: 'shape',
@@ -76,18 +85,43 @@ export const FILTERS = [
       (SIZE_LABELS[group] ?? []).map((label, index) => ({ value: String(index + 1), label })),
     match: (s, value) => s.size === Number(value),
   },
+  COLOR_FILTER,
+]
+
+// ---------- 貓狗品種（家貓、家犬詳細頁的「品種」區塊） ----------
+// 和 scripts/breed-traits.csv 的標準一致；體型依成犬、成貓的體重
+const BREED_SIZE_LABELS = {
+  dog: ['迷你（4 公斤以下，例如吉娃娃）', '小型（4～10 公斤，例如柴犬）', '中型（10～25 公斤，例如邊境牧羊犬）', '大型（25～45 公斤，例如黃金獵犬）', '超大型（45 公斤以上，例如聖伯納）'],
+  cat: ['小型（4 公斤以下）', '中型（4～6 公斤）', '大型（6 公斤以上，例如緬因貓）'],
+}
+
+const COAT_TYPES = ['短毛', '長毛', '捲毛', '硬毛', '無毛']
+
+export const BREED_FILTERS = [
   {
-    key: 'color',
-    label: '顏色',
-    type: 'swatch',
-    // 複選＝「同時具備」：選了黑＋白，就只留下身上同時有黑色和白色的動物，選越多範圍越小
-    match: (s, value) => parseColors(value).every((color) => s.colors?.includes(color)),
+    key: 'size',
+    label: '體型',
+    type: 'select',
+    getOptions: (_list, kind) =>
+      (BREED_SIZE_LABELS[kind] ?? []).map((label, index) => ({ value: String(index + 1), label })),
+    match: (b, value) => b.size === Number(value),
   },
+  {
+    key: 'coat',
+    label: '毛',
+    type: 'select',
+    // 只列出這一類（貓或狗）有出現的毛種，例如貓沒有「硬毛」
+    getOptions: (list) =>
+      COAT_TYPES.filter((coat) => list.some((b) => b.coat === coat)).map((coat) => ({ value: coat, label: coat })),
+    match: (b, value) => b.coat === value,
+  },
+  COLOR_FILTER,
 ]
 
 // 套用所有篩選條件（可以指定略過某一個，用來計算該選項還剩幾種）
-export function applyFilters(list, filters, skipKey) {
+//   defs：要套用哪一組篩選（預設是物種的外型、大小、顏色；品種用 BREED_FILTERS）
+export function applyFilters(list, filters, skipKey, defs = FILTERS) {
   return list.filter((s) =>
-    FILTERS.every((f) => f.key === skipKey || !filters[f.key] || f.match(s, filters[f.key])),
+    defs.every((f) => f.key === skipKey || !filters[f.key] || f.match(s, filters[f.key])),
   )
 }

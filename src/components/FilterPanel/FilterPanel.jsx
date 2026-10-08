@@ -6,9 +6,19 @@ import styles from './FilterPanel.module.css'
  *   外型、大小：下拉選單，選項後面的數字＝「選了之後還剩幾種」
  *   顏色：圓形色塊，可以複選，選越多範圍越小
  * 會變成 0 種的選項不能選，避免選到一筆都沒有
+ *
+ * defs：要顯示哪一組篩選（預設是物種的外型、大小、顏色；貓狗品種用 BREED_FILTERS 的體型、毛、顏色）
  */
-export default function FilterPanel({ list, group, filters, onChange, onClear }) {
-  const activeCount = FILTERS.filter((f) => filters[f.key]).length
+export default function FilterPanel({
+  list,
+  group,
+  filters,
+  onChange,
+  onClear,
+  defs = FILTERS,
+  note = '大小與顏色為 AI 協助標記，僅供參考',
+}) {
+  const activeCount = defs.filter((f) => filters[f.key]).length
 
   return (
     <section className={styles.panel} aria-label="外觀篩選">
@@ -22,13 +32,14 @@ export default function FilterPanel({ list, group, filters, onChange, onClear })
       </div>
 
       <div className={styles.grid}>
-        {FILTERS.map((filter) =>
+        {defs.map((filter) =>
           filter.type === 'swatch' ? (
             <ColorSwatches
               key={filter.key}
               filter={filter}
               list={list}
               filters={filters}
+              defs={defs}
               onChange={onChange}
             />
           ) : (
@@ -38,21 +49,22 @@ export default function FilterPanel({ list, group, filters, onChange, onClear })
               list={list}
               group={group}
               filters={filters}
+              defs={defs}
               onChange={onChange}
             />
           ),
         )}
       </div>
 
-      <p className={styles.note}>大小與顏色為 AI 協助標記，僅供參考</p>
+      <p className={styles.note}>{note}</p>
     </section>
   )
 }
 
 // ---------- 下拉選單（外型、大小） ----------
-function SelectFilter({ filter, list, group, filters, onChange }) {
+function SelectFilter({ filter, list, group, filters, defs, onChange }) {
   // 套用「其他」條件後的清單，用來計算這個選單每個選項的數量
-  const base = applyFilters(list, filters, filter.key)
+  const base = applyFilters(list, filters, filter.key, defs)
   const value = filters[filter.key] ?? ''
   const options = filter.getOptions(list, group)
 
@@ -92,7 +104,7 @@ function SelectFilter({ filter, list, group, filters, onChange }) {
 }
 
 // ---------- 顏色色塊（可複選） ----------
-function ColorSwatches({ filter, list, filters, onChange }) {
+function ColorSwatches({ filter, list, filters, defs, onChange }) {
   const selected = parseColors(filters[filter.key])
 
   // 點一下選取，再點一下取消
@@ -102,7 +114,7 @@ function ColorSwatches({ filter, list, filters, onChange }) {
   }
 
   // 每個色塊「加選之後還剩幾種」：用其他條件＋目前已選的顏色＋這個顏色來計算
-  const base = applyFilters(list, filters, filter.key)
+  const base = applyFilters(list, filters, filter.key, defs)
   const countWith = (name) => {
     const colors = selected.includes(name) ? selected : [...selected, name]
     return base.filter((s) => colors.every((c) => s.colors?.includes(c))).length
