@@ -131,7 +131,7 @@ function ColorSwatches({ filter, list, filters, defs, onChange }) {
         {selected.length > 0 ? selected.map((c) => `${c}色`).join('＋') : '不確定'}
       </div>
       <ul className={styles.swatches}>
-        {COLORS.map(({ name, hex }) => {
+        {COLORS.map(({ name, hex, ring }) => {
           const isSelected = selected.includes(name)
           const count = countWith(name)
           const disabled = count === 0 && !isSelected
@@ -140,7 +140,7 @@ function ColorSwatches({ filter, list, filters, defs, onChange }) {
               <button
                 type="button"
                 className={styles.swatch}
-                style={{ '--swatch': hex }}
+                style={{ '--swatch': hex, '--swatch-ring': ring }}
                 aria-pressed={isSelected}
                 aria-label={`${name}色（${count} 種）`}
                 title={`${name}色（${count} 種）`}

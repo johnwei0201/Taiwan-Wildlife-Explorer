@@ -133,10 +133,14 @@
   transform: scale(1.06);
 }
 
-/* 已選取：放大一點點代表被選到，不另外加框線 */
+/* 已選取：不放大，改在外面加一圈同色系的框（彩度稍低），框和色塊之間留 0.5px 白色間隔
+   用 box-shadow 畫：第一層白色＝間隔，第二層＝外框；box-shadow 不佔空間，選取時色塊不會被擠動 */
 .swatch[aria-pressed='true'],
 .swatch[aria-pressed='true']:hover {
-  transform: scale(1.15);
+  transform: none;
+  box-shadow:
+    0 0 0 0.5px #fff,
+    0 0 0 2.5px var(--swatch-ring);
 }
 
 /* 顯示已選顏色的長方形框：外觀和下拉選單一樣，但只用來顯示，不能點 */

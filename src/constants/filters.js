@@ -39,16 +39,18 @@ const SIZE_LABELS = {
 }
 
 // 顏色色塊：name 對應 traits.csv 的顏色文字，hex 是色塊的顯示顏色
+//   ring：選取時外框的顏色＝同一個顏色、彩度再降一些（HSL 飽和度 × 0.8），比色塊本身沉穩
+//         黑、灰本來就沒有彩度，維持原色；白色的白框在白底上看不到，改用淺灰
 export const COLORS = [
-  { name: '黑', hex: '#222222' },
-  { name: '白', hex: '#ffffff' },
-  { name: '灰', hex: '#9e9e9e' },
-  { name: '褐', hex: '#8b5a2b' },
-  { name: '紅', hex: '#d32f2f' },
-  { name: '橙', hex: '#f57c00' },
-  { name: '黃', hex: '#fbc02d' },
-  { name: '綠', hex: '#388e3c' },
-  { name: '藍', hex: '#1e66c8' },
+  { name: '黑', hex: '#222222', ring: '#222222' },
+  { name: '白', hex: '#ffffff', ring: '#cfcfcf' },
+  { name: '灰', hex: '#9e9e9e', ring: '#9e9e9e' },
+  { name: '褐', hex: '#8b5a2b', ring: '#815a35' },
+  { name: '紅', hex: '#d32f2f', ring: '#c33f3f' },
+  { name: '橙', hex: '#f57c00', ring: '#dd7c18' },
+  { name: '黃', hex: '#fbc02d', ring: '#e6b742' },
+  { name: '綠', hex: '#388e3c', ring: '#418544' },
+  { name: '藍', hex: '#1e66c8', ring: '#2f69b7' },
 ]
 
 // 複選的顏色在網址上用逗號分隔：'黑,白' ↔ ['黑', '白']
