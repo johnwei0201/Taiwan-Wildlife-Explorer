@@ -2,7 +2,7 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import SpeciesGrid from '../../components/SpeciesGrid/SpeciesGrid.jsx'
 import FilterPanel from '../../components/FilterPanel/FilterPanel.jsx'
-import { COLLECTIONS, GROUPS, findGroup, isVisible, matchTags, parseTags } from '../../constants/groups.js'
+import { COLLECTIONS, GROUPS, findGroup, matchTags, parseTags } from '../../constants/groups.js'
 import { FILTERS, applyFilters } from '../../constants/filters.js'
 import { useSpeciesList } from '../../hooks/useSpeciesList.js'
 import { matchQuery, parseQuery, searchText } from '../../utils/search.js'
@@ -12,19 +12,16 @@ const RANDOM_COUNT = 30
 
 // 首頁隨機推薦不放昆蟲類、蛛形類、多足類、爬蟲類：有些人看到蟲、蜘蛛、蜈蚣或蛇的照片會不舒服，
 // 一打開網頁就看到可能直接離開；想看的人點對應的分頁就看得到
-const RANDOM_EXCLUDED_IDS = ['insecta', 'arachnida', 'myriapoda', 'reptilia']
+// 家養動物也不放：隨機推薦維持「野外看得到的動物」
+const RANDOM_EXCLUDED_IDS = ['insecta', 'arachnida', 'myriapoda', 'reptilia', 'domestic']
 const RANDOM_GROUPS = GROUPS.filter((g) => g.kind === 'group' && !RANDOM_EXCLUDED_IDS.includes(g.id))
 
 // 類群裡再排除部分分類（目或科的學名）：
 //   老鼠和長得像老鼠的：鼠科、倉鼠科（田鼠）、尖鼠科（鼩鼱）
 //   蝙蝠：翼手目，包含蝙蝠科、葉鼻蝠科等所有蝙蝠
 const RANDOM_EXCLUDED_TAXA = ['Muridae', 'Cricetidae', 'Soricidae', 'Chiroptera']
-// 家養動物也不放：隨機推薦維持「野外看得到的動物」
 const isRandomCandidate = (s) =>
-  s.photo &&
-  !s.domestic &&
-  !RANDOM_EXCLUDED_TAXA.includes(s.order?.nameSci) &&
-  !RANDOM_EXCLUDED_TAXA.includes(s.family?.nameSci)
+  s.photo && !RANDOM_EXCLUDED_TAXA.includes(s.order?.nameSci) && !RANDOM_EXCLUDED_TAXA.includes(s.family?.nameSci)
 
 // 洗牌（Fisher–Yates）：從最後一張開始，每張都和前面隨機一張交換，每種排列機率相同
 function shuffle(list) {
@@ -133,22 +130,16 @@ export default function HomePage() {
 
   // 篩選順序：分頁（有選第二層就用第二層，例如「昆蟲類 › 蝴蝶」）→ 主題 → 搜尋字 → 外觀
   const scope = activeSub ?? activeGroup
-  //   雞、鴨（domesticOnly）只有選了「家養動物」主題或搜尋時才放進來
-  const hasQuery = queryTerms.length > 0
-  const scopeAll = scope ? speciesList.filter(scope.match) : []
-  const scopeSpecies = scopeAll.filter((s) => isVisible(s, activeTags, hasQuery))
+  const scopeSpecies = scope ? speciesList.filter(scope.match) : []
   const groupSpecies = scopeSpecies.filter((s) => matchTags(s, activeTags) && matchSearch(s))
   const filteredSpecies = applyAppearance(groupSpecies)
 
   // 每個主題「加選之後還剩幾種」：會變成 0 種的不能選（例如特有種＋外來種不可能同時成立）
   // 還沒選分頁（首頁隨機推薦）時，點主題會從「全部」裡篩選，所以用全部物種來計算
-  //   用加選之後的主題判斷看不看得到雞、鴨：在「鳥類」分頁時，「家養動物」才算得到雞、鴨而不會被停用
-  const tagScopeSpecies = scope ? scopeAll : speciesList
+  const tagScopeSpecies = scope ? scopeSpecies : speciesList
   const countWithTag = (tagId) => {
     const tags = activeTags.includes(tagId) ? activeTags : [...activeTags, tagId]
-    return applyAppearance(
-      tagScopeSpecies.filter((s) => isVisible(s, tags, hasQuery) && matchTags(s, tags) && matchSearch(s)),
-    ).length
+    return applyAppearance(tagScopeSpecies.filter((s) => matchTags(s, tags) && matchSearch(s))).length
   }
 
   return (
@@ -156,7 +147,7 @@ export default function HomePage() {
       <section className={styles.hero}>
         {/* 畫面上的大標題拿掉（頁首已經有網站名稱），但保留給螢幕閱讀器和搜尋引擎：每頁都該有一個 h1 */}
         <h1 className="visually-hidden">發現台灣動物趣</h1>
-        <p className={styles.subtitle}>探索台灣的鳥類、哺乳類、爬蟲類、兩棲類、魚類、昆蟲、蜘蛛、蠍子、蜈蚣與甲殼類</p>
+        <p className={styles.subtitle}>探索台灣的鳥類、哺乳類、爬蟲類、兩棲類、魚類、昆蟲、蜘蛛、蠍子、蜈蚣、甲殼類與家養動物</p>
       </section>
 
       <div className={styles.tabBar}>

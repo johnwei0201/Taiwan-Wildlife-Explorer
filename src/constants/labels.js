@@ -22,7 +22,7 @@ export const REDLIST_LABELS = {
 
 export const DOMESTIC_INFO = {
   title: '什麼是家養動物？',
-  text: '由人類長期飼養、馴化的動物，例如貓、狗、豬、牛、羊、雞、鴨、鵝。牠們不是野生動物，但在街頭、農村也很常見，所以一起收錄在「家養動物」主題裡。',
+  text: '由人類長期飼養、馴化的動物，例如貓、狗、豬、牛、羊、雞、鴨、鵝。牠們不是野生動物，但在街頭、農村也很常見，所以收錄在「家養動物」分頁裡。',
 }
 
 export const ENDEMIC_INFO = {

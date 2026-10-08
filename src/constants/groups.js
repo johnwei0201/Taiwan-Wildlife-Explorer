@@ -71,6 +71,19 @@ export const GROUPS = [
     ],
   },
   { id: 'crustacea', label: '甲殼類', kind: 'group', match: byGroup('crustacea') },
+  // 家養動物（貓、狗、兔、豬、牛、羊、雞、鴨、鵝、火雞）：資料腳本手動收錄的，不是野生動物，
+  //   獨立一個分頁，不和野生的哺乳類、鳥類混在一起；第二層依用途分，大小標準跟著分（哺乳類／鳥類）
+  {
+    id: 'domestic',
+    label: '家養動物',
+    kind: 'group',
+    match: byGroup('domestic'),
+    subgroups: [
+      { id: 'pet', label: '寵物（貓、狗、兔）', match: (s) => s.group === 'domestic' && ['Felidae', 'Canidae', 'Leporidae'].includes(s.family?.nameSci) },
+      { id: 'livestock', label: '家畜（豬、牛、羊）', match: (s) => s.group === 'domestic' && ['Suidae', 'Bovidae'].includes(s.family?.nameSci) },
+      { id: 'poultry', label: '家禽（雞、鴨、鵝）', match: (s) => s.group === 'domestic' && s.class?.nameSci === 'Aves' },
+    ],
+  },
 ]
 
 // 主題（特有種、保育類、外來種）：可複選，疊加在分頁上，例如「鳥類＋特有種＋保育類」
@@ -80,14 +93,7 @@ export const COLLECTIONS = [
   { id: 'protected', label: '保育類', match: (s) => Boolean(s.protectedLevel) },
   // 外來種＝所有不是原生的物種（入侵種、歸化種、栽培豢養），卡片上會標出是哪一種
   { id: 'alien', label: '外來種', match: (s) => Boolean(s.alienType) && s.alienType !== 'native' },
-  // 家養動物（貓、狗、豬、牛、羊、兔、雞、鴨、鵝、火雞）：資料腳本手動收錄的，不是野生動物
-  { id: 'domestic', label: '家養動物', match: (s) => Boolean(s.domestic) },
 ]
-
-// 雞、鴨（domesticOnly）只在選了「家養動物」主題時看得到，不和野鳥混在「鳥類」分頁裡
-//   有搜尋字時例外：使用者直接搜尋「雞」，就是想找它
-export const isVisible = (species, tagIds, hasQuery = false) =>
-  !species.domesticOnly || tagIds.includes('domestic') || hasQuery
 
 export const parseTags = (value) =>
   (value ? value.split(',') : []).filter((id) => COLLECTIONS.some((c) => c.id === id))

@@ -18,10 +18,10 @@ export const RANK_ORDER = ['class', 'order', 'family', 'genus']
 
 export const taxonPath = (rank, nameSci) => `/taxon/${rank}/${encodeURIComponent(nameSci)}`
 
-// 雞、鴨（domesticOnly）只在首頁「家養動物」主題下看得到，分類頁和種數都不算它們
+// 家養動物在首頁有自己的分頁，分類頁（例如雉科、牛科）只列野生動物，種數也不算它們
 export function filterByTaxon(speciesList, rank, nameSci) {
   const get = TAXON_RANKS[rank]?.get
-  return get ? speciesList.filter((s) => !s.domesticOnly && get(s) === nameSci) : []
+  return get ? speciesList.filter((s) => !s.domestic && get(s) === nameSci) : []
 }
 
 // iNaturalist 的中文名有時附上別名，例如「爬行綱 (爬蟲類 爬行類)」，只留第一個

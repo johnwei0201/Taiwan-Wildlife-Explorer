@@ -1712,7 +1712,7 @@
   {
     "id": 118552,
     "taicolId": "t0063825",
-    "group": "mammalia",
+    "group": "domestic",
     "nameZh": "家貓",
     "nameSci": "Felis catus",
     "nameEn": "Domestic Cat",
@@ -1750,7 +1750,7 @@
       "nameSci": "Felis",
       "nameZh": "貓屬"
     },
-    "shape": "貓、鼬、白鼻心（食肉動物）",
+    "shape": "貓",
     "size": 3,
     "colors": [
       "黑",
@@ -2729,7 +2729,7 @@
   {
     "id": 47144,
     "taicolId": "t0085383",
-    "group": "mammalia",
+    "group": "domestic",
     "nameZh": "家犬",
     "nameSci": "Canis familiaris",
     "nameEn": "Domestic Dog",
@@ -18992,7 +18992,7 @@
   {
     "id": 123070,
     "taicolId": "t0085384",
-    "group": "mammalia",
+    "group": "domestic",
     "nameZh": "家山羊",
     "nameSci": "Capra hircus",
     "nameEn": "Domestic Goat",
@@ -19033,7 +19033,7 @@
       "nameSci": "Capra",
       "nameZh": "山羊屬"
     },
-    "shape": "鹿、羊、牛、豬",
+    "shape": "羊",
     "size": 4,
     "colors": [
       "黑",
@@ -19243,7 +19243,7 @@
   {
     "id": 236935,
     "taicolId": null,
-    "group": "aves",
+    "group": "domestic",
     "nameZh": "家鴨",
     "nameSci": "Anas platyrhynchos domesticus",
     "nameEn": "Domestic Mallard",
@@ -19258,7 +19258,6 @@
       "license": "CC BY-NC"
     },
     "domestic": true,
-    "domesticOnly": true,
     "class": {
       "nameSci": "Aves",
       "nameZh": "鳥類"
@@ -19278,7 +19277,7 @@
       "nameSci": "Anas",
       "nameZh": "鴨屬"
     },
-    "shape": "鴨子、雁鵝",
+    "shape": "鴨、鵝",
     "size": 4,
     "colors": [
       "白",
@@ -25463,7 +25462,7 @@
   {
     "id": 81925,
     "taicolId": "t0076866",
-    "group": "mammalia",
+    "group": "domestic",
     "nameZh": "水牛",
     "nameSci": "Bubalus bubalis",
     "nameEn": "Domestic Water Buffalo",
@@ -25504,7 +25503,7 @@
       "nameSci": "Bubalus",
       "nameZh": "水牛屬"
     },
-    "shape": "鹿、羊、牛、豬",
+    "shape": "牛",
     "size": 5,
     "colors": [
       "灰",
@@ -26165,7 +26164,7 @@
   {
     "id": 333822,
     "taicolId": null,
-    "group": "aves",
+    "group": "domestic",
     "nameZh": "中國鵝",
     "nameSci": "Anser cygnoides domesticus",
     "nameEn": "Domestic Swan Goose",
@@ -26181,7 +26180,6 @@
     },
     "wikidataId": "Q386047",
     "domestic": true,
-    "domesticOnly": true,
     "class": {
       "nameSci": "Aves",
       "nameZh": "鳥類"
@@ -26201,7 +26199,7 @@
       "nameSci": "Anser",
       "nameZh": "雁屬"
     },
-    "shape": "鴨子、雁鵝",
+    "shape": "鴨、鵝",
     "size": 5,
     "colors": [
       "白",
@@ -36640,7 +36638,7 @@
   {
     "id": 505478,
     "taicolId": "t0085688",
-    "group": "aves",
+    "group": "domestic",
     "nameZh": "雞",
     "nameSci": "Gallus gallus domesticus",
     "nameEn": "Domestic Chicken",
@@ -36656,7 +36654,6 @@
     },
     "wikidataId": "Q780",
     "domestic": true,
-    "domesticOnly": true,
     "class": {
       "nameSci": "Aves",
       "nameZh": "鳥類"
@@ -36676,7 +36673,7 @@
       "nameSci": "Gallus",
       "nameZh": "原雞屬"
     },
-    "shape": "雞、雉、鶉",
+    "shape": "雞、火雞",
     "size": 4,
     "colors": [
       "紅",
@@ -37474,7 +37471,7 @@
   {
     "id": 74113,
     "taicolId": "t0107062",
-    "group": "mammalia",
+    "group": "domestic",
     "nameZh": "家牛",
     "nameSci": "Bos taurus",
     "nameEn": "Domestic Cattle",
@@ -37515,7 +37512,7 @@
       "nameSci": "Bos",
       "nameZh": "牛屬"
     },
-    "shape": "鹿、羊、牛、豬",
+    "shape": "牛",
     "size": 5,
     "colors": [
       "褐",
@@ -58095,7 +58092,7 @@
   {
     "id": 120479,
     "taicolId": "t0057686",
-    "group": "aves",
+    "group": "domestic",
     "nameZh": "歐洲家鵝",
     "nameSci": "Anser anser domesticus",
     "nameEn": "Domestic Greylag Goose",
@@ -58111,7 +58108,6 @@
     },
     "wikidataId": "Q255503",
     "domestic": true,
-    "domesticOnly": true,
     "class": {
       "nameSci": "Aves",
       "nameZh": "鳥類"
@@ -58131,7 +58127,7 @@
       "nameSci": "Anser",
       "nameZh": "雁屬"
     },
-    "shape": "鴨子、雁鵝",
+    "shape": "鴨、鵝",
     "size": 5,
     "colors": [
       "白",
@@ -74174,7 +74170,7 @@
   {
     "id": 334341,
     "taicolId": null,
-    "group": "mammalia",
+    "group": "domestic",
     "nameZh": "家兔",
     "nameSci": "Oryctolagus cuniculus domesticus",
     "nameEn": "Domestic Rabbit",
@@ -92219,7 +92215,7 @@
   {
     "id": 324492,
     "taicolId": null,
-    "group": "mammalia",
+    "group": "domestic",
     "nameZh": "家豬",
     "nameSci": "Sus scrofa domesticus",
     "nameEn": "Domestic Pig",
@@ -92260,7 +92256,7 @@
       "nameSci": "Sus",
       "nameZh": "豬屬"
     },
-    "shape": "鹿、羊、牛、豬",
+    "shape": "豬",
     "size": 5,
     "colors": [
       "白",
@@ -162180,7 +162176,7 @@
   {
     "id": 524794,
     "taicolId": null,
-    "group": "aves",
+    "group": "domestic",
     "nameZh": "火雞",
     "nameSci": "Meleagris gallopavo domesticus",
     "nameEn": "Domestic Turkey",
@@ -162196,7 +162192,6 @@
     },
     "wikidataId": "Q848706",
     "domestic": true,
-    "domesticOnly": true,
     "class": {
       "nameSci": "Aves",
       "nameZh": "鳥類"
@@ -162216,7 +162211,7 @@
       "nameSci": "Meleagris",
       "nameZh": null
     },
-    "shape": "雞、雉、鶉",
+    "shape": "雞、火雞",
     "size": 5,
     "colors": [
       "黑",

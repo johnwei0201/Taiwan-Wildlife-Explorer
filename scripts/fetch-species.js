@@ -51,27 +51,26 @@ const GROUPS = [
   { id: 'myriapoda', label: '多足類', inatTaxonId: 144128, minCount: 20 }, // 多足亞門（蜈蚣、馬陸）
 ]
 
-// 家養動物：手動指定收錄，標記 domestic，網站上放在「家養動物」主題
+// 家養動物：手動指定收錄，類群都是 domestic（網站上獨立一個分頁，不和野生的哺乳類、鳥類混在一起）
 //   iNaturalist 把人養的動物標成「圈養」，只能是一般級、升不到研究級（例如雞的研究級紀錄是 0 筆），
 //   所以不能靠上面的研究級查詢，要直接指定物種；觀察數改用全部等級的紀錄
 //   wikidata：Wikidata 的編號。腳本從 Wikidata 讀出對應的 iNaturalist 編號（屬性 P3151），再到 iNaturalist 抓資料
 //             Wikidata 沒有對應的（例如家鴨），改用 inatTaxonId 直接指定
-//   domesticOnly：只在「家養動物」主題下看得到（家禽不放進「鳥類」分頁，以免和野鳥混在一起）
 //   nameZh：中文名直接指定。TaiCOL 用學名查雞會對到野生的祖先「紅原雞」，貓、狗也只寫「貓」、「犬」
 const DOMESTIC = [
-  { wikidata: 'Q20980826', group: 'mammalia', nameZh: '家貓' },
-  { wikidata: 'Q20717272', group: 'mammalia', nameZh: '家犬' },
-  { wikidata: 'Q787', group: 'mammalia', nameZh: '家豬' },
-  { wikidata: 'Q2934', group: 'mammalia', nameZh: '家山羊' },
-  { wikidata: 'Q149017', group: 'mammalia', nameZh: '家兔' },
-  { wikidata: 'Q42710', group: 'mammalia', nameZh: '水牛' },
-  { wikidata: 'Q19610691', group: 'mammalia', nameZh: '家牛' },
-  { wikidata: 'Q780', group: 'aves', nameZh: '雞', domesticOnly: true },
-  { inatTaxonId: 236935, group: 'aves', nameZh: '家鴨', domesticOnly: true },
+  { wikidata: 'Q20980826', nameZh: '家貓' },
+  { wikidata: 'Q20717272', nameZh: '家犬' },
+  { wikidata: 'Q149017', nameZh: '家兔' },
+  { wikidata: 'Q787', nameZh: '家豬' },
+  { wikidata: 'Q2934', nameZh: '家山羊' },
+  { wikidata: 'Q42710', nameZh: '水牛' },
+  { wikidata: 'Q19610691', nameZh: '家牛' },
+  { wikidata: 'Q780', nameZh: '雞' },
+  { inatTaxonId: 236935, nameZh: '家鴨' },
   // 家鵝有兩個來源：中國鵝（祖先是鴻雁，例如獅頭鵝）、歐洲家鵝（祖先是灰雁，例如白羅曼鵝）
-  { wikidata: 'Q386047', group: 'aves', nameZh: '中國鵝', domesticOnly: true },
-  { wikidata: 'Q255503', group: 'aves', nameZh: '歐洲家鵝', domesticOnly: true },
-  { wikidata: 'Q848706', group: 'aves', nameZh: '火雞', domesticOnly: true },
+  { wikidata: 'Q386047', nameZh: '中國鵝' },
+  { wikidata: 'Q255503', nameZh: '歐洲家鵝' },
+  { wikidata: 'Q848706', nameZh: '火雞' },
 ]
 
 // 排除清單：一般查詢不收的物種
@@ -251,8 +250,8 @@ async function main() {
   if (ONLY_GROUPS) {
     const previous = JSON.parse(await readFile(`${OUTPUT_DIR}/species-list.json`, 'utf8'))
     const previousMeta = JSON.parse(await readFile(`${OUTPUT_DIR}/meta.json`, 'utf8'))
-    // 家養動物只看 domestic 有沒有指定，不跟著所屬類群重抓（例如重抓鳥類時，雞、鴨照樣保留）
-    const kept = previous.filter((s) => (s.domestic ? !includeDomestic : !ONLY_GROUPS.includes(s.group)))
+    // 家養動物另外用 domestic 標記判斷（早期的資料類群是 mammalia、aves，避免重抓後重複）
+    const kept = previous.filter((s) => !ONLY_GROUPS.includes(s.group) && !(includeDomestic && s.domestic))
     allSpecies.push(...kept)
     unmatched.push(...previousMeta.unmatched.filter((name) => kept.some((s) => s.nameSci === name)))
     console.log(`保留其他類群原本的資料：${kept.length} 種\n`)
@@ -277,11 +276,10 @@ async function main() {
   if (includeDomestic) {
     console.log('【家養動物】')
     for (const item of DOMESTIC) {
-      const species = await buildSpecies({ id: item.group }, await fetchDomesticSpecies(item))
+      const species = await buildSpecies({ id: 'domestic' }, await fetchDomesticSpecies(item))
       species.nameZh = item.nameZh
       if (item.wikidata) species.wikidataId = item.wikidata
       species.domestic = true
-      if (item.domesticOnly) species.domesticOnly = true
       allSpecies.push(species)
       console.log(`  ${species.nameZh ?? '（無中文名）'} ${species.nameSci}${species.photo ? '' : ' ⚠️無授權照片'}`)
     }

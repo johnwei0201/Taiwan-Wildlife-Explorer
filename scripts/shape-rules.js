@@ -140,6 +140,17 @@ export const SHAPE_RULES = {
     { label: '葉蜂（幼蟲像毛毛蟲）', match: ['Tenthredinidae', 'Argidae', 'Symphyta'] },
     { label: '其他蜂類', match: ['Hymenoptera'] },
   ],
+  // 家養動物：牛和羊同屬牛科，要靠「亞科」區分（iNaturalist 把山羊放在羚羊亞科，舊分類是羊亞科）
+  domestic: [
+    { label: '貓', match: ['Felidae'] },
+    { label: '狗', match: ['Canidae'] },
+    { label: '兔子', match: ['Leporidae'] },
+    { label: '豬', match: ['Suidae'] },
+    { label: '羊', match: ['Caprinae', 'Antilopinae'] },
+    { label: '牛', match: ['Bovinae'] },
+    { label: '雞、火雞', match: ['Phasianidae'] },
+    { label: '鴨、鵝', match: ['Anatidae'] },
+  ],
   fish: [
     { label: '鯊魚、魟魚（骨頭是軟骨）', match: ['Chondrichthyes', 'Elasmobranchii'] },
     { label: '鰕虎、彈塗魚（住在溪底或潮間帶）', match: ['Gobiidae', 'Oxudercidae', 'Eleotridae', 'Butidae', 'Rhyacichthyidae'] },
