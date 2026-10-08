@@ -23,7 +23,7 @@ export default function FilterPanel({
   return (
     <section className={styles.panel} aria-label="外觀篩選">
       <div className={styles.header}>
-        <h2 className={styles.title}>用外觀找找看</h2>
+        <h2 className={styles.title}>用外型找找</h2>
         {activeCount > 0 && (
           <button type="button" className={styles.clear} onClick={onClear}>
             清除條件

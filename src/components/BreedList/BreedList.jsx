@@ -8,7 +8,7 @@ const EMPTY_FILTERS = { size: '', coat: '', color: '' }
 
 // 品種介紹（家貓、家犬詳細頁）：資料來自 scripts/fetch-breeds.js 產生的 breeds.json
 //   依知名度（有幾種語言的維基百科條目）排序，先看到大家比較熟悉的品種
-//   上方的「用外觀找找看」可以依體型、毛、顏色篩選，找出路上看到的貓狗可能是什麼品種
+//   上方的「用外型找找」可以依體型、毛、顏色篩選，找出路上看到的貓狗可能是什麼品種
 export default function BreedList({ kind }) {
   const [breeds, setBreeds] = useState([])
   const [status, setStatus] = useState('loading')
@@ -56,7 +56,7 @@ export default function BreedList({ kind }) {
       />
 
       <p className={styles.count}>
-        共 {filtered.length} 種
+        共 <strong className={styles.countNumber}>{filtered.length}</strong> 種
         {filtered.length < breeds.length && `（從 ${breeds.length} 種中篩選）`}
       </p>
 

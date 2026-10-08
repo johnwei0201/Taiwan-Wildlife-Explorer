@@ -254,7 +254,7 @@ export default function HomePage() {
       {status === 'success' && activeGroup && (
         <>
           <p className={styles.count}>
-            共 {filteredSpecies.length} 種
+            共 <strong className={styles.countNumber}>{filteredSpecies.length}</strong> 種
             {filteredSpecies.length < scopeSpecies.length && `（從 ${scopeSpecies.length} 種中篩選）`}
           </p>
           {filteredSpecies.length === 0 ? (

@@ -147,8 +147,17 @@
 
 .count {
   margin-block: var(--space-4);
-  font-size: var(--fs-sm);
+  font-size: var(--fs-base);
   color: var(--color-text-muted);
+}
+
+/* 「共 N 種」：數字用紅色、放大 1.5 倍，一眼看到篩選結果有幾種 */
+.countNumber {
+  margin-inline: 2px;
+  font-size: 1.5em;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--color-alert);
 }
 
 .message {

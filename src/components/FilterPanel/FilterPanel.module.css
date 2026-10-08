@@ -27,7 +27,7 @@
 }
 
 .title {
-  font-size: var(--fs-base);
+  font-size: 1.25rem; /* 20px：面板的標題，比下方的「共 N 種」（16px）大 */
   font-weight: 700;
   color: var(--color-primary-dark);
 }
