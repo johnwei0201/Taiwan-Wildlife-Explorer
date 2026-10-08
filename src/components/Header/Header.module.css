@@ -132,7 +132,7 @@
 .navLink {
   display: block;
   padding: 10px var(--container-padding);
-  transition: background-color var(--transition);
+  transition: color var(--transition);
 }
 
 /* 選項之間的淡分隔線，距離縮短後仍看得出是兩個獨立項目 */
@@ -140,13 +140,14 @@
   border-top: 1px solid rgb(255 255 255 / 0.12);
 }
 
+/* 滑過、目前頁面：不加方框，只把文字變成黃色（目前頁面另外加粗，和滑過區分） */
 .navLink:hover {
-  background-color: rgb(255 255 255 / 0.1);
+  color: var(--color-nav-active);
 }
 
 .active {
   font-weight: 700;
-  color: var(--color-accent);
+  color: var(--color-nav-active);
 }
 
 /* ---------- 平板以上：隱藏漢堡，選單橫向排列 ---------- */

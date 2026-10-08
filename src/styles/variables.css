@@ -18,6 +18,7 @@
   --color-primary-dark: #1f4a36;
   --color-primary-light: #e3efe8;
   --color-accent: #d98e2b;         /* 帝雉金：強調色 */
+  --color-nav-active: #ffd43b;     /* 頁首選單：目前頁面、滑過時的黃色（深色頁首上醒目） */
 
   --color-text: #1f2a24;
   --color-text-muted: #5c6b63;
