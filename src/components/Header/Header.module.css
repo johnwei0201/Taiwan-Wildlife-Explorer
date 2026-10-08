@@ -6,13 +6,14 @@
   color: #fff;
   box-shadow: var(--shadow-sm);
   /* 頁首背景：四層疊在一起（寫在前面的在上層）
-       1. 草叢_上（959×304）：橫向排 3 張，貼齊頂端再往上移半張高度，只露出垂下來的葉子
-       2. 草叢_下（819×317）：橫向排 3 張，貼齊底部再往下移半張高度，只露出長上來的葉子
+       1. 草叢_上（781×256）：橫向排 3 張，貼齊頂端再往上移半張高度，只露出垂下來的葉子
+       2. 草叢_下（781×283）：橫向排 3 張，貼齊底部再往下移半張高度，只露出長上來的葉子
        3. 半透明深綠色：只壓暗底圖（底圖是淺綠色，白字直接放上去會看不清楚）
        4. 草叢_底：橫向重複排 2 張，頁首比圖高時垂直方向也接著重複
      「半張高度」會隨頁首寬度改變，用 vw 計算：每張寬 33.33vw，高度 = 33.33vw × 原圖高 ÷ 原圖寬
-       草叢_上：33.33 × 304 ÷ 959 ≈ 10.57vw，一半 ≈ 5.28vw
-       草叢_下：33.33 × 317 ÷ 819 ≈ 12.90vw，一半 ≈ 6.45vw
+       草叢_上：33.33 × 256 ÷ 781 ≈ 10.93vw，一半 ≈ 5.46vw
+       草叢_下：33.33 × 283 ÷ 781 ≈ 12.08vw，一半 ≈ 6.04vw
+     ※ 換圖時如果尺寸改變，這兩個數字要重算
      background-color 是圖片還沒載入時的底色 */
   background-color: var(--color-primary);
   background-image:
@@ -23,8 +24,8 @@
   background-size: calc(100% / 3) auto, calc(100% / 3) auto, 100% 100%, 50% auto;
   background-repeat: repeat-x, repeat-x, no-repeat, repeat;
   background-position:
-    left 0 top -5.28vw,
-    left 0 bottom -6.45vw,
+    left 0 top -5.46vw,
+    left 0 bottom -6.04vw,
     center,
     left center;
 }
