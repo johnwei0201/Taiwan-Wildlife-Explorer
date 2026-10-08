@@ -20,6 +20,8 @@ const CATEGORY_TAXON_IDS = {
   47651: 'insecta', // 直翅目
   48112: 'insecta', // 螳螂目
   47198: 'insecta', // 竹節蟲目
+  47822: 'insecta', // 雙翅目（蒼蠅、蚊子）
+  47201: 'insecta', // 膜翅目（蜂、螞蟻）
   47119: 'arachnida', // 蛛形綱（蜘蛛、蠍子…）
   85493: 'crustacea', // 甲殼類
   144128: 'myriapoda', // 多足類

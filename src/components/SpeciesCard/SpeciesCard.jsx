@@ -5,8 +5,9 @@ import styles from './SpeciesCard.module.css'
 
 // 物種卡片：列表頁和「我附近的動物」都會共用這個元件
 export default function SpeciesCard({ species }) {
-  const { id, nameZh, nameSci, photo, endemic, protectedLevel, alienType } = species
-  const alienLabel = ALIEN_LABELS[alienType]
+  const { id, nameZh, nameSci, photo, endemic, protectedLevel, alienType, domestic } = species
+  // 家養動物只標「家養」：TaiCOL 可能也標成外來種（栽培豢養），兩個標籤意思重複
+  const alienLabel = domestic ? null : ALIEN_LABELS[alienType]
 
   // 照片放在 iNaturalist 的伺服器上，有時要好幾秒才載入完成，甚至失敗：
   //   loading 下載中 → 閃爍動畫，讓人知道「正在載入」而不是壞掉
@@ -54,8 +55,9 @@ export default function SpeciesCard({ species }) {
         <h3 className={styles.nameZh}>{nameZh ?? nameSci}</h3>
         <p className={`scientific-name ${styles.nameSci}`}>{nameSci}</p>
 
-        {(endemic || protectedLevel || alienLabel) && (
+        {(endemic || protectedLevel || alienLabel || domestic) && (
           <ul className={styles.tags}>
+            {domestic && <li className={`${styles.tag} ${styles.domestic}`}>家養</li>}
             {endemic && <li className={`${styles.tag} ${styles.endemic}`}>特有</li>}
             {protectedLevel && (
               <li className={`${styles.tag} ${styles.protected}`}>{protectedLevel} 級保育</li>

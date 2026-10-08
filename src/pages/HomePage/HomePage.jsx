@@ -2,7 +2,7 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import SpeciesGrid from '../../components/SpeciesGrid/SpeciesGrid.jsx'
 import FilterPanel from '../../components/FilterPanel/FilterPanel.jsx'
-import { COLLECTIONS, GROUPS, findGroup, matchTags, parseTags } from '../../constants/groups.js'
+import { COLLECTIONS, GROUPS, findGroup, isVisible, matchTags, parseTags } from '../../constants/groups.js'
 import { FILTERS, applyFilters } from '../../constants/filters.js'
 import { useSpeciesList } from '../../hooks/useSpeciesList.js'
 import { matchQuery, parseQuery, searchText } from '../../utils/search.js'
@@ -19,8 +19,12 @@ const RANDOM_GROUPS = GROUPS.filter((g) => g.kind === 'group' && !RANDOM_EXCLUDE
 //   老鼠和長得像老鼠的：鼠科、倉鼠科（田鼠）、尖鼠科（鼩鼱）
 //   蝙蝠：翼手目，包含蝙蝠科、葉鼻蝠科等所有蝙蝠
 const RANDOM_EXCLUDED_TAXA = ['Muridae', 'Cricetidae', 'Soricidae', 'Chiroptera']
+// 家養動物也不放：隨機推薦維持「野外看得到的動物」
 const isRandomCandidate = (s) =>
-  s.photo && !RANDOM_EXCLUDED_TAXA.includes(s.order?.nameSci) && !RANDOM_EXCLUDED_TAXA.includes(s.family?.nameSci)
+  s.photo &&
+  !s.domestic &&
+  !RANDOM_EXCLUDED_TAXA.includes(s.order?.nameSci) &&
+  !RANDOM_EXCLUDED_TAXA.includes(s.family?.nameSci)
 
 // 洗牌（Fisher–Yates）：從最後一張開始，每張都和前面隨機一張交換，每種排列機率相同
 function shuffle(list) {
@@ -129,16 +133,22 @@ export default function HomePage() {
 
   // 篩選順序：分頁（有選第二層就用第二層，例如「昆蟲類 › 蝴蝶」）→ 主題 → 搜尋字 → 外觀
   const scope = activeSub ?? activeGroup
-  const scopeSpecies = scope ? speciesList.filter(scope.match) : []
+  //   雞、鴨（domesticOnly）只有選了「家養動物」主題或搜尋時才放進來
+  const hasQuery = queryTerms.length > 0
+  const scopeAll = scope ? speciesList.filter(scope.match) : []
+  const scopeSpecies = scopeAll.filter((s) => isVisible(s, activeTags, hasQuery))
   const groupSpecies = scopeSpecies.filter((s) => matchTags(s, activeTags) && matchSearch(s))
   const filteredSpecies = applyAppearance(groupSpecies)
 
   // 每個主題「加選之後還剩幾種」：會變成 0 種的不能選（例如特有種＋外來種不可能同時成立）
   // 還沒選分頁（首頁隨機推薦）時，點主題會從「全部」裡篩選，所以用全部物種來計算
-  const tagScopeSpecies = scope ? scopeSpecies : speciesList
+  //   用加選之後的主題判斷看不看得到雞、鴨：在「鳥類」分頁時，「家養動物」才算得到雞、鴨而不會被停用
+  const tagScopeSpecies = scope ? scopeAll : speciesList
   const countWithTag = (tagId) => {
     const tags = activeTags.includes(tagId) ? activeTags : [...activeTags, tagId]
-    return applyAppearance(tagScopeSpecies.filter((s) => matchTags(s, tags) && matchSearch(s))).length
+    return applyAppearance(
+      tagScopeSpecies.filter((s) => isVisible(s, tags, hasQuery) && matchTags(s, tags) && matchSearch(s)),
+    ).length
   }
 
   return (

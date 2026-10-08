@@ -11,6 +11,7 @@
  *   npm run data -- --limit=5                 → 每個類群只抓 5 種（測試用）
  *   npm run data -- --groups=lepidoptera,odonata
  *     → 只重抓指定的類群，其他類群保留原本的資料（加入新類群時用，不必全部重抓）
+ *   npm run data -- --groups=domestic         → 只重抓家養動物（DOMESTIC 清單）
  */
 import { mkdir, readFile, writeFile } from 'node:fs/promises'
 
@@ -38,6 +39,8 @@ const GROUPS = [
   { id: 'phasmida', label: '竹節蟲', inatTaxonId: 47198, minCount: 20 }, // 竹節蟲目
   { id: 'hemiptera', label: '蟬、椿象', inatTaxonId: 47744, minCount: 20 }, // 半翅目
   { id: 'orthoptera', label: '蚱蜢、蟋蟀', inatTaxonId: 47651, minCount: 20 }, // 直翅目
+  { id: 'diptera', label: '蒼蠅、蚊子', inatTaxonId: 47822, minCount: 20 }, // 雙翅目（蒼蠅、蚊子、虻）
+  { id: 'hymenoptera', label: '蜂、螞蟻', inatTaxonId: 47201, minCount: 20 }, // 膜翅目（蜜蜂、胡蜂、螞蟻）
   // 魚類在分類上分成好幾綱，這裡兩個設定共用同一個 id，資料會合併成一個類群
   { id: 'fish', label: '魚類（硬骨魚）', inatTaxonId: 47178, minCount: 20 }, // 輻鰭魚綱
   { id: 'fish', label: '魚類（鯊魚、魟魚）', inatTaxonId: 47273, minCount: 20 }, // 板鰓亞綱
@@ -48,11 +51,26 @@ const GROUPS = [
   { id: 'myriapoda', label: '多足類', inatTaxonId: 144128, minCount: 20 }, // 多足亞門（蜈蚣、馬陸）
 ]
 
-// 排除清單：家養動物不屬於野生動物圖鑑
+// 家養動物：手動指定收錄，標記 domestic，網站上放在「家養動物」主題
+//   iNaturalist 把人養的動物標成「圈養」，只能是一般級、升不到研究級（例如雞的研究級紀錄是 0 筆），
+//   所以不能靠上面的研究級查詢，要直接指定 taxon_id；觀察數改用全部等級的紀錄
+//   domesticOnly：只在「家養動物」主題下看得到（雞、鴨不放進「鳥類」分頁，以免和野鳥混在一起）
+//   nameZh：中文名直接指定。TaiCOL 用學名查雞會對到野生的祖先「紅原雞」，貓、狗也只寫「貓」、「犬」
+const DOMESTIC = [
+  { inatTaxonId: 118552, group: 'mammalia', nameZh: '家貓' },
+  { inatTaxonId: 47144, group: 'mammalia', nameZh: '家犬' },
+  { inatTaxonId: 505478, group: 'aves', nameZh: '雞', domesticOnly: true },
+  { inatTaxonId: 236935, group: 'aves', nameZh: '家鴨', domesticOnly: true },
+]
+
+// 排除清單：一般查詢不收的物種
+//   家貓、家犬有研究級紀錄，一般查詢會抓到，這裡排除，改由 DOMESTIC 收錄（避免重複）
 const EXCLUDED_NAMES = new Set([
   'Felis catus', // 家貓
   'Canis familiaris', // 家犬
   'Canis lupus familiaris', // 家犬（另一種寫法）
+  'Gallus gallus domesticus', // 雞
+  'Anas platyrhynchos domesticus', // 家鴨
   'Capra hircus', // 家羊
   'Bubalus bubalis', // 水牛
 ])
@@ -134,6 +152,18 @@ async function fetchInatSpecies(group) {
   return results.slice(0, LIMIT)
 }
 
+// 家養動物：直接查物種資料，觀察數用台灣全部等級的紀錄（家養的紀錄幾乎都是一般級）
+//   回傳和 species_counts 相同的格式 { count, taxon }，後面可以共用 buildSpecies
+async function fetchDomesticSpecies(item) {
+  const taxonData = await fetchJson(`${INAT_API}/taxa/${item.inatTaxonId}?locale=zh-TW`)
+  await sleep(REQUEST_DELAY_MS)
+  const countData = await fetchJson(
+    `${INAT_API}/observations?taxon_id=${item.inatTaxonId}&place_id=${TAIWAN_PLACE_ID}&per_page=0`,
+  )
+  await sleep(REQUEST_DELAY_MS)
+  return { count: countData.total_results, taxon: taxonData.results[0] }
+}
+
 // 代表照片沒有 CC 授權時，從該物種的其他照片中找一張有授權的
 async function findLicensedPhoto(taxonId) {
   const data = await fetchJson(`${INAT_API}/taxa/${taxonId}`)
@@ -186,6 +216,7 @@ async function buildSpecies(group, inatResult) {
 async function main() {
   console.log(`開始整理資料（每個類群上限：${LIMIT === Infinity ? '全部' : LIMIT}）\n`)
   const groups = ONLY_GROUPS ? GROUPS.filter((g) => ONLY_GROUPS.includes(g.id)) : GROUPS
+  const includeDomestic = !ONLY_GROUPS || ONLY_GROUPS.includes('domestic')
   const allSpecies = []
   const unmatched = [] // TaiCOL 對不上的物種，之後放進手動對照表
 
@@ -193,7 +224,8 @@ async function main() {
   if (ONLY_GROUPS) {
     const previous = JSON.parse(await readFile(`${OUTPUT_DIR}/species-list.json`, 'utf8'))
     const previousMeta = JSON.parse(await readFile(`${OUTPUT_DIR}/meta.json`, 'utf8'))
-    const kept = previous.filter((s) => !ONLY_GROUPS.includes(s.group))
+    // 家養動物只看 domestic 有沒有指定，不跟著所屬類群重抓（例如重抓鳥類時，雞、鴨照樣保留）
+    const kept = previous.filter((s) => (s.domestic ? !includeDomestic : !ONLY_GROUPS.includes(s.group)))
     allSpecies.push(...kept)
     unmatched.push(...previousMeta.unmatched.filter((name) => kept.some((s) => s.nameSci === name)))
     console.log(`保留其他類群原本的資料：${kept.length} 種\n`)
@@ -212,6 +244,18 @@ async function main() {
         .filter(Boolean)
         .join(' ')
       console.log(`  ${species.nameZh ?? '（無中文名）'} ${species.nameSci} ${marks}`)
+    }
+  }
+
+  if (includeDomestic) {
+    console.log('【家養動物】')
+    for (const item of DOMESTIC) {
+      const species = await buildSpecies({ id: item.group }, await fetchDomesticSpecies(item))
+      species.nameZh = item.nameZh
+      species.domestic = true
+      if (item.domesticOnly) species.domesticOnly = true
+      allSpecies.push(species)
+      console.log(`  ${species.nameZh ?? '（無中文名）'} ${species.nameSci}${species.photo ? '' : ' ⚠️無授權照片'}`)
     }
   }
 

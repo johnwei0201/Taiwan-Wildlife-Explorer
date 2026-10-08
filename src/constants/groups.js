@@ -18,7 +18,10 @@ export const GROUPS = [
     id: 'insecta',
     label: '昆蟲類',
     kind: 'group',
-    match: byGroup('lepidoptera', 'moth', 'odonata', 'coleoptera', 'hemiptera', 'orthoptera', 'mantodea', 'phasmida'),
+    match: byGroup(
+      'lepidoptera', 'moth', 'odonata', 'coleoptera', 'hemiptera', 'orthoptera', 'mantodea', 'phasmida',
+      'diptera', 'hymenoptera',
+    ),
     subgroups: [
       { id: 'lepidoptera', label: '蝴蝶', match: byGroup('lepidoptera') },
       { id: 'moth', label: '蛾', match: byGroup('moth') },
@@ -37,6 +40,8 @@ export const GROUPS = [
       { id: 'orthoptera', label: '蚱蜢、蟋蟀', match: byGroup('orthoptera') },
       { id: 'mantodea', label: '螳螂', match: byGroup('mantodea') },
       { id: 'phasmida', label: '竹節蟲', match: byGroup('phasmida') },
+      { id: 'diptera', label: '蒼蠅、蚊子', match: byGroup('diptera') },
+      { id: 'hymenoptera', label: '蜂、螞蟻', match: byGroup('hymenoptera') },
     ],
   },
   // 蜘蛛、蠍子有 8 隻腳、身體分兩段、沒有觸角，不是昆蟲，屬於蛛形綱；第二層依「目」分
@@ -75,7 +80,14 @@ export const COLLECTIONS = [
   { id: 'protected', label: '保育類', match: (s) => Boolean(s.protectedLevel) },
   // 外來種＝所有不是原生的物種（入侵種、歸化種、栽培豢養），卡片上會標出是哪一種
   { id: 'alien', label: '外來種', match: (s) => Boolean(s.alienType) && s.alienType !== 'native' },
+  // 家養動物（家貓、家犬、雞、家鴨）：資料腳本手動收錄的，不是野生動物
+  { id: 'domestic', label: '家養動物', match: (s) => Boolean(s.domestic) },
 ]
+
+// 雞、鴨（domesticOnly）只在選了「家養動物」主題時看得到，不和野鳥混在「鳥類」分頁裡
+//   有搜尋字時例外：使用者直接搜尋「雞」，就是想找它
+export const isVisible = (species, tagIds, hasQuery = false) =>
+  !species.domesticOnly || tagIds.includes('domestic') || hasQuery
 
 export const parseTags = (value) =>
   (value ? value.split(',') : []).filter((id) => COLLECTIONS.some((c) => c.id === id))

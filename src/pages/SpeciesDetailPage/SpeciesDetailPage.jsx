@@ -27,6 +27,7 @@ import {
   ALIEN_GENERAL,
   ALIEN_INFO,
   ALIEN_LABELS,
+  DOMESTIC_INFO,
   ENDEMIC_INFO,
   PROTECTED_INFO,
   REDLIST_INFO,
@@ -182,7 +183,8 @@ export default function SpeciesDetailPage() {
 // ---------- 上半部：照片與基本資料 ----------
 function SpeciesHero({ taxon, local, displayName, speciesList }) {
   const endemic = local?.endemic ?? taxon.endemic
-  const alienLabel = ALIEN_LABELS[local?.alienType]
+  // 家養動物只標「家養動物」，不再標外來種（和卡片一樣，避免意思重複）
+  const alienLabel = local?.domestic ? null : ALIEN_LABELS[local?.alienType]
   const redlistLabel = REDLIST_LABELS[local?.redlist]
   // 從界到種的完整分類：「種」就是這個物種本身，其他層從 ancestors 找
   const taxonomy = TAXONOMY_RANKS.map((rankInfo) => ({
@@ -216,6 +218,13 @@ function SpeciesHero({ taxon, local, displayName, speciesList }) {
 
         {/* 標籤：滑鼠移上去（手機點一下）會出現說明 */}
         <ul className={styles.tags}>
+          {local?.domestic && (
+            <li>
+              <InfoTag label="家養動物" title={DOMESTIC_INFO.title} className={`${styles.tag} ${styles.domestic}`}>
+                <p>{DOMESTIC_INFO.text}</p>
+              </InfoTag>
+            </li>
+          )}
           {endemic && (
             <li>
               <InfoTag label="臺灣特有種" title={ENDEMIC_INFO.title} className={`${styles.tag} ${styles.endemic}`}>
