@@ -153,6 +153,8 @@ export const SHAPE_RULES = {
     { label: '其他蜘蛛', match: ['Araneae'] },
   ],
   myriapoda: [
+    // 蚰蜒也是唇足綱，所以要放在「蜈蚣」那條規則前面，先被比對到
+    { label: '蚰蜒（腳非常長，常出現在浴室、牆角）', match: ['Scutigeromorpha'] },
     { label: '蜈蚣（身體扁平，每節一對腳，會咬人）', match: ['Chilopoda'] },
     { label: '馬陸（身體圓筒狀，每節兩對腳，受驚會捲起來）', match: ['Diplopoda'] },
   ],

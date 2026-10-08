@@ -1,5 +1,6 @@
 // 文字搜尋：用空格隔開多個關鍵字，每個關鍵字都要出現（順序不拘），例如「台灣 藍」找得到臺灣藍鵲
-// 比對範圍：中文名、學名、英文名、科、目（所以輸入「鍬形蟲」「鷺」也能找到整科）
+// 比對範圍：中文名、學名、英文名、科、目（所以輸入「鍬形蟲」「鷺」也能找到整科），
+// 有幼蟲照片的蝴蝶、蛾另外加上「毛毛蟲」「幼蟲」
 
 // 統一寫法：英文不分大小寫、「臺」和「台」視為同一個字、全形空格當作一般空格
 export function normalize(text) {
@@ -22,6 +23,8 @@ export function searchText(species) {
       species.family?.nameSci,
       species.order?.nameZh,
       species.order?.nameSci,
+      // 有幼蟲照片的蝴蝶、蛾：搜尋「毛毛蟲」「幼蟲」也找得到
+      species.larvaPhoto ? '毛毛蟲 幼蟲' : '',
     ].join(' '),
   )
 }

@@ -20,6 +20,15 @@ export const GROUPS = [
     subgroups: [
       { id: 'lepidoptera', label: '蝴蝶', match: byGroup('lepidoptera') },
       { id: 'moth', label: '蛾', match: byGroup('moth') },
+      // 毛毛蟲：蝴蝶、蛾的幼蟲，不是另外的物種；卡片改用幼蟲照片（scripts/fetch-larva.js 事先查好）
+      //   noFilters：外觀篩選的大小、顏色是成蟲的資料，套在毛毛蟲上會誤導，所以不顯示
+      {
+        id: 'caterpillar',
+        label: '毛毛蟲',
+        match: (s) => ['lepidoptera', 'moth'].includes(s.group) && Boolean(s.larvaPhoto),
+        display: (s) => ({ ...s, nameZh: `${s.nameZh ?? s.nameSci}（幼蟲）`, photo: s.larvaPhoto }),
+        noFilters: true,
+      },
       { id: 'odonata', label: '蜻蜓', match: byGroup('odonata') },
       { id: 'coleoptera', label: '甲蟲', match: byGroup('coleoptera') },
       { id: 'hemiptera', label: '蟬、椿象', match: byGroup('hemiptera') },
@@ -37,7 +46,8 @@ export const GROUPS = [
     kind: 'group',
     match: byGroup('myriapoda'),
     subgroups: [
-      { id: 'chilopoda', label: '蜈蚣', match: (s) => s.group === 'myriapoda' && s.class?.nameSci === 'Chilopoda' },
+      // 蚰蜒和蜈蚣同屬唇足綱（只是不同目），所以放在一起，名稱寫出來避免看到長腳的蚰蜒覺得奇怪
+      { id: 'chilopoda', label: '蜈蚣、蚰蜒', match: (s) => s.group === 'myriapoda' && s.class?.nameSci === 'Chilopoda' },
       { id: 'diplopoda', label: '馬陸', match: (s) => s.group === 'myriapoda' && s.class?.nameSci === 'Diplopoda' },
     ],
   },

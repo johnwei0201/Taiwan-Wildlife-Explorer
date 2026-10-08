@@ -5,8 +5,9 @@ import styles from './SpeciesGrid.module.css'
 export default function SpeciesGrid({ list }) {
   return (
     <ul className={styles.grid}>
+      {/* key 包含照片網址：同一物種換了照片（例如成蟲 → 幼蟲）時重新建立卡片，重新顯示載入動畫 */}
       {list.map((species) => (
-        <li key={species.id}>
+        <li key={`${species.id}-${species.photo?.url ?? ''}`}>
           <SpeciesCard species={species} />
         </li>
       ))}

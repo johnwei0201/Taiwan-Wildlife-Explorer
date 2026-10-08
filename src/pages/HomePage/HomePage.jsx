@@ -123,7 +123,8 @@ export default function HomePage() {
 
   const clearFilters = () => setSearchParams(buildParams(activeGroup.id, activeSub?.id, activeTags), { replace: true })
 
-  const showFilters = activeGroup?.kind === 'group'
+  // 外觀篩選：選了類群才出現；小分類標明 noFilters 的不顯示（例如毛毛蟲：大小、顏色是成蟲的資料）
+  const showFilters = activeGroup?.kind === 'group' && !activeSub?.noFilters
   const applyAppearance = (list) => (showFilters ? applyFilters(list, filters) : list)
 
   // 篩選順序：分頁（有選第二層就用第二層，例如「昆蟲類 › 蝴蝶」）→ 主題 → 搜尋字 → 外觀
@@ -258,7 +259,8 @@ export default function HomePage() {
           {filteredSpecies.length === 0 ? (
             <p className={styles.message}>沒有符合條件的動物，試著減少一些條件</p>
           ) : (
-            <SpeciesGrid list={filteredSpecies} />
+            // 小分類可以改變卡片的顯示方式（例如毛毛蟲：改用幼蟲照片、名稱加上「幼蟲」）
+            <SpeciesGrid list={activeSub?.display ? filteredSpecies.map(activeSub.display) : filteredSpecies} />
           )}
         </>
       )}
