@@ -3634,6 +3634,55 @@
     }
   },
   {
+    "id": 123010,
+    "taicolId": "t0028343",
+    "group": "myriapoda",
+    "nameZh": "磚紅厚甲馬陸",
+    "nameSci": "Trigoniulus corallinus",
+    "nameEn": "Rusty Millipede",
+    "endemic": false,
+    "alienType": "native",
+    "protectedLevel": null,
+    "redlist": null,
+    "observationsCount": 2979,
+    "photo": {
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/500821844/medium.jpg",
+      "author": "Mark Yokoyama",
+      "license": "CC BY-NC-ND"
+    },
+    "class": {
+      "nameSci": "Diplopoda",
+      "nameZh": "倍足綱"
+    },
+    "order": {
+      "nameSci": "Spirobolida",
+      "nameZh": "山蛩目"
+    },
+    "suborder": {
+      "nameSci": "Trigoniulidea",
+      "nameZh": null
+    },
+    "infraorder": null,
+    "family": {
+      "nameSci": "Pachybolidae",
+      "nameZh": "厚甲馬陸科"
+    },
+    "subfamily": {
+      "nameSci": "Trigoniulinae",
+      "nameZh": "厚甲馬陸亞科"
+    },
+    "genus": {
+      "nameSci": "Trigoniulus",
+      "nameZh": "厚甲馬陸屬"
+    },
+    "shape": "馬陸（身體圓筒狀，每節兩對腳，受驚會捲起來）",
+    "size": 2,
+    "colors": [
+      "紅",
+      "褐"
+    ]
+  },
+  {
     "id": 13893,
     "taicolId": "t0096205",
     "group": "aves",
@@ -16009,6 +16058,55 @@
     }
   },
   {
+    "id": 415288,
+    "taicolId": "t0065261",
+    "group": "myriapoda",
+    "nameZh": "霍氏繞馬陸",
+    "nameSci": "Helicorthomorpha holstii",
+    "nameEn": "Orange Rosary Millipede",
+    "endemic": false,
+    "alienType": "native",
+    "protectedLevel": null,
+    "redlist": null,
+    "observationsCount": 755,
+    "photo": {
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/8913210/medium.jpg",
+      "author": "portioid",
+      "license": "CC BY"
+    },
+    "class": {
+      "nameSci": "Diplopoda",
+      "nameZh": "倍足綱"
+    },
+    "order": {
+      "nameSci": "Polydesmida",
+      "nameZh": "帶馬陸目"
+    },
+    "suborder": {
+      "nameSci": "Strongylosomatidea",
+      "nameZh": null
+    },
+    "infraorder": null,
+    "family": {
+      "nameSci": "Paradoxosomatidae",
+      "nameZh": "奇馬陸科"
+    },
+    "subfamily": {
+      "nameSci": "Paradoxosomatinae",
+      "nameZh": "奇馬陸亞科"
+    },
+    "genus": {
+      "nameSci": "Helicorthomorpha",
+      "nameZh": "繞馬陸屬"
+    },
+    "shape": "馬陸（身體圓筒狀，每節兩對腳，受驚會捲起來）",
+    "size": 1,
+    "colors": [
+      "褐",
+      "黃"
+    ]
+  },
+  {
     "id": 51566,
     "taicolId": "t0027215",
     "group": "lepidoptera",
@@ -23779,6 +23877,55 @@
     }
   },
   {
+    "id": 563727,
+    "taicolId": "t0098939",
+    "group": "myriapoda",
+    "nameZh": "福爾摩沙山蛩",
+    "nameSci": "Spirobolus formosae",
+    "nameEn": null,
+    "endemic": false,
+    "alienType": "native",
+    "protectedLevel": null,
+    "redlist": null,
+    "observationsCount": 449,
+    "photo": {
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/367225994/medium.jpeg",
+      "author": "lava_chen",
+      "license": "CC BY-NC"
+    },
+    "class": {
+      "nameSci": "Diplopoda",
+      "nameZh": "倍足綱"
+    },
+    "order": {
+      "nameSci": "Spirobolida",
+      "nameZh": "山蛩目"
+    },
+    "suborder": {
+      "nameSci": "Spirobolidea",
+      "nameZh": "山蛩亞目"
+    },
+    "infraorder": null,
+    "family": {
+      "nameSci": "Spirobolidae",
+      "nameZh": "山蛩科"
+    },
+    "subfamily": {
+      "nameSci": "Spirobolinae",
+      "nameZh": null
+    },
+    "genus": {
+      "nameSci": "Spirobolus",
+      "nameZh": "山蛩屬"
+    },
+    "shape": "馬陸（身體圓筒狀，每節兩對腳，受驚會捲起來）",
+    "size": 4,
+    "colors": [
+      "黑",
+      "紅"
+    ]
+  },
+  {
     "id": 125505,
     "taicolId": "t0098329",
     "group": "lepidoptera",
@@ -28816,6 +28963,53 @@
     }
   },
   {
+    "id": 973169,
+    "taicolId": "t0086241",
+    "group": "myriapoda",
+    "nameZh": "少棘蜈蚣",
+    "nameSci": "Scolopendra mutilans",
+    "nameEn": "Chinese Red-headed Centipede",
+    "endemic": false,
+    "alienType": "native",
+    "protectedLevel": null,
+    "redlist": null,
+    "observationsCount": 356,
+    "photo": {
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/92654755/medium.jpg",
+      "author": "Ryosuke Kuwahara",
+      "license": "CC BY-NC"
+    },
+    "class": {
+      "nameSci": "Chilopoda",
+      "nameZh": "唇足綱"
+    },
+    "order": {
+      "nameSci": "Scolopendromorpha",
+      "nameZh": "蜈蚣目"
+    },
+    "suborder": null,
+    "infraorder": null,
+    "family": {
+      "nameSci": "Scolopendridae",
+      "nameZh": "蜈蚣科"
+    },
+    "subfamily": {
+      "nameSci": "Scolopendrinae",
+      "nameZh": "蜈蚣亞科"
+    },
+    "genus": {
+      "nameSci": "Scolopendra",
+      "nameZh": "蜈蚣屬"
+    },
+    "shape": "蜈蚣（身體扁平，每節一對腳，會咬人）",
+    "size": 4,
+    "colors": [
+      "紅",
+      "黑",
+      "黃"
+    ]
+  },
+  {
     "id": 128312,
     "taicolId": "t0056320",
     "group": "fish",
@@ -31072,6 +31266,55 @@
       "nameSci": "Alcis",
       "nameZh": "霜尺蛾屬"
     }
+  },
+  {
+    "id": 1080397,
+    "taicolId": null,
+    "group": "myriapoda",
+    "nameZh": "黑白山蛩",
+    "nameSci": "Spirobolus panmaus",
+    "nameEn": null,
+    "endemic": false,
+    "alienType": null,
+    "protectedLevel": null,
+    "redlist": null,
+    "observationsCount": 307,
+    "photo": {
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/235052094/medium.jpeg",
+      "author": "abujudy",
+      "license": "CC BY-NC"
+    },
+    "class": {
+      "nameSci": "Diplopoda",
+      "nameZh": "倍足綱"
+    },
+    "order": {
+      "nameSci": "Spirobolida",
+      "nameZh": "山蛩目"
+    },
+    "suborder": {
+      "nameSci": "Spirobolidea",
+      "nameZh": "山蛩亞目"
+    },
+    "infraorder": null,
+    "family": {
+      "nameSci": "Spirobolidae",
+      "nameZh": "山蛩科"
+    },
+    "subfamily": {
+      "nameSci": "Spirobolinae",
+      "nameZh": null
+    },
+    "genus": {
+      "nameSci": "Spirobolus",
+      "nameZh": "山蛩屬"
+    },
+    "shape": "馬陸（身體圓筒狀，每節兩對腳，受驚會捲起來）",
+    "size": 4,
+    "colors": [
+      "黑",
+      "白"
+    ]
   },
   {
     "id": 1636180,
@@ -36986,6 +37229,54 @@
     }
   },
   {
+    "id": 415176,
+    "taicolId": "t0082503",
+    "group": "myriapoda",
+    "nameZh": "北京小直形馬陸",
+    "nameSci": "Orthomorphella pekuensis",
+    "nameEn": null,
+    "endemic": false,
+    "alienType": "native",
+    "protectedLevel": null,
+    "redlist": null,
+    "observationsCount": 233,
+    "photo": {
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/46860889/medium.jpg",
+      "author": "Jared Busen",
+      "license": "CC BY-NC"
+    },
+    "class": {
+      "nameSci": "Diplopoda",
+      "nameZh": "倍足綱"
+    },
+    "order": {
+      "nameSci": "Polydesmida",
+      "nameZh": "帶馬陸目"
+    },
+    "suborder": {
+      "nameSci": "Strongylosomatidea",
+      "nameZh": null
+    },
+    "infraorder": null,
+    "family": {
+      "nameSci": "Paradoxosomatidae",
+      "nameZh": "奇馬陸科"
+    },
+    "subfamily": {
+      "nameSci": "Paradoxosomatinae",
+      "nameZh": "奇馬陸亞科"
+    },
+    "genus": {
+      "nameSci": "Orthomorphella",
+      "nameZh": "小直形馬陸屬"
+    },
+    "shape": "馬陸（身體圓筒狀，每節兩對腳，受驚會捲起來）",
+    "size": 1,
+    "colors": [
+      "褐"
+    ]
+  },
+  {
     "id": 13721,
     "taicolId": "t0071791",
     "group": "aves",
@@ -39923,6 +40214,51 @@
     }
   },
   {
+    "id": 871901,
+    "taicolId": null,
+    "group": "myriapoda",
+    "nameZh": "淡黃琉球帶馬陸",
+    "nameSci": "Riukiaria cohaesiva",
+    "nameEn": null,
+    "endemic": false,
+    "alienType": null,
+    "protectedLevel": null,
+    "redlist": null,
+    "observationsCount": 211,
+    "photo": null,
+    "class": {
+      "nameSci": "Diplopoda",
+      "nameZh": "倍足綱"
+    },
+    "order": {
+      "nameSci": "Polydesmida",
+      "nameZh": "帶馬陸目"
+    },
+    "suborder": {
+      "nameSci": "Leptodesmidea",
+      "nameZh": null
+    },
+    "infraorder": null,
+    "family": {
+      "nameSci": "Xystodesmidae",
+      "nameZh": "光帶馬陸科"
+    },
+    "subfamily": {
+      "nameSci": "Xystodesminae",
+      "nameZh": null
+    },
+    "genus": {
+      "nameSci": "Riukiaria",
+      "nameZh": "琉球帶馬陸屬"
+    },
+    "shape": "馬陸（身體圓筒狀，每節兩對腳，受驚會捲起來）",
+    "size": 2,
+    "colors": [
+      "黃",
+      "黑"
+    ]
+  },
+  {
     "id": 7120,
     "taicolId": "t0077015",
     "group": "aves",
@@ -41145,6 +41481,55 @@
       "nameSci": "Bowie",
       "nameZh": "寶兒蛛屬"
     }
+  },
+  {
+    "id": 563749,
+    "taicolId": "t0077971",
+    "group": "myriapoda",
+    "nameZh": "花蓮章氏馬陸",
+    "nameSci": "Chamberlinius hualienensis",
+    "nameEn": null,
+    "endemic": true,
+    "alienType": "native",
+    "protectedLevel": null,
+    "redlist": null,
+    "observationsCount": 204,
+    "photo": {
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/71694495/medium.jpg",
+      "author": "Ryosuke Kuwahara",
+      "license": "CC BY-NC"
+    },
+    "class": {
+      "nameSci": "Diplopoda",
+      "nameZh": "倍足綱"
+    },
+    "order": {
+      "nameSci": "Polydesmida",
+      "nameZh": "帶馬陸目"
+    },
+    "suborder": {
+      "nameSci": "Strongylosomatidea",
+      "nameZh": null
+    },
+    "infraorder": null,
+    "family": {
+      "nameSci": "Paradoxosomatidae",
+      "nameZh": "奇馬陸科"
+    },
+    "subfamily": {
+      "nameSci": "Paradoxosomatinae",
+      "nameZh": "奇馬陸亞科"
+    },
+    "genus": {
+      "nameSci": "Chamberlinius",
+      "nameZh": "章氏馬陸屬"
+    },
+    "shape": "馬陸（身體圓筒狀，每節兩對腳，受驚會捲起來）",
+    "size": 2,
+    "colors": [
+      "褐",
+      "黃"
+    ]
   },
   {
     "id": 361729,
@@ -49879,6 +50264,55 @@
       "nameSci": "Trachyzulpha",
       "nameZh": null
     }
+  },
+  {
+    "id": 308046,
+    "taicolId": "t0031364",
+    "group": "myriapoda",
+    "nameZh": "粗直形馬陸",
+    "nameSci": "Orthomorpha coarctata",
+    "nameEn": "Long-flange Millipede",
+    "endemic": false,
+    "alienType": "native",
+    "protectedLevel": null,
+    "redlist": null,
+    "observationsCount": 154,
+    "photo": {
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/5151181/medium.jpg",
+      "author": "Cheryl Harleston López Espino",
+      "license": "CC BY-NC-ND"
+    },
+    "class": {
+      "nameSci": "Diplopoda",
+      "nameZh": "倍足綱"
+    },
+    "order": {
+      "nameSci": "Polydesmida",
+      "nameZh": "帶馬陸目"
+    },
+    "suborder": {
+      "nameSci": "Strongylosomatidea",
+      "nameZh": null
+    },
+    "infraorder": null,
+    "family": {
+      "nameSci": "Paradoxosomatidae",
+      "nameZh": "奇馬陸科"
+    },
+    "subfamily": {
+      "nameSci": "Paradoxosomatinae",
+      "nameZh": "奇馬陸亞科"
+    },
+    "genus": {
+      "nameSci": "Orthomorpha",
+      "nameZh": "直形馬陸屬"
+    },
+    "shape": "馬陸（身體圓筒狀，每節兩對腳，受驚會捲起來）",
+    "size": 1,
+    "colors": [
+      "褐",
+      "黃"
+    ]
   },
   {
     "id": 8359,
@@ -63376,6 +63810,52 @@
     }
   },
   {
+    "id": 359306,
+    "taicolId": "t0033371",
+    "group": "myriapoda",
+    "nameZh": "臀獵足蚰",
+    "nameSci": "Thereuopoda clunifera",
+    "nameEn": "Japanese Long-legged Centipede",
+    "endemic": false,
+    "alienType": "native",
+    "protectedLevel": null,
+    "redlist": null,
+    "observationsCount": 99,
+    "photo": {
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/50399588/medium.jpg",
+      "author": "Ryosuke Kuwahara",
+      "license": "CC BY-NC"
+    },
+    "class": {
+      "nameSci": "Chilopoda",
+      "nameZh": "唇足綱"
+    },
+    "order": {
+      "nameSci": "Scutigeromorpha",
+      "nameZh": "蚰蜒目"
+    },
+    "suborder": null,
+    "infraorder": null,
+    "family": {
+      "nameSci": "Scutigeridae",
+      "nameZh": "蚰蜒科"
+    },
+    "subfamily": {
+      "nameSci": "Thereuoneminae",
+      "nameZh": null
+    },
+    "genus": {
+      "nameSci": "Thereuopoda",
+      "nameZh": "蚰蜓屬"
+    },
+    "shape": "蜈蚣（身體扁平，每節一對腳，會咬人）",
+    "size": 2,
+    "colors": [
+      "褐",
+      "灰"
+    ]
+  },
+  {
     "id": 9187,
     "taicolId": "t0062496",
     "group": "aves",
@@ -76244,6 +76724,52 @@
     }
   },
   {
+    "id": 366871,
+    "taicolId": "t0067212",
+    "group": "myriapoda",
+    "nameZh": "小紅黑馬陸",
+    "nameSci": "Leptogoniulus sorornus",
+    "nameEn": null,
+    "endemic": false,
+    "alienType": "native",
+    "protectedLevel": null,
+    "redlist": null,
+    "observationsCount": 73,
+    "photo": {
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/112321494/medium.jpeg",
+      "author": "Ben Machado",
+      "license": "CC BY"
+    },
+    "class": {
+      "nameSci": "Diplopoda",
+      "nameZh": "倍足綱"
+    },
+    "order": {
+      "nameSci": "Spirobolida",
+      "nameZh": "山蛩目"
+    },
+    "suborder": {
+      "nameSci": "Trigoniulidea",
+      "nameZh": null
+    },
+    "infraorder": null,
+    "family": {
+      "nameSci": "Pachybolidae",
+      "nameZh": "厚甲馬陸科"
+    },
+    "subfamily": null,
+    "genus": {
+      "nameSci": "Leptogoniulus",
+      "nameZh": "黑馬陸屬"
+    },
+    "shape": "馬陸（身體圓筒狀，每節兩對腳，受驚會捲起來）",
+    "size": 2,
+    "colors": [
+      "紅",
+      "黑"
+    ]
+  },
+  {
     "id": 9224,
     "taicolId": "t0062503",
     "group": "aves",
@@ -80616,6 +81142,53 @@
       "nameSci": "Calappa",
       "nameZh": "饅頭蟹屬"
     }
+  },
+  {
+    "id": 709429,
+    "taicolId": "t0038598",
+    "group": "myriapoda",
+    "nameZh": "多棘蜈蚣",
+    "nameSci": "Scolopendra multidens",
+    "nameEn": null,
+    "endemic": false,
+    "alienType": "native",
+    "protectedLevel": null,
+    "redlist": null,
+    "observationsCount": 65,
+    "photo": {
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/139978723/medium.jpg",
+      "author": "Chan Kam Kong",
+      "license": "CC BY-NC"
+    },
+    "class": {
+      "nameSci": "Chilopoda",
+      "nameZh": "唇足綱"
+    },
+    "order": {
+      "nameSci": "Scolopendromorpha",
+      "nameZh": "蜈蚣目"
+    },
+    "suborder": null,
+    "infraorder": null,
+    "family": {
+      "nameSci": "Scolopendridae",
+      "nameZh": "蜈蚣科"
+    },
+    "subfamily": {
+      "nameSci": "Scolopendrinae",
+      "nameZh": "蜈蚣亞科"
+    },
+    "genus": {
+      "nameSci": "Scolopendra",
+      "nameZh": "蜈蚣屬"
+    },
+    "shape": "蜈蚣（身體扁平，每節一對腳，會咬人）",
+    "size": 4,
+    "colors": [
+      "黑",
+      "紅",
+      "黃"
+    ]
   },
   {
     "id": 3900,
@@ -91089,6 +91662,52 @@
     }
   },
   {
+    "id": 564237,
+    "taicolId": "t0098660",
+    "group": "myriapoda",
+    "nameZh": "擬旋刺馬陸",
+    "nameSci": "Pseudospirobolellus avernus",
+    "nameEn": null,
+    "endemic": false,
+    "alienType": "native",
+    "protectedLevel": null,
+    "redlist": null,
+    "observationsCount": 52,
+    "photo": {
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/4955079/medium.jpg",
+      "author": "budak",
+      "license": "CC BY-NC"
+    },
+    "class": {
+      "nameSci": "Diplopoda",
+      "nameZh": "倍足綱"
+    },
+    "order": {
+      "nameSci": "Spirobolida",
+      "nameZh": "山蛩目"
+    },
+    "suborder": {
+      "nameSci": "Spirobolidea",
+      "nameZh": "山蛩亞目"
+    },
+    "infraorder": null,
+    "family": {
+      "nameSci": "Pseudospirobolellidae",
+      "nameZh": "擬旋刺馬陸科"
+    },
+    "subfamily": null,
+    "genus": {
+      "nameSci": "Pseudospirobolellus",
+      "nameZh": null
+    },
+    "shape": "馬陸（身體圓筒狀，每節兩對腳，受驚會捲起來）",
+    "size": 1,
+    "colors": [
+      "褐",
+      "黃"
+    ]
+  },
+  {
     "id": 144544,
     "taicolId": "t0047203",
     "group": "aves",
@@ -101368,6 +101987,53 @@
     }
   },
   {
+    "id": 1267435,
+    "taicolId": "t0038596",
+    "group": "myriapoda",
+    "nameZh": "琉神大蜈蚣",
+    "nameSci": "Scolopendra alcyona",
+    "nameEn": "Halcyon Giant Centipede",
+    "endemic": false,
+    "alienType": "native",
+    "protectedLevel": null,
+    "redlist": null,
+    "observationsCount": 42,
+    "photo": {
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/375165267/medium.jpg",
+      "author": "Shaway Liu",
+      "license": "CC BY-NC"
+    },
+    "class": {
+      "nameSci": "Chilopoda",
+      "nameZh": "唇足綱"
+    },
+    "order": {
+      "nameSci": "Scolopendromorpha",
+      "nameZh": "蜈蚣目"
+    },
+    "suborder": null,
+    "infraorder": null,
+    "family": {
+      "nameSci": "Scolopendridae",
+      "nameZh": "蜈蚣科"
+    },
+    "subfamily": {
+      "nameSci": "Scolopendrinae",
+      "nameZh": "蜈蚣亞科"
+    },
+    "genus": {
+      "nameSci": "Scolopendra",
+      "nameZh": "蜈蚣屬"
+    },
+    "shape": "蜈蚣（身體扁平，每節一對腳，會咬人）",
+    "size": 4,
+    "colors": [
+      "綠",
+      "藍",
+      "黃"
+    ]
+  },
+  {
     "id": 7955,
     "taicolId": "t0097786",
     "group": "aves",
@@ -108051,6 +108717,52 @@
     }
   },
   {
+    "id": 625776,
+    "taicolId": "t0082569",
+    "group": "myriapoda",
+    "nameZh": "糙耳孔蜈蚣",
+    "nameSci": "Otostigmus scaber",
+    "nameEn": "Blue Keeled Centipede",
+    "endemic": false,
+    "alienType": "native",
+    "protectedLevel": null,
+    "redlist": null,
+    "observationsCount": 37,
+    "photo": {
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/355430850/medium.jpg",
+      "author": "Lynette",
+      "license": "CC BY-NC"
+    },
+    "class": {
+      "nameSci": "Chilopoda",
+      "nameZh": "唇足綱"
+    },
+    "order": {
+      "nameSci": "Scolopendromorpha",
+      "nameZh": "蜈蚣目"
+    },
+    "suborder": null,
+    "infraorder": null,
+    "family": {
+      "nameSci": "Scolopendridae",
+      "nameZh": "蜈蚣科"
+    },
+    "subfamily": {
+      "nameSci": "Otostigminae",
+      "nameZh": "耳孔蜈蚣亞科"
+    },
+    "genus": {
+      "nameSci": "Otostigmus",
+      "nameZh": "耳孔蜈蚣屬"
+    },
+    "shape": "蜈蚣（身體扁平，每節一對腳，會咬人）",
+    "size": 2,
+    "colors": [
+      "綠",
+      "褐"
+    ]
+  },
+  {
     "id": 12987,
     "taicolId": "t0096470",
     "group": "aves",
@@ -109676,6 +110388,55 @@
       "nameSci": "Gasteracantha",
       "nameZh": "棘蛛屬"
     }
+  },
+  {
+    "id": 143390,
+    "taicolId": "t0082591",
+    "group": "myriapoda",
+    "nameZh": "溫室馬陸",
+    "nameSci": "Oxidus gracilis",
+    "nameEn": "Greenhouse Millipede",
+    "endemic": false,
+    "alienType": "native",
+    "protectedLevel": null,
+    "redlist": null,
+    "observationsCount": 36,
+    "photo": {
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/63662225/medium.jpg",
+      "author": "Ryosuke Kuwahara",
+      "license": "CC BY-NC"
+    },
+    "class": {
+      "nameSci": "Diplopoda",
+      "nameZh": "倍足綱"
+    },
+    "order": {
+      "nameSci": "Polydesmida",
+      "nameZh": "帶馬陸目"
+    },
+    "suborder": {
+      "nameSci": "Strongylosomatidea",
+      "nameZh": null
+    },
+    "infraorder": null,
+    "family": {
+      "nameSci": "Paradoxosomatidae",
+      "nameZh": "奇馬陸科"
+    },
+    "subfamily": {
+      "nameSci": "Paradoxosomatinae",
+      "nameZh": "奇馬陸亞科"
+    },
+    "genus": {
+      "nameSci": "Oxidus",
+      "nameZh": "酸帶馬陸屬"
+    },
+    "shape": "馬陸（身體圓筒狀，每節兩對腳，受驚會捲起來）",
+    "size": 1,
+    "colors": [
+      "褐",
+      "黑"
+    ]
   },
   {
     "id": 3873,
@@ -117563,6 +118324,52 @@
       "nameSci": "Pardosa",
       "nameZh": "豹蛛屬"
     }
+  },
+  {
+    "id": 336911,
+    "taicolId": "t0037895",
+    "group": "myriapoda",
+    "nameZh": "長足衛蜈蚣",
+    "nameSci": "Rhysida longipes",
+    "nameEn": "Minor Blueleg Centipede",
+    "endemic": false,
+    "alienType": "native",
+    "protectedLevel": null,
+    "redlist": null,
+    "observationsCount": 31,
+    "photo": {
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/29849990/medium.jpeg",
+      "author": "Kate",
+      "license": "CC BY-NC"
+    },
+    "class": {
+      "nameSci": "Chilopoda",
+      "nameZh": "唇足綱"
+    },
+    "order": {
+      "nameSci": "Scolopendromorpha",
+      "nameZh": "蜈蚣目"
+    },
+    "suborder": null,
+    "infraorder": null,
+    "family": {
+      "nameSci": "Scolopendridae",
+      "nameZh": "蜈蚣科"
+    },
+    "subfamily": {
+      "nameSci": "Otostigminae",
+      "nameZh": "耳孔蜈蚣亞科"
+    },
+    "genus": {
+      "nameSci": "Rhysida",
+      "nameZh": "衛蜈蚣屬"
+    },
+    "shape": "蜈蚣（身體扁平，每節一對腳，會咬人）",
+    "size": 3,
+    "colors": [
+      "綠",
+      "黃"
+    ]
   },
   {
     "id": 7002,
@@ -144730,6 +145537,53 @@
       "nameSci": "Latouchia",
       "nameZh": null
     }
+  },
+  {
+    "id": 447908,
+    "taicolId": "t0038597",
+    "group": "myriapoda",
+    "nameZh": "赤蜈蚣",
+    "nameSci": "Scolopendra morsitans",
+    "nameEn": "Red-headed Centipede",
+    "endemic": false,
+    "alienType": "native",
+    "protectedLevel": null,
+    "redlist": null,
+    "observationsCount": 20,
+    "photo": {
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/319413551/medium.jpg",
+      "author": "hednota",
+      "license": "CC BY-NC"
+    },
+    "class": {
+      "nameSci": "Chilopoda",
+      "nameZh": "唇足綱"
+    },
+    "order": {
+      "nameSci": "Scolopendromorpha",
+      "nameZh": "蜈蚣目"
+    },
+    "suborder": null,
+    "infraorder": null,
+    "family": {
+      "nameSci": "Scolopendridae",
+      "nameZh": "蜈蚣科"
+    },
+    "subfamily": {
+      "nameSci": "Scolopendrinae",
+      "nameZh": "蜈蚣亞科"
+    },
+    "genus": {
+      "nameSci": "Scolopendra",
+      "nameZh": "蜈蚣屬"
+    },
+    "shape": "蜈蚣（身體扁平，每節一對腳，會咬人）",
+    "size": 3,
+    "colors": [
+      "黃",
+      "綠",
+      "紅"
+    ]
   },
   {
     "id": 19339,

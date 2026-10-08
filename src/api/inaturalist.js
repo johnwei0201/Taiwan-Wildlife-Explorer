@@ -5,8 +5,8 @@ const INAT_API = 'https://api.inaturalist.org/v1'
 export const TAIWAN_PLACE_ID = 7887
 
 // 收錄的類群：鳥類、哺乳類、爬蟲類、兩棲類、
-//   硬骨魚、鯊魚魟魚、鱗翅目（蝴蝶＋蛾）、蜻蛉目、鞘翅目、半翅目、直翅目、螳螂目、竹節蟲目、蜘蛛目、甲殼類
-const GROUP_TAXON_IDS = '3,40151,26036,20978,47178,47273,47157,47792,47208,47744,47651,48112,47198,47118,85493'
+//   硬骨魚、鯊魚魟魚、鱗翅目（蝴蝶＋蛾）、蜻蛉目、鞘翅目、半翅目、直翅目、螳螂目、竹節蟲目、蜘蛛目、甲殼類、多足類
+const GROUP_TAXON_IDS = '3,40151,26036,20978,47178,47273,47157,47792,47208,47744,47651,48112,47198,47118,85493,144128'
 
 const ICONIC_TO_GROUP = {
   Aves: 'aves',
@@ -145,6 +145,38 @@ export async function fetchRecentObservations(taxonId, signal) {
   })
   const data = await fetchJson(`${INAT_API}/observations?${params}`, signal)
   return data.results.filter((obs) => obs.location).map(toObservation)
+}
+
+// 幼蟲照片（蝴蝶、蛾的毛毛蟲）：觀察者在 iNaturalist 上標註「生命階段：幼蟲」的紀錄
+//   不限台灣：只是要看幼蟲長什麼樣子，全世界的照片都可以；依按讚數排序，先看到拍得好的
+//   只要 CC 授權的照片（和網站其他照片一樣，必須標示作者與授權）
+const LIFE_STAGE_TERM = 1 // 標註項目「生命階段」
+const LIFE_STAGE_LARVA = 6 // 標註值「幼蟲」
+const CC_LICENSES = 'cc0,cc-by,cc-by-nc,cc-by-sa,cc-by-nd,cc-by-nc-sa,cc-by-nc-nd'
+
+export async function fetchLarvaPhotos(taxonId, signal) {
+  const params = new URLSearchParams({
+    taxon_id: taxonId,
+    term_id: LIFE_STAGE_TERM,
+    term_value_id: LIFE_STAGE_LARVA,
+    photos: true,
+    photo_license: CC_LICENSES,
+    quality_grade: 'research',
+    order_by: 'votes',
+    per_page: 6,
+  })
+  const data = await fetchJson(`${INAT_API}/observations?${params}`, signal)
+  return {
+    total: data.total_results,
+    photos: data.results
+      .map((obs) => {
+        const photo = toPhoto(obs.photos?.find((p) => p.license_code))
+        // 觀察紀錄的照片沒有作者欄位，作者就是上傳的人：有填名字用名字，沒填就用帳號
+        const author = obs.user?.name || obs.user?.login || photo?.author
+        return photo && { ...photo, author, id: obs.id, observationUrl: obs.uri }
+      })
+      .filter(Boolean),
+  }
 }
 
 // 某物種在使用者附近的紀錄：依距離由近到遠排序，每筆加上 distanceKm

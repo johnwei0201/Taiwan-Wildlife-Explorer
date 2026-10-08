@@ -15,6 +15,7 @@
 #   魚類（體長）：1 比小指短(<5cm)、2 跟手掌差不多(5~15cm)、3 手掌到手臂長(15~40cm)、4 比手臂還長(40~100cm)、5 超過一公尺(>100cm)
 #   甲殼類（螃蟹量殼寬，其他量體長）：1 比小指甲小(<1cm)、2 小指甲到十元硬幣(1~3cm)、3 跟手掌心差不多(3~8cm)、4 比手掌還大(>8cm)
 #   蜘蛛（不含腳的體長）：1 比綠豆小(<0.5cm)、2 綠豆到小指甲(0.5~1.5cm)、3 小指甲到十元硬幣(1.5~3cm)、4 比十元硬幣還大(>3cm)
+#   多足類（蜈蚣、馬陸，體長）：1 比小指短(<4cm)、2 跟小指差不多(4~6cm)、3 跟手掌差不多(6~10cm)、4 比手掌還長(>10cm)
 #
 # 顏色（用 / 分隔，可以有多個，包含公母不同的顏色）：黑、白、灰、褐、紅、橙、黃、綠、藍
 #   蝴蝶、蛾以翅膀正反面的主要顏色為準；紫色的金屬光澤歸為「藍」
@@ -3351,3 +3352,22 @@ Trichonephila clavata,3,黃/黑/藍/紅
 Tylorida ventralis,2,綠/白/褐
 Uthina luzonica,1,褐/灰
 Zebraplatys bulbus,1,黑/白
+# ---------- 多足類 ----------
+Chamberlinius hualienensis,2,褐/黃
+Helicorthomorpha holstii,1,褐/黃
+Leptogoniulus sorornus,2,紅/黑
+Orthomorpha coarctata,1,褐/黃
+Orthomorphella pekuensis,1,褐
+Otostigmus scaber,2,綠/褐
+Oxidus gracilis,1,褐/黑
+Pseudospirobolellus avernus,1,褐/黃
+Rhysida longipes,3,綠/黃
+Riukiaria cohaesiva,2,黃/黑
+Scolopendra alcyona,4,綠/藍/黃
+Scolopendra morsitans,3,黃/綠/紅
+Scolopendra multidens,4,黑/紅/黃
+Scolopendra mutilans,4,紅/黑/黃
+Spirobolus formosae,4,黑/紅
+Spirobolus panmaus,4,黑/白
+Thereuopoda clunifera,2,褐/灰
+Trigoniulus corallinus,2,紅/褐

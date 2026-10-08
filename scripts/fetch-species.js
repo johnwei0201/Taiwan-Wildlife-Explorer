@@ -43,6 +43,7 @@ const GROUPS = [
   { id: 'fish', label: '魚類（鯊魚、魟魚）', inatTaxonId: 47273, minCount: 20 }, // 板鰓亞綱
   { id: 'crustacea', label: '甲殼類', inatTaxonId: 85493, minCount: 20 }, // 甲殼亞門
   { id: 'araneae', label: '蜘蛛', inatTaxonId: 47118, minCount: 20 }, // 蜘蛛目
+  { id: 'myriapoda', label: '多足類', inatTaxonId: 144128, minCount: 20 }, // 多足亞門（蜈蚣、馬陸）
 ]
 
 // 排除清單：家養動物不屬於野生動物圖鑑

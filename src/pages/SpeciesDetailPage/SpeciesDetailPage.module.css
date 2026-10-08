@@ -394,6 +394,58 @@
 .skeletonTitle { height: 2.5rem; width: 60%; }
 .skeletonLine  { height: 1rem; margin-top: var(--space-3); }
 .skeletonBlock { height: 200px; }
+.larvaSkeleton { height: 160px; }
+
+/* ---------- 毛毛蟲（幼蟲）照片：手機 3 欄、平板以上 6 欄的正方形縮圖 ---------- */
+.larvaGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-2);
+}
+
+/* 照片用絕對定位貼在正方形框裡，照片本身的尺寸不會撐開版面（避免 iPhone 越長越大的問題） */
+.larvaPhoto {
+  position: relative;
+  display: block;
+  aspect-ratio: 1;
+  overflow: hidden;
+  border-radius: var(--radius-sm);
+  background-color: var(--color-primary-light);
+}
+
+.larvaPhoto img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--transition);
+}
+
+.larvaPhoto:hover img {
+  transform: scale(1.05);
+}
+
+.larvaCredit {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 2px var(--space-1);
+  font-size: 0.6rem;
+  color: #fff;
+  background: linear-gradient(transparent, rgb(0 0 0 / 0.6));
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media (min-width: 768px) {
+  .larvaGrid {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: var(--space-3);
+  }
+}
 
 /* ---------- 平板：附近動物 3 欄（清單在地圖下方，寬度夠） ---------- */
 @media (min-width: 768px) {

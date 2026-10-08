@@ -52,7 +52,7 @@ export default function NearbyPage() {
     <div className="container">
       <section className={styles.intro}>
         <h1 className={styles.title}>我附近的動物</h1>
-        <p className={styles.subtitle}>看看你身邊曾經出現過哪些鳥類、哺乳類、爬蟲類、兩棲類、魚類、昆蟲、蜘蛛與甲殼類</p>
+        <p className={styles.subtitle}>看看你身邊曾經出現過哪些鳥類、哺乳類、爬蟲類、兩棲類、魚類、昆蟲、蜘蛛、蜈蚣與甲殼類</p>
       </section>
 
       <div className={styles.controls}>

@@ -10,9 +10,9 @@ import styles from './HomePage.module.css'
 
 const RANDOM_COUNT = 30
 
-// 首頁隨機推薦不放昆蟲類、蛛形類、爬蟲類：有些人看到蟲、蜘蛛或蛇的照片會不舒服，
+// 首頁隨機推薦不放昆蟲類、蛛形類、多足類、爬蟲類：有些人看到蟲、蜘蛛、蜈蚣或蛇的照片會不舒服，
 // 一打開網頁就看到可能直接離開；想看的人點對應的分頁就看得到
-const RANDOM_EXCLUDED_IDS = ['insecta', 'arachnida', 'reptilia']
+const RANDOM_EXCLUDED_IDS = ['insecta', 'arachnida', 'myriapoda', 'reptilia']
 const RANDOM_GROUPS = GROUPS.filter((g) => g.kind === 'group' && !RANDOM_EXCLUDED_IDS.includes(g.id))
 
 // 類群裡再排除部分分類（目或科的學名）：
@@ -145,7 +145,7 @@ export default function HomePage() {
       <section className={styles.hero}>
         {/* 畫面上的大標題拿掉（頁首已經有網站名稱），但保留給螢幕閱讀器和搜尋引擎：每頁都該有一個 h1 */}
         <h1 className="visually-hidden">發現台灣動物趣</h1>
-        <p className={styles.subtitle}>探索台灣的鳥類、哺乳類、爬蟲類、兩棲類、魚類、昆蟲、蜘蛛與甲殼類</p>
+        <p className={styles.subtitle}>探索台灣的鳥類、哺乳類、爬蟲類、兩棲類、魚類、昆蟲、蜘蛛、蜈蚣與甲殼類</p>
       </section>
 
       <div className={styles.tabBar}>

@@ -30,6 +30,17 @@ export const GROUPS = [
   },
   // 蜘蛛有 8 隻腳、身體分兩段，不是昆蟲，屬於蛛形綱；之後的蠍子、盲蛛也放在這裡
   { id: 'arachnida', label: '蛛形類', kind: 'group', match: byGroup('araneae') },
+  // 蜈蚣、馬陸腳很多、身體分很多節，也不是昆蟲，屬於多足類；第二層依「綱」分
+  {
+    id: 'myriapoda',
+    label: '多足類',
+    kind: 'group',
+    match: byGroup('myriapoda'),
+    subgroups: [
+      { id: 'chilopoda', label: '蜈蚣', match: (s) => s.group === 'myriapoda' && s.class?.nameSci === 'Chilopoda' },
+      { id: 'diplopoda', label: '馬陸', match: (s) => s.group === 'myriapoda' && s.class?.nameSci === 'Diplopoda' },
+    ],
+  },
   { id: 'crustacea', label: '甲殼類', kind: 'group', match: byGroup('crustacea') },
 ]
 

@@ -152,6 +152,10 @@ export const SHAPE_RULES = {
     { label: '狼蛛、貓蛛（在地面或葉上遊走捕食）', match: ['Lycosidae', 'Pisauridae', 'Oxyopidae'] },
     { label: '其他蜘蛛', match: ['Araneae'] },
   ],
+  myriapoda: [
+    { label: '蜈蚣（身體扁平，每節一對腳，會咬人）', match: ['Chilopoda'] },
+    { label: '馬陸（身體圓筒狀，每節兩對腳，受驚會捲起來）', match: ['Diplopoda'] },
+  ],
   odonata: [
     { label: '豆娘（身體細長，停下來翅膀合起來）', match: ['Zygoptera'] },
     { label: '蜻蜓（停下來翅膀攤平）', match: ['Anisoptera', 'Odonata'] },

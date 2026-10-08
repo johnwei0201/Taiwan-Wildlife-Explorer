@@ -15,6 +15,7 @@ import {
   fetchRecentObservations,
   fetchSpeciesNearby,
   fetchNearbySpecies,
+  fetchLarvaPhotos,
 } from '../../api/inaturalist.js'
 import { fetchWikiSummary, toTraditional } from '../../api/wikipedia.js'
 import { formatKm } from '../../utils/geo.js'
@@ -61,6 +62,13 @@ export default function SpeciesDetailPage() {
     [userLocation, radius],
   )
 
+  // 蝴蝶、蛾（鱗翅目）才查幼蟲照片：小時候是毛毛蟲，長大後完全不一樣
+  const isLepidoptera = Boolean(taxon.data?.ancestors.some((a) => a.nameSci === 'Lepidoptera'))
+  const larva = useAsync(
+    (signal) => (isLepidoptera ? fetchLarvaPhotos(id, signal) : Promise.resolve(null)),
+    [id, isLepidoptera],
+  )
+
   // 瀏覽器分頁標題顯示物種名稱
   const displayName = local?.nameZh ?? taxon.data?.nameZh ?? taxon.data?.nameSci
   useEffect(() => {
@@ -81,6 +89,8 @@ export default function SpeciesDetailPage() {
       {taxon.status === 'success' && (
         <SpeciesHero taxon={taxon.data} local={local} displayName={displayName} speciesList={speciesList} />
       )}
+
+      {isLepidoptera && <LarvaPhotos larva={larva} name={displayName} />}
 
       <section className={styles.section}>
         <h2 className={styles.sectionTitle}>月份出現分布</h2>
@@ -396,6 +406,46 @@ function NearbyAnimals({ result, speciesList, currentId }) {
         ))}
       </ul>
     </>
+  )
+}
+
+// ---------- 幼蟲長這樣（蝴蝶、蛾的毛毛蟲） ----------
+// 照片來自 iNaturalist 上標註「幼蟲」的觀察紀錄，點照片可以到原始紀錄看更多
+function LarvaPhotos({ larva, name }) {
+  // 剛確認是鱗翅目的那一瞬間，查詢還沒開始，會先拿到上一次的「成功、但沒有資料（null）」；
+  // 這時當作載入中，避免讀取 null 的欄位讓整頁當掉
+  const data = larva.status === 'success' ? larva.data : null
+  const isLoading = larva.status === 'loading' || (larva.status === 'success' && !data)
+
+  return (
+    <section className={styles.section} aria-labelledby="larva-title">
+      <h2 id="larva-title" className={styles.sectionTitle}>
+        毛毛蟲（幼蟲）長這樣
+      </h2>
+      <p className={styles.sectionNote}>
+        蝴蝶和蛾小時候是毛毛蟲，長大後的樣子完全不一樣
+        {data?.total > 0 && `（iNaturalist 上有 ${data.total} 筆幼蟲紀錄）`}
+      </p>
+
+      {isLoading && <div className={`skeleton ${styles.larvaSkeleton}`} />}
+      {larva.status === 'error' && <p className={styles.message}>暫時無法取得幼蟲照片</p>}
+      {data?.photos.length === 0 && <p className={styles.message}>目前還沒有人上傳{name}幼蟲的照片</p>}
+      {data?.photos.length > 0 && (
+        <ul className={styles.larvaGrid}>
+          {data.photos.map((photo) => (
+            <li key={photo.id}>
+              <a href={photo.observationUrl} target="_blank" rel="noreferrer" className={styles.larvaPhoto}>
+                <img src={photo.url} alt={`${name}的幼蟲`} loading="lazy" />
+                {/* CC 授權規定：必須標示作者與授權 */}
+                <span className={styles.larvaCredit}>
+                  © {photo.author}・{photo.license}
+                </span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      )}
+    </section>
   )
 }
 
