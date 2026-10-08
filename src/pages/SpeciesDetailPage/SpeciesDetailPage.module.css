@@ -256,9 +256,17 @@
   line-height: 1.7;
 }
 
+/* 搜尋範圍、紀錄筆數、距離：數字放大，一眼就看得到重點 */
 .nearbySummary strong {
-  font-size: var(--fs-base);
+  margin-inline: 2px;
+  font-size: var(--fs-xl);
+  line-height: 1;
   color: var(--color-primary-dark);
+}
+
+/* 紀錄筆數用紅色，最醒目 */
+.nearbySummary .recordCount {
+  color: var(--color-alert);
 }
 
 /* 右側清單的標題（發現記錄／你附近的動物） */

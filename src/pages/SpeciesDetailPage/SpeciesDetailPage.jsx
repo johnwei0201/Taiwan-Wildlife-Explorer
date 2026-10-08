@@ -416,15 +416,16 @@ function NearbySummary({ nearby, name }) {
   if (total > 0) {
     return (
       <p className={styles.nearbySummary}>
-        你附近 {radius} 公里內有 <strong>{total}</strong> 筆{name}的紀錄，最近一筆約{' '}
-        <strong>{formatKm(nearest.distanceKm)}</strong> 公里{where}
+        你附近 <strong>{radius}</strong> 公里內有 <strong className={styles.recordCount}>{total}</strong> 筆{name}
+        的紀錄，最近一筆約 <strong>{formatKm(nearest.distanceKm)}</strong> 公里{where}
       </p>
     )
   }
   if (nearest) {
     return (
       <p className={styles.nearbySummary}>
-        你附近 {radius} 公里內沒有紀錄。最近的紀錄約在 <strong>{formatKm(nearest.distanceKm)}</strong> 公里外{where}
+        你附近 <strong>{radius}</strong> 公里內沒有紀錄。最近的紀錄約在{' '}
+        <strong>{formatKm(nearest.distanceKm)}</strong> 公里外{where}
       </p>
     )
   }
