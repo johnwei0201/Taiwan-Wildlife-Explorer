@@ -26,13 +26,18 @@
   display: none;
 }
 
-/* 按鈕裡中文在上、英文在下（直向排列、置中） */
+/* 按鈕裡中文在上、英文在下（直向排列、置中）
+   高度固定 42px＝加英文之前的高度（上下 8px 留白＋24px 行高＋框線），多了一行英文也不變高：
+   上下留白拿掉、中文行高縮成 20px，中英兩行（20＋13＝33px）在 42px 裡垂直置中 */
 .tab {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   flex-shrink: 0;
-  padding: var(--space-2) var(--space-4);
+  height: 42px;
+  padding: 0 var(--space-4);
+  line-height: 1.25;
   border: 1px solid var(--color-border);
   border-radius: var(--radius-sm); /* 6px 圓角的方形按鈕 */
   background-color: var(--color-surface);
