@@ -59,11 +59,11 @@
   padding-right: var(--space-4);
 }
 
-/* 圖片依高度縮放、寬度自動：手機 40px、平板 48px、桌機 56px 高 */
+/* 圖片依高度縮放、寬度自動：手機 48px、平板 60px、桌機 72px 高（頁首高度分別是 60、76、88px，上下各留一點空間） */
 .logoImage {
   display: block;
   width: auto;
-  height: 40px;
+  height: 48px;
 }
 
 /* 漢堡按鈕：三條線用一個 span 加上 ::before / ::after 畫出來 */
@@ -154,7 +154,7 @@
 
   /* 平板：頁首比較高（76px），Logo 也跟著放大 */
   .logoImage {
-    height: 48px;
+    height: 60px;
   }
 
   .nav,
@@ -200,7 +200,7 @@
 /* ---------- 桌機：Logo 再大一點、搜尋框再寬一點 ---------- */
 @media (min-width: 1200px) {
   .logoImage {
-    height: 56px;
+    height: 72px;
   }
 
   .search {
