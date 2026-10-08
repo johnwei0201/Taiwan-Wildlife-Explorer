@@ -5,15 +5,16 @@
   z-index: 100;
   color: #fff;
   box-shadow: var(--shadow-sm);
-  /* 底圖：森林插畫填滿整個頁首（cover：等比例放大到蓋滿，多的部分裁掉，不會變形）
-     上面疊一層半透明的深綠色：插畫是淺綠色，直接放白字會看不清楚
+  /* 底圖：森林插畫橫向排 4 張（每張寬 25%，高度依原比例），頁首比圖高時垂直方向也接著重複
+     上面疊一層半透明的深綠色（蓋滿、不重複）：插畫是淺綠色，直接放白字會看不清楚
      background-color 是圖片還沒載入時的底色 */
   background-color: var(--color-primary);
   background-image:
     linear-gradient(rgb(31 74 54 / 0.6), rgb(31 74 54 / 0.6)),
     url('../../assets/草叢_底.png');
-  background-size: cover;
-  background-position: center;
+  background-size: 100% 100%, 25% auto;
+  background-repeat: no-repeat, repeat;
+  background-position: center, left center;
 }
 
 /* 手機：第一行 Logo＋漢堡按鈕，第二行搜尋框（換行排列） */
