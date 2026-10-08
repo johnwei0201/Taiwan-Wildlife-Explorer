@@ -12,6 +12,7 @@
  *   npm run data -- --groups=lepidoptera,odonata
  *     → 只重抓指定的類群，其他類群保留原本的資料（加入新類群時用，不必全部重抓）
  *   npm run data -- --groups=domestic         → 只重抓家養動物（DOMESTIC 清單）
+ *   npm run data -- --groups=manual           → 只重抓手動收錄的物種（MANUAL 清單）
  */
 import { mkdir, readFile, writeFile } from 'node:fs/promises'
 
@@ -71,6 +72,16 @@ const DOMESTIC = [
   { wikidata: 'Q386047', nameZh: '中國鵝' },
   { wikidata: 'Q255503', nameZh: '歐洲家鵝' },
   { wikidata: 'Q848706', nameZh: '火雞' },
+]
+
+// 手動收錄：研究級紀錄不到門檻、但一般人常遇到、會想查的物種
+//   例如台灣鋏蠓（小黑蚊）身體只有 1 公釐多，照片很難鑑定到種，研究級紀錄只有 11 筆
+//   之後紀錄變多、超過門檻時，一般查詢就會抓到，這裡的設定會自動略過，不會重複
+//   aliases：俗名，搜尋時也找得到（例如搜尋「小黑蚊」找到臺灣鋏蠓）
+const MANUAL = [
+  { inatTaxonId: 827963, group: 'diptera', aliases: ['小黑蚊'] }, // 台灣鋏蠓：叮咬後奇癢，台灣中南部山區很常見
+  { inatTaxonId: 130032, group: 'diptera' }, // 混雜家蚊（尖音家蚊）：家裡最常見的蚊子之一
+  { inatTaxonId: 155309, group: 'diptera' }, // 熱帶家蚊：會傳播絲蟲病
 ]
 
 // 排除清單：一般查詢不收的物種
@@ -177,9 +188,9 @@ async function fetchInatIdFromWikidata(wikidataId) {
   return Number(id)
 }
 
-// 家養動物：直接查物種資料，觀察數用台灣全部等級的紀錄（家養的紀錄幾乎都是一般級）
+// 直接查指定的物種（家養動物、手動收錄），觀察數用台灣全部等級的紀錄（這些物種的研究級紀錄很少）
 //   回傳和 species_counts 相同的格式 { count, taxon }，後面可以共用 buildSpecies
-async function fetchDomesticSpecies(item) {
+async function fetchSpeciesById(item) {
   const taxonId = item.inatTaxonId ?? (await fetchInatIdFromWikidata(item.wikidata))
   const taxonData = await fetchJson(`${INAT_API}/taxa/${taxonId}?locale=zh-TW`)
   await sleep(REQUEST_DELAY_MS)
@@ -202,6 +213,23 @@ async function findLicensedPhoto(taxonId) {
   return null
 }
 
+// 物種的照片全都沒有 CC 授權時，改從觀察紀錄找：只看研究級（物種已經被其他人確認），依按讚數挑拍得好的
+//   觀察紀錄的照片沒有作者欄位，作者就是上傳的人：有填名字用名字，沒填就用帳號
+const CC_LICENSES = 'cc0,cc-by,cc-by-nc,cc-by-sa,cc-by-nd,cc-by-nc-sa,cc-by-nc-nd'
+
+async function findObservationPhoto(taxonId) {
+  const data = await fetchJson(
+    `${INAT_API}/observations?taxon_id=${taxonId}&quality_grade=research&photos=true` +
+      `&photo_license=${CC_LICENSES}&order_by=votes&per_page=5`,
+  )
+  await sleep(REQUEST_DELAY_MS)
+  for (const obs of data.results) {
+    const photo = toPhoto(obs.photos?.find((p) => p.license_code))
+    if (photo) return { ...photo, author: obs.user?.name || obs.user?.login || photo.author }
+  }
+  return null
+}
+
 // ---------- ② TaiCOL ----------
 
 async function fetchTaicol(scientificName) {
@@ -220,6 +248,7 @@ async function buildSpecies(group, inatResult) {
 
   let photo = toPhoto(taxon.default_photo)
   if (!photo) photo = await findLicensedPhoto(taxon.id)
+  if (!photo) photo = await findObservationPhoto(taxon.id)
 
   return {
     id: taxon.id, // 用 iNaturalist taxon_id 當主鍵，之後即時查詢 API 會用到
@@ -243,6 +272,8 @@ async function main() {
   console.log(`開始整理資料（每個類群上限：${LIMIT === Infinity ? '全部' : LIMIT}）\n`)
   const groups = ONLY_GROUPS ? GROUPS.filter((g) => ONLY_GROUPS.includes(g.id)) : GROUPS
   const includeDomestic = !ONLY_GROUPS || ONLY_GROUPS.includes('domestic')
+  // 手動收錄的物種：指定 manual，或重抓它所屬的類群時（例如 diptera）一起重抓
+  const includeManual = (item) => !ONLY_GROUPS || ONLY_GROUPS.includes('manual') || ONLY_GROUPS.includes(item.group)
   const allSpecies = []
   const unmatched = [] // TaiCOL 對不上的物種，之後放進手動對照表
 
@@ -251,7 +282,12 @@ async function main() {
     const previous = JSON.parse(await readFile(`${OUTPUT_DIR}/species-list.json`, 'utf8'))
     const previousMeta = JSON.parse(await readFile(`${OUTPUT_DIR}/meta.json`, 'utf8'))
     // 家養動物另外用 domestic 標記判斷（早期的資料類群是 mammalia、aves，避免重抓後重複）
-    const kept = previous.filter((s) => !ONLY_GROUPS.includes(s.group) && !(includeDomestic && s.domestic))
+    const kept = previous.filter(
+      (s) =>
+        !ONLY_GROUPS.includes(s.group) &&
+        !(includeDomestic && s.domestic) &&
+        !(ONLY_GROUPS.includes('manual') && s.manual),
+    )
     allSpecies.push(...kept)
     unmatched.push(...previousMeta.unmatched.filter((name) => kept.some((s) => s.nameSci === name)))
     console.log(`保留其他類群原本的資料：${kept.length} 種\n`)
@@ -276,11 +312,29 @@ async function main() {
   if (includeDomestic) {
     console.log('【家養動物】')
     for (const item of DOMESTIC) {
-      const species = await buildSpecies({ id: 'domestic' }, await fetchDomesticSpecies(item))
+      const species = await buildSpecies({ id: 'domestic' }, await fetchSpeciesById(item))
       species.nameZh = item.nameZh
       if (item.wikidata) species.wikidataId = item.wikidata
       species.domestic = true
       allSpecies.push(species)
+      console.log(`  ${species.nameZh ?? '（無中文名）'} ${species.nameSci}${species.photo ? '' : ' ⚠️無授權照片'}`)
+    }
+  }
+
+  const manualItems = MANUAL.filter(includeManual)
+  if (manualItems.length > 0) {
+    console.log('【手動收錄】')
+    for (const item of manualItems) {
+      // 已經達到門檻、一般查詢抓到了，就不必再加
+      if (allSpecies.some((s) => s.id === item.inatTaxonId)) {
+        console.log(`  略過 ${item.inatTaxonId}：一般查詢已經收錄`)
+        continue
+      }
+      const species = await buildSpecies({ id: item.group }, await fetchSpeciesById(item))
+      species.manual = true
+      if (item.aliases) species.aliases = item.aliases
+      allSpecies.push(species)
+      if (!species.taicolId) unmatched.push(species.nameSci)
       console.log(`  ${species.nameZh ?? '（無中文名）'} ${species.nameSci}${species.photo ? '' : ' ⚠️無授權照片'}`)
     }
   }

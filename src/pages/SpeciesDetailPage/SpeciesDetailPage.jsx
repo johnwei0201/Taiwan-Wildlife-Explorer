@@ -229,6 +229,11 @@ function SpeciesHero({ taxon, local, displayName, speciesList }) {
   // 家養動物只標「家養動物」，不再標外來種（和卡片一樣，避免意思重複）
   const alienLabel = local?.domestic ? null : ALIEN_LABELS[local?.alienType]
   const redlistLabel = REDLIST_LABELS[local?.redlist]
+  // iNaturalist 的物種照片全都沒有 CC 授權時（例如臺灣鋏蠓），改用資料腳本從觀察紀錄找到的照片
+  const heroPhotos =
+    taxon.photos.length > 0 || !local?.photo
+      ? taxon.photos
+      : [{ ...local.photo, largeUrl: local.photo.url.replace('/medium.', '/large.') }]
   // 從界到種的完整分類：「種」就是這個物種本身，其他層從 ancestors 找
   const taxonomy = TAXONOMY_RANKS.map((rankInfo) => ({
     ...rankInfo,
@@ -250,7 +255,7 @@ function SpeciesHero({ taxon, local, displayName, speciesList }) {
 
   return (
     <section className={styles.hero}>
-      <PhotoGallery photos={taxon.photos} alt={displayName} />
+      <PhotoGallery photos={heroPhotos} alt={displayName} />
 
       <div>
         <h1 className={styles.nameZh}>{displayName}</h1>

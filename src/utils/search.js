@@ -23,6 +23,8 @@ export function searchText(species) {
       species.family?.nameSci,
       species.order?.nameZh,
       species.order?.nameSci,
+      // 俗名（例如臺灣鋏蠓的「小黑蚊」）
+      ...(species.aliases ?? []),
       // 有幼蟲照片的蝴蝶、蛾：搜尋「毛毛蟲」「幼蟲」也找得到
       species.larvaPhoto ? '毛毛蟲 幼蟲' : '',
     ].join(' '),

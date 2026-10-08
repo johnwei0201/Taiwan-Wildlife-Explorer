@@ -57827,6 +57827,59 @@
     }
   },
   {
+    "id": 130032,
+    "taicolId": "t0097856",
+    "group": "diptera",
+    "nameZh": "混雜家蚊",
+    "nameSci": "Culex pipiens",
+    "nameEn": "Common house mosquito",
+    "endemic": null,
+    "alienType": "native",
+    "protectedLevel": null,
+    "redlist": null,
+    "observationsCount": 142,
+    "photo": {
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/190302/medium.jpg",
+      "author": "David Marquina Reyes",
+      "license": "CC BY-NC-ND"
+    },
+    "manual": true,
+    "class": {
+      "nameSci": "Insecta",
+      "nameZh": "昆蟲綱"
+    },
+    "order": {
+      "nameSci": "Diptera",
+      "nameZh": "雙翅目"
+    },
+    "suborder": {
+      "nameSci": "Nematocera",
+      "nameZh": "長角亞目"
+    },
+    "infraorder": {
+      "nameSci": "Culicomorpha",
+      "nameZh": "蚊下目"
+    },
+    "family": {
+      "nameSci": "Culicidae",
+      "nameZh": "蚊科"
+    },
+    "subfamily": {
+      "nameSci": "Culicinae",
+      "nameZh": "家蚊亞科"
+    },
+    "genus": {
+      "nameSci": "Culex",
+      "nameZh": "家蚊屬"
+    },
+    "shape": "蚊子、大蚊（腳細長）",
+    "size": 2,
+    "colors": [
+      "褐",
+      "灰"
+    ]
+  },
+  {
     "id": 141617,
     "taicolId": "t0098298",
     "group": "lepidoptera",
@@ -91438,6 +91491,59 @@
     ]
   },
   {
+    "id": 155309,
+    "taicolId": "t0079798",
+    "group": "diptera",
+    "nameZh": "熱帶家蚊",
+    "nameSci": "Culex quinquefasciatus",
+    "nameEn": "Southern House Mosquito",
+    "endemic": false,
+    "alienType": "native",
+    "protectedLevel": null,
+    "redlist": null,
+    "observationsCount": 63,
+    "photo": {
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/190540/medium.jpg",
+      "author": "Sean McCann",
+      "license": "CC BY-NC-SA"
+    },
+    "manual": true,
+    "class": {
+      "nameSci": "Insecta",
+      "nameZh": "昆蟲綱"
+    },
+    "order": {
+      "nameSci": "Diptera",
+      "nameZh": "雙翅目"
+    },
+    "suborder": {
+      "nameSci": "Nematocera",
+      "nameZh": "長角亞目"
+    },
+    "infraorder": {
+      "nameSci": "Culicomorpha",
+      "nameZh": "蚊下目"
+    },
+    "family": {
+      "nameSci": "Culicidae",
+      "nameZh": "蚊科"
+    },
+    "subfamily": {
+      "nameSci": "Culicinae",
+      "nameZh": "家蚊亞科"
+    },
+    "genus": {
+      "nameSci": "Culex",
+      "nameZh": "家蚊屬"
+    },
+    "shape": "蚊子、大蚊（腳細長）",
+    "size": 1,
+    "colors": [
+      "褐",
+      "灰"
+    ]
+  },
+  {
     "id": 34610,
     "taicolId": "t0064363",
     "group": "reptilia",
@@ -110522,6 +110628,62 @@
       "黑",
       "黃",
       "橙"
+    ]
+  },
+  {
+    "id": 827963,
+    "taicolId": "t0063980",
+    "group": "diptera",
+    "nameZh": "臺灣鋏蠓",
+    "nameSci": "Forcipomyia taiwana",
+    "nameEn": "Little Black Mosquito",
+    "endemic": false,
+    "alienType": "native",
+    "protectedLevel": null,
+    "redlist": null,
+    "observationsCount": 44,
+    "photo": {
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/602424256/medium.jpg",
+      "author": "Zheng-An Wang",
+      "license": "CC BY"
+    },
+    "manual": true,
+    "class": {
+      "nameSci": "Insecta",
+      "nameZh": "昆蟲綱"
+    },
+    "order": {
+      "nameSci": "Diptera",
+      "nameZh": "雙翅目"
+    },
+    "suborder": {
+      "nameSci": "Nematocera",
+      "nameZh": "長角亞目"
+    },
+    "infraorder": {
+      "nameSci": "Culicomorpha",
+      "nameZh": "蚊下目"
+    },
+    "family": {
+      "nameSci": "Ceratopogonidae",
+      "nameZh": "蠓科"
+    },
+    "subfamily": {
+      "nameSci": "Forcipomyiinae",
+      "nameZh": "鋏蠓亞科"
+    },
+    "genus": {
+      "nameSci": "Forcipomyia",
+      "nameZh": "鋏蠓屬"
+    },
+    "shape": "蠓（非常小，會叮人，例如小黑蚊）",
+    "size": 1,
+    "colors": [
+      "黑",
+      "灰"
+    ],
+    "aliases": [
+      "小黑蚊"
     ]
   },
   {

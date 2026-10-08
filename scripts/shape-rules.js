@@ -118,6 +118,7 @@ export const SHAPE_RULES = {
   ],
   diptera: [
     { label: '蚊子、大蚊（腳細長）', match: ['Culicidae', 'Tipulidae', 'Limoniidae', 'Chironomidae'] },
+    { label: '蠓（非常小，會叮人，例如小黑蚊）', match: ['Ceratopogonidae'] },
     { label: '食蚜蠅（像蜜蜂，常停在花上）', match: ['Syrphidae'] },
     { label: '蜂虻（毛茸茸，飛行時懸停）', match: ['Bombyliidae'] },
     { label: '虻（體型粗壯，眼睛很大）', match: ['Tabanidae', 'Stratiomyidae', 'Asilidae'] },
