@@ -53,26 +53,43 @@ const GROUPS = [
 
 // 家養動物：手動指定收錄，標記 domestic，網站上放在「家養動物」主題
 //   iNaturalist 把人養的動物標成「圈養」，只能是一般級、升不到研究級（例如雞的研究級紀錄是 0 筆），
-//   所以不能靠上面的研究級查詢，要直接指定 taxon_id；觀察數改用全部等級的紀錄
-//   domesticOnly：只在「家養動物」主題下看得到（雞、鴨不放進「鳥類」分頁，以免和野鳥混在一起）
+//   所以不能靠上面的研究級查詢，要直接指定物種；觀察數改用全部等級的紀錄
+//   wikidata：Wikidata 的編號。腳本從 Wikidata 讀出對應的 iNaturalist 編號（屬性 P3151），再到 iNaturalist 抓資料
+//             Wikidata 沒有對應的（例如家鴨），改用 inatTaxonId 直接指定
+//   domesticOnly：只在「家養動物」主題下看得到（家禽不放進「鳥類」分頁，以免和野鳥混在一起）
 //   nameZh：中文名直接指定。TaiCOL 用學名查雞會對到野生的祖先「紅原雞」，貓、狗也只寫「貓」、「犬」
 const DOMESTIC = [
-  { inatTaxonId: 118552, group: 'mammalia', nameZh: '家貓' },
-  { inatTaxonId: 47144, group: 'mammalia', nameZh: '家犬' },
-  { inatTaxonId: 505478, group: 'aves', nameZh: '雞', domesticOnly: true },
+  { wikidata: 'Q20980826', group: 'mammalia', nameZh: '家貓' },
+  { wikidata: 'Q20717272', group: 'mammalia', nameZh: '家犬' },
+  { wikidata: 'Q787', group: 'mammalia', nameZh: '家豬' },
+  { wikidata: 'Q2934', group: 'mammalia', nameZh: '家山羊' },
+  { wikidata: 'Q149017', group: 'mammalia', nameZh: '家兔' },
+  { wikidata: 'Q42710', group: 'mammalia', nameZh: '水牛' },
+  { wikidata: 'Q19610691', group: 'mammalia', nameZh: '家牛' },
+  { wikidata: 'Q780', group: 'aves', nameZh: '雞', domesticOnly: true },
   { inatTaxonId: 236935, group: 'aves', nameZh: '家鴨', domesticOnly: true },
+  // 家鵝有兩個來源：中國鵝（祖先是鴻雁，例如獅頭鵝）、歐洲家鵝（祖先是灰雁，例如白羅曼鵝）
+  { wikidata: 'Q386047', group: 'aves', nameZh: '中國鵝', domesticOnly: true },
+  { wikidata: 'Q255503', group: 'aves', nameZh: '歐洲家鵝', domesticOnly: true },
+  { wikidata: 'Q848706', group: 'aves', nameZh: '火雞', domesticOnly: true },
 ]
 
 // 排除清單：一般查詢不收的物種
-//   家貓、家犬有研究級紀錄，一般查詢會抓到，這裡排除，改由 DOMESTIC 收錄（避免重複）
+//   家養動物有些有研究級紀錄，一般查詢會抓到，這裡排除，改由 DOMESTIC 收錄（避免重複）
 const EXCLUDED_NAMES = new Set([
   'Felis catus', // 家貓
   'Canis familiaris', // 家犬
   'Canis lupus familiaris', // 家犬（另一種寫法）
   'Gallus gallus domesticus', // 雞
   'Anas platyrhynchos domesticus', // 家鴨
-  'Capra hircus', // 家羊
+  'Anser cygnoides domesticus', // 中國鵝
+  'Anser anser domesticus', // 歐洲家鵝
+  'Meleagris gallopavo domesticus', // 火雞
+  'Sus scrofa domesticus', // 家豬
+  'Oryctolagus cuniculus domesticus', // 家兔
+  'Capra hircus', // 家山羊
   'Bubalus bubalis', // 水牛
+  'Bos taurus', // 家牛
 ])
 
 // 雜交個體（學名含 ×，例如 Anas platyrhynchos × Cairina moschata）不是一個物種，也排除
@@ -152,13 +169,23 @@ async function fetchInatSpecies(group) {
   return results.slice(0, LIMIT)
 }
 
+// Wikidata 的物種項目記有 iNaturalist 編號（屬性 P3151）
+async function fetchInatIdFromWikidata(wikidataId) {
+  const data = await fetchJson(`https://www.wikidata.org/wiki/Special:EntityData/${wikidataId}.json`)
+  await sleep(REQUEST_DELAY_MS)
+  const id = data.entities[wikidataId]?.claims?.P3151?.[0]?.mainsnak?.datavalue?.value
+  if (!id) throw new Error(`Wikidata ${wikidataId} 沒有 iNaturalist 編號`)
+  return Number(id)
+}
+
 // 家養動物：直接查物種資料，觀察數用台灣全部等級的紀錄（家養的紀錄幾乎都是一般級）
 //   回傳和 species_counts 相同的格式 { count, taxon }，後面可以共用 buildSpecies
 async function fetchDomesticSpecies(item) {
-  const taxonData = await fetchJson(`${INAT_API}/taxa/${item.inatTaxonId}?locale=zh-TW`)
+  const taxonId = item.inatTaxonId ?? (await fetchInatIdFromWikidata(item.wikidata))
+  const taxonData = await fetchJson(`${INAT_API}/taxa/${taxonId}?locale=zh-TW`)
   await sleep(REQUEST_DELAY_MS)
   const countData = await fetchJson(
-    `${INAT_API}/observations?taxon_id=${item.inatTaxonId}&place_id=${TAIWAN_PLACE_ID}&per_page=0`,
+    `${INAT_API}/observations?taxon_id=${taxonId}&place_id=${TAIWAN_PLACE_ID}&per_page=0`,
   )
   await sleep(REQUEST_DELAY_MS)
   return { count: countData.total_results, taxon: taxonData.results[0] }
@@ -252,6 +279,7 @@ async function main() {
     for (const item of DOMESTIC) {
       const species = await buildSpecies({ id: item.group }, await fetchDomesticSpecies(item))
       species.nameZh = item.nameZh
+      if (item.wikidata) species.wikidataId = item.wikidata
       species.domestic = true
       if (item.domesticOnly) species.domesticOnly = true
       allSpecies.push(species)

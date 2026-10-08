@@ -80,7 +80,7 @@ export const COLLECTIONS = [
   { id: 'protected', label: '保育類', match: (s) => Boolean(s.protectedLevel) },
   // 外來種＝所有不是原生的物種（入侵種、歸化種、栽培豢養），卡片上會標出是哪一種
   { id: 'alien', label: '外來種', match: (s) => Boolean(s.alienType) && s.alienType !== 'native' },
-  // 家養動物（家貓、家犬、雞、家鴨）：資料腳本手動收錄的，不是野生動物
+  // 家養動物（貓、狗、豬、牛、羊、兔、雞、鴨、鵝、火雞）：資料腳本手動收錄的，不是野生動物
   { id: 'domestic', label: '家養動物', match: (s) => Boolean(s.domestic) },
 ]
 

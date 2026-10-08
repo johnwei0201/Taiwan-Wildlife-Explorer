@@ -1726,6 +1726,7 @@
       "author": "Von.grzanka",
       "license": "CC BY-SA"
     },
+    "wikidataId": "Q20980826",
     "domestic": true,
     "class": {
       "nameSci": "Mammalia",
@@ -2736,12 +2737,13 @@
     "alienType": "invasive",
     "protectedLevel": null,
     "redlist": null,
-    "observationsCount": 3601,
+    "observationsCount": 3602,
     "photo": {
       "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/307568930/medium.jpg",
       "author": "Alec Karcz",
       "license": "CC BY-NC"
     },
+    "wikidataId": "Q20717272",
     "domestic": true,
     "class": {
       "nameSci": "Mammalia",
@@ -3096,7 +3098,7 @@
       "nameSci": "Cervidae",
       "nameZh": "鹿科"
     },
-    "shape": "鹿、羊、野豬",
+    "shape": "鹿、羊、牛、豬",
     "size": 4,
     "colors": [
       "褐"
@@ -13255,7 +13257,7 @@
       "nameSci": "Bovidae",
       "nameZh": "牛科"
     },
-    "shape": "鹿、羊、野豬",
+    "shape": "鹿、羊、牛、豬",
     "size": 4,
     "colors": [
       "褐",
@@ -18986,6 +18988,58 @@
       "nameSci": "Iguana",
       "nameZh": "鬣蜥屬"
     }
+  },
+  {
+    "id": 123070,
+    "taicolId": "t0085384",
+    "group": "mammalia",
+    "nameZh": "家山羊",
+    "nameSci": "Capra hircus",
+    "nameEn": "Domestic Goat",
+    "endemic": false,
+    "alienType": "cultured",
+    "protectedLevel": null,
+    "redlist": null,
+    "observationsCount": 685,
+    "photo": {
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/6035700/medium.jpeg",
+      "author": "Jakob Fahr",
+      "license": "CC BY-NC"
+    },
+    "wikidataId": "Q2934",
+    "domestic": true,
+    "class": {
+      "nameSci": "Mammalia",
+      "nameZh": "哺乳類"
+    },
+    "order": {
+      "nameSci": "Artiodactyla",
+      "nameZh": "偶蹄目"
+    },
+    "suborder": {
+      "nameSci": "Ruminantia",
+      "nameZh": "反芻動物 (演化支)"
+    },
+    "infraorder": null,
+    "family": {
+      "nameSci": "Bovidae",
+      "nameZh": "牛科"
+    },
+    "subfamily": {
+      "nameSci": "Antilopinae",
+      "nameZh": "羚羊亞科"
+    },
+    "genus": {
+      "nameSci": "Capra",
+      "nameZh": "山羊屬"
+    },
+    "shape": "鹿、羊、牛、豬",
+    "size": 4,
+    "colors": [
+      "黑",
+      "白",
+      "褐"
+    ]
   },
   {
     "id": 66323,
@@ -25407,6 +25461,57 @@
     }
   },
   {
+    "id": 81925,
+    "taicolId": "t0076866",
+    "group": "mammalia",
+    "nameZh": "水牛",
+    "nameSci": "Bubalus bubalis",
+    "nameEn": "Domestic Water Buffalo",
+    "endemic": false,
+    "alienType": "cultured",
+    "protectedLevel": null,
+    "redlist": null,
+    "observationsCount": 470,
+    "photo": {
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/4666378/medium.jpg",
+      "author": "Giverny",
+      "license": "CC BY-NC"
+    },
+    "wikidataId": "Q42710",
+    "domestic": true,
+    "class": {
+      "nameSci": "Mammalia",
+      "nameZh": "哺乳類"
+    },
+    "order": {
+      "nameSci": "Artiodactyla",
+      "nameZh": "偶蹄目"
+    },
+    "suborder": {
+      "nameSci": "Ruminantia",
+      "nameZh": "反芻動物 (演化支)"
+    },
+    "infraorder": null,
+    "family": {
+      "nameSci": "Bovidae",
+      "nameZh": "牛科"
+    },
+    "subfamily": {
+      "nameSci": "Bovinae",
+      "nameZh": "牛亞科"
+    },
+    "genus": {
+      "nameSci": "Bubalus",
+      "nameZh": "水牛屬"
+    },
+    "shape": "鹿、羊、牛、豬",
+    "size": 5,
+    "colors": [
+      "灰",
+      "黑"
+    ]
+  },
+  {
     "id": 614907,
     "taicolId": "t0032823",
     "group": "fish",
@@ -26056,6 +26161,54 @@
       "license": "CC BY-NC",
       "observationUrl": "https://www.inaturalist.org/observations/34189643"
     }
+  },
+  {
+    "id": 333822,
+    "taicolId": null,
+    "group": "aves",
+    "nameZh": "中國鵝",
+    "nameSci": "Anser cygnoides domesticus",
+    "nameEn": "Domestic Swan Goose",
+    "endemic": false,
+    "alienType": null,
+    "protectedLevel": null,
+    "redlist": null,
+    "observationsCount": 453,
+    "photo": {
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/5656457/medium.jpg",
+      "author": "spheller",
+      "license": "CC BY-NC"
+    },
+    "wikidataId": "Q386047",
+    "domestic": true,
+    "domesticOnly": true,
+    "class": {
+      "nameSci": "Aves",
+      "nameZh": "鳥類"
+    },
+    "order": {
+      "nameSci": "Anseriformes",
+      "nameZh": "雁形目"
+    },
+    "suborder": null,
+    "infraorder": null,
+    "family": {
+      "nameSci": "Anatidae",
+      "nameZh": "鴨科"
+    },
+    "subfamily": null,
+    "genus": {
+      "nameSci": "Anser",
+      "nameZh": "雁屬"
+    },
+    "shape": "鴨子、雁鵝",
+    "size": 5,
+    "colors": [
+      "白",
+      "灰",
+      "褐",
+      "橙"
+    ]
   },
   {
     "id": 1110022,
@@ -35396,7 +35549,7 @@
       "nameSci": "Cervidae",
       "nameZh": "鹿科"
     },
-    "shape": "鹿、羊、野豬",
+    "shape": "鹿、羊、牛、豬",
     "size": 5,
     "colors": [
       "褐"
@@ -36150,7 +36303,7 @@
       "nameSci": "Suidae",
       "nameZh": "豬科"
     },
-    "shape": "鹿、羊、野豬",
+    "shape": "鹿、羊、牛、豬",
     "size": 4,
     "colors": [
       "黑",
@@ -36501,6 +36654,7 @@
       "author": "Svklimkin",
       "license": "CC BY-SA"
     },
+    "wikidataId": "Q780",
     "domestic": true,
     "domesticOnly": true,
     "class": {
@@ -37316,6 +37470,59 @@
       "nameSci": "Geothelphusa",
       "nameZh": "澤蟹屬"
     }
+  },
+  {
+    "id": 74113,
+    "taicolId": "t0107062",
+    "group": "mammalia",
+    "nameZh": "家牛",
+    "nameSci": "Bos taurus",
+    "nameEn": "Domestic Cattle",
+    "endemic": false,
+    "alienType": "cultured",
+    "protectedLevel": null,
+    "redlist": null,
+    "observationsCount": 268,
+    "photo": {
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/408007934/medium.jpeg",
+      "author": "jwillardz",
+      "license": "CC BY-NC"
+    },
+    "wikidataId": "Q19610691",
+    "domestic": true,
+    "class": {
+      "nameSci": "Mammalia",
+      "nameZh": "哺乳類"
+    },
+    "order": {
+      "nameSci": "Artiodactyla",
+      "nameZh": "偶蹄目"
+    },
+    "suborder": {
+      "nameSci": "Ruminantia",
+      "nameZh": "反芻動物 (演化支)"
+    },
+    "infraorder": null,
+    "family": {
+      "nameSci": "Bovidae",
+      "nameZh": "牛科"
+    },
+    "subfamily": {
+      "nameSci": "Bovinae",
+      "nameZh": "牛亞科"
+    },
+    "genus": {
+      "nameSci": "Bos",
+      "nameZh": "牛屬"
+    },
+    "shape": "鹿、羊、牛、豬",
+    "size": 5,
+    "colors": [
+      "褐",
+      "黃",
+      "黑",
+      "白"
+    ]
   },
   {
     "id": 601841,
@@ -46506,7 +46713,7 @@
       "nameSci": "Cervidae",
       "nameZh": "鹿科"
     },
-    "shape": "鹿、羊、野豬",
+    "shape": "鹿、羊、牛、豬",
     "size": 4,
     "colors": [
       "褐",
@@ -57884,6 +58091,53 @@
       "nameSci": "Paraleptuca",
       "nameZh": "擬瘦招潮屬"
     }
+  },
+  {
+    "id": 120479,
+    "taicolId": "t0057686",
+    "group": "aves",
+    "nameZh": "歐洲家鵝",
+    "nameSci": "Anser anser domesticus",
+    "nameEn": "Domestic Greylag Goose",
+    "endemic": false,
+    "alienType": "cultured",
+    "protectedLevel": null,
+    "redlist": null,
+    "observationsCount": 141,
+    "photo": {
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/338955166/medium.jpg",
+      "author": "Marleigh Fletcher",
+      "license": "CC BY-NC"
+    },
+    "wikidataId": "Q255503",
+    "domestic": true,
+    "domesticOnly": true,
+    "class": {
+      "nameSci": "Aves",
+      "nameZh": "鳥類"
+    },
+    "order": {
+      "nameSci": "Anseriformes",
+      "nameZh": "雁形目"
+    },
+    "suborder": null,
+    "infraorder": null,
+    "family": {
+      "nameSci": "Anatidae",
+      "nameZh": "鴨科"
+    },
+    "subfamily": null,
+    "genus": {
+      "nameSci": "Anser",
+      "nameZh": "雁屬"
+    },
+    "shape": "鴨子、雁鵝",
+    "size": 5,
+    "colors": [
+      "白",
+      "灰",
+      "橙"
+    ]
   },
   {
     "id": 4843,
@@ -73914,6 +74168,53 @@
     "size": 3,
     "colors": [
       "黃",
+      "黑"
+    ]
+  },
+  {
+    "id": 334341,
+    "taicolId": null,
+    "group": "mammalia",
+    "nameZh": "家兔",
+    "nameSci": "Oryctolagus cuniculus domesticus",
+    "nameEn": "Domestic Rabbit",
+    "endemic": false,
+    "alienType": null,
+    "protectedLevel": null,
+    "redlist": null,
+    "observationsCount": 91,
+    "photo": {
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/262129758/medium.jpg",
+      "author": "Paul Korecky",
+      "license": "CC BY-SA"
+    },
+    "wikidataId": "Q149017",
+    "domestic": true,
+    "class": {
+      "nameSci": "Mammalia",
+      "nameZh": "哺乳類"
+    },
+    "order": {
+      "nameSci": "Lagomorpha",
+      "nameZh": "兔形目"
+    },
+    "suborder": null,
+    "infraorder": null,
+    "family": {
+      "nameSci": "Leporidae",
+      "nameZh": "兔科"
+    },
+    "subfamily": null,
+    "genus": {
+      "nameSci": "Oryctolagus",
+      "nameZh": "穴兔屬"
+    },
+    "shape": "兔子",
+    "size": 3,
+    "colors": [
+      "白",
+      "灰",
+      "褐",
       "黑"
     ]
   },
@@ -91913,6 +92214,57 @@
       "黑",
       "紅",
       "橙"
+    ]
+  },
+  {
+    "id": 324492,
+    "taicolId": null,
+    "group": "mammalia",
+    "nameZh": "家豬",
+    "nameSci": "Sus scrofa domesticus",
+    "nameEn": "Domestic Pig",
+    "endemic": false,
+    "alienType": null,
+    "protectedLevel": null,
+    "redlist": null,
+    "observationsCount": 62,
+    "photo": {
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/267631414/medium.jpeg",
+      "author": "\nSteven Lek",
+      "license": "PD"
+    },
+    "wikidataId": "Q787",
+    "domestic": true,
+    "class": {
+      "nameSci": "Mammalia",
+      "nameZh": "哺乳類"
+    },
+    "order": {
+      "nameSci": "Artiodactyla",
+      "nameZh": "偶蹄目"
+    },
+    "suborder": {
+      "nameSci": "Suina",
+      "nameZh": null
+    },
+    "infraorder": null,
+    "family": {
+      "nameSci": "Suidae",
+      "nameZh": "豬科"
+    },
+    "subfamily": {
+      "nameSci": "Suinae",
+      "nameZh": null
+    },
+    "genus": {
+      "nameSci": "Sus",
+      "nameZh": "豬屬"
+    },
+    "shape": "鹿、羊、牛、豬",
+    "size": 5,
+    "colors": [
+      "白",
+      "黑"
     ]
   },
   {
@@ -161824,6 +162176,54 @@
       "nameSci": "Kerivoula",
       "nameZh": "彩蝠屬"
     }
+  },
+  {
+    "id": 524794,
+    "taicolId": null,
+    "group": "aves",
+    "nameZh": "火雞",
+    "nameSci": "Meleagris gallopavo domesticus",
+    "nameEn": "Domestic Turkey",
+    "endemic": false,
+    "alienType": null,
+    "protectedLevel": null,
+    "redlist": null,
+    "observationsCount": 17,
+    "photo": {
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/147633618/medium.jpg",
+      "author": "Mtshad",
+      "license": "CC BY-SA"
+    },
+    "wikidataId": "Q848706",
+    "domestic": true,
+    "domesticOnly": true,
+    "class": {
+      "nameSci": "Aves",
+      "nameZh": "鳥類"
+    },
+    "order": {
+      "nameSci": "Galliformes",
+      "nameZh": "雞形目"
+    },
+    "suborder": null,
+    "infraorder": null,
+    "family": {
+      "nameSci": "Phasianidae",
+      "nameZh": "雉科"
+    },
+    "subfamily": null,
+    "genus": {
+      "nameSci": "Meleagris",
+      "nameZh": null
+    },
+    "shape": "雞、雉、鶉",
+    "size": 5,
+    "colors": [
+      "黑",
+      "褐",
+      "白",
+      "紅"
+    ]
   },
   {
     "id": 40146,

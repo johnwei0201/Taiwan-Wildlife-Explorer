@@ -9,6 +9,8 @@ import TaxonomyTable from '../../components/TaxonomyTable/TaxonomyTable.jsx'
 import TaxonPath from '../../components/TaxonPath/TaxonPath.jsx'
 import { RANK_ORDER, cleanZh, filterByTaxon } from '../../utils/taxon.js'
 import InfoTag from '../../components/InfoTag/InfoTag.jsx'
+import AdoptionList from '../../components/AdoptionList/AdoptionList.jsx'
+import BreedList from '../../components/BreedList/BreedList.jsx'
 import {
   fetchTaxon,
   fetchMonthlyCounts,
@@ -37,6 +39,9 @@ import {
 import styles from './SpeciesDetailPage.module.css'
 
 const RADIUS_OPTIONS = [1, 5, 10] // 公里
+
+// 家貓、家犬多兩個區塊：收容所等待認養的貓狗、品種介紹（大多數人對貓狗最有興趣）
+const PET_KINDS = { 'Felis catus': 'cat', 'Canis familiaris': 'dog' }
 
 export default function SpeciesDetailPage() {
   const { id } = useParams()
@@ -70,6 +75,8 @@ export default function SpeciesDetailPage() {
     [id, isLepidoptera],
   )
 
+  const petKind = PET_KINDS[local?.nameSci]
+
   // 瀏覽器分頁標題顯示物種名稱
   const displayName = local?.nameZh ?? taxon.data?.nameZh ?? taxon.data?.nameSci
   useEffect(() => {
@@ -92,6 +99,21 @@ export default function SpeciesDetailPage() {
       )}
 
       {isLepidoptera && <LarvaPhotos larva={larva} name={displayName} />}
+
+      {petKind && (
+        <>
+          <section className={styles.section}>
+            <h2 className={styles.sectionTitle}>等你帶回家</h2>
+            <p className={styles.sectionNote}>全台公立收容所正在等待認養的{petKind === 'cat' ? '貓' : '狗'}，資料每天更新</p>
+            <AdoptionList kind={petKind} />
+          </section>
+          <section className={styles.section}>
+            <h2 className={styles.sectionTitle}>{petKind === 'cat' ? '貓' : '狗'}的品種</h2>
+            <p className={styles.sectionNote}>依知名度排序，點卡片可以到維基百科看完整介紹</p>
+            <BreedList kind={petKind} />
+          </section>
+        </>
+      )}
 
       <section className={styles.section}>
         <h2 className={styles.sectionTitle}>月份出現分布</h2>

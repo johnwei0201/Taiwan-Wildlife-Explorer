@@ -35,7 +35,7 @@ export const SHAPE_RULES = {
   mammalia: [
     { label: '蝙蝠', match: ['Chiroptera'] },
     { label: '鯨、豚、海豹', match: ['Balaenopteridae', 'Delphinidae', 'Kogiidae', 'Phocoenidae', 'Physeteridae', 'Ziphiidae', 'Phocidae'] },
-    { label: '鹿、羊、野豬', match: ['Cervidae', 'Bovidae', 'Suidae'] },
+    { label: '鹿、羊、牛、豬', match: ['Cervidae', 'Bovidae', 'Suidae'] },
     { label: '猴子', match: ['Primates'] },
     { label: '熊', match: ['Ursidae'] },
     { label: '貓、鼬、白鼻心（食肉動物）', match: ['Felidae', 'Herpestidae', 'Mustelidae', 'Viverridae'] },
