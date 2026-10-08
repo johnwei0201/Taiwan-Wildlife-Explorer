@@ -152,6 +152,14 @@ export const SHAPE_RULES = {
     { label: '狼蛛、貓蛛（在地面或葉上遊走捕食）', match: ['Lycosidae', 'Pisauridae', 'Oxyopidae'] },
     { label: '其他蜘蛛', match: ['Araneae'] },
   ],
+  // 名字有「蠍」的不一定是蠍子：只有蠍目尾巴末端有毒針；鞭蠍、鞭蛛都不會螫人
+  arachnid_other: [
+    { label: '蠍子（尾巴末端有毒針）', match: ['Scorpiones'] },
+    { label: '鞭蠍（尾巴像細鞭子，沒有毒針）', match: ['Uropygi', 'Thelyphonida'] },
+    { label: '鞭蛛（沒有尾巴，前腳像長鞭）', match: ['Amblypygi'] },
+    { label: '盲蛛（身體圓、腳非常長）', match: ['Opiliones'] },
+    { label: '蟎（非常小，要靠近看）', match: ['Trombidiformes', 'Sarcoptiformes', 'Mesostigmata', 'Ixodida'] },
+  ],
   myriapoda: [
     // 蚰蜒也是唇足綱，所以要放在「蜈蚣」那條規則前面，先被比對到
     { label: '蚰蜒（腳非常長，常出現在浴室、牆角）', match: ['Scutigeromorpha'] },

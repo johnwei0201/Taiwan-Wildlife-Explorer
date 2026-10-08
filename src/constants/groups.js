@@ -4,6 +4,8 @@
 //   subgroups     → 第二層小分類：第一層只放「綱」這一級（鳥類、昆蟲類…），
 //                   「目」這一級（蝴蝶、蜻蜓…）放在第二層，之後加新類群時第一層不會一直變長
 const byGroup = (...ids) => (s) => ids.includes(s.group)
+// 依「目」的學名分小分類（例如蛛形類底下的蠍子、盲蛛）
+const byOrder = (...names) => (s) => names.includes(s.order?.nameSci)
 
 export const GROUPS = [
   { id: 'all', label: '全部', kind: 'all', match: () => true },
@@ -37,8 +39,20 @@ export const GROUPS = [
       { id: 'phasmida', label: '竹節蟲', match: byGroup('phasmida') },
     ],
   },
-  // 蜘蛛有 8 隻腳、身體分兩段，不是昆蟲，屬於蛛形綱；之後的蠍子、盲蛛也放在這裡
-  { id: 'arachnida', label: '蛛形類', kind: 'group', match: byGroup('araneae') },
+  // 蜘蛛、蠍子有 8 隻腳、身體分兩段、沒有觸角，不是昆蟲，屬於蛛形綱；第二層依「目」分
+  {
+    id: 'arachnida',
+    label: '蛛形類',
+    kind: 'group',
+    match: byGroup('araneae', 'arachnid_other'),
+    subgroups: [
+      { id: 'araneae', label: '蜘蛛', match: byGroup('araneae') },
+      // 鞭蠍、鞭蛛名字有「蠍」、長得也像，和真正的蠍子放在一起，外型篩選再分開
+      { id: 'scorpion', label: '蠍子、鞭蠍', match: byOrder('Scorpiones', 'Uropygi', 'Thelyphonida', 'Amblypygi') },
+      { id: 'harvestman', label: '盲蛛', match: byOrder('Opiliones') },
+      { id: 'mite', label: '蟎', match: byOrder('Trombidiformes', 'Sarcoptiformes', 'Mesostigmata', 'Ixodida') },
+    ],
+  },
   // 蜈蚣、馬陸腳很多、身體分很多節，也不是昆蟲，屬於多足類；第二層依「綱」分
   {
     id: 'myriapoda',

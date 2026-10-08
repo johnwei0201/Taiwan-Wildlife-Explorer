@@ -5706,6 +5706,52 @@
     }
   },
   {
+    "id": 549041,
+    "taicolId": "t0048320",
+    "group": "arachnid_other",
+    "nameZh": "十字盾鞭蠍",
+    "nameSci": "Typopeltis crucifer",
+    "nameEn": "Taiwan whipscorpion",
+    "endemic": false,
+    "alienType": "native",
+    "protectedLevel": null,
+    "redlist": null,
+    "observationsCount": 2128,
+    "photo": {
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/23780238/medium.jpg",
+      "author": "張智偉(Chang, Jack, Chih-Wei)",
+      "license": "CC BY-NC"
+    },
+    "class": {
+      "nameSci": "Arachnida",
+      "nameZh": "蛛形綱"
+    },
+    "order": {
+      "nameSci": "Uropygi",
+      "nameZh": "鞭蠍目"
+    },
+    "suborder": null,
+    "infraorder": null,
+    "family": {
+      "nameSci": "Thelyphonidae",
+      "nameZh": "鞭蠍科"
+    },
+    "subfamily": {
+      "nameSci": "Typopeltinae",
+      "nameZh": null
+    },
+    "genus": {
+      "nameSci": "Typopeltis",
+      "nameZh": null
+    },
+    "shape": "鞭蠍（尾巴像細鞭子，沒有毒針）",
+    "size": 4,
+    "colors": [
+      "黑",
+      "褐"
+    ]
+  },
+  {
     "id": 108344,
     "taicolId": "t0082932",
     "group": "odonata",
@@ -64832,6 +64878,51 @@
     }
   },
   {
+    "id": 1651404,
+    "taicolId": null,
+    "group": "arachnid_other",
+    "nameZh": "臺灣平丘盲蛛",
+    "nameSci": "Pseudoliobunum maximum",
+    "nameEn": null,
+    "endemic": false,
+    "alienType": null,
+    "protectedLevel": null,
+    "redlist": null,
+    "observationsCount": 102,
+    "photo": null,
+    "class": {
+      "nameSci": "Arachnida",
+      "nameZh": "蛛形綱"
+    },
+    "order": {
+      "nameSci": "Opiliones",
+      "nameZh": "盲蛛目"
+    },
+    "suborder": {
+      "nameSci": "Eupnoi",
+      "nameZh": "開氣門亞目"
+    },
+    "infraorder": null,
+    "family": {
+      "nameSci": "Sclerosomatidae",
+      "nameZh": "硬體盲蛛科"
+    },
+    "subfamily": {
+      "nameSci": "Leiobuninae",
+      "nameZh": null
+    },
+    "genus": {
+      "nameSci": "Pseudoliobunum",
+      "nameZh": null
+    },
+    "shape": "盲蛛（身體圓、腳非常長）",
+    "size": 2,
+    "colors": [
+      "褐",
+      "黃"
+    ]
+  },
+  {
     "id": 244134,
     "taicolId": "t0050695",
     "group": "moth",
@@ -75476,6 +75567,56 @@
     }
   },
   {
+    "id": 203333,
+    "taicolId": "t0033332",
+    "group": "arachnid_other",
+    "nameZh": "二點葉蟎",
+    "nameSci": "Tetranychus urticae",
+    "nameEn": "Twospotted Spider Mite",
+    "endemic": false,
+    "alienType": "invasive",
+    "protectedLevel": null,
+    "redlist": null,
+    "observationsCount": 80,
+    "photo": {
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/1696964/medium.jpg",
+      "author": "Gilles San Martin",
+      "license": "CC BY-SA"
+    },
+    "class": {
+      "nameSci": "Arachnida",
+      "nameZh": "蛛形綱"
+    },
+    "order": {
+      "nameSci": "Trombidiformes",
+      "nameZh": "絨蟎目"
+    },
+    "suborder": {
+      "nameSci": "Prostigmata",
+      "nameZh": "前氣門亞目"
+    },
+    "infraorder": {
+      "nameSci": "Eleutherengona",
+      "nameZh": null
+    },
+    "family": {
+      "nameSci": "Tetranychidae",
+      "nameZh": "葉蟎科"
+    },
+    "subfamily": null,
+    "genus": {
+      "nameSci": "Tetranychus",
+      "nameZh": "葉蟎屬"
+    },
+    "shape": "蟎（非常小，要靠近看）",
+    "size": 1,
+    "colors": [
+      "綠",
+      "黃",
+      "紅"
+    ]
+  },
+  {
     "id": 1650558,
     "taicolId": "t0098684",
     "group": "aves",
@@ -84897,6 +85038,55 @@
       "nameSci": "Atergatis",
       "nameZh": null
     }
+  },
+  {
+    "id": 361989,
+    "taicolId": "t0067565",
+    "group": "arachnid_other",
+    "nameZh": "澳洲鍊蠍",
+    "nameSci": "Liocheles australasiae",
+    "nameEn": "Dwarf Wood Scorpion",
+    "endemic": false,
+    "alienType": "native",
+    "protectedLevel": null,
+    "redlist": null,
+    "observationsCount": 63,
+    "photo": {
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/194225217/medium.jpg",
+      "author": "sashahaldane",
+      "license": "CC BY-NC"
+    },
+    "class": {
+      "nameSci": "Arachnida",
+      "nameZh": "蛛形綱"
+    },
+    "order": {
+      "nameSci": "Scorpiones",
+      "nameZh": "蠍目"
+    },
+    "suborder": {
+      "nameSci": "Neoscorpionina",
+      "nameZh": null
+    },
+    "infraorder": {
+      "nameSci": "Orthosterni",
+      "nameZh": null
+    },
+    "family": {
+      "nameSci": "Hormuridae",
+      "nameZh": "鏈尾蠍科"
+    },
+    "subfamily": null,
+    "genus": {
+      "nameSci": "Liocheles",
+      "nameZh": "滑螯蠍属"
+    },
+    "shape": "蠍子（尾巴末端有毒針）",
+    "size": 3,
+    "colors": [
+      "黑",
+      "褐"
+    ]
   },
   {
     "id": 34610,
@@ -96919,6 +97109,56 @@
     }
   },
   {
+    "id": 363789,
+    "taicolId": null,
+    "group": "arachnid_other",
+    "nameZh": "越南欉木蠍",
+    "nameSci": "Isometrus maculatus",
+    "nameEn": "Lesser Brown Scorpion",
+    "endemic": false,
+    "alienType": null,
+    "protectedLevel": null,
+    "redlist": null,
+    "observationsCount": 50,
+    "photo": {
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/532140756/medium.jpg",
+      "author": "Thilina Hettiarachchi",
+      "license": "CC BY-NC"
+    },
+    "class": {
+      "nameSci": "Arachnida",
+      "nameZh": "蛛形綱"
+    },
+    "order": {
+      "nameSci": "Scorpiones",
+      "nameZh": "蠍目"
+    },
+    "suborder": {
+      "nameSci": "Neoscorpionina",
+      "nameZh": null
+    },
+    "infraorder": {
+      "nameSci": "Orthosterni",
+      "nameZh": null
+    },
+    "family": {
+      "nameSci": "Buthidae",
+      "nameZh": "殺牛蠍科"
+    },
+    "subfamily": null,
+    "genus": {
+      "nameSci": "Isometrus",
+      "nameZh": null
+    },
+    "shape": "蠍子（尾巴末端有毒針）",
+    "size": 4,
+    "colors": [
+      "黃",
+      "褐",
+      "黑"
+    ]
+  },
+  {
     "id": 7128,
     "taicolId": "t0098051",
     "group": "aves",
@@ -101766,6 +102006,55 @@
       "nameSci": "Poltys",
       "nameZh": "錐頭蛛屬"
     }
+  },
+  {
+    "id": 862103,
+    "taicolId": "t0069865",
+    "group": "arachnid_other",
+    "nameZh": "江某畸節蜱",
+    "nameSci": "Abacarus eminens",
+    "nameEn": null,
+    "endemic": true,
+    "alienType": "native",
+    "protectedLevel": null,
+    "redlist": null,
+    "observationsCount": 45,
+    "photo": {
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/33025940/medium.jpeg",
+      "author": "Max Hsieh(雁子)",
+      "license": "CC BY-NC"
+    },
+    "class": {
+      "nameSci": "Arachnida",
+      "nameZh": "蛛形綱"
+    },
+    "order": {
+      "nameSci": "Sarcoptiformes",
+      "nameZh": "疥蟎目"
+    },
+    "suborder": {
+      "nameSci": "Endeostigmata",
+      "nameZh": null
+    },
+    "infraorder": null,
+    "family": {
+      "nameSci": "Eriophyidae",
+      "nameZh": "癭蟎科"
+    },
+    "subfamily": {
+      "nameSci": "Phyllocoptinae",
+      "nameZh": null
+    },
+    "genus": {
+      "nameSci": "Abacarus",
+      "nameZh": null
+    },
+    "shape": "蟎（非常小，要靠近看）",
+    "size": 1,
+    "colors": [
+      "白",
+      "黃"
+    ]
   },
   {
     "id": 9225,
@@ -128309,6 +128598,55 @@
     }
   },
   {
+    "id": 786970,
+    "taicolId": "t0037023",
+    "group": "arachnid_other",
+    "nameZh": "背斑偽盾刺盲蛛",
+    "nameSci": "Pseudogagrella dorsomaculata",
+    "nameEn": null,
+    "endemic": false,
+    "alienType": "native",
+    "protectedLevel": null,
+    "redlist": null,
+    "observationsCount": 28,
+    "photo": {
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/340068317/medium.jpeg",
+      "author": "Kuan-Chieh (Chuck) Hung",
+      "license": "CC BY-NC-SA"
+    },
+    "class": {
+      "nameSci": "Arachnida",
+      "nameZh": "蛛形綱"
+    },
+    "order": {
+      "nameSci": "Opiliones",
+      "nameZh": "盲蛛目"
+    },
+    "suborder": {
+      "nameSci": "Eupnoi",
+      "nameZh": "開氣門亞目"
+    },
+    "infraorder": null,
+    "family": {
+      "nameSci": "Sclerosomatidae",
+      "nameZh": "硬體盲蛛科"
+    },
+    "subfamily": {
+      "nameSci": "Gagrellinae",
+      "nameZh": null
+    },
+    "genus": {
+      "nameSci": "Pseudogagrella",
+      "nameZh": "偽盾刺盲蛛屬"
+    },
+    "shape": "盲蛛（身體圓、腳非常長）",
+    "size": 2,
+    "colors": [
+      "黑",
+      "黃"
+    ]
+  },
+  {
     "id": 7192,
     "taicolId": "t0027901",
     "group": "aves",
@@ -146900,6 +147238,55 @@
     }
   },
   {
+    "id": 532990,
+    "taicolId": "t0037069",
+    "group": "arachnid_other",
+    "nameZh": "臺灣偽黑盲蛛",
+    "nameSci": "Pseudomelanopa taiwana",
+    "nameEn": null,
+    "endemic": false,
+    "alienType": "native",
+    "protectedLevel": null,
+    "redlist": null,
+    "observationsCount": 21,
+    "photo": {
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/366443582/medium.jpeg",
+      "author": "尤冠智 (Yu Kuan Chih)",
+      "license": "CC BY-NC-ND"
+    },
+    "class": {
+      "nameSci": "Arachnida",
+      "nameZh": "蛛形綱"
+    },
+    "order": {
+      "nameSci": "Opiliones",
+      "nameZh": "盲蛛目"
+    },
+    "suborder": {
+      "nameSci": "Eupnoi",
+      "nameZh": "開氣門亞目"
+    },
+    "infraorder": null,
+    "family": {
+      "nameSci": "Sclerosomatidae",
+      "nameZh": "硬體盲蛛科"
+    },
+    "subfamily": {
+      "nameSci": "Gagrellinae",
+      "nameZh": null
+    },
+    "genus": {
+      "nameSci": "Pseudomelanopa",
+      "nameZh": "偽黑盲蛛屬"
+    },
+    "shape": "盲蛛（身體圓、腳非常長）",
+    "size": 2,
+    "colors": [
+      "黑",
+      "褐"
+    ]
+  },
+  {
     "id": 26,
     "taicolId": "t0064871",
     "group": "aves",
@@ -150107,6 +150494,49 @@
       "黃",
       "綠",
       "紅"
+    ]
+  },
+  {
+    "id": 932849,
+    "taicolId": "t0030343",
+    "group": "arachnid_other",
+    "nameZh": "安柏無尾鞭蠍",
+    "nameSci": "Charon ambreae",
+    "nameEn": null,
+    "endemic": true,
+    "alienType": "native",
+    "protectedLevel": null,
+    "redlist": null,
+    "observationsCount": 20,
+    "photo": {
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/151948448/medium.jpg",
+      "author": "CHUNG CHANG-LIN",
+      "license": "CC BY-NC"
+    },
+    "class": {
+      "nameSci": "Arachnida",
+      "nameZh": "蛛形綱"
+    },
+    "order": {
+      "nameSci": "Amblypygi",
+      "nameZh": "鈍尾目"
+    },
+    "suborder": null,
+    "infraorder": null,
+    "family": {
+      "nameSci": "Charontidae",
+      "nameZh": null
+    },
+    "subfamily": null,
+    "genus": {
+      "nameSci": "Charon",
+      "nameZh": null
+    },
+    "shape": "鞭蛛（沒有尾巴，前腳像長鞭）",
+    "size": 3,
+    "colors": [
+      "褐",
+      "灰"
     ]
   },
   {
