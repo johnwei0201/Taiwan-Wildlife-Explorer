@@ -409,7 +409,7 @@ function NearbyAnimals({ result, speciesList, currentId }) {
   )
 }
 
-// ---------- 幼蟲長這樣（蝴蝶、蛾的毛毛蟲） ----------
+// ---------- 毛毛蟲（幼蟲）照片：蝴蝶、蛾 ----------
 // 照片來自 iNaturalist 上標註「幼蟲」的觀察紀錄，點照片可以到原始紀錄看更多
 function LarvaPhotos({ larva, name }) {
   // 剛確認是鱗翅目的那一瞬間，查詢還沒開始，會先拿到上一次的「成功、但沒有資料（null）」；
@@ -420,7 +420,7 @@ function LarvaPhotos({ larva, name }) {
   return (
     <section className={styles.section} aria-labelledby="larva-title">
       <h2 id="larva-title" className={styles.sectionTitle}>
-        毛毛蟲（幼蟲）長這樣
+        毛毛蟲（幼蟲）
       </h2>
       <p className={styles.sectionNote}>
         蝴蝶和蛾小時候是毛毛蟲，長大後的樣子完全不一樣
