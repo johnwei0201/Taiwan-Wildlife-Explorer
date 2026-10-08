@@ -4,9 +4,32 @@ import { distanceKm } from '../utils/geo.js'
 const INAT_API = 'https://api.inaturalist.org/v1'
 export const TAIWAN_PLACE_ID = 7887
 
-// 收錄的類群：鳥類、哺乳類、爬蟲類、兩棲類、
-//   硬骨魚、鯊魚魟魚、鱗翅目（蝴蝶＋蛾）、蜻蛉目、鞘翅目、半翅目、直翅目、螳螂目、竹節蟲目、蛛形綱（蜘蛛、蠍子…）、甲殼類、多足類
-const GROUP_TAXON_IDS = '3,40151,26036,20978,47178,47273,47157,47792,47208,47744,47651,48112,47198,47119,85493,144128'
+// 收錄的類群：iNaturalist 分類編號 → 首頁第一層分頁的 id（constants/groups.js）
+//   我附近的動物用它分辨每筆紀錄屬於哪一類：看紀錄的上層分類（ancestor_ids）裡有哪一個編號
+const CATEGORY_TAXON_IDS = {
+  3: 'aves', // 鳥綱
+  40151: 'mammalia', // 哺乳綱
+  26036: 'reptilia', // 爬行綱
+  20978: 'amphibia', // 兩棲綱
+  47178: 'fish', // 硬骨魚
+  47273: 'fish', // 鯊魚、魟魚
+  47157: 'insecta', // 鱗翅目（蝴蝶＋蛾）
+  47792: 'insecta', // 蜻蛉目
+  47208: 'insecta', // 鞘翅目
+  47744: 'insecta', // 半翅目
+  47651: 'insecta', // 直翅目
+  48112: 'insecta', // 螳螂目
+  47198: 'insecta', // 竹節蟲目
+  47119: 'arachnida', // 蛛形綱（蜘蛛、蠍子…）
+  85493: 'crustacea', // 甲殼類
+  144128: 'myriapoda', // 多足類
+}
+const GROUP_TAXON_IDS = Object.keys(CATEGORY_TAXON_IDS).join(',')
+
+function toCategory(taxon) {
+  const id = taxon?.ancestor_ids?.find((ancestorId) => CATEGORY_TAXON_IDS[ancestorId])
+  return CATEGORY_TAXON_IDS[id] ?? null
+}
 
 const ICONIC_TO_GROUP = {
   Aves: 'aves',
@@ -43,6 +66,7 @@ function toObservation(obs) {
     observedOn: obs.observed_on,
     placeGuess: obs.place_guess,
     taxonId: obs.taxon?.id,
+    category: toCategory(obs.taxon),
     nameZh: obs.taxon?.preferred_common_name ?? null,
     nameSci: obs.taxon?.name,
     url: obs.uri,
@@ -76,6 +100,7 @@ export async function fetchNearbySpecies(location, signal) {
       nameZh: taxon.preferred_common_name ?? null,
       nameSci: taxon.name,
       endemic: taxon.preferred_establishment_means === 'endemic',
+      category: toCategory(taxon),
       nearbyCount: count,
       photo: toPhoto(taxon.default_photo),
     })),

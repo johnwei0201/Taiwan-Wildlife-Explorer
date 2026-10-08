@@ -5,6 +5,7 @@ import LocationIcon from '../../components/LocationIcon/LocationIcon.jsx'
 import { fetchNearbySpecies, fetchNearbyObservations } from '../../api/inaturalist.js'
 import { useSpeciesList, withLocalData } from '../../hooks/useSpeciesList.js'
 import { useGeolocation } from '../../hooks/useGeolocation.js'
+import { GROUPS } from '../../constants/groups.js'
 import styles from './NearbyPage.module.css'
 
 const RADIUS_OPTIONS = [1, 5, 10] // 公里
@@ -19,6 +20,8 @@ export default function NearbyPage() {
   const { location, isLocating, error: geoError, locate: locateMe, pickLocation } = useGeolocation()
   const [radius, setRadius] = useState(5)
   const [result, setResult] = useState({ status: 'idle', species: [], total: 0, observations: [] })
+  // 被關掉的類別（記「關掉的」而不是「開著的」：換地點後新出現的類別預設就是開的）
+  const [hiddenCategories, setHiddenCategories] = useState([])
 
   const geoMessage = GEO_MESSAGES[geoError] ?? ''
 
@@ -46,7 +49,24 @@ export default function NearbyPage() {
   }, [location, radius])
 
   // 若物種已在我們整理好的清單中，改用清單資料（有 TaiCOL 的保育等級等資訊）
-  const nearbySpecies = withLocalData(result.species, speciesList)
+  //   清單資料沒有 category 欄位，所以類別要從 iNaturalist 原本的結果取
+  const categoryById = new Map(result.species.map((s) => [s.id, s.category]))
+  const allNearbySpecies = withLocalData(result.species, speciesList).map((s) => ({
+    ...s,
+    category: categoryById.get(s.id),
+  }))
+
+  // 這附近有出現的類別（依首頁分頁的順序），附上種數
+  const categories = GROUPS.filter((g) => g.kind === 'group')
+    .map((g) => ({ ...g, count: allNearbySpecies.filter((s) => s.category === g.id).length }))
+    .filter((g) => g.count > 0)
+
+  const isShown = (item) => !hiddenCategories.includes(item.category)
+  const nearbySpecies = allNearbySpecies.filter(isShown)
+  const visibleObservations = result.observations.filter(isShown)
+
+  const toggleCategory = (id) =>
+    setHiddenCategories((prev) => (prev.includes(id) ? prev.filter((c) => c !== id) : [...prev, id]))
 
   return (
     <div className="container">
@@ -76,6 +96,24 @@ export default function NearbyPage() {
         </div>
       </div>
 
+      {/* 這附近有出現的類別：點一下關掉（地圖標點和下方卡片一起隱藏），再點一下打開 */}
+      {result.status === 'success' && categories.length > 0 && (
+        <div className={styles.categories} role="group" aria-label="顯示的類別">
+          {categories.map((category) => (
+            <button
+              key={category.id}
+              type="button"
+              aria-pressed={!hiddenCategories.includes(category.id)}
+              className={styles.categoryButton}
+              onClick={() => toggleCategory(category.id)}
+            >
+              {category.label}
+              <span className={styles.categoryCount}>{category.count}</span>
+            </button>
+          ))}
+        </div>
+      )}
+
       <p className={styles.hint}>
         {geoMessage || '也可以直接在地圖上點選任何地點'}
       </p>
@@ -85,7 +123,7 @@ export default function NearbyPage() {
           <NearbyMap
             location={location}
             radius={radius}
-            observations={result.observations}
+            observations={visibleObservations}
             onPick={pickLocation}
           />
           <ul className={styles.legend}>
@@ -113,8 +151,13 @@ export default function NearbyPage() {
             <>
               <p className={styles.count}>
                 半徑 {radius} 公里內共發現 <strong>{result.total}</strong> 種
-                {result.total > nearbySpecies.length && `（顯示最常見的 ${nearbySpecies.length} 種）`}
+                {hiddenCategories.length > 0
+                  ? `（目前顯示 ${nearbySpecies.length} 種）`
+                  : result.total > nearbySpecies.length && `（顯示最常見的 ${nearbySpecies.length} 種）`}
               </p>
+              {nearbySpecies.length === 0 && (
+                <p className={styles.message}>所有類別都關掉了，點上方的類別按鈕打開</p>
+              )}
               <ul className={styles.grid}>
                 {nearbySpecies.map((species) => (
                   <li key={species.id}>
