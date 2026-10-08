@@ -10,18 +10,21 @@ import TaxonPath from '../../components/TaxonPath/TaxonPath.jsx'
 import { RANK_ORDER, cleanZh, filterByTaxon } from '../../utils/taxon.js'
 import InfoTag from '../../components/InfoTag/InfoTag.jsx'
 import BreedList from '../../components/BreedList/BreedList.jsx'
+import CategoryToggles from '../../components/CategoryToggles/CategoryToggles.jsx'
 import {
   fetchTaxon,
   fetchMonthlyCounts,
   fetchRecentObservations,
   fetchSpeciesNearby,
   fetchNearbySpecies,
+  fetchNearbyObservations,
   fetchLarvaPhotos,
 } from '../../api/inaturalist.js'
 import { fetchWikiSummary, toTraditional } from '../../api/wikipedia.js'
 import { formatKm } from '../../utils/geo.js'
 import { useAsync } from '../../hooks/useAsync.js'
-import { useSpeciesList, withLocalData } from '../../hooks/useSpeciesList.js'
+import { useSpeciesList } from '../../hooks/useSpeciesList.js'
+import { useCategoryFilter } from '../../hooks/useCategoryFilter.js'
 import { useGeolocation } from '../../hooks/useGeolocation.js'
 import { useMediaQuery } from '../../hooks/useMediaQuery.js'
 import {
@@ -61,11 +64,27 @@ export default function SpeciesDetailPage() {
     (signal) => (userLocation ? fetchSpeciesNearby(id, userLocation, radius, signal) : Promise.resolve(null)),
     [id, userLocation, radius],
   )
-  // 同一個範圍內還出現過哪些動物（右側清單，和「我附近的動物」頁面相同）
+  // 同一個範圍內還出現過哪些動物（右側清單＋地圖上的綠點，和「我附近的動物」頁面相同）
   const nearbyAnimals = useAsync(
-    (signal) => (userLocation ? fetchNearbySpecies({ ...userLocation, radius }, signal) : Promise.resolve(null)),
+    (signal) =>
+      userLocation
+        ? Promise.all([
+            fetchNearbySpecies({ ...userLocation, radius }, signal),
+            fetchNearbyObservations({ ...userLocation, radius }, signal),
+          ]).then(([speciesResult, observations]) => ({ ...speciesResult, observations }))
+        : Promise.resolve(null),
     [userLocation, radius],
   )
+  // 類別開關：關掉的類別，右側清單和地圖上的綠點一起隱藏
+  const nearbyFiltered = useCategoryFilter(
+    nearbyAnimals.data?.species ?? [],
+    nearbyAnimals.data?.observations ?? [],
+    speciesList,
+  )
+  // 地圖上的綠點不含這個物種自己（它的紀錄已經用橘點標出來了）
+  const otherObservations = userLocation
+    ? nearbyFiltered.observations.filter((obs) => obs.taxonId !== Number(id))
+    : []
 
   // 蝴蝶、蛾（鱗翅目）才查幼蟲照片：小時候是毛毛蟲，長大後完全不一樣
   const isLepidoptera = Boolean(taxon.data?.ancestors.some((a) => a.nameSci === 'Lepidoptera'))
@@ -144,7 +163,7 @@ export default function SpeciesDetailPage() {
         </div>
         <p className={styles.sectionNote}>
           色塊為所有紀錄的分布熱點，橘點為觀察紀錄。為保護野生動物，敏感物種的位置已模糊化。
-          {userLocation && ' 藍點是你的約略位置，不會被儲存。'}
+          {userLocation && ' 綠點是附近其他動物的紀錄，可以用右側的類別按鈕開關。藍點是你的約略位置，不會被儲存。'}
         </p>
         {geoError && (
           <p className={styles.geoError}>
@@ -175,6 +194,7 @@ export default function SpeciesDetailPage() {
           <SpeciesMap
             taxonId={id}
             observations={(userLocation ? nearby.data?.observations : recent.data) ?? []}
+            otherObservations={otherObservations}
             userLocation={userLocation}
             radius={radius}
             nearest={nearby.data?.total === 0 ? nearby.data.observations[0] : null}
@@ -183,7 +203,15 @@ export default function SpeciesDetailPage() {
             {userLocation ? (
               <>
                 <h3 className={styles.listTitle}>你附近 {radius} 公里內的動物</h3>
-                <NearbyAnimals result={nearbyAnimals} speciesList={speciesList} currentId={Number(id)} />
+                {nearbyAnimals.status === 'success' && (
+                  <CategoryToggles
+                    categories={nearbyFiltered.categories}
+                    hiddenCategories={nearbyFiltered.hiddenCategories}
+                    onToggle={nearbyFiltered.toggle}
+                    className={styles.categoryToggles}
+                  />
+                )}
+                <NearbyAnimals result={nearbyAnimals} filtered={nearbyFiltered} currentId={Number(id)} />
               </>
             ) : (
               <RecentRecords status={recent.status} records={recent.data ?? []} />
@@ -408,19 +436,22 @@ function NearbySummary({ nearby, name }) {
 }
 
 // ---------- 你附近的動物：和「我附近的動物」頁面相同的卡片清單 ----------
-function NearbyAnimals({ result, speciesList, currentId }) {
+function NearbyAnimals({ result, filtered, currentId }) {
   if (result.status === 'loading') return <div className={`skeleton ${styles.skeletonBlock}`} />
   if (result.status === 'error' || !result.data) return <p className={styles.message}>暫時無法取得附近的動物</p>
   if (result.data.total === 0) return <p className={styles.message}>這附近還沒有紀錄，試試擴大搜尋範圍</p>
 
-  const species = withLocalData(result.data.species, speciesList)
+  const { species, hiddenCategories } = filtered
 
   return (
     <>
       <p className={styles.nearbyCount}>
         共發現 <strong>{result.data.total}</strong> 種
-        {result.data.total > species.length && `（顯示最常見的 ${species.length} 種）`}
+        {hiddenCategories.length > 0
+          ? `（目前顯示 ${species.length} 種）`
+          : result.data.total > species.length && `（顯示最常見的 ${species.length} 種）`}
       </p>
+      {species.length === 0 && <p className={styles.message}>所有類別都關掉了，點上方的類別按鈕打開</p>}
       <ul className={styles.nearbyGrid}>
         {species.map((s) => (
           // 目前正在看的物種如果也在附近，用框線標出來

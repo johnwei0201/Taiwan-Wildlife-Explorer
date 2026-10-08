@@ -269,6 +269,11 @@
   color: var(--color-primary-dark);
 }
 
+/* 附近動物的類別開關（樣式在 CategoryToggles 元件裡，這裡只負責和下方的間距） */
+.categoryToggles {
+  margin-bottom: var(--space-3);
+}
+
 /* 手機：「發現記錄」整條是一個可以點的按鈕，右邊箭頭表示可以展開 */
 .collapseButton {
   display: flex;

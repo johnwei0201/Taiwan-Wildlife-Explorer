@@ -36,8 +36,9 @@ function FitView({ location, radius, nearest }) {
  *   observations：要標在地圖上的紀錄（未定位時是最新紀錄，定位後是附近紀錄）
  *   userLocation / radius：定位後顯示藍點與搜尋範圍
  *   nearest：搜尋範圍內沒有紀錄時，最近的那一筆（地圖會一起框進來）
+ *   otherObservations：定位後，附近其他動物的紀錄（綠色小點，畫在這個物種的橘點下面）
  */
-export default function SpeciesMap({ taxonId, observations, userLocation, radius, nearest }) {
+export default function SpeciesMap({ taxonId, observations, otherObservations = [], userLocation, radius, nearest }) {
   // 標點的繪圖範圍放大到地圖的 3 倍，拖動時不會被切掉（說明見 NearbyMap）
   const [vectorRenderer] = useState(() => L.svg({ padding: 1 }))
 
@@ -78,6 +79,10 @@ export default function SpeciesMap({ taxonId, observations, userLocation, radius
           </>
         )}
 
+        {/* 先畫其他動物、再畫這個物種：後畫的在上層，橘點不會被綠點蓋住 */}
+        {otherObservations.map((obs) => (
+          <ObservationMarker key={`other-${obs.id}`} observation={obs} variant="other" />
+        ))}
         {observations.map((obs) => (
           <ObservationMarker key={obs.id} observation={obs} />
         ))}

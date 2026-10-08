@@ -72,36 +72,9 @@
   }
 }
 
-/* ---------- 類別開關：開著是綠底白字，關掉是白底灰字 ---------- */
+/* 類別開關（樣式在 CategoryToggles 元件裡，這裡只負責和上方的間距） */
 .categories {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-2);
   margin-top: var(--space-3);
-}
-
-.categoryButton {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-1);
-  padding: var(--space-1) var(--space-3);
-  font-size: var(--fs-sm);
-  color: var(--color-text-muted);
-  background-color: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: 999px;
-  transition: background-color var(--transition), color var(--transition), border-color var(--transition);
-}
-
-.categoryButton[aria-pressed='true'] {
-  color: #fff;
-  background-color: var(--color-primary);
-  border-color: var(--color-primary);
-}
-
-.categoryCount {
-  font-size: 0.75rem; /* 12px：種數只是輔助資訊 */
-  opacity: 0.8;
 }
 
 .hint {
