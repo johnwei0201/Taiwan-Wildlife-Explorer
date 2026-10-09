@@ -207,10 +207,10 @@
   color: var(--color-primary-dark);
 }
 
-/* 圖示和「推薦」兩個字一樣大：1em＝目前的字級，字級調整時圖示也會跟著變 */
+/* 圖示比「推薦」兩個字稍大一點：1.5em＝字級的 1.5 倍（16px 字 → 24px 圖示），字級調整時圖示也會跟著變 */
 .refreshIcon {
-  width: 1em;
-  height: 1em;
+  width: 1.5em;
+  height: 1.5em;
   transition: transform 0.4s ease;
 }
 
