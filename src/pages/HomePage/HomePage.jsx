@@ -143,132 +143,139 @@ export default function HomePage() {
   }
 
   return (
-    <div className="container">
-      <section className={styles.hero}>
-        {/* 畫面上的大標題拿掉（頁首已經有網站名稱），但保留給螢幕閱讀器和搜尋引擎：每頁都該有一個 h1 */}
-        <h1 className="visually-hidden">發現台灣動物趣</h1>
-        <p className={styles.subtitle}>探索台灣的鳥類、哺乳類、爬蟲類、兩棲類、魚類、昆蟲、蜘蛛、蠍子、蜈蚣、甲殼類與家養動物</p>
-      </section>
+    <>
+      {/* 頂部色帶：說明文字＋分頁＋主題，米色底、滿版寬度（內容仍對齊下方的版心） */}
+      <div className={styles.band}>
+        <div className="container">
+          <section className={styles.hero}>
+            {/* 畫面上的大標題拿掉（頁首已經有網站名稱），但保留給螢幕閱讀器和搜尋引擎：每頁都該有一個 h1 */}
+            <h1 className="visually-hidden">發現台灣動物趣</h1>
+            <p className={styles.subtitle}>探索台灣的鳥類、哺乳類、爬蟲類、兩棲類、魚類、昆蟲、蜘蛛、蠍子、蜈蚣、甲殼類與家養動物</p>
+          </section>
 
-      <div className={styles.tabBar}>
-        {/* 分頁（單選）：手機可以左右滑動，平板以上會自動換行 */}
-        <div className={styles.tabs} role="tablist" aria-label="動物分類">
-          {GROUPS.map((group) => (
-            <button
-              key={group.id}
-              type="button"
-              role="tab"
-              aria-selected={activeGroup?.id === group.id}
-              className={styles.tab}
-              onClick={() => selectGroup(group.id)}
-            >
-              {group.label}
-              <span className={styles.tabEn}>{group.labelEn}</span>
-            </button>
-          ))}
-        </div>
-
-        {/* 主題＋推薦按鈕同一行：主題靠左，推薦按鈕推到最右邊 */}
-        <div className={styles.tagRow}>
-          {/* 主題（可複選）：疊加在分頁上，選越多範圍越小 */}
-          <div className={styles.tabs} role="group" aria-label="主題（可複選）">
-            {COLLECTIONS.map((tag) => {
-              const isSelected = activeTags.includes(tag.id)
-              const count = status === 'success' ? countWithTag(tag.id) : null
-              return (
+          <div className={styles.tabBar}>
+            {/* 分頁（單選）：手機可以左右滑動，平板以上會自動換行 */}
+            <div className={styles.tabs} role="tablist" aria-label="動物分類">
+              {GROUPS.map((group) => (
                 <button
-                  key={tag.id}
+                  key={group.id}
                   type="button"
-                  aria-pressed={isSelected}
-                  data-kind="collection"
+                  role="tab"
+                  aria-selected={activeGroup?.id === group.id}
                   className={styles.tab}
-                  title={count === null ? tag.label : `${tag.label}（${count} 種）`}
-                  disabled={count === 0 && !isSelected}
-                  onClick={() => toggleTag(tag.id)}
+                  onClick={() => selectGroup(group.id)}
                 >
-                  {/* 打勾：不只靠顏色，也用符號表示「已選取」 */}
-                  <span>
-                    {isSelected && <span aria-hidden="true">✓ </span>}
-                    {tag.label}
-                  </span>
-                  <span className={styles.tabEn}>{tag.labelEn}</span>
+                  {group.label}
+                  <span className={styles.tabEn}>{group.labelEn}</span>
                 </button>
-              )
-            })}
-          </div>
+              ))}
+            </div>
 
-          {/* 推薦按鈕（重新隨機挑一批）：只在首頁隨機推薦時出現 */}
-          {status === 'success' && !activeGroup && (
-            <button type="button" className={styles.refresh} onClick={() => setRefreshCount((n) => n + 1)}>
-              <span aria-hidden="true">↻</span> 推薦
-            </button>
-          )}
+            {/* 主題＋推薦按鈕同一行：主題靠左，推薦按鈕推到最右邊 */}
+            <div className={styles.tagRow}>
+              {/* 主題（可複選）：疊加在分頁上，選越多範圍越小 */}
+              <div className={styles.tabs} role="group" aria-label="主題（可複選）">
+                {COLLECTIONS.map((tag) => {
+                  const isSelected = activeTags.includes(tag.id)
+                  const count = status === 'success' ? countWithTag(tag.id) : null
+                  return (
+                    <button
+                      key={tag.id}
+                      type="button"
+                      aria-pressed={isSelected}
+                      data-kind="collection"
+                      className={styles.tab}
+                      title={count === null ? tag.label : `${tag.label}（${count} 種）`}
+                      disabled={count === 0 && !isSelected}
+                      onClick={() => toggleTag(tag.id)}
+                    >
+                      {/* 打勾：不只靠顏色，也用符號表示「已選取」 */}
+                      <span>
+                        {isSelected && <span aria-hidden="true">✓ </span>}
+                        {tag.label}
+                      </span>
+                      <span className={styles.tabEn}>{tag.labelEn}</span>
+                    </button>
+                  )
+                })}
+              </div>
+
+              {/* 推薦按鈕（重新隨機挑一批）：只在首頁隨機推薦時出現 */}
+              {status === 'success' && !activeGroup && (
+                <button type="button" className={styles.refresh} onClick={() => setRefreshCount((n) => n + 1)}>
+                  <span aria-hidden="true">↻</span> 推薦
+                </button>
+              )}
+            </div>
+          </div>
         </div>
       </div>
 
-      {/* 第二層小分類：選了有小分類的類群（例如昆蟲類）才出現 */}
-      {activeGroup?.subgroups && (
-        <div ref={subtabsRef} className={styles.subtabs} role="tablist" aria-label={`${activeGroup.label}的小分類`}>
-          <span className={styles.subtabsLabel} aria-hidden="true">
-            {activeGroup.label} ›
-          </span>
-          {[{ id: null, label: '全部' }, ...activeGroup.subgroups].map((sub) => (
-            <button
-              key={sub.id ?? 'all'}
-              type="button"
-              role="tab"
-              aria-selected={(activeSub?.id ?? null) === sub.id}
-              className={styles.subtab}
-              onClick={() => selectSub(sub.id)}
-            >
-              {sub.label}
-            </button>
-          ))}
-        </div>
-      )}
+      <div className="container">
+        {/* 第二層小分類：選了有小分類的類群（例如昆蟲類）才出現 */}
+        {activeGroup?.subgroups && (
+          <div ref={subtabsRef} className={styles.subtabs} role="tablist" aria-label={`${activeGroup.label}的小分類`}>
+            <span className={styles.subtabsLabel} aria-hidden="true">
+              {activeGroup.label} ›
+            </span>
+            {[{ id: null, label: '全部' }, ...activeGroup.subgroups].map((sub) => (
+              <button
+                key={sub.id ?? 'all'}
+                type="button"
+                role="tab"
+                aria-selected={(activeSub?.id ?? null) === sub.id}
+                className={styles.subtab}
+                onClick={() => selectSub(sub.id)}
+              >
+                {sub.label}
+              </button>
+            ))}
+          </div>
+        )}
 
-      {/* 選了類群才出現外觀篩選；key 讓切換類群時重新播放出現動畫
-          group 用最細的那一層（例如蝴蝶），大小的選項才對得上；
-          只選「昆蟲類」時，蝴蝶和蜻蜓的大小標準不同，大小篩選會請使用者先選小分類 */}
-      {status === 'success' && showFilters && (
-        <FilterPanel
-          key={scope.id}
-          list={groupSpecies}
-          group={scope.id}
-          filters={filters}
-          onChange={changeFilter}
-          onClear={clearFilters}
-        />
-      )}
+        {/* 選了類群才出現外觀篩選；key 讓切換類群時重新播放出現動畫
+            group 用最細的那一層（例如蝴蝶），大小的選項才對得上；
+            只選「昆蟲類」時，蝴蝶和蜻蜓的大小標準不同，大小篩選會請使用者先選小分類 */}
+        {status === 'success' && showFilters && (
+          <FilterPanel
+            key={scope.id}
+            list={groupSpecies}
+            group={scope.id}
+            filters={filters}
+            onChange={changeFilter}
+            onClear={clearFilters}
+          />
+        )}
 
-      {status === 'loading' && <p className={styles.message}>資料載入中…</p>}
-      {status === 'error' && <p className={styles.message}>資料載入失敗，請稍後再試</p>}
+        {status === 'loading' && <p className={styles.message}>資料載入中…</p>}
+        {status === 'error' && <p className={styles.message}>資料載入失敗，請稍後再試</p>}
 
-      {/* 還沒選分頁：隨機推薦 */}
-      {status === 'success' && !activeGroup && (
-        <>
-          <p className={styles.count}>
-            隨機推薦 {randomSpecies.length} 種（全台共 {speciesList.length} 種，點上方分類看更多）
-          </p>
-          <SpeciesGrid list={randomSpecies} />
-        </>
-      )}
+        {/* 還沒選分頁：隨機推薦 */}
+        {status === 'success' && !activeGroup && (
+          <>
+            <p className={styles.count}>
+              隨機推薦 {randomSpecies.length} 種（全台共 {speciesList.length} 種，點上方分類看更多）
+            </p>
+            <SpeciesGrid list={randomSpecies} />
+          </>
+        )}
 
-      {/* 已選分頁 */}
-      {status === 'success' && activeGroup && (
-        <>
-          <p className={styles.count}>
-            共 <strong className={styles.countNumber}>{filteredSpecies.length}</strong> 種
-            {filteredSpecies.length < scopeSpecies.length && `（從 ${scopeSpecies.length} 種中篩選）`}
-          </p>
-          {filteredSpecies.length === 0 ? (
-            <p className={styles.message}>沒有符合條件的動物，試著減少一些條件</p>
-          ) : (
-            // 小分類可以改變卡片的顯示方式（例如毛毛蟲：改用幼蟲照片、名稱加上「幼蟲」）
-            <SpeciesGrid list={activeSub?.display ? filteredSpecies.map(activeSub.display) : filteredSpecies} />
-          )}
-        </>
-      )}
-    </div>
+        {/* 已選分頁 */}
+        {status === 'success' && activeGroup && (
+          <>
+            <p className={styles.count}>
+              共 <strong className={styles.countNumber}>{filteredSpecies.length}</strong> 種
+              {filteredSpecies.length < scopeSpecies.length && `（從 ${scopeSpecies.length} 種中篩選）`}
+            </p>
+            {filteredSpecies.length === 0 ? (
+              <p className={styles.message}>沒有符合條件的動物，試著減少一些條件</p>
+            ) : (
+              // 小分類可以改變卡片的顯示方式（例如毛毛蟲：改用幼蟲照片、名稱加上「幼蟲」）
+              <SpeciesGrid list={activeSub?.display ? filteredSpecies.map(activeSub.display) : filteredSpecies} />
+            )}
+          </>
+        )}
+      </div>
+    </>
   )
 }
