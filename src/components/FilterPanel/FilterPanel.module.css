@@ -20,7 +20,7 @@
   }
 }
 
-/* 標題列：淡橄欖綠底、深綠字（白字在這個底色上對比只有 1.8:1 看不清楚，深綠字 5.5:1），
+/* 標題列：和首頁副標色帶同一個淡綠色（共用 --color-band，色帶換色時這裡會跟著變），深綠字；
    用負的 margin 往左右延伸到面板邊緣（抵銷面板的左右留白） */
 .header {
   display: flex;
@@ -29,7 +29,7 @@
   gap: var(--space-2);
   margin: 0 calc(-1 * var(--space-4)) var(--space-3);
   padding: var(--space-2) var(--space-4);
-  background-color: var(--color-panel-header);
+  background-color: var(--color-band);
 }
 
 .title {
