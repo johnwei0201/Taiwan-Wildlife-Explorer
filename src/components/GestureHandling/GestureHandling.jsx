@@ -10,12 +10,17 @@ const HINTS = {
 }
 const HINT_DURATION_MS = 1500
 
+// 已經顯示過的提示：每一種提示在每次開啟網站時只出現一次（看過一次就知道怎麼操作，不必一直提醒）
+//   放在元件外面，所有地圖共用；在網站內換頁也會保留，重新整理後才會再出現
+const shownHints = new Set()
+
 /**
  * 協同手勢（和 Google 地圖嵌入網頁時的做法一樣）：避免使用者只是想捲動網頁，卻不小心操作到地圖
  *   桌機：一般滾輪 → 捲動網頁；按住 Ctrl（Mac 是 ⌘）＋滾輪 → 縮放地圖
  *         （觸控板兩指開合，瀏覽器會當成 Ctrl＋滾輪送出，所以照樣可以縮放）
  *   手機：一指 → 捲動網頁；兩指 → 移動、縮放地圖
  *   點一下地圖不受影響（例如「我附近的動物」點地圖選位置）
+ *   誤觸時的提示每一種只出現一次（見 shownHints）
  * 放在 <MapContainer> 裡面使用
  */
 export default function GestureHandling() {
@@ -27,6 +32,8 @@ export default function GestureHandling() {
     const container = map.getContainer()
 
     const showHint = (type) => {
+      if (shownHints.has(type)) return
+      shownHints.add(type)
       setHint(type)
       clearTimeout(timerRef.current)
       timerRef.current = setTimeout(() => setHint(null), HINT_DURATION_MS)
