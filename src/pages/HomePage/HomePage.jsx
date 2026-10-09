@@ -144,7 +144,7 @@ export default function HomePage() {
 
   return (
     <>
-      {/* 頂部色帶：說明文字＋分頁＋主題，淡黃綠底、滿版寬度（內容仍對齊下方的版心） */}
+      {/* 頂部色帶：說明文字＋分頁＋主題，淡綠底、滿版寬度（內容仍對齊下方的版心） */}
       <div className={styles.band}>
         <div className="container">
           <section className={styles.hero}>
