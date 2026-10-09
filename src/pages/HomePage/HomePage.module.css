@@ -18,6 +18,18 @@
   margin-top: var(--space-4);
 }
 
+/* 手機 2 欄、平板 3 欄：30 張剛好排滿，第 31、32 張先藏起來 */
+.randomGrid li:nth-child(n + 31) {
+  display: none;
+}
+
+/* 桌機 4 欄（和 SpeciesGrid 的斷點一致）：30 張會差 2 張排不滿，顯示全部 32 張 */
+@media (min-width: 1200px) {
+  .randomGrid li:nth-child(n + 31) {
+    display: block;
+  }
+}
+
 /* 說明文字和下方分頁之間的距離縮小 */
 .hero {
   margin-bottom: var(--space-2);

@@ -8,7 +8,9 @@ import { useSpeciesList } from '../../hooks/useSpeciesList.js'
 import { matchQuery, parseQuery, searchText } from '../../utils/search.js'
 import styles from './HomePage.module.css'
 
-const RANDOM_COUNT = 30
+// 隨機推薦的數量：一次挑 32 種，但手機（2 欄）、平板（3 欄）只顯示前 30 種，桌機（4 欄）顯示 32 種
+//   這樣每一種版面的最後一排都是滿的；顯示幾張交給 CSS（.randomGrid），拉動視窗時推薦內容不會重新洗牌
+const RANDOM_COUNT = 32
 
 // 首頁隨機推薦不放昆蟲類、蛛形類、多足類、爬蟲類：有些人看到蟲、蜘蛛、蜈蚣或蛇的照片會不舒服，
 // 一打開網頁就看到可能直接離開；想看的人點對應的分頁就看得到
