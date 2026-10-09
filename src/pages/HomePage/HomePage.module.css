@@ -207,9 +207,10 @@
   color: var(--color-primary-dark);
 }
 
+/* 圖示和「推薦」兩個字一樣大：1em＝目前的字級，字級調整時圖示也會跟著變 */
 .refreshIcon {
-  width: 32px;
-  height: 32px;
+  width: 1em;
+  height: 1em;
   transition: transform 0.4s ease;
 }
 
