@@ -1,12 +1,14 @@
+/* 深綠底：一般文字用 85% 白（對比 4.8:1），連結用純白，比較醒目 */
 .footer {
   padding-block: var(--space-6);
   font-size: var(--fs-sm);
-  color: var(--color-text-muted);
+  color: rgb(255 255 255 / 0.85);
   text-align: center;
-  border-top: 1px solid var(--color-border);
+  background-color: var(--color-footer);
 }
 
 .footer a {
+  color: #fff;
   text-decoration: underline;
 }
 

@@ -150,7 +150,15 @@ export default function HomePage() {
           <section className={styles.hero}>
             {/* 畫面上的大標題拿掉（頁首已經有網站名稱），但保留給螢幕閱讀器和搜尋引擎：每頁都該有一個 h1 */}
             <h1 className="visually-hidden">發現台灣動物趣</h1>
-            <p className={styles.subtitle}>探索台灣的鳥類、哺乳類、爬蟲類、兩棲類、魚類、昆蟲、蝴蝶、蠍子、甲殼類或家養動物</p>
+            {/* 收錄種數從資料算出來（資料載入後才顯示），新增或刪除物種時不必改文字 */}
+            <p className={styles.subtitle}>
+              {status === 'success' && (
+                <>
+                  本站收錄 <strong className={styles.totalCount}>{speciesList.length.toLocaleString()}</strong> 種動物，
+                </>
+              )}
+              探索台灣的鳥類、哺乳類、爬蟲類、兩棲類、魚類、昆蟲、蝴蝶、蠍子、甲殼類或家養動物
+            </p>
           </section>
 
           <div className={styles.tabBar}>

@@ -27,6 +27,11 @@
   color: var(--color-text-muted);
 }
 
+/* 收錄種數：加粗、主色，一眼看到網站的規模 */
+.totalCount {
+  color: var(--color-primary-dark);
+}
+
 /* ---------- 類群切換 ---------- */
 /* 分頁和主題分成兩組：手機上下兩排，平板以上排在同一行（放不下會換行） */
 .tabBar {
