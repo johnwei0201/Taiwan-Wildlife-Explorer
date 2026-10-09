@@ -13,6 +13,11 @@
   }
 }
 
+/* 隨機推薦的卡片：和上方色帶之間留一點距離（和已選分頁時「共 N 種」那一行的間距一樣） */
+.randomGrid {
+  margin-top: var(--space-4);
+}
+
 /* 說明文字和下方分頁之間的距離縮小 */
 .hero {
   margin-bottom: var(--space-2);

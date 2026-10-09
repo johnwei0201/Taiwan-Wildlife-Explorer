@@ -150,7 +150,7 @@ export default function HomePage() {
           <section className={styles.hero}>
             {/* 畫面上的大標題拿掉（頁首已經有網站名稱），但保留給螢幕閱讀器和搜尋引擎：每頁都該有一個 h1 */}
             <h1 className="visually-hidden">發現台灣動物趣</h1>
-            <p className={styles.subtitle}>探索台灣的鳥類、哺乳類、爬蟲類、兩棲類、魚類、昆蟲、蜘蛛、蠍子、蜈蚣、甲殼類與家養動物</p>
+            <p className={styles.subtitle}>探索台灣的鳥類、哺乳類、爬蟲類、兩棲類、魚類、昆蟲、蝴蝶、蠍子、甲殼類或家養動物</p>
           </section>
 
           <div className={styles.tabBar}>
@@ -252,12 +252,9 @@ export default function HomePage() {
 
         {/* 還沒選分頁：隨機推薦 */}
         {status === 'success' && !activeGroup && (
-          <>
-            <p className={styles.count}>
-              隨機推薦 {randomSpecies.length} 種（全台共 {speciesList.length} 種，點上方分類看更多）
-            </p>
+          <div className={styles.randomGrid}>
             <SpeciesGrid list={randomSpecies} />
-          </>
+          </div>
         )}
 
         {/* 已選分頁 */}
