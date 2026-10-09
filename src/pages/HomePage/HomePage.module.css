@@ -1,10 +1,10 @@
 /* ---------- 頂部色帶：說明文字＋分頁＋主題 ---------- */
-/* 滿版米色底；版面（Layout 的 main）上方有留白，這裡用負的 margin 抵銷，色帶才會緊接在頁首下方
+/* 滿版淡黃綠底；版面（Layout 的 main）上方有留白，這裡用負的 margin 抵銷，色帶才會緊接在頁首下方
    （數值要和 Layout.module.css 的 .main padding 一致：手機 24px、平板以上 32px） */
 .band {
   margin-top: calc(-1 * var(--space-6));
   padding-block: var(--space-3) var(--space-2);
-  background-color: var(--color-cream);
+  background-color: var(--color-band);
 }
 
 @media (min-width: 768px) {

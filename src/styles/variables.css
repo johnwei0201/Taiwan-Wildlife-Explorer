@@ -23,7 +23,7 @@
   --color-text: #1f2a24;
   --color-text-muted: #5c6b63;
   --color-bg: #f7f8f5;
-  --color-cream: #faf5ec;          /* 首頁頂部色帶（說明文字＋分頁）的米色底 */
+  --color-band: #edebbf;          /* 首頁頂部色帶（說明文字＋分頁）的淡黃綠底；說明文字對比 4.6:1 */
   --color-surface: #ffffff;
   --color-border: #dde3dd;
 
