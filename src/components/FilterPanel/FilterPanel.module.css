@@ -20,7 +20,8 @@
   }
 }
 
-/* 標題列：深綠底白字，用負的 margin 往左右延伸到面板邊緣（抵銷面板的左右留白） */
+/* 標題列：淡橄欖綠底、深綠字（白字在這個底色上對比只有 1.8:1 看不清楚，深綠字 5.5:1），
+   用負的 margin 往左右延伸到面板邊緣（抵銷面板的左右留白） */
 .header {
   display: flex;
   align-items: center;
@@ -28,27 +29,27 @@
   gap: var(--space-2);
   margin: 0 calc(-1 * var(--space-4)) var(--space-3);
   padding: var(--space-2) var(--space-4);
-  background-color: var(--color-primary-dark);
+  background-color: var(--color-panel-header);
 }
 
 .title {
   font-size: 1.25rem; /* 20px：面板的標題，比下方的「共 N 種」（16px）大 */
   font-weight: 700;
-  color: #fff;
+  color: var(--color-primary-dark);
 }
 
-/* 「清除條件」在深綠標題列上：改用白字白框（原本的紅字在深綠底上看不清楚） */
+/* 「清除條件」在標題列上：和標題一樣用深綠字、深綠框 */
 .clear {
   padding: var(--space-1) var(--space-3);
   font-size: var(--fs-sm);
-  color: #fff;
+  color: var(--color-primary-dark);
   border: 1px solid currentColor;
   border-radius: 999px;
   transition: background-color var(--transition);
 }
 
 .clear:hover {
-  background-color: rgb(255 255 255 / 0.15);
+  background-color: rgb(255 255 255 / 0.35);
 }
 
 /* 手機：2 欄 */
@@ -113,7 +114,7 @@
 }
 
 .note {
-  margin-top: var(--space-2);
+  margin-top: var(--space-1);
   font-size: 0.75rem;
   color: var(--color-text-muted);
 }
@@ -135,7 +136,7 @@
   grid-template-columns: repeat(5, 40px);
   justify-content: space-between;
   row-gap: var(--space-2);
-  padding-block: var(--space-1); /* 左右不留空：色塊邊緣和上方的框切齊（選取外環會稍微超出，面板四周有留白不會被切到） */
+  padding-block: 3px; /* 上下只留選取外框（2.5px）需要的空間；左右不留空：色塊邊緣和上方的框切齊（選取外環會稍微超出，面板四周有留白不會被切到） */
 }
 
 /* 每個項目垂直置中，「清除」才會和色塊對齊（不然會依文字基線往下偏 2px） */
@@ -220,7 +221,7 @@
 /* 平板：外型、大小並排；顏色獨佔下一列，9 個色塊＋清除才放得下一排 */
 @media (min-width: 768px) {
   .panel {
-    padding: 0 var(--space-6) var(--space-4);
+    padding: 0 var(--space-6) var(--space-3);
   }
 
   .header {
