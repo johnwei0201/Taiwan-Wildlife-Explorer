@@ -9,18 +9,18 @@
 }
 
 /* 手機版頁首的草叢：和頁尾不同方向，看起來比較有變化
-     大小：比共用的手機版（316px／475px）再小約 10% → 284px／428px
-     草叢_上往上推半張高度：284 × 256 ÷ 781 ÷ 2 ≈ 47px
-     草叢_下往下推 36px（半張是 51px，少推一點 → 草叢往上移，長上來的葉子多露出一些）
+     草叢_上：369px 寬（高 369 × 256 ÷ 781 ≈ 121px），往上推 49px，露出下方約 6 成垂下來的葉子
+     草叢_下：426px 寬（高 426 × 283 ÷ 781 ≈ 154px），往下推 39px，露出上方約 7.5 成長上來的葉子
+     草叢_底：428px 寬
      鏡射：背景圖本身不能翻轉，所以把草叢移到後面的 ::before 圖層，再把圖層左右翻轉（文字、按鈕不受影響）
      :global(.jungle-bg) 提高優先順序，確保蓋過共用的 .jungle-bg 設定 */
 @media (max-width: 767px) {
   .header:global(.jungle-bg) {
-    --jungle-size: 100% 100%, 284px auto, 284px auto, 100% 100%, 428px auto;
+    --jungle-size: 100% 100%, 369px auto, 426px auto, 100% 100%, 428px auto;
     --jungle-position:
       center,
-      left 0 top -47px,
-      left 0 bottom -36px,
+      left 0 top -49px,
+      left 0 bottom -39px,
       center,
       left center;
     background-image: none;
