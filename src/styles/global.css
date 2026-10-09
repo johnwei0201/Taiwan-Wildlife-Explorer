@@ -84,3 +84,20 @@ body {
     center,
     left center;
 }
+
+/* 手機（767px 以下）：葉子改用固定大小，和桌機（約 1900px 寬的螢幕）上看到的葉子一樣大
+   上面的比例寫法在窄螢幕上會把葉子縮得很小（390px 寬的手機只剩桌機的 1/5）
+     草叢_上／下：1900 ÷ 3 ≈ 633px 寬；草叢_底：1900 ÷ 2 ≈ 950px 寬
+     往外推半張高度：草叢_上 633 × 256 ÷ 781 ÷ 2 ≈ 104px，草叢_下 633 × 283 ÷ 781 ÷ 2 ≈ 115px
+   平板、桌機維持上面的比例寫法不變 */
+@media (max-width: 767px) {
+  .jungle-bg {
+    background-size: 100% 100%, 633px auto, 633px auto, 100% 100%, 950px auto;
+    background-position:
+      center,
+      left 0 top -104px,
+      left 0 bottom -115px,
+      center,
+      left center;
+  }
+}
