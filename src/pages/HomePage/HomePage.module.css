@@ -27,6 +27,21 @@
   color: var(--color-text-muted);
 }
 
+/* 副標：手機顯示短句，平板以上（768px）顯示完整的類群列表 */
+.subtitleLong {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .subtitleShort {
+    display: none;
+  }
+
+  .subtitleLong {
+    display: inline;
+  }
+}
+
 /* 收錄種數：加粗、主色，一眼看到網站的規模 */
 .totalCount {
   color: var(--color-primary-dark);

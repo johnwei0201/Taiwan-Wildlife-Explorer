@@ -157,7 +157,11 @@ export default function HomePage() {
                   本站收錄 <strong className={styles.totalCount}>{speciesList.length.toLocaleString()}</strong> 種動物，
                 </>
               )}
-              探索台灣的鳥類、哺乳類、爬蟲類、兩棲類、魚類、昆蟲、蝴蝶、蠍子、甲殼類或家養動物
+              {/* 手機版用短句，平板以上列出各類群（用 CSS 切換：只是外觀不同，不必用程式判斷螢幕寬度） */}
+              <span className={styles.subtitleShort}>探索台灣各類動物</span>
+              <span className={styles.subtitleLong}>
+                探索台灣的鳥類、哺乳類、爬蟲類、兩棲類、魚類、昆蟲、蝴蝶、蠍子、甲殼類或家養動物
+              </span>
             </p>
           </section>
 
