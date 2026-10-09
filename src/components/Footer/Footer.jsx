@@ -12,7 +12,7 @@ const DATA_SOURCES = [
 
 export default function Footer() {
   return (
-    <footer className={styles.footer}>
+    <footer className={`${styles.footer} jungle-bg`}>
       <div className="container">
         <p>
           資料來源：

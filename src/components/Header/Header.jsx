@@ -16,7 +16,7 @@ export default function Header() {
   const closeMenu = () => setIsMenuOpen(false)
 
   return (
-    <header className={styles.header}>
+    <header className={`${styles.header} jungle-bg`}>
       <div className={`container ${styles.inner}`}>
         {/* Logo：點了回到首頁並重新整理（用一般的 <a> 而不是 Link：
             Link 只在網站內切換畫面，已經在首頁時點了沒有反應；<a> 會重新載入，隨機推薦也會換一批） */}
