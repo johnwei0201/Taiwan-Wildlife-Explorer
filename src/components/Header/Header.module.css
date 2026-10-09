@@ -8,6 +8,38 @@
   box-shadow: var(--shadow-sm);
 }
 
+/* 手機版頁首的草叢：和頁尾不同方向，看起來比較有變化
+     大小：比共用的手機版（316px／475px）再小約 10% → 284px／428px
+     草叢_上往上推半張高度：284 × 256 ÷ 781 ÷ 2 ≈ 47px
+     草叢_下往下推 36px（半張是 51px，少推一點 → 草叢往上移，長上來的葉子多露出一些）
+     鏡射：背景圖本身不能翻轉，所以把草叢移到後面的 ::before 圖層，再把圖層左右翻轉（文字、按鈕不受影響）
+     :global(.jungle-bg) 提高優先順序，確保蓋過共用的 .jungle-bg 設定 */
+@media (max-width: 767px) {
+  .header:global(.jungle-bg) {
+    --jungle-size: 100% 100%, 284px auto, 284px auto, 100% 100%, 428px auto;
+    --jungle-position:
+      center,
+      left 0 top -47px,
+      left 0 bottom -36px,
+      center,
+      left center;
+    background-image: none;
+    isolation: isolate; /* 讓 z-index: -1 的 ::before 留在頁首裡面，不會跑到頁面後面 */
+  }
+
+  .header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background-image: var(--jungle-images);
+    background-size: var(--jungle-size);
+    background-repeat: var(--jungle-repeat);
+    background-position: var(--jungle-position);
+    transform: scaleX(-1);
+  }
+}
+
 /* 手機：第一行 Logo＋漢堡按鈕，第二行搜尋框（換行排列） */
 .inner {
   display: flex;

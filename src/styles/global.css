@@ -66,23 +66,28 @@ body {
      草叢_下：33.33 × 283 ÷ 781 ≈ 12.08vw，一半 ≈ 6.04vw
    ※ 換圖時如果尺寸改變，這兩個數字要重算
    background-color 是圖片還沒載入時的底色 */
+/* 圖片、大小、位置寫成變數（--jungle-*）：個別區塊可以只覆蓋要改的數值（例如手機版頁首），不必重寫圖片路徑 */
 .jungle-bg {
   --jungle-filter: rgb(33 73 82 / 0.5);
-  background-color: var(--color-primary);
-  background-image:
+  --jungle-images:
     linear-gradient(var(--jungle-filter), var(--jungle-filter)),
     url('../assets/草叢_上.png'),
     url('../assets/草叢_下.png'),
     linear-gradient(rgb(31 74 54 / 0.6), rgb(31 74 54 / 0.6)),
     url('../assets/草叢_底.png');
-  background-size: 100% 100%, calc(100% / 3) auto, calc(100% / 3) auto, 100% 100%, 50% auto;
-  background-repeat: no-repeat, repeat-x, repeat-x, no-repeat, repeat;
-  background-position:
+  --jungle-size: 100% 100%, calc(100% / 3) auto, calc(100% / 3) auto, 100% 100%, 50% auto;
+  --jungle-repeat: no-repeat, repeat-x, repeat-x, no-repeat, repeat;
+  --jungle-position:
     center,
     left 0 top -5.46vw,
     left 0 bottom -6.04vw,
     center,
     left center;
+  background-color: var(--color-primary);
+  background-image: var(--jungle-images);
+  background-size: var(--jungle-size);
+  background-repeat: var(--jungle-repeat);
+  background-position: var(--jungle-position);
 }
 
 /* 手機（767px 以下）：葉子改用固定大小
@@ -93,8 +98,8 @@ body {
    平板、桌機維持上面的比例寫法不變 */
 @media (max-width: 767px) {
   .jungle-bg {
-    background-size: 100% 100%, 316px auto, 316px auto, 100% 100%, 475px auto;
-    background-position:
+    --jungle-size: 100% 100%, 316px auto, 316px auto, 100% 100%, 475px auto;
+    --jungle-position:
       center,
       left 0 top -52px,
       left 0 bottom -57px,
