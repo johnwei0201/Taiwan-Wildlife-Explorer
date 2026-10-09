@@ -3,6 +3,7 @@ import L from 'leaflet'
 import { MapContainer, TileLayer, Circle, CircleMarker, Popup, useMap, useMapEvents } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css'
 import ObservationMarker from '../ObservationMarker/ObservationMarker.jsx'
+import GestureHandling from '../GestureHandling/GestureHandling.jsx'
 import styles from './NearbyMap.module.css'
 
 const TAIWAN_CENTER = [23.7, 120.95]
@@ -57,6 +58,8 @@ export default function NearbyMap({ location, radius, observations, onPick }) {
           keepBuffer={4}
         />
 
+        {/* 防止誤觸：桌機 Ctrl＋滾輪才縮放、手機兩指才移動地圖 */}
+        <GestureHandling />
         <MapClickHandler onPick={onPick} />
         <FitToSearchArea location={location} radius={radius} />
 

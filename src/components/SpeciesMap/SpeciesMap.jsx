@@ -3,6 +3,7 @@ import L from 'leaflet'
 import { MapContainer, TileLayer, Circle, CircleMarker, Popup, useMap } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css'
 import ObservationMarker from '../ObservationMarker/ObservationMarker.jsx'
+import GestureHandling from '../GestureHandling/GestureHandling.jsx'
 import { heatmapTileUrl } from '../../api/inaturalist.js'
 import styles from './SpeciesMap.module.css'
 
@@ -67,6 +68,8 @@ export default function SpeciesMap({ taxonId, observations, otherObservations = 
           keepBuffer={4}
         />
 
+        {/* 防止誤觸：桌機 Ctrl＋滾輪才縮放、手機兩指才移動地圖 */}
+        <GestureHandling />
         <FitView location={userLocation} radius={radius} nearest={nearest} />
         {userLocation && (
           <>

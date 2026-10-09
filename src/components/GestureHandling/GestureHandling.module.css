@@ -1,0 +1,25 @@
+/* 蓋在整張地圖上的半透明提示：z-index 高於地圖圖層與縮放按鈕（Leaflet 的控制項是 1000） */
+.hint {
+  position: absolute;
+  inset: 0;
+  z-index: 1001;
+  display: grid;
+  place-items: center;
+  padding: var(--space-4);
+  background-color: rgb(0 0 0 / 0.45);
+  opacity: 0;
+  pointer-events: none; /* 不擋住地圖：點擊、雙指操作都照常傳給地圖 */
+  transition: opacity 0.3s ease;
+}
+
+.hint[data-visible='true'] {
+  opacity: 1;
+}
+
+.text {
+  font-size: var(--fs-base);
+  font-weight: 700;
+  color: #fff;
+  text-align: center;
+  text-shadow: 0 1px 3px rgb(0 0 0 / 0.5);
+}
