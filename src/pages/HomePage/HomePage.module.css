@@ -194,6 +194,7 @@
 }
 
 /* 推薦按鈕：和分頁同樣 6px 圓角，用主色框線，和分頁、主題區分開 */
+/* 推薦按鈕：圓形重新整理圖示＋「推薦」，圖示本身就像按鈕，所以不另外加外框 */
 .refresh {
   display: inline-flex;
   flex-shrink: 0;
@@ -201,18 +202,20 @@
   gap: var(--space-1);
   margin-left: auto;
   margin-bottom: var(--space-2); /* 和主題按鈕下方的留白一致，上下才會對齊 */
-  padding: var(--space-1) var(--space-3);
   white-space: nowrap;
-  font-size: var(--fs-sm);
+  font-weight: 700;
   color: var(--color-primary-dark);
-  border: 1px solid var(--color-primary);
-  border-radius: var(--radius-sm);
-  background-color: var(--color-surface);
-  transition: background-color var(--transition);
 }
 
-.refresh:hover {
-  background-color: var(--color-primary-light);
+.refreshIcon {
+  width: 32px;
+  height: 32px;
+  transition: transform 0.4s ease;
+}
+
+/* 滑過時圖示轉半圈，提示「換一批」 */
+.refresh:hover .refreshIcon {
+  transform: rotate(180deg);
 }
 
 .count {

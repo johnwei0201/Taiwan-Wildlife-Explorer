@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import PhotoGallery from '../../components/PhotoGallery/PhotoGallery.jsx'
 import MonthChart from '../../components/MonthChart/MonthChart.jsx'
 import SpeciesMap from '../../components/SpeciesMap/SpeciesMap.jsx'
@@ -10,6 +10,7 @@ import TaxonPath from '../../components/TaxonPath/TaxonPath.jsx'
 import { RANK_ORDER, cleanZh, filterByTaxon } from '../../utils/taxon.js'
 import InfoTag from '../../components/InfoTag/InfoTag.jsx'
 import BreedList from '../../components/BreedList/BreedList.jsx'
+import BackLink from '../../components/BackLink/BackLink.jsx'
 import CategoryToggles from '../../components/CategoryToggles/CategoryToggles.jsx'
 import {
   fetchTaxon,
@@ -106,7 +107,7 @@ export default function SpeciesDetailPage() {
 
   return (
     <div className="container">
-      <Link to="/" className={styles.back}>← 回到圖鑑</Link>
+      <BackLink />
 
       {taxon.status === 'loading' && <HeroSkeleton />}
       {taxon.status === 'error' && (

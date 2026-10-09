@@ -4,6 +4,7 @@ import SpeciesGrid from '../../components/SpeciesGrid/SpeciesGrid.jsx'
 import TaxonPath from '../../components/TaxonPath/TaxonPath.jsx'
 import { useSpeciesList } from '../../hooks/useSpeciesList.js'
 import { RANK_ORDER, TAXON_RANKS, cleanZh, filterByTaxon, taxonPath } from '../../utils/taxon.js'
+import BackLink from '../../components/BackLink/BackLink.jsx'
 import styles from './TaxonPage.module.css'
 
 /**
@@ -69,9 +70,7 @@ export default function TaxonPage() {
 
   return (
     <div className="container">
-      <Link to="/" className={styles.back}>
-        ← 回到圖鑑
-      </Link>
+      <BackLink />
 
       {/* 分類路徑：綱 → 目 → 科 → 屬，最後一個是目前這一層 */}
       {sample && (

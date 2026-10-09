@@ -6,6 +6,7 @@ import { COLLECTIONS, GROUPS, findGroup, matchTags, parseTags } from '../../cons
 import { FILTERS, applyFilters } from '../../constants/filters.js'
 import { useSpeciesList } from '../../hooks/useSpeciesList.js'
 import { matchQuery, parseQuery, searchText } from '../../utils/search.js'
+import resetIcon from '../../assets/icons/Reset.png'
 import styles from './HomePage.module.css'
 
 // 隨機推薦的數量：一次挑 32 種，但手機（2 欄）、平板（3 欄）只顯示前 30 種，桌機（4 欄）顯示 32 種
@@ -217,7 +218,8 @@ export default function HomePage() {
               {/* 推薦按鈕（重新隨機挑一批）：只在首頁隨機推薦時出現 */}
               {status === 'success' && !activeGroup && (
                 <button type="button" className={styles.refresh} onClick={() => setRefreshCount((n) => n + 1)}>
-                  <span aria-hidden="true">↻</span> 推薦
+                  <img src={resetIcon} alt="" className={styles.refreshIcon} />
+                  推薦
                 </button>
               )}
             </div>

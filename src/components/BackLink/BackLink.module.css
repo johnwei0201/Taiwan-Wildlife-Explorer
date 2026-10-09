@@ -1,0 +1,30 @@
+/* 靠右對齊 */
+.row {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: var(--space-4);
+}
+
+.link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--color-primary);
+  font-weight: 700;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
+/* 圓形箭頭圖示：高度跟著文字大小（1.5 倍字高） */
+.icon {
+  width: auto;
+  height: 1.5em;
+  transition: transform var(--transition);
+}
+
+/* 滑過時箭頭往左移一點，提示「往回走」 */
+.link:hover .icon {
+  transform: translateX(-3px);
+}
