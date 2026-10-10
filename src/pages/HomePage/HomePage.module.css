@@ -54,9 +54,10 @@
   }
 }
 
-/* 收錄種數：加粗、主色，一眼看到網站的規模 */
+/* 收錄種數：橘紅色、放大 1.2 倍（16px → 19px），一眼看到網站的規模 */
 .totalCount {
-  color: var(--color-primary-dark);
+  font-size: 1.2em;
+  color: var(--color-highlight);
 }
 
 /* ---------- 類群切換 ---------- */

@@ -162,6 +162,12 @@
   color: var(--color-text-muted);
 }
 
+/* 種數：和物種詳細頁「共發現 N 種」一樣，橘紅色、放大 1.35 倍 */
+.count strong {
+  font-size: 1.35em;
+  color: var(--color-highlight);
+}
+
 /* 手機：2 欄 */
 .grid {
   display: grid;

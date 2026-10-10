@@ -315,6 +315,12 @@
   color: var(--color-text-muted);
 }
 
+/* 種數：橘紅色、放大 1.35 倍（14px → 約 19px，粗體 18.66px 以上算大字，對比 3:1 就看得清楚） */
+.nearbyCount strong {
+  font-size: 1.35em;
+  color: var(--color-highlight);
+}
+
 /* 手機：2 欄 */
 .nearbyGrid {
   display: grid;
