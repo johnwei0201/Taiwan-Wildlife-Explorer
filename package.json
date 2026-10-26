@@ -11,7 +11,9 @@
     "enrich": "node scripts/enrich-species.js",
     "larva": "node scripts/fetch-larva.js",
     "breeds": "node scripts/fetch-breeds.js",
-    "details": "python scripts/fetch-details.py"
+    "details": "python scripts/fetch-details.py",
+    "summaries": "python scripts/fetch-summaries.py",
+    "ecology": "python scripts/fetch-ecology.py"
   },
   "dependencies": {
     "leaflet": "^1.9.4",
