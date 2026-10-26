@@ -22,3 +22,8 @@ Thumbs.db
 # Python 資料腳本的 API 快取（可以重新產生）
 scripts/.cache/
 __pycache__/
+
+# AI 動物通後端：Python 虛擬環境、可以重新產生的文件與向量資料庫
+backend/.venv/
+backend/data/
+backend/index/

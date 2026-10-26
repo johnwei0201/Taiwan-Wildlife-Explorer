@@ -1,0 +1,7 @@
+# AI 動物通後端（RAG）使用的 Python 套件
+#   安裝：python -m venv backend/.venv
+#         backend/.venv/Scripts/python -m pip install -r backend/requirements.txt
+
+# 3-2 向量資料庫：把文字轉成向量（多語言開源模型）、存進向量資料庫
+sentence-transformers==3.4.1
+chromadb==1.5.9   # 1.x 起有預先編譯好的 Windows 版本（0.6 版要在電腦上用 C++ 編譯，容易失敗）
