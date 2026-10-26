@@ -5,7 +5,7 @@
   backend/.venv/Scripts/python backend/build_index.py
 
 約 8,700 塊，一般筆電的 CPU 約需 5～15 分鐘（第一次執行還要下載模型）
-轉好的向量會另存一份快取（backend/data/vectors.npy），塊的內容沒變時重建索引不必再轉一次
+轉好的向量會另存一份快取（backend/data/vectors.npy），之後重建只重新轉「新增或改過」的塊
 """
 
 import json
@@ -27,16 +27,22 @@ BATCH = 500  # 每次寫進資料庫的筆數
 
 
 def load_or_embed(chunks):
-    """塊的 id 和內容都跟上次一樣 → 直接讀快取；否則重新轉向量並存檔"""
+    """逐塊比對快取：id 和內容都跟上次一樣的塊直接沿用向量，只有新增或改過的塊才重新轉"""
     keys = [f"{c['id']}|{hash_text(c['text'])}" for c in chunks]
+    cached = {}
     if VECTORS_PATH.exists() and VECTOR_KEYS_PATH.exists():
-        if json.loads(VECTOR_KEYS_PATH.read_text(encoding='utf-8')) == keys:
-            print('塊的內容沒變，使用向量快取')
-            return np.load(VECTORS_PATH).tolist()
+        old_keys = json.loads(VECTOR_KEYS_PATH.read_text(encoding='utf-8'))
+        cached = dict(zip(old_keys, np.load(VECTORS_PATH).tolist()))
 
-    started = time.time()
-    vectors = embed_passages([c['text'] for c in chunks])
-    print(f'轉向量完成：{time.time() - started:.0f} 秒，每個向量 {len(vectors[0])} 維')
+    todo = [i for i, key in enumerate(keys) if key not in cached]
+    print(f'向量快取：沿用 {len(keys) - len(todo)} 塊，需要重新轉 {len(todo)} 塊')
+    if todo:
+        started = time.time()
+        new_vectors = embed_passages([chunks[i]['text'] for i in todo], show_progress=len(todo) > 100)
+        cached.update({keys[i]: vector for i, vector in zip(todo, new_vectors)})
+        print(f'轉向量完成：{time.time() - started:.0f} 秒，每個向量 {len(new_vectors[0])} 維')
+
+    vectors = [cached[key] for key in keys]
     np.save(VECTORS_PATH, np.array(vectors, dtype=np.float32))
     VECTOR_KEYS_PATH.write_text(json.dumps(keys), encoding='utf-8')
     return vectors
@@ -64,7 +70,7 @@ def main():
             ids=[c['id'] for c in batch],
             embeddings=vectors[start:start + BATCH],
             documents=[c['text'] for c in batch],
-            metadatas=[{'docId': c['docId'], 'field': c['field']} for c in batch],
+            metadatas=[{'docId': c['docId'], 'group': c['group'], 'field': c['field']} for c in batch],
         )
     print(f'已寫入向量資料庫：{collection.count()} 筆（{INDEX_DIR}）')
 

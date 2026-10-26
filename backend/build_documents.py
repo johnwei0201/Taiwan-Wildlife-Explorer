@@ -51,6 +51,14 @@ ALIEN_LABELS = {
 }
 FIELD_LABELS = {'diet': '食性', 'habitat': '棲地與分布', 'behavior': '習性', 'appearance': '外觀'}
 
+# 人工補充的俗名：常用說法，但維基導言沒寫到（鍵是本站的中文名）
+EXTRA_ALIASES = {
+    '亞洲黑熊': ['臺灣黑熊'],  # 臺灣黑熊是亞洲黑熊的亞種，本站以物種收錄
+    '大冠鷲': ['蛇鵰'],
+    '家犬': ['狗狗', '小狗'],
+    '家貓': ['貓咪', '小貓'],
+}
+
 # 名詞解釋：問「什麼是特有種？」這類問題時用（內容和網站上的說明一致）
 GLOSSARY = [
     ('endemic', '特有種', '臺灣特有種：只分布在臺灣（含離島），在世界其他地方的野外都找不到的物種。臺灣是一座島嶼，生物長期和大陸隔離，演化出許多獨一無二的特有種。'),
@@ -94,7 +102,8 @@ def build_species(species, details, summary, ecology):
     """一個物種 → (完整文件, [塊])"""
     name = clean_zh(species['nameZh']) or species['nameSci']
     sci = species['nameSci']
-    aliases = [a for a in [*(species.get('aliases') or []), *(ecology.get('aliases') or [])] if a != name]
+    aliases = [*(species.get('aliases') or []), *(ecology.get('aliases') or []), *EXTRA_ALIASES.get(name, [])]
+    aliases = [a for a in aliases if a != name]
     aliases = list(dict.fromkeys(aliases))  # 去掉重複、保留順序
 
     taxonomy = ' > '.join(
@@ -141,11 +150,13 @@ def build_species(species, details, summary, ecology):
         'url': summary['url'] if summary else None,
         'text': full_text,
     }
-    chunks = [{'id': f'{doc_id}#overview', 'docId': doc_id, 'field': 'overview', 'text': overview}]
+    group = species['group']
+    chunks = [{'id': f'{doc_id}#overview', 'docId': doc_id, 'group': group, 'field': 'overview', 'text': overview}]
     for field, text in fields.items():
         chunks.append({
             'id': f'{doc_id}#{field}',
             'docId': doc_id,
+            'group': group,
             'field': field,
             'text': f'{name}（{sci}）的{FIELD_LABELS[field]}：{text}',
         })
@@ -184,7 +195,7 @@ def main():
     for key, term, text in GLOSSARY:
         doc_id = f'glossary:{key}'
         documents.append({'id': doc_id, 'type': 'glossary', 'name': term, 'text': text})
-        chunks.append({'id': f'{doc_id}#overview', 'docId': doc_id, 'field': 'glossary', 'text': text})
+        chunks.append({'id': f'{doc_id}#overview', 'docId': doc_id, 'group': 'glossary', 'field': 'glossary', 'text': text})
         index_name(term, doc_id)
 
     DATA_OUT.mkdir(exist_ok=True)
