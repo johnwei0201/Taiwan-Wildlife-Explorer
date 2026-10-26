@@ -1,69 +1,39 @@
 // AI 動物通：向後端發問
 //
-//   階段二（目前）：後端還沒做好，先回傳「示範用」的假資料，用來確認畫面與互動
-//   階段四：改成呼叫真正的 RAG 後端（Python FastAPI 的 /ask），回傳格式維持不變，畫面不必修改
+//   後端：Vercel Python Function（api/ask.py），和網站同一個網域，所以直接用 /api/ask
+//   本機開發：npm run dev 會把 /api 轉給 backend/serve_local.py（vite.config.js 的 proxy）
 //
-// 回傳格式（未來後端也照這個格式回傳）：
+// 回傳格式：
 //   {
 //     answer: '回答文字',
 //     sources: [8415, 12345],          // 參考的物種 id（畫面會用本站資料顯示成物種卡片）
 //     followUps: ['延伸問題 1', '…'],   // 延伸問題按鈕
+//     mode: 'ai' | 'fallback',         // fallback：AI 暫停時，只列出找到的物種
 //   }
-import { normalize } from '../utils/search.js'
 
-export const IS_DEMO = true // 示範模式：頁面會顯示「示範模式」標籤
+const API_URL = '/api/ask'
 
-const DEMO_DELAY_MS = 900 // 模擬網路與 AI 思考的時間，讓載入動畫看得到
-const MAX_SOURCES = 4
-
-// 示範模式用：讀取本站物種清單（只讀一次，之後重複使用）
-let speciesListPromise = null
-function loadSpeciesList() {
-  speciesListPromise ??= fetch('/data/species-list.json').then((res) => {
-    if (!res.ok) throw new Error(`HTTP ${res.status}`)
-    return res.json()
-  })
-  return speciesListPromise
-}
-
-// 等待一段時間；使用者離開頁面（signal 取消）時立刻停止
-function wait(ms, signal) {
-  return new Promise((resolve, reject) => {
-    const timer = setTimeout(resolve, ms)
-    signal?.addEventListener('abort', () => {
-      clearTimeout(timer)
-      reject(new DOMException('Aborted', 'AbortError'))
-    })
-  })
-}
-
-// 示範模式：找出問題裡提到的物種（中文名出現在問題裡），名稱越長越優先（「臺灣藍鵲」優先於「藍鵲」）
-function findMentionedSpecies(question, speciesList) {
-  const text = normalize(question)
-  return speciesList
-    .filter((s) => s.nameZh && s.nameZh.length >= 2 && text.includes(normalize(s.nameZh)))
-    .sort((a, b) => b.nameZh.length - a.nameZh.length)
-    .slice(0, MAX_SOURCES)
-}
+// 給使用者看的錯誤：訊息可以直接顯示在畫面上
+export class AskError extends Error {}
 
 export async function askQuestion(question, signal) {
-  const [speciesList] = await Promise.all([loadSpeciesList(), wait(DEMO_DELAY_MS, signal)])
-  const mentioned = findMentionedSpecies(question, speciesList)
-
-  if (mentioned.length === 0) {
-    return {
-      answer:
-        '（示範回答）這個問題裡沒有找到本站收錄的物種名稱。AI 動物通的後端還在建置中，完成後會根據本站資料回答，資料沒有提到的部分會直接告訴你。',
-      sources: [],
-      followUps: ['臺灣藍鵲吃什麼？', '什麼是特有種？'],
-    }
+  let res
+  try {
+    res = await fetch(API_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ question }),
+      signal,
+    })
+  } catch (error) {
+    if (error.name === 'AbortError') throw error // 使用者離開頁面，交給呼叫的地方處理
+    throw new AskError('連不上 AI 動物通，請檢查網路後再試一次。')
   }
 
-  const names = mentioned.map((s) => s.nameZh).join('、')
-  const first = mentioned[0].nameZh
-  return {
-    answer: `（示範回答）你問到了「${names}」。AI 動物通的後端還在建置中，完成後會根據本站的物種資料回答這個問題。下方先列出相關的物種，點卡片可以看詳細介紹。`,
-    sources: mentioned.map((s) => s.id),
-    followUps: [`${first}住在哪裡？`, `${first}是保育類嗎？`],
+  const data = await res.json().catch(() => null)
+  if (!res.ok) {
+    // 429 問太快、422 問題長度不對…後端會在 detail 說明原因
+    throw new AskError(data?.detail ?? '暫時無法回答，請稍後再試。')
   }
+  return data
 }

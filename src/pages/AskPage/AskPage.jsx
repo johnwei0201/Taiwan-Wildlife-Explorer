@@ -4,7 +4,7 @@ import ExampleQuestions from '../../components/ExampleQuestions/ExampleQuestions
 import ChatMessage from '../../components/ChatMessage/ChatMessage.jsx'
 import ChatInput from '../../components/ChatInput/ChatInput.jsx'
 import SpeciesCard from '../../components/SpeciesCard/SpeciesCard.jsx'
-import { askQuestion, IS_DEMO } from '../../api/ask.js'
+import { askQuestion, AskError } from '../../api/ask.js'
 import { useSpeciesList } from '../../hooks/useSpeciesList.js'
 import styles from './AskPage.module.css'
 
@@ -57,7 +57,8 @@ export default function AskPage() {
       update({ text: result.answer, sources: result.sources, followUps: result.followUps })
     } catch (error) {
       if (error.name === 'AbortError') return
-      update({ text: '暫時無法回答，請稍後再試。', sources: [], followUps: [] })
+      const text = error instanceof AskError ? error.message : '暫時無法回答，請稍後再試。'
+      update({ text, sources: [], followUps: [] })
     }
   }
 
@@ -65,14 +66,11 @@ export default function AskPage() {
 
   return (
     <div className="container">
-      <PagePanel title="AI 動物通" badge={IS_DEMO ? '示範模式' : null}>
+      <PagePanel title="AI 動物通">
         <p className={styles.intro}>
           用一句話問問台灣動物的食性、棲地、保育等級，AI 會根據本站收錄的動物資料回答，並列出參考的物種。
         </p>
-        <p className={styles.notice}>
-          回答僅根據本站物種資料，不確定時會告訴你。
-          {IS_DEMO && '目前後端建置中，回答為示意內容。'}
-        </p>
+        <p className={styles.notice}>回答僅根據本站物種資料，資料沒有提到的會直接告訴你；AI 也可能出錯，請以物種介紹為準。</p>
         <ExampleQuestions label="試試看這些問題" questions={EXAMPLE_QUESTIONS} onSelect={send} disabled={isLoading} />
       </PagePanel>
 

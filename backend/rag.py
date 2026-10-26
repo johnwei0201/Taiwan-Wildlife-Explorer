@@ -124,20 +124,29 @@ def find_names(question):
     text = normalize(question)
     used = [False] * len(text)
     found = []
+    # 中文名：逐字比對（英文名另外處理，因為 normalize 拿掉空白後就分不出單字的邊界）
     for length in range(min(len(text), 30), 1, -1):
         for start in range(len(text) - length + 1):
             key = text[start:start + length]
-            if key not in name_index or any(used[start:start + length]):
-                continue
-            # 英文名要是完整的字（「cat」不能比對到「category」的一部分）
-            if key.isascii() and (
-                (start > 0 and text[start - 1].isalnum()) or
-                (start + length < len(text) and text[start + length].isalnum())
-            ):
+            if key.isascii() or key not in name_index or any(used[start:start + length]):
                 continue
             for i in range(start, start + length):
                 used[i] = True
             found.append((start, name_index[key]))
+
+    # 英文名：以單字為單位，連續幾個字接起來查（「taiwan blue magpie」→ taiwanbluemagpie）
+    # 這樣「cat」不會對到「category」的一部分
+    words = re.findall(r'[a-z0-9]+', question.lower())
+    word_used = [False] * len(words)
+    for count in range(min(len(words), 6), 0, -1):
+        for start in range(len(words) - count + 1):
+            key = ''.join(words[start:start + count])
+            if (count == 1 and len(key) < 5) or key not in name_index or any(word_used[start:start + count]):
+                continue  # 單一個短字（例如 the、bat）容易誤判，不比對
+            for i in range(start, start + count):
+                word_used[i] = True
+            found.append((len(text) + start, name_index[key]))  # 排在中文名後面
+
     doc_ids = []
     for _, ids in sorted(found):  # 依名稱在問題裡出現的順序
         doc_ids.extend(i for i in ids if i not in doc_ids)

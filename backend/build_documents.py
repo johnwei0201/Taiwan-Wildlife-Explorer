@@ -71,8 +71,11 @@ GLOSSARY = [
 
 
 def normalize(text):
-    """名稱比對用：英文小寫、「臺」和「台」視為同一個字、去掉空白（和網站搜尋的規則一致）"""
-    return re.sub(r'\s+', '', (text or '').lower().replace('臺', '台'))
+    """名稱比對用：英文小寫、「臺」和「台」視為同一個字、去掉空白（和網站搜尋的規則一致）
+
+    另外去掉連字號和撇號：英文名「Taiwan Blue-Magpie」問成「taiwan blue magpie」也要對得到
+    """
+    return re.sub(r"[\s\-'’]+", '', (text or '').lower().replace('臺', '台'))
 
 
 def clean_zh(name):
