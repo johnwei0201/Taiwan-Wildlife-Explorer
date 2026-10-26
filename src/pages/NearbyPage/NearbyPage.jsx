@@ -3,6 +3,7 @@ import NearbyMap from '../../components/NearbyMap/NearbyMap.jsx'
 import SpeciesCard from '../../components/SpeciesCard/SpeciesCard.jsx'
 import LocationIcon from '../../components/LocationIcon/LocationIcon.jsx'
 import CategoryToggles from '../../components/CategoryToggles/CategoryToggles.jsx'
+import PagePanel from '../../components/PagePanel/PagePanel.jsx'
 import { fetchNearbySpecies, fetchNearbyObservations } from '../../api/inaturalist.js'
 import { useSpeciesList } from '../../hooks/useSpeciesList.js'
 import { useGeolocation } from '../../hooks/useGeolocation.js'
@@ -54,47 +55,41 @@ export default function NearbyPage() {
 
   return (
     <div className="container">
-      {/* 上方的區塊：和「用外型找找」面板同一種樣式（淡綠色標題列＋白底內容） */}
-      <section className={styles.panel}>
-        <div className={styles.panelHeader}>
-          <h1 className={styles.title}>我附近的動物</h1>
-        </div>
+      {/* 上方的區塊：淡綠色標題列＋白底內容（共用元件 PagePanel） */}
+      <PagePanel title="我附近的動物">
+        <p className={styles.subtitle}>看看你身邊曾經出現過哪些鳥類、哺乳類、爬蟲類、兩棲類、魚類、昆蟲、蜘蛛、蠍子、蜈蚣與甲殼類</p>
 
-        <div className={styles.panelBody}>
-          <p className={styles.subtitle}>看看你身邊曾經出現過哪些鳥類、哺乳類、爬蟲類、兩棲類、魚類、昆蟲、蜘蛛、蠍子、蜈蚣與甲殼類</p>
+        <div className={styles.controls}>
+          <button type="button" className={styles.locateButton} onClick={locateMe} disabled={isLocating}>
+            <LocationIcon />
+            {isLocating ? '定位中…' : '使用我的位置'}
+          </button>
 
-          <div className={styles.controls}>
-            <button type="button" className={styles.locateButton} onClick={locateMe} disabled={isLocating}>
-              <LocationIcon />
-              {isLocating ? '定位中…' : '使用我的位置'}
-            </button>
-
-            <div className={styles.radius} role="group" aria-label="搜尋半徑">
-              {RADIUS_OPTIONS.map((km) => (
-                <button
-                  key={km}
-                  type="button"
-                  aria-pressed={radius === km}
-                  className={styles.radiusButton}
-                  onClick={() => setRadius(km)}
-                >
-                  {km} 公里
-                </button>
-              ))}
-            </div>
+          <div className={styles.radius} role="group" aria-label="搜尋半徑">
+            {RADIUS_OPTIONS.map((km) => (
+              <button
+                key={km}
+                type="button"
+                aria-pressed={radius === km}
+                className={styles.radiusButton}
+                onClick={() => setRadius(km)}
+              >
+                {km} 公里
+              </button>
+            ))}
           </div>
-
-          {/* 這附近有出現的類別：點一下關掉（地圖標點和下方卡片一起隱藏），再點一下打開 */}
-          {result.status === 'success' && (
-            <CategoryToggles
-              categories={filtered.categories}
-              hiddenCategories={hiddenCategories}
-              onToggle={filtered.toggle}
-              className={styles.categories}
-            />
-          )}
         </div>
-      </section>
+
+        {/* 這附近有出現的類別：點一下關掉（地圖標點和下方卡片一起隱藏），再點一下打開 */}
+        {result.status === 'success' && (
+          <CategoryToggles
+            categories={filtered.categories}
+            hiddenCategories={hiddenCategories}
+            onToggle={filtered.toggle}
+            className={styles.categories}
+          />
+        )}
+      </PagePanel>
 
       <p className={styles.hint}>
         {geoMessage || '也可以直接在地圖上點選任何地點'}

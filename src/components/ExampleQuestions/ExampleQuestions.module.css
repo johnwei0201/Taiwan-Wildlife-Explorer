@@ -1,0 +1,37 @@
+.wrap {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.label {
+  font-size: var(--fs-sm);
+  color: var(--color-text-muted);
+}
+
+.list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+/* 圓角膠囊按鈕：白底綠框，滑過時變淡綠底 */
+.button {
+  padding: var(--space-1) var(--space-3);
+  font-size: var(--fs-sm);
+  color: var(--color-primary-dark);
+  text-align: left;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-primary);
+  border-radius: 999px;
+  transition: background-color var(--transition);
+}
+
+.button:hover:not(:disabled) {
+  background-color: var(--color-primary-light);
+}
+
+.button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

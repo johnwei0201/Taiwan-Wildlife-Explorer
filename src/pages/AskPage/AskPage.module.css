@@ -1,0 +1,71 @@
+/* ---------- 上方說明區（PagePanel 內） ---------- */
+.intro {
+  color: var(--color-text-muted);
+}
+
+.notice {
+  margin-block: var(--space-1) var(--space-3);
+  font-size: var(--fs-sm);
+  color: var(--color-text-muted);
+}
+
+/* ---------- 對話區：白底卡片，和上方區塊同一種風格 ---------- */
+.chat {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  margin-top: var(--space-4);
+  padding: var(--space-4);
+  background-color: var(--color-surface);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+}
+
+@media (min-width: 768px) {
+  .chat {
+    padding: var(--space-6);
+  }
+}
+
+.empty {
+  padding-block: var(--space-6);
+  text-align: center;
+  color: var(--color-text-muted);
+}
+
+.messages {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+/* 輸入框和對話之間用一條淡線分開 */
+.inputBar {
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--color-border);
+}
+
+/* ---------- 參考資料卡片 ---------- */
+.sources {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.sourcesLabel {
+  font-size: var(--fs-sm);
+  color: var(--color-text-muted);
+}
+
+/* 卡片寬度至少 150px，空間夠就多排幾張：手機約 2 張、桌機約 4 張 */
+.sourceGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: var(--space-3);
+}
+
+@media (min-width: 768px) {
+  .sourceGrid {
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  }
+}

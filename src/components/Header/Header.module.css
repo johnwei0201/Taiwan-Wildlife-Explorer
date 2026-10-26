@@ -208,6 +208,13 @@
 }
 
 /* ---------- 桌機：Logo 再大一點、搜尋框再寬一點 ---------- */
+/* 平板（768～1023px）：選單有三項，空間比較擠，選單項目的左右留白縮小，讓出空間給 Logo */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .navLink {
+    padding-inline: var(--space-2);
+  }
+}
+
 @media (min-width: 1200px) {
   .logoImage {
     height: 80px;

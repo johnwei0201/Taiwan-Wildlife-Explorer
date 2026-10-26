@@ -4,9 +4,11 @@ import SearchBox from '../SearchBox/SearchBox.jsx'
 import logoUrl from '../../assets/發現台灣動物趣_logo.png'
 import styles from './Header.module.css'
 
+// 選單順序：物種圖鑑 → 我附近的動物 → AI 動物通（最右側）
 const NAV_ITEMS = [
   { to: '/', label: '物種圖鑑' },
   { to: '/nearby', label: '我附近的動物' },
+  { to: '/ask', label: 'AI 動物通' },
 ]
 
 export default function Header() {
