@@ -23,7 +23,5 @@ Thumbs.db
 scripts/.cache/
 __pycache__/
 
-# AI 動物通後端：Python 虛擬環境、可以重新產生的文件與向量資料庫
+# AI 動物通後端：Python 虛擬環境（backend/data/ 線上 API 要讀取，所以要上傳）
 backend/.venv/
-backend/data/
-backend/index/

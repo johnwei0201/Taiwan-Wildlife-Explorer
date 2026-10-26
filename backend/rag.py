@@ -9,6 +9,9 @@
   5. 備援：沒有 API 金鑰、額度用完或連線失敗時，改成「只列出找到的物種」，網站不會壞掉
 
 回傳格式和前端 src/api/ask.js 一致：{ answer, sources: [物種 id], followUps: [延伸問題], mode }
+
+向量搜尋不用向量資料庫：8,754 塊 × 384 維，用 numpy 一次算完全部相似度只要幾毫秒，
+省下 Chroma，線上 API（Vercel，上限 500 MB）才放得下
 """
 
 import json
@@ -17,10 +20,11 @@ import re
 from functools import lru_cache
 from pathlib import Path
 
+import numpy as np
 from dotenv import load_dotenv
 
 from build_documents import normalize
-from embedding import embed_query, get_collection
+from query_encoder import embed_query
 
 BACKEND_DIR = Path(__file__).resolve().parent
 DATA_DIR = BACKEND_DIR / 'data'
@@ -98,6 +102,17 @@ def load_data():
     return documents, name_index, chunks_by_doc
 
 
+@lru_cache(maxsize=1)
+def load_vectors():
+    """vectors.npy 的第 i 列就是 chunks.jsonl 的第 i 塊（build_index.py 依同樣順序產生）"""
+    chunks = [json.loads(line) for line in (DATA_DIR / 'chunks.jsonl').read_text(encoding='utf-8').splitlines() if line]
+    vectors = np.load(DATA_DIR / 'vectors.npy')
+    if len(chunks) != len(vectors):
+        raise RuntimeError('vectors.npy 和 chunks.jsonl 的數量不同，請重新執行 build_index.py')
+    groups = np.array([chunk['group'] for chunk in chunks])
+    return chunks, vectors, groups
+
+
 # ---------- 1. 名稱查詢 ----------
 
 def find_names(question):
@@ -149,18 +164,23 @@ def find_groups(text):
 
 def vector_search(question, groups):
     """依意思找最接近的塊，再依物種合併；每個物種取「最接近的那塊」＋「概要」"""
-    where = {'group': {'$in': groups}} if groups else None
-    results = get_collection().query(
-        query_embeddings=[embed_query(question)], n_results=CANDIDATES, where=where,
-    )
+    chunks, vectors, chunk_groups = load_vectors()
+    # 向量都已經正規化（長度 1），內積就是餘弦相似度
+    scores = vectors @ embed_query(question)
+    if groups:
+        scores = np.where(np.isin(chunk_groups, groups), scores, -np.inf)  # 不是指定類群的塊排到最後
+    top = np.argsort(-scores)[:CANDIDATES]
+
     _, _, chunks_by_doc = load_data()
     picked = {}
-    for chunk_id, metadata in zip(results['ids'][0], results['metadatas'][0]):
-        doc_id = metadata['docId']
+    for index in top:
+        if scores[index] == -np.inf:
+            break
+        doc_id = chunks[index]['docId']
         if doc_id in picked:
             continue
         doc_chunks = chunks_by_doc[doc_id]
-        best = next(c for c in doc_chunks if c['id'] == chunk_id)
+        best = next(c for c in doc_chunks if c['id'] == chunks[index]['id'])
         overview = doc_chunks[0]
         picked[doc_id] = [overview] if best is overview else [overview, best]
         if len(picked) >= MAX_SEARCHED:

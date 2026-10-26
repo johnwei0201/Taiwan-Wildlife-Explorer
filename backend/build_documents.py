@@ -7,9 +7,9 @@
   species-summaries.json  維基導言
   species-ecology.json    食性、棲地、習性、外觀、俗名
 
-輸出（backend/data/，可以重新產生，不上傳）：
-  documents.json   每個物種一份「完整文件」，回答時交給 Claude 看；另有幾份名詞解釋
-  chunks.jsonl     切好的「塊」，3-2 用來建立向量資料庫
+輸出（backend/data/，線上 API 會讀取，所以要上傳）：
+  documents.json   每個物種的基本資訊（名稱、俗名、類群、物種 id）；另有幾份名詞解釋
+  chunks.jsonl     切好的「塊」，回答時交給 Claude 看；3-2 也用來轉向量
   name_index.json  名稱索引（中文名、俗名、學名、英文名 → 文件 id），混合式檢索的「名稱直接查詢」用
 
 為什麼要切塊（chunking）：
@@ -136,7 +136,6 @@ def build_species(species, details, summary, ecology):
     overview = '\n'.join(line for line in overview_lines if line)
 
     fields = {field: ecology[field] for field in FIELD_LABELS if ecology.get(field)}
-    full_text = overview + ''.join(f'\n{FIELD_LABELS[f]}：{text}' for f, text in fields.items())
 
     doc_id = f"species:{species['id']}"
     document = {
@@ -148,7 +147,6 @@ def build_species(species, details, summary, ecology):
         'aliases': aliases,
         'group': species['group'],
         'url': summary['url'] if summary else None,
-        'text': full_text,
     }
     group = species['group']
     chunks = [{'id': f'{doc_id}#overview', 'docId': doc_id, 'group': group, 'field': 'overview', 'text': overview}]
@@ -194,7 +192,7 @@ def main():
 
     for key, term, text in GLOSSARY:
         doc_id = f'glossary:{key}'
-        documents.append({'id': doc_id, 'type': 'glossary', 'name': term, 'text': text})
+        documents.append({'id': doc_id, 'type': 'glossary', 'name': term})
         chunks.append({'id': f'{doc_id}#overview', 'docId': doc_id, 'group': 'glossary', 'field': 'glossary', 'text': text})
         index_name(term, doc_id)
 

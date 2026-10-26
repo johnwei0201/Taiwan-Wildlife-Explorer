@@ -1,0 +1,7 @@
+# AI 動物通線上 API（api/ask.py）使用的 Python 套件；Vercel 部署時會自動安裝
+# 只放執行時需要的套件（Vercel 的 Python 上限 500 MB），建立資料用的套件在 backend/requirements.txt
+anthropic==2.3.0       # Claude 官方 Python 套件
+numpy==2.5.4           # 向量相似度計算
+onnxruntime==1.31.0    # 執行 ONNX 模型（問題轉向量），不需要 PyTorch
+tokenizers==0.22.2     # 把文字切成模型看得懂的 token
+python-dotenv==1.2.4   # 本機從 backend/.env 讀取 API 金鑰（Vercel 上用環境變數）

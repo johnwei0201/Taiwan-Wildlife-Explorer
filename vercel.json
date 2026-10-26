@@ -1,3 +1,9 @@
 {
-  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
+  "rewrites": [{ "source": "/((?!api/).*)", "destination": "/index.html" }],
+  "functions": {
+    "api/ask.py": {
+      "maxDuration": 60,
+      "excludeFiles": "{public/**,src/**,scripts/**,dist/**,node_modules/**,backend/.venv/**,backend/data/vector_keys.json,**/*.md,**/*.psd}"
+    }
+  }
 }
