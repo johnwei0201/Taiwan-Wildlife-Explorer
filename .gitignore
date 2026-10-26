@@ -18,3 +18,7 @@ Thumbs.db
 
 # Claude Code 個人設定（不上傳）
 .claude/settings.local.json
+
+# Python 資料腳本的 API 快取（可以重新產生）
+scripts/.cache/
+__pycache__/
