@@ -9,9 +9,20 @@ import { useSpeciesList } from '../../hooks/useSpeciesList.js'
 import styles from './AskPage.module.css'
 
 // 範例問題：只放 RAG 擅長的題型（單一物種、兩種比較、名詞解釋），訪客和面試官點了就能直接試用
-//   階段一的資料覆蓋率統計出來後，再換成資料最完整的物種
+//   都是 20 題測試裡回答良好的題目（另加列舉題，向量搜尋也能找到）
 //   本站用 TaiCOL 的正式中文名，俗名寫在括號裡（例如帝雉的正式名稱是黑長尾雉）
-const EXAMPLE_QUESTIONS = ['臺灣藍鵲吃什麼？', '黑長尾雉（帝雉）是保育類嗎？', '藍腹鷴和黑長尾雉有什麼不同？', '什麼是特有種？']
+const EXAMPLE_QUESTIONS = [
+  '臺灣藍鵲吃什麼？',
+  '黑長尾雉（帝雉）是保育類嗎？',
+  '藍腹鷴和黑長尾雉有什麼不同？',
+  '什麼是特有種？',
+  '石虎幾月最容易看到？',
+  '臺灣黑熊住在哪裡？',
+  '五色鳥長什麼樣子？',
+  '外來種和入侵種有什麼不同？',
+  '會吃昆蟲的青蛙有哪些？',
+  '台灣有哪些螢火蟲？',
+]
 
 let nextId = 0 // 每則對話的 key
 
@@ -67,11 +78,11 @@ export default function AskPage() {
   return (
     <div className="container">
       <PagePanel title="AI 動物通">
+        <ExampleQuestions label="試試看這些問題" questions={EXAMPLE_QUESTIONS} onSelect={send} disabled={isLoading} />
         <p className={styles.intro}>
           用一句話問問台灣動物的食性、棲地、保育等級，AI 會根據本站收錄的動物資料回答，並列出參考的物種。
         </p>
         <p className={styles.notice}>回答僅根據本站物種資料，資料沒有提到的會直接告訴你；AI 也可能出錯，請以物種介紹為準。</p>
-        <ExampleQuestions label="試試看這些問題" questions={EXAMPLE_QUESTIONS} onSelect={send} disabled={isLoading} />
       </PagePanel>
 
       <section className={styles.chat} aria-label="對話">
