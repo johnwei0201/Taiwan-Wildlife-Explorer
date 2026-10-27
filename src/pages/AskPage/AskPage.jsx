@@ -6,23 +6,14 @@ import ChatInput from '../../components/ChatInput/ChatInput.jsx'
 import SpeciesCard from '../../components/SpeciesCard/SpeciesCard.jsx'
 import { askQuestion, AskError } from '../../api/ask.js'
 import { useSpeciesList } from '../../hooks/useSpeciesList.js'
+import { ASK_QUESTIONS } from '../../constants/askQuestions.js'
+import { shuffle } from '../../utils/random.js'
+import resetIcon from '../../assets/icons/Reset.png'
 import styles from './AskPage.module.css'
 
-// 範例問題：只放 RAG 擅長的題型（單一物種、兩種比較、名詞解釋），訪客和面試官點了就能直接試用
-//   都是 20 題測試裡回答良好的題目（另加列舉題，向量搜尋也能找到）
-//   本站用 TaiCOL 的正式中文名，俗名寫在括號裡（例如帝雉的正式名稱是黑長尾雉）
-const EXAMPLE_QUESTIONS = [
-  '臺灣藍鵲吃什麼？',
-  '黑長尾雉（帝雉）是保育類嗎？',
-  '藍腹鷴和黑長尾雉有什麼不同？',
-  '什麼是特有種？',
-  '石虎幾月最容易看到？',
-  '臺灣黑熊住在哪裡？',
-  '五色鳥長什麼樣子？',
-  '外來種和入侵種有什麼不同？',
-  '會吃昆蟲的青蛙有哪些？',
-  '台灣有哪些螢火蟲？',
-]
+// 範例問題：從 100 題（constants/askQuestions.js）裡隨機挑 12 題，每次進頁面都不一樣
+const EXAMPLE_COUNT = 12
+const pickExamples = () => shuffle(ASK_QUESTIONS).slice(0, EXAMPLE_COUNT)
 
 // 對話暫存在 sessionStorage：點物種卡片去看介紹、再回來時，對話還在
 //   sessionStorage 只在這個分頁有效，關掉分頁就清空；另外超過 30 分鐘沒有新對話也會清掉
@@ -59,6 +50,8 @@ export default function AskPage() {
     nextId = Math.max(nextId, ...saved.map((m) => m.id)) // 新訊息的 key 接在暫存的後面，不會重複
     return saved
   })
+  // 按「試試看這些問題」前面的圖示，就換一批範例問題
+  const [examples, setExamples] = useState(pickExamples)
   const controllerRef = useRef(null)
   const listEndRef = useRef(null)
 
@@ -108,7 +101,18 @@ export default function AskPage() {
   return (
     <div className="container">
       <PagePanel title="AI 動物通">
-        <ExampleQuestions label="試試看這些問題" questions={EXAMPLE_QUESTIONS} onSelect={send} disabled={isLoading} />
+        <ExampleQuestions
+          label={
+            <button type="button" className={styles.refresh} onClick={() => setExamples(pickExamples())}>
+              <img src={resetIcon} alt="" className={styles.refreshIcon} />
+              試試看這些問題
+              <span className="visually-hidden">（按一下換一批）</span>
+            </button>
+          }
+          questions={examples}
+          onSelect={send}
+          disabled={isLoading}
+        />
         <p className={styles.intro}>
           用一句話問問台灣動物的食性、棲地、保育等級，AI 會根據本站收錄的動物資料回答，並列出參考的物種。
         </p>

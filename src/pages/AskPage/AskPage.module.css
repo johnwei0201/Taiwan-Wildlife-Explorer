@@ -1,4 +1,25 @@
 /* ---------- 上方說明區（PagePanel 內） ---------- */
+/* 「試試看這些問題」：前面加重新整理圖示，按了換一批問題（和首頁的「推薦」按鈕同樣的樣式） */
+.refresh {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  font-size: var(--fs-base);
+  font-weight: 700;
+  color: var(--color-primary-dark);
+}
+
+/* 圖示是字的 1.5 倍大；滑過時轉半圈，提示「換一批」 */
+.refreshIcon {
+  width: 1.5em;
+  height: 1.5em;
+  transition: transform 0.4s ease;
+}
+
+.refresh:hover .refreshIcon {
+  transform: rotate(180deg);
+}
+
 .intro {
   margin-top: var(--space-4);
   color: var(--color-text-muted);

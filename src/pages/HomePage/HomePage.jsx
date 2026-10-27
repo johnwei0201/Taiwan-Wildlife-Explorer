@@ -6,6 +6,7 @@ import { COLLECTIONS, GROUPS, findGroup, matchTags, parseTags } from '../../cons
 import { FILTERS, applyFilters } from '../../constants/filters.js'
 import { useSpeciesList } from '../../hooks/useSpeciesList.js'
 import { matchQuery, parseQuery, searchText } from '../../utils/search.js'
+import { shuffle } from '../../utils/random.js'
 import resetIcon from '../../assets/icons/Reset.png'
 import styles from './HomePage.module.css'
 
@@ -25,16 +26,6 @@ const RANDOM_GROUPS = GROUPS.filter((g) => g.kind === 'group' && !RANDOM_EXCLUDE
 const RANDOM_EXCLUDED_TAXA = ['Muridae', 'Cricetidae', 'Soricidae', 'Chiroptera']
 const isRandomCandidate = (s) =>
   s.photo && !RANDOM_EXCLUDED_TAXA.includes(s.order?.nameSci) && !RANDOM_EXCLUDED_TAXA.includes(s.family?.nameSci)
-
-// 洗牌（Fisher–Yates）：從最後一張開始，每張都和前面隨機一張交換，每種排列機率相同
-function shuffle(list) {
-  const result = [...list]
-  for (let i = result.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1))
-    ;[result[i], result[j]] = [result[j], result[i]]
-  }
-  return result
-}
 
 // 各類群平均挑選：直接從全部物種隨機挑，鳥類佔一半以上，推薦幾乎都是鳥；
 // 改成每個類群輪流各拿一種，直到湊滿 30 種（某類群挑完了就跳過它），最後再整體洗牌
