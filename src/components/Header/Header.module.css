@@ -179,11 +179,19 @@
     padding-block: 0;
   }
 
+  /* 選單項目：黑色膠囊底，在草叢背景上比較清楚；字放大到 18px */
   .navLink {
     padding: var(--space-2) var(--space-4);
-    border-radius: var(--radius-sm);
+    font-size: var(--fs-lg);
+    background-color: rgb(0 0 0 / 0.75);
+    border-radius: 999px;
+    transition: color var(--transition), background-color var(--transition);
     /* 選單文字不換行：平板剛好 768px 寬時空間很擠，「物種圖鑑」會被拆成兩行；改由 Logo 稍微縮小讓出空間 */
     white-space: nowrap;
+  }
+
+  .navLink:hover {
+    background-color: #000;
   }
 
   /* 橫向排列時不需要分隔線 */
@@ -208,10 +216,11 @@
 }
 
 /* ---------- 桌機：Logo 再大一點、搜尋框再寬一點 ---------- */
-/* 平板（768～1023px）：選單有三項，空間比較擠，選單項目的左右留白縮小，讓出空間給 Logo */
+/* 平板（768～1023px）：選單有三項，空間比較擠，選單項目的左右留白縮小、字維持 16px，讓出空間給 Logo */
 @media (min-width: 768px) and (max-width: 1023px) {
   .navLink {
     padding-inline: var(--space-2);
+    font-size: var(--fs-base);
   }
 }
 
