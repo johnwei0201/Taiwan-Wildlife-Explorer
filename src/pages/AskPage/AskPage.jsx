@@ -82,13 +82,12 @@ export default function AskPage() {
         <p className={styles.intro}>
           用一句話問問台灣動物的食性、棲地、保育等級，AI 會根據本站收錄的動物資料回答，並列出參考的物種。
         </p>
-        <p className={styles.notice}>回答僅根據本站物種資料，資料沒有提到的會直接告訴你；AI 也可能出錯，請以物種介紹為準。</p>
+        <p className={styles.notice}>（回答僅根據本站物種資料，資料沒有提到的會直接告訴你；AI 也可能出錯，請以物種介紹為準。）</p>
       </PagePanel>
 
+      {/* 還沒有對話時只顯示輸入框，送出第一個問題後才出現對話區 */}
       <section className={styles.chat} aria-label="對話">
-        {messages.length === 0 ? (
-          <p className={styles.empty}>還沒有對話。點上方的範例問題，或在下方輸入你的問題。</p>
-        ) : (
+        {messages.length > 0 && (
           <ul className={styles.messages} aria-live="polite">
             {messages.map((message) => {
               const sources = (message.sources ?? []).map((id) => speciesById.get(id)).filter(Boolean)
@@ -121,9 +120,9 @@ export default function AskPage() {
             })}
           </ul>
         )}
-        <div ref={listEndRef} />
+        {messages.length > 0 && <div ref={listEndRef} />}
 
-        <div className={styles.inputBar}>
+        <div className={messages.length > 0 ? styles.inputBar : undefined}>
           <ChatInput onSend={send} disabled={isLoading} />
         </div>
       </section>

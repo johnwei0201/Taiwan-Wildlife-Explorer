@@ -28,19 +28,13 @@
   }
 }
 
-.empty {
-  padding-block: var(--space-6);
-  text-align: center;
-  color: var(--color-text-muted);
-}
-
 .messages {
   display: flex;
   flex-direction: column;
   gap: var(--space-4);
 }
 
-/* 輸入框和對話之間用一條淡線分開 */
+/* 有對話時，輸入框和對話之間用一條淡線分開 */
 .inputBar {
   padding-top: var(--space-4);
   border-top: 1px solid var(--color-border);
