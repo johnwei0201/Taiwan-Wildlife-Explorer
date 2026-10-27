@@ -24,12 +24,41 @@ const EXAMPLE_QUESTIONS = [
   '台灣有哪些螢火蟲？',
 ]
 
+// 對話暫存在 sessionStorage：點物種卡片去看介紹、再回來時，對話還在
+//   sessionStorage 只在這個分頁有效，關掉分頁就清空；另外超過 30 分鐘沒有新對話也會清掉
+const STORAGE_KEY = 'ask-messages'
+const STORAGE_TTL = 30 * 60 * 1000
+
+// 讀回暫存的對話；還在等回答的那一題（離開頁面時已取消）連同問題一起拿掉
+function loadMessages() {
+  try {
+    const saved = JSON.parse(sessionStorage.getItem(STORAGE_KEY))
+    if (!saved || Date.now() - saved.savedAt > STORAGE_TTL) return []
+    return saved.messages.filter((m, i, all) => !m.loading && !all[i + 1]?.loading)
+  } catch {
+    return [] // 無痕模式等情況可能無法使用 sessionStorage，就從空白對話開始
+  }
+}
+
+function saveMessages(messages) {
+  try {
+    sessionStorage.setItem(STORAGE_KEY, JSON.stringify({ savedAt: Date.now(), messages }))
+  } catch {
+    // 存不了就算了，只是回來時對話不會保留
+  }
+}
+
 let nextId = 0 // 每則對話的 key
 
 // AI 動物通：用一句話問台灣動物的問題，AI 根據本站資料回答，並附上參考的物種卡片
 export default function AskPage() {
   const { speciesList } = useSpeciesList()
-  const [messages, setMessages] = useState([]) // { id, role: 'user' | 'assistant', text, sources, followUps, loading }
+  // { id, role: 'user' | 'assistant', text, sources, followUps, loading }
+  const [messages, setMessages] = useState(() => {
+    const saved = loadMessages()
+    nextId = Math.max(nextId, ...saved.map((m) => m.id)) // 新訊息的 key 接在暫存的後面，不會重複
+    return saved
+  })
   const controllerRef = useRef(null)
   const listEndRef = useRef(null)
 
@@ -44,9 +73,10 @@ export default function AskPage() {
     }
   }, [])
 
-  // 有新訊息時，把最新的一則捲進畫面
+  // 有新訊息時，把最新的一則捲進畫面，並暫存起來
   useEffect(() => {
     if (messages.length > 0) listEndRef.current?.scrollIntoView({ behavior: 'smooth', block: 'nearest' })
+    saveMessages(messages)
   }, [messages])
 
   const send = async (question) => {
