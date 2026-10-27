@@ -49,6 +49,22 @@
   }
 }
 
+/* 清除對話：放在對話區右上角，用淡色小字，不搶對話內容的注意力 */
+.clear {
+  align-self: flex-end;
+  padding: var(--space-1) var(--space-3);
+  font-size: var(--fs-sm);
+  color: var(--color-text-muted);
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  transition: color var(--transition), border-color var(--transition);
+}
+
+.clear:hover {
+  color: var(--color-alert);
+  border-color: var(--color-alert);
+}
+
 .messages {
   display: flex;
   flex-direction: column;
