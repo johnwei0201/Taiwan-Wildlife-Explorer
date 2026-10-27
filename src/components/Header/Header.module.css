@@ -179,10 +179,12 @@
     padding-block: 0;
   }
 
-  /* 選單項目：黑色膠囊底，在草叢背景上比較清楚；字放大到 18px */
+  /* 選單項目：黑色膠囊底，在草叢背景上比較清楚；字放大到 18px
+     行高設成 1（行高＝字高），上下留白相同，文字就會上下置中；膠囊高度 18 + 6 × 2 = 30px */
   .navLink {
-    padding: var(--space-2) var(--space-4);
+    padding: 6px var(--space-4);
     font-size: var(--fs-lg);
+    line-height: 1;
     background-color: rgb(0 0 0 / 0.75);
     border-radius: 999px;
     transition: color var(--transition), background-color var(--transition);
