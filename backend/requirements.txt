@@ -11,3 +11,6 @@ sentence-transformers==3.4.1
 
 # 匯入、查詢資料庫（backend/db/）：psycopg 支援 COPY 大量寫入，但太大，線上改用 pg8000
 psycopg[binary]==3.3.6
+
+# 測試 Google 登入的驗證（backend/test_google_token.py）：產生測試用的簽章，只在本機使用
+cryptography==50.0.2

@@ -218,11 +218,16 @@
 }
 
 /* ---------- 桌機：Logo 再大一點、搜尋框再寬一點 ---------- */
-/* 平板（768～1023px）：選單有三項，空間比較擠，選單項目的左右留白縮小、字維持 16px，讓出空間給 Logo */
+/* 平板（768～1023px）：選單有四項，空間比較擠，選單項目的左右留白縮小、字維持 16px，
+   搜尋框也縮窄一點，讓出空間給 Logo */
 @media (min-width: 768px) and (max-width: 1023px) {
   .navLink {
     padding-inline: var(--space-2);
     font-size: var(--fs-base);
+  }
+
+  .search {
+    flex-basis: 180px;
   }
 }
 

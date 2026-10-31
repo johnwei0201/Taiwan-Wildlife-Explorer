@@ -1,0 +1,248 @@
+/* ---------- 共用 ---------- */
+.muted {
+  color: var(--color-text-muted);
+}
+
+/* ---------- 沒登入：功能說明＋登入按鈕 ---------- */
+.features {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin-block: var(--space-3) var(--space-4);
+  padding-left: 1.25em;
+  list-style: disc;
+}
+
+.signIn {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-2);
+}
+
+.error {
+  font-size: var(--fs-sm);
+  color: var(--color-alert);
+}
+
+.notice {
+  padding: var(--space-3) var(--space-4);
+  font-weight: 700;
+  color: var(--color-primary-dark);
+  background-color: var(--color-primary-light);
+  border-radius: var(--radius-sm);
+}
+
+.privacy {
+  margin-top: var(--space-4);
+  font-size: var(--fs-sm);
+  color: var(--color-text-muted);
+}
+
+/* ---------- 已登入：個人資料列 ---------- */
+.profile {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+}
+
+/* min-width: 0：Email 很長時可以截斷，不會把登出按鈕擠出去 */
+.profileText {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.name {
+  font-weight: 700;
+}
+
+.email {
+  overflow: hidden;
+  font-size: var(--fs-sm);
+  color: var(--color-text-muted);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* 登出：推到最右邊，用淡色外框，不搶注意力 */
+.logout {
+  flex-shrink: 0;
+  margin-left: auto;
+  padding: var(--space-1) var(--space-3);
+  font-size: var(--fs-sm);
+  color: var(--color-text-muted);
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  transition: color var(--transition), border-color var(--transition);
+}
+
+.logout:hover:not(:disabled) {
+  color: var(--color-primary-dark);
+  border-color: var(--color-primary);
+}
+
+/* ---------- 完成度 ---------- */
+.progress {
+  margin-top: var(--space-4);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--color-border);
+}
+
+.totals {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-3);
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  padding: var(--space-3) var(--space-4);
+  background-color: var(--color-primary-light);
+  border-radius: var(--radius-sm);
+}
+
+.statLabel {
+  font-size: var(--fs-sm);
+  color: var(--color-text-muted);
+}
+
+/* 看過的數字：和首頁「共 N 種」一樣用橘紅色大字，一眼看到成果 */
+.statValue {
+  font-size: var(--fs-2xl);
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--color-highlight);
+}
+
+.statTotal {
+  font-size: var(--fs-sm);
+  color: var(--color-text-muted);
+}
+
+.groups {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin-top: var(--space-4);
+}
+
+/* 每一列：類群名稱｜進度條｜看過幾種 */
+.group {
+  display: grid;
+  grid-template-columns: 7.5em 1fr 5.5em;
+  align-items: center;
+  gap: var(--space-3);
+  font-size: var(--fs-sm);
+}
+
+.groupName {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.bar {
+  height: 10px;
+  overflow: hidden;
+  background-color: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+}
+
+/* 看過一種也要看得到一點點進度 */
+.barFill {
+  display: block;
+  min-width: 4px;
+  height: 100%;
+  background-color: var(--color-primary);
+  border-radius: 999px;
+}
+
+.groupCount {
+  color: var(--color-text-muted);
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.toggleAll {
+  margin-top: var(--space-3);
+  font-size: var(--fs-sm);
+  color: var(--color-primary);
+  text-decoration: underline;
+}
+
+/* ---------- 清單：分頁＋物種卡片 ---------- */
+.lists {
+  margin-top: var(--space-4);
+  padding: var(--space-4);
+  background-color: var(--color-surface);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+}
+
+@media (min-width: 768px) {
+  .lists {
+    padding: var(--space-6);
+  }
+}
+
+.tabs {
+  display: flex;
+  gap: var(--space-2);
+  margin-bottom: var(--space-4);
+  border-bottom: 1px solid var(--color-border);
+}
+
+/* 分頁：選到的那一頁底下有主色的線 */
+.tab {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  margin-bottom: -1px;
+  padding: var(--space-2) var(--space-3);
+  font-weight: 700;
+  color: var(--color-text-muted);
+  border-bottom: 3px solid transparent;
+  transition: color var(--transition), border-color var(--transition);
+}
+
+.tab[aria-selected='true'] {
+  color: var(--color-primary-dark);
+  border-bottom-color: var(--color-primary);
+}
+
+.tabCount {
+  padding: 0 var(--space-2);
+  font-size: 0.75rem;
+  color: var(--color-primary-dark);
+  background-color: var(--color-primary-light);
+  border-radius: 999px;
+}
+
+.empty {
+  padding-block: var(--space-6);
+  color: var(--color-text-muted);
+  text-align: center;
+}
+
+/* 刪除帳號：放在最下面，小字，滑過時才變紅 */
+.delete {
+  display: block;
+  margin: var(--space-6) auto 0;
+  font-size: var(--fs-sm);
+  color: var(--color-text-muted);
+  text-decoration: underline;
+}
+
+.delete:hover:not(:disabled) {
+  color: var(--color-alert);
+}

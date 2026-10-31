@@ -10,6 +10,7 @@
 - **物種介紹**：分類階層、保育與紅皮書等級、照片、常見月份、出現縣市、iNaturalist 紀錄地圖
 - **我附近的動物**：依目前位置顯示附近的觀察紀錄
 - **AI 動物通**：用 RAG（檢索增強生成）回答動物問題，只根據本站資料回答，並附上參考的物種卡片
+- **會員（生命清單）**：用 Google 帳號登入，記錄在野外看過的動物，看各類群、特有種的完成度；也可以收藏喜歡的動物
 
 ## AI 動物通（RAG）
 
@@ -53,6 +54,7 @@
 | `species_monthly_counts`、`species_county_counts` | 每月、各縣市的紀錄數 |
 | `rag_chunks` | AI 動物通的 8,754 塊文字和 384 維向量（pgvector） |
 | `ask_logs`、`ask_log_sources` | AI 動物通的問答紀錄、回答引用的物種 |
+| `users`、`sessions`、`user_species` | 會員、登入狀態、生命清單和收藏 |
 
 - 結構：[`backend/db/schema.sql`](backend/db/schema.sql)（外鍵、`CHECK` 限制、`ON DELETE CASCADE`、索引）
 - 匯入：[`backend/db/import_species.py`](backend/db/import_species.py)，整個匯入在一個交易裡，用 upsert 和 `COPY`，可以重複執行
@@ -65,6 +67,20 @@
 - 不存 IP：訪客代號是「臺灣日期＋IP」的 HMAC，同一天能計算次數，隔天就無法對應到同一個人
 - 資料庫連不上時，自動改用記憶體計算次數，AI 動物通照常回答
 - 分析查詢：[`backend/db/ask_queries.sql`](backend/db/ask_queries.sql)（每日題數、熱門問題、最常被引用的物種、花費）
+
+## 會員（Google 登入）
+
+1. 前端用 Google Identity Services 的登入按鈕，登入後拿到 Google 簽名的 ID token（JWT）
+2. 後端（[`api/auth.py`](api/auth.py)）驗證 token，建立自己的登入狀態，存在 `sessions` 表；瀏覽器只拿到 HttpOnly cookie
+3. 生命清單的完成度用一段 SQL 算出：`LEFT JOIN` 保留沒看過的物種，`FILTER` 另外算特有種（[`backend/account.py`](backend/account.py)）
+
+安全性的做法：
+
+- **JWT 驗證自己寫**（[`backend/google_token.py`](backend/google_token.py)）：Google 的 google-auth 套件連同依賴約 27 MB，會讓 Vercel 函式超過 225 MB 的上限；RS256 驗證只用 Python 內建的 `pow` 和 SHA-256，用「組出預期內容再整段比對」的方式，避開解析簽章的已知漏洞。檢查發行者、對象（aud）、過期時間、Email 已驗證，只接受 RS256
+- **測試**（[`backend/test_google_token.py`](backend/test_google_token.py)）：用自己產生的 RSA 金鑰簽 token，9 種情況（竄改內容、別的金鑰、別的網站、過期、`alg: none`…）都符合預期
+- **登入狀態**：cookie 是 256 位元的隨機字串，設 `HttpOnly`、`Secure`、`SameSite=Lax`；資料庫只存它的 SHA-256，外洩也不能拿來登入；登出時刪除該筆，立刻失效
+- **CSRF**：除了 `SameSite=Lax`，會修改資料的請求還會比對 `Origin` 和網址
+- **不存密碼**：只存 Google 提供的名稱、Email、頭像；刪除帳號時，`ON DELETE CASCADE` 一併刪除登入狀態和清單
 
 ## 技術
 
@@ -88,7 +104,7 @@ backend/.venv/Scripts/python -m pip install -r backend/requirements.txt
 backend/.venv/Scripts/python backend/serve_local.py
 ```
 
-在 `backend/.env` 放 `ANTHROPIC_API_KEY=…`（不會上傳）；沒有金鑰時以備援模式回答。`npm run dev` 會把 `/api` 轉給本機的後端。
+在 `backend/.env` 放 `ANTHROPIC_API_KEY=…`、`DATABASE_URL=…`（不會上傳），會員功能另外需要 `GOOGLE_CLIENT_ID=…`；沒有 Claude 金鑰時以備援模式回答，沒有 Client ID 時會員頁顯示「準備中」。`npm run dev` 會把 `/api` 轉給本機的後端。
 
 更新 AI 用的資料：
 

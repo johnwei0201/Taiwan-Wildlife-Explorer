@@ -2,6 +2,7 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'
 import App from './App.jsx'
+import { AccountProvider } from './hooks/useAccount.jsx'
 
 // CSS 的載入順序很重要：先清除瀏覽器預設樣式，再定義變數，最後套用全站樣式
 import './styles/reset.css'
@@ -11,7 +12,10 @@ import './styles/global.css'
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <BrowserRouter>
-      <App />
+      {/* 會員狀態（登入、生命清單）：整個網站共用 */}
+      <AccountProvider>
+        <App />
+      </AccountProvider>
     </BrowserRouter>
   </StrictMode>,
 )

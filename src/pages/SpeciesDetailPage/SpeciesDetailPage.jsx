@@ -12,6 +12,7 @@ import InfoTag from '../../components/InfoTag/InfoTag.jsx'
 import BreedList from '../../components/BreedList/BreedList.jsx'
 import BackLink from '../../components/BackLink/BackLink.jsx'
 import CategoryToggles from '../../components/CategoryToggles/CategoryToggles.jsx'
+import CollectionButtons from '../../components/CollectionButtons/CollectionButtons.jsx'
 import {
   fetchTaxon,
   fetchMonthlyCounts,
@@ -324,6 +325,9 @@ function SpeciesHero({ taxon, local, displayName, speciesList }) {
             </li>
           )}
         </ul>
+
+        {/* 看過／收藏：只有本站收錄的物種才能記錄（資料庫裡有這個物種） */}
+        {local && <CollectionButtons speciesId={local.id} />}
 
         {taxonomy.length > 0 && (
           // key：換到別的物種時重新建立，展開中的說明會自動關閉

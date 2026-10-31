@@ -160,3 +160,37 @@ CREATE TABLE IF NOT EXISTS rag_chunks (
 );
 -- 名稱查詢時「取某幾種動物的全部塊，依順序排好」
 CREATE INDEX IF NOT EXISTS rag_chunks_doc_id_position_idx ON rag_chunks (doc_id, position);
+
+-- ==========================================================================
+-- 會員（第 4 步）：Google 登入、生命清單、收藏
+-- ==========================================================================
+
+-- 會員：只存 Google 提供的基本資料，沒有密碼（密碼由 Google 保管）
+CREATE TABLE IF NOT EXISTS users (
+    id            bigint GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    google_sub    text NOT NULL UNIQUE,      -- Google 帳號的固定編號（Email 可能會改，這個不會）
+    email         text NOT NULL,
+    display_name  text,
+    avatar_url    text,
+    created_at    timestamptz NOT NULL DEFAULT now(),
+    last_login_at timestamptz NOT NULL DEFAULT now()
+);
+
+-- 登入狀態：瀏覽器的 cookie 存一串隨機的 token，資料庫只存它的 SHA-256
+--   就算資料庫外洩，拿到的雜湊也不能拿來登入；登出時刪掉這一筆，token 立刻失效
+CREATE TABLE IF NOT EXISTS sessions (
+    token_hash text PRIMARY KEY,
+    user_id    bigint NOT NULL REFERENCES users (id) ON DELETE CASCADE,
+    created_at timestamptz NOT NULL DEFAULT now(),
+    expires_at timestamptz NOT NULL
+);
+CREATE INDEX IF NOT EXISTS sessions_user_id_idx ON sessions (user_id);
+
+-- 生命清單（seen：在野外看過）和收藏（favorite）：同一種動物可以同時在兩個清單裡
+CREATE TABLE IF NOT EXISTS user_species (
+    user_id    bigint NOT NULL REFERENCES users (id) ON DELETE CASCADE,
+    species_id integer NOT NULL REFERENCES species (id) ON DELETE CASCADE,
+    list       text NOT NULL CHECK (list IN ('seen', 'favorite')),
+    created_at timestamptz NOT NULL DEFAULT now(),
+    PRIMARY KEY (user_id, list, species_id)
+);

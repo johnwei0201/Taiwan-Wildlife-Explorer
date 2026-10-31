@@ -5,25 +5,22 @@ AI 動物通 API（Vercel Python Function）：網站把問題送到 POST /api/a
   GET  /api/ask  → {"status": "ok", "database": "ok"}（確認 API 和資料庫有在運作）
 
 回答的邏輯在 backend/rag.py；問答紀錄與次數限制在 backend/ask_log.py（PostgreSQL）
-這個檔案只負責收發 HTTP、檢查輸入
-用 Python 內建的 BaseHTTPRequestHandler，不用 FastAPI：
-  Vercel 偵測到 FastAPI 會把整個網站交給 Python 處理，可能影響 React 前端
+這個檔案只負責收發 HTTP、檢查輸入（共用的 HTTP 工具在 backend/web.py）
 
 金鑰 ANTHROPIC_API_KEY、資料庫連線 DATABASE_URL 設定在 Vercel 專案的環境變數，不放在程式裡
 本機測試：backend/serve_local.py
 """
 
-import json
 import sys
 import time
 from collections import defaultdict, deque
-from http.server import BaseHTTPRequestHandler
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / 'backend'))
 import ask_log  # noqa: E402
 import database  # noqa: E402
 from rag import answer_question  # noqa: E402
+from web import BadRequest, JsonHandler  # noqa: E402
 
 MAX_QUESTION_LENGTH = 200
 
@@ -54,7 +51,7 @@ def rate_limit_message(ip):
     return None
 
 
-class handler(BaseHTTPRequestHandler):
+class handler(JsonHandler):
     def do_GET(self):
         try:
             db_status = 'ok' if database.ping() else 'unavailable'
@@ -63,19 +60,14 @@ class handler(BaseHTTPRequestHandler):
         self.send_json(200, {'status': 'ok', 'database': db_status})
 
     def do_POST(self):
-        length = int(self.headers.get('content-length') or 0)
-        if length > 4000:
-            return self.send_json(413, {'detail': '問題太長了'})
         try:
-            body = json.loads(self.rfile.read(length) or b'{}')
-            question = str(body.get('question', '')).strip()
-        except (ValueError, AttributeError):
-            return self.send_json(400, {'detail': '格式錯誤'})
+            question = str(self.read_json().get('question', '')).strip()
+        except BadRequest as error:
+            return self.send_json(error.status, {'detail': error.detail})
         if not question or len(question) > MAX_QUESTION_LENGTH:
             return self.send_json(422, {'detail': f'問題要在 1～{MAX_QUESTION_LENGTH} 字之間'})
 
-        # Vercel 在前面有一層轉送，真正的 IP 在 X-Forwarded-For 的第一個
-        ip = (self.headers.get('x-forwarded-for') or self.client_address[0]).split(',')[0].strip()
+        ip = self.client_ip()
         try:
             log_id, message = ask_log.start(ip, question)
         except Exception as error:  # 資料庫連不上：改用記憶體計算次數，這題不記錄
@@ -103,11 +95,3 @@ class handler(BaseHTTPRequestHandler):
             ask_log.finish(log_id, result, round((time.time() - started) * 1000))
         except Exception as error:
             print(f'[ask] 問答紀錄寫入失敗：{type(error).__name__}: {error}')
-
-    def send_json(self, status, data):
-        payload = json.dumps(data, ensure_ascii=False).encode('utf-8')
-        self.send_response(status)
-        self.send_header('Content-Type', 'application/json; charset=utf-8')
-        self.send_header('Content-Length', str(len(payload)))
-        self.end_headers()
-        self.wfile.write(payload)
