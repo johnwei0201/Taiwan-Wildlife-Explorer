@@ -186,7 +186,7 @@ CREATE TABLE IF NOT EXISTS sessions (
 );
 CREATE INDEX IF NOT EXISTS sessions_user_id_idx ON sessions (user_id);
 
--- 看過的動物（seen：在野外看過）和收藏（favorite）：同一種動物可以同時在兩個清單裡
+-- 看過的動物（seen：登入後打開物種頁時自動記錄）和收藏（favorite）：同一種動物可以同時在兩個清單裡
 CREATE TABLE IF NOT EXISTS user_species (
     user_id    bigint NOT NULL REFERENCES users (id) ON DELETE CASCADE,
     species_id integer NOT NULL REFERENCES species (id) ON DELETE CASCADE,

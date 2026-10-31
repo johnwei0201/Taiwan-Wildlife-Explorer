@@ -10,7 +10,7 @@ import { detectInAppBrowser, lineExternalUrl } from '../../utils/inAppBrowser.js
 import styles from './AccountPage.module.css'
 
 const TABS = [
-  { list: 'seen', label: '看過的動物', empty: '還沒有記錄。在物種介紹頁按「看過」，就會出現在這裡。' },
+  { list: 'seen', label: '看過的動物', empty: '還沒有記錄。打開物種介紹頁，就會自動記錄在這裡。' },
   { list: 'favorite', label: '收藏', empty: '還沒有收藏。在物種介紹頁按「收藏」，就會出現在這裡。' },
 ]
 
@@ -54,7 +54,7 @@ function SignIn({ clientId }) {
       <p>登入後可以記錄你和臺灣動物的相遇：</p>
       <ul className={styles.features}>
         <li>
-          <strong>看過的動物</strong>：記錄在野外遇見的動物，看看鳥類、蝴蝶、蛙類……各收集了幾種，臺灣特有種看過幾種。
+          <strong>看過的動物</strong>：瀏覽過的物種介紹會自動記錄，看看鳥類、蝴蝶、蛙類……各看過幾種，臺灣特有種看過幾種。
         </li>
         <li>
           <strong>收藏</strong>：把喜歡的動物存起來，下次直接找到。
@@ -74,7 +74,7 @@ function SignIn({ clientId }) {
       )}
 
       <p className={styles.privacy}>
-        （使用 Google 帳號登入，本站不會取得你的密碼；只保存 Google 提供的名稱、Email、頭像，以及你記錄的動物。可以隨時刪除帳號，資料會一併刪除。詳見<Link to="/privacy">隱私權政策</Link>。）
+        （使用 Google 帳號登入，本站不會取得你的密碼；只保存 Google 提供的名稱、Email、頭像，以及你看過、收藏的動物。可以隨時刪除帳號，資料會一併刪除。詳見<Link to="/privacy">隱私權政策</Link>。）
       </p>
     </PagePanel>
   )

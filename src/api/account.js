@@ -39,7 +39,7 @@ export const deleteAccount = () => request('/api/auth?scope=account', { method: 
 // { seen: [物種 id], favorite: [物種 id], groups: [{ code, name, seen, total, endemicSeen, endemicTotal }] }
 export const fetchCollection = () => request('/api/collection')
 
-// list：'seen'（看過的動物：在野外看過）或 'favorite'（收藏）；都回傳更新後的清單
+// list：'seen'（看過的動物：打開物種頁時自動記錄）或 'favorite'（收藏）；都回傳更新後的清單
 export const addToCollection = (speciesId, list) =>
   request('/api/collection', { method: 'POST', body: JSON.stringify({ speciesId, list }) })
 

@@ -1,26 +1,28 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { AccountError } from '../../api/account.js'
 import { useAccount } from '../../hooks/useAccount.jsx'
 import styles from './CollectionButtons.module.css'
 
-const BUTTONS = [
-  { list: 'seen', on: '✓ 看過', off: '看過', hint: '我在野外看過這種動物' },
-  { list: 'favorite', on: '♥ 已收藏', off: '♡ 收藏', hint: '收藏這種動物' },
-]
+const BUTTONS = [{ list: 'favorite', on: '♥ 已收藏', off: '♡ 收藏', hint: '收藏這種動物' }]
 
-// 物種介紹頁的「看過」「收藏」按鈕：已登入時直接切換；沒登入時提示到會員頁登入
+// 物種介紹頁的會員功能：已登入時自動記錄成「看過的動物」，並顯示收藏按鈕；沒登入時提示到會員頁登入
 //   會員功能還沒開放（沒有 Client ID）或後端無法使用時，整塊不顯示
 export default function CollectionButtons({ speciesId }) {
-  const { status, user, clientId, collection, toggle } = useAccount()
+  const { status, user, clientId, collection, toggle, markSeen } = useAccount()
   const [pending, setPending] = useState(null) // 正在送出的清單名稱
+
+  // 打開這一頁就記錄（清單載入後才知道是否已經記錄過）
+  useEffect(() => {
+    if (user && collection) markSeen(speciesId)
+  }, [user, collection, speciesId, markSeen])
 
   if (status !== 'ready' || !clientId) return null
 
   if (!user) {
     return (
       <p className={styles.signInHint}>
-        <Link to="/account">登入會員</Link>，就能記錄你看過的動物
+        <Link to="/account">登入會員</Link>，看過的動物會自動記錄下來
       </p>
     )
   }

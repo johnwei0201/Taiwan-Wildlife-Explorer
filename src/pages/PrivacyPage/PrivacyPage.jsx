@@ -29,9 +29,9 @@ export default function PrivacyPage() {
           <h2>會員（使用 Google 帳號登入）</h2>
           <ul>
             <li>登入時，Google 會提供你的 Google 帳號編號、名稱、Email 和頭像網址。本站只保存這四項，<strong>不會取得你的 Google 密碼</strong>。</li>
-            <li>你在<Link to="/account">會員頁</Link>記錄的「看過的動物」和「收藏」，會和你的帳號一起保存。</li>
+            <li>登入後，你打開過的物種介紹頁會自動記錄為「看過的動物」；你按下的「收藏」也會保存。這些紀錄只和你的帳號一起保存，可以在<Link to="/account">會員頁</Link>查看。</li>
             <li>這些資料只用來顯示你的會員資料和清單，不會用在其他地方。</li>
-            <li>登入後，瀏覽器會保存一個登入用的 cookie（30 天後失效，登出時立即失效）。這是本站唯一使用的 cookie。</li>
+            <li>登入後，瀏覽器會保存一個登入用的 cookie（30 天後失效，登出時立即失效）。這是本站自己使用的唯一一個 cookie；Google 的登入按鈕另外會保存一個記錄登入提示狀態的 cookie（g_state）。</li>
             <li>你可以隨時在會員頁<strong>刪除帳號</strong>，帳號、登入狀態、清單會立即一併刪除。</li>
           </ul>
 
