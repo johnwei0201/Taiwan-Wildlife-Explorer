@@ -5,4 +5,4 @@ numpy==2.5.4           # 向量相似度計算
 onnxruntime==1.31.0    # 執行 ONNX 模型（問題轉向量），不需要 PyTorch
 tokenizers==0.22.2     # 把文字切成模型看得懂的 token
 python-dotenv==1.2.4   # 本機從 backend/.env 讀取 API 金鑰（Vercel 上用環境變數）
-psycopg[binary]==3.3.6 # 連接 PostgreSQL（問答紀錄、次數限制）
+pg8000==1.31.6         # 連接 PostgreSQL（問答紀錄、次數限制）；純 Python，比 psycopg 小約 20 MB

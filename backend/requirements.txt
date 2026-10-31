@@ -8,3 +8,6 @@
 # 建立資料用：把全部塊轉成向量（PyTorch 版模型，太大，不放上線）
 sentence-transformers==3.4.1
 
+
+# 匯入、查詢資料庫（backend/db/）：psycopg 支援 COPY 大量寫入，但太大，線上改用 pg8000
+psycopg[binary]==3.3.6

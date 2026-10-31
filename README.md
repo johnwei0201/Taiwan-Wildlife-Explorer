@@ -63,7 +63,7 @@
 - 前端：React 19、Vite、React Router、CSS Modules、Leaflet
 - 資料處理：Node.js、Python（標準函式庫）
 - AI 後端：Python、Claude API、onnxruntime、numpy；建立資料時用 sentence-transformers
-- 資料庫：PostgreSQL（Neon）、psycopg
+- 資料庫：PostgreSQL（Neon）；線上用 pg8000（純 Python，Vercel 函式有 225 MB 上限），本機匯入用 psycopg（支援 COPY）
 
 ## 本機開發
 
