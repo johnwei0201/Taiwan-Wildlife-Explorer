@@ -33,6 +33,54 @@
   border-radius: var(--radius-sm);
 }
 
+/* App 內建瀏覽器的提示：淡橘底，和一般說明區分開 */
+.inApp {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  background-color: #fdf3e1;
+  border: 1px solid var(--color-accent);
+  border-radius: var(--radius-sm);
+}
+
+.inAppButton {
+  padding: var(--space-2) var(--space-6);
+  font-weight: 700;
+  color: #fff;
+  background-color: var(--color-primary);
+  border-radius: 999px;
+}
+
+.copyRow {
+  display: flex;
+  gap: var(--space-2);
+  width: 100%;
+}
+
+/* min-width: 0：網址很長時可以縮短，不會把按鈕擠出去 */
+.copyInput {
+  flex: 1;
+  min-width: 0;
+  padding: var(--space-1) var(--space-2);
+  font-size: var(--fs-sm);
+  color: var(--color-text-muted);
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+}
+
+.copyButton {
+  flex-shrink: 0;
+  padding: var(--space-1) var(--space-3);
+  font-size: var(--fs-sm);
+  color: var(--color-primary-dark);
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-primary);
+  border-radius: 999px;
+}
+
 .privacy {
   margin-top: var(--space-4);
   font-size: var(--fs-sm);

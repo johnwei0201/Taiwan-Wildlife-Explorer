@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import PagePanel from '../../components/PagePanel/PagePanel.jsx'
 import SpeciesGrid from '../../components/SpeciesGrid/SpeciesGrid.jsx'
@@ -6,6 +6,7 @@ import GoogleSignInButton from '../../components/GoogleSignInButton/GoogleSignIn
 import { AccountError } from '../../api/account.js'
 import { useAccount } from '../../hooks/useAccount.jsx'
 import { useSpeciesList } from '../../hooks/useSpeciesList.js'
+import { detectInAppBrowser, lineExternalUrl } from '../../utils/inAppBrowser.js'
 import styles from './AccountPage.module.css'
 
 const TABS = [
@@ -37,6 +38,7 @@ export default function AccountPage() {
 function SignIn({ clientId }) {
   const { login } = useAccount()
   const [error, setError] = useState('')
+  const inAppBrowser = detectInAppBrowser()
 
   const handleCredential = async (credential) => {
     setError('')
@@ -59,19 +61,60 @@ function SignIn({ clientId }) {
         </li>
       </ul>
 
-      {clientId ? (
+      {!clientId ? (
+        <p className={styles.notice}>會員功能準備中，敬請期待。</p>
+      ) : inAppBrowser ? (
+        // App 內建的瀏覽器：Google 不允許登入，按鈕按了也沒反應，改成提示換瀏覽器
+        <InAppBrowserNotice app={inAppBrowser} />
+      ) : (
         <div className={styles.signIn}>
           <GoogleSignInButton clientId={clientId} onCredential={handleCredential} />
           {error && <p className={styles.error} role="alert">{error}</p>}
         </div>
-      ) : (
-        <p className={styles.notice}>會員功能準備中，敬請期待。</p>
       )}
 
       <p className={styles.privacy}>
         （使用 Google 帳號登入，本站不會取得你的密碼；只保存 Google 提供的名稱、Email、頭像，以及你記錄的動物。可以隨時刪除帳號，資料會一併刪除。詳見<Link to="/privacy">隱私權政策</Link>。）
       </p>
     </PagePanel>
+  )
+}
+
+// 在 LINE、Facebook 等 App 裡開啟時的提示：LINE 可以一鍵改用瀏覽器開啟，其他 App 提供複製網址
+function InAppBrowserNotice({ app }) {
+  const inputRef = useRef(null)
+  const [copied, setCopied] = useState(false)
+  const pageUrl = window.location.href.replace(/[?&]openExternalBrowser=1/, '')
+
+  const copy = async () => {
+    try {
+      await navigator.clipboard.writeText(pageUrl)
+      setCopied(true)
+    } catch {
+      inputRef.current?.select() // 有些 App 不允許程式複製，改成選取網址，讓訪客自己長按複製
+    }
+  }
+
+  return (
+    <div className={styles.inApp} role="alert">
+      <p>
+        <strong>目前是在 {app} 裡開啟網頁。</strong>
+        Google 基於安全理由，不允許在 App 內建的瀏覽器登入，請改用 Safari 或 Chrome 開啟本頁。
+      </p>
+      {app === 'LINE' ? (
+        <a className={styles.inAppButton} href={lineExternalUrl()}>
+          用瀏覽器開啟
+        </a>
+      ) : (
+        <p>點畫面右上角（或右下角）的「⋯」選單，選擇「在瀏覽器中開啟」。</p>
+      )}
+      <div className={styles.copyRow}>
+        <input ref={inputRef} className={styles.copyInput} value={pageUrl} readOnly aria-label="本頁網址" />
+        <button type="button" className={styles.copyButton} onClick={copy}>
+          {copied ? '已複製' : '複製網址'}
+        </button>
+      </div>
+    </div>
   )
 }
 
