@@ -28,7 +28,7 @@
 | 切塊 | 每種切成概要、食性、棲地、習性、外觀，共 8,754 塊；每塊開頭帶物種名稱 |
 | 向量 | `intfloat/multilingual-e5-small`（384 維）；文件向量事先算好（`backend/data/vectors.npy`） |
 | 檢索 | 名稱索引 12,000 多個名稱（含俗名、英文名）＋ numpy 計算餘弦相似度 |
-| 部署 | Vercel Python Function（`api/ask.py`），和網站同一個網域 |
+| 部署 | Vercel Python Function（`api/ask.py`），和網站同一個網域；和資料庫一樣放在新加坡 |
 
 **為了放進 Vercel（Python 上限 500 MB）**：線上把問題轉向量改用同一個模型的 ONNX int8 量化版（onnxruntime，不需要 PyTorch，模型 470 → 118 MB），和原模型的向量相似度 0.996 以上（`backend/verify_onnx.py`）；向量搜尋不用向量資料庫，直接用 numpy 計算。
 
@@ -49,6 +49,14 @@
 - 結構：[`backend/db/schema.sql`](backend/db/schema.sql)（外鍵、`CHECK` 限制、`ON DELETE CASCADE`、索引）
 - 匯入：[`backend/db/import_species.py`](backend/db/import_species.py)，整個匯入在一個交易裡，用 upsert 和 `COPY`，可以重複執行
 - 查詢範例：[`backend/db/example_queries.sql`](backend/db/example_queries.sql)（分組統計、`FILTER`、遞迴查詢、`EXISTS`）
+
+**AI 動物通的問答紀錄**（`ask_logs`、`ask_log_sources`）：每則提問的問題、回答模式、token 用量、回應時間、引用的物種
+
+- 次數限制改用資料庫計算（每分鐘 5 題、每天 50 題、全站每天 500 題）：Vercel 同時開多台主機時，所有主機看到同一份紀錄
+- 同一位訪客同時送出多題時，用 `pg_advisory_xact_lock` 鎖住該訪客，檢查次數和寫入紀錄在同一個交易裡完成，不會多放行
+- 不存 IP：訪客代號是「臺灣日期＋IP」的 HMAC，同一天能計算次數，隔天就無法對應到同一個人
+- 資料庫連不上時，自動改用記憶體計算次數，AI 動物通照常回答
+- 分析查詢：[`backend/db/ask_queries.sql`](backend/db/ask_queries.sql)（每日題數、熱門問題、最常被引用的物種、花費）
 
 ## 技術
 

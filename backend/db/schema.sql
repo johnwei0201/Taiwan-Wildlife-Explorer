@@ -1,4 +1,4 @@
--- 物種資料的資料表（PostgreSQL）
+-- 網站的資料表（PostgreSQL）：物種資料、AI 動物通的問答紀錄
 -- 由 backend/db/import_species.py 執行；用 IF NOT EXISTS，重複執行不會出錯
 --
 -- 設計重點
@@ -107,3 +107,36 @@ CREATE TABLE IF NOT EXISTS species_county_counts (
 );
 -- 主鍵 (species_id, county_id) 只能從物種查縣市；「某縣市有哪些物種」要另外建從縣市開始的索引
 CREATE INDEX IF NOT EXISTS species_county_counts_county_id_idx ON species_county_counts (county_id);
+
+-- ==========================================================================
+-- AI 動物通的問答紀錄（第 2 步）：分析熱門問題，也用來計算提問次數限制
+-- ==========================================================================
+
+-- 每一則被受理的提問一筆（超過次數被擋下的不記錄）
+--   不存 IP：client_hash 是「IP＋當天日期」算出的代號，同一天能認出是同一位訪客（計算次數用），
+--   隔天代號就完全不同，無法追蹤同一個人
+CREATE TABLE IF NOT EXISTS ask_logs (
+    id            bigint GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    created_at    timestamptz NOT NULL DEFAULT now(),
+    client_hash   text NOT NULL,
+    question      text NOT NULL CHECK (char_length(question) BETWEEN 1 AND 200),
+    status        text NOT NULL DEFAULT 'pending' CHECK (status IN ('pending', 'answered', 'error')),
+    mode          text CHECK (mode IN ('ai', 'fallback')),  -- ai＝Claude 回答；fallback＝備援模式
+    method        text,                                     -- 檢索方式：名稱查詢、向量搜尋…
+    input_tokens  integer CHECK (input_tokens >= 0),
+    output_tokens integer CHECK (output_tokens >= 0),
+    duration_ms   integer CHECK (duration_ms >= 0)
+);
+-- 次數限制會查「這位訪客最近 1 分鐘／今天問了幾題」：先比對 client_hash，再看時間範圍
+CREATE INDEX IF NOT EXISTS ask_logs_client_hash_created_at_idx ON ask_logs (client_hash, created_at);
+-- 全站今天的總題數、每日統計：依時間範圍查
+CREATE INDEX IF NOT EXISTS ask_logs_created_at_idx ON ask_logs (created_at);
+
+-- 回答引用了哪些物種（一則回答可以引用好幾種）
+CREATE TABLE IF NOT EXISTS ask_log_sources (
+    log_id     bigint NOT NULL REFERENCES ask_logs (id) ON DELETE CASCADE,
+    species_id integer NOT NULL REFERENCES species (id) ON DELETE CASCADE,
+    position   smallint NOT NULL,  -- 在回答裡的順序（1 開始）
+    PRIMARY KEY (log_id, species_id)
+);
+CREATE INDEX IF NOT EXISTS ask_log_sources_species_id_idx ON ask_log_sources (species_id);

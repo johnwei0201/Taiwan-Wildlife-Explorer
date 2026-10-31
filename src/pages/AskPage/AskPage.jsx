@@ -100,7 +100,7 @@ export default function AskPage() {
         <p className={styles.intro}>
           用一句話問問台灣動物的食性、棲地、保育等級，AI 會根據本站收錄的動物資料回答，並列出參考的物種。
         </p>
-        <p className={styles.notice}>（回答僅根據本站物種資料，資料沒有提到的會直接告訴你；AI 也可能出錯，請以物種介紹為準。）</p>
+        <p className={styles.notice}>（回答僅根據本站物種資料，資料沒有提到的會直接告訴你；AI 也可能出錯，請以物種介紹為準。提問內容會匿名保存，用來改善回答，請不要輸入個人資料。）</p>
       </PagePanel>
 
       {/* 還沒有對話時只顯示輸入框，送出第一個問題後才出現對話區 */}

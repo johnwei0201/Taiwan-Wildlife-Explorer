@@ -8,5 +8,3 @@
 # 建立資料用：把全部塊轉成向量（PyTorch 版模型，太大，不放上線）
 sentence-transformers==3.4.1
 
-# 物種資料匯入 PostgreSQL（backend/db/）
-psycopg[binary]==3.3.6
