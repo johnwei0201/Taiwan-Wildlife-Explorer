@@ -1,0 +1,109 @@
+-- 物種資料的資料表（PostgreSQL）
+-- 由 backend/db/import_species.py 執行；用 IF NOT EXISTS，重複執行不會出錯
+--
+-- 設計重點
+--   1. 分類階層（綱→目→科→屬）放在 taxa，每一層用 parent_id 指向上一層；物種只記錄自己的「屬」
+--   2. 一種動物有多筆的資料（照片、顏色、俗名、每月／各縣市紀錄數）各自獨立成表，以 species_id 關聯
+--   3. 只能是固定幾種值的欄位用 CHECK 限制，錯誤的資料進不了資料庫
+--   4. 子表的外鍵都設 ON DELETE CASCADE：刪掉一種動物時，它的照片、顏色等資料一起刪除
+
+-- ---------- 類群：網站上的分頁（鳥類、蝴蝶、蛾…） ----------
+CREATE TABLE IF NOT EXISTS animal_groups (
+    code        text PRIMARY KEY,           -- 'aves'、'moth'…（和前端的 group 相同）
+    name_zh     text NOT NULL,              -- 鳥類、蛾…
+    category_zh text NOT NULL,              -- 上一層的大分類：昆蟲類、蛛形類…（鳥類等本身就是大分類）
+    sort_order  smallint NOT NULL
+);
+
+-- ---------- 分類階層：自己連自己的樹狀結構 ----------
+CREATE TABLE IF NOT EXISTS taxa (
+    id        serial PRIMARY KEY,
+    rank      text NOT NULL CHECK (rank IN ('class', 'order', 'suborder', 'infraorder', 'family', 'subfamily', 'genus')),
+    name_sci  text NOT NULL,
+    name_zh   text,
+    parent_id integer REFERENCES taxa (id),  -- 上一層；綱（class）是最上層，沒有上一層
+    UNIQUE (rank, name_sci)
+);
+CREATE INDEX IF NOT EXISTS taxa_parent_id_idx ON taxa (parent_id);
+
+-- ---------- 物種 ----------
+-- 主鍵用 iNaturalist 的物種編號：TaiCOL 編號有重複（同一個編號對到兩個學名），也有 200 多種沒有編號
+CREATE TABLE IF NOT EXISTS species (
+    id                 integer PRIMARY KEY,
+    taicol_id          text,
+    group_code         text NOT NULL REFERENCES animal_groups (code),
+    genus_id           integer NOT NULL REFERENCES taxa (id),
+    name_zh            text,                       -- 少數物種沒有中文名
+    name_sci           text NOT NULL UNIQUE,
+    name_en            text,
+    is_endemic         boolean,                    -- 空值＝TaiCOL 沒有標註（不知道），和 false（不是特有種）不同
+    is_domestic        boolean NOT NULL DEFAULT false,
+    alien_type         text CHECK (alien_type IN ('native', 'naturalized', 'invasive', 'cultured')),
+    protected_level    text CHECK (protected_level IN ('I', 'II', 'III')),
+    redlist            text CHECK (redlist IN ('RE', 'NCR', 'NEN', 'NVU', 'NNT', 'NLC', 'DD', 'NA', 'NE')),
+    observations_count integer NOT NULL DEFAULT 0 CHECK (observations_count >= 0),
+    larva_count        integer CHECK (larva_count >= 0),  -- 幼蟲的紀錄數（只有蝶、蛾有）
+    shape              text,                       -- 外型分類，例如「小型鳴禽（麻雀、白頭翁等）」
+    size               smallint CHECK (size BETWEEN 1 AND 5),
+    wikipedia_url      text
+);
+CREATE INDEX IF NOT EXISTS species_group_code_idx ON species (group_code);
+CREATE INDEX IF NOT EXISTS species_genus_id_idx ON species (genus_id);
+
+-- ---------- 照片：成體、幼蟲各最多一張 ----------
+CREATE TABLE IF NOT EXISTS species_photos (
+    species_id      integer NOT NULL REFERENCES species (id) ON DELETE CASCADE,
+    kind            text NOT NULL CHECK (kind IN ('adult', 'larva')),
+    url             text NOT NULL,
+    author          text,
+    license         text,
+    observation_url text,
+    PRIMARY KEY (species_id, kind)
+);
+
+-- ---------- 顏色：一種動物可以有好幾個顏色 ----------
+CREATE TABLE IF NOT EXISTS species_colors (
+    species_id integer NOT NULL REFERENCES species (id) ON DELETE CASCADE,
+    color      text NOT NULL CHECK (color IN ('黑', '白', '灰', '褐', '紅', '橙', '黃', '綠', '藍')),
+    PRIMARY KEY (species_id, color)
+);
+CREATE INDEX IF NOT EXISTS species_colors_color_idx ON species_colors (color);
+
+-- ---------- 俗名 ----------
+CREATE TABLE IF NOT EXISTS species_aliases (
+    species_id integer NOT NULL REFERENCES species (id) ON DELETE CASCADE,
+    alias      text NOT NULL,
+    PRIMARY KEY (species_id, alias)
+);
+CREATE INDEX IF NOT EXISTS species_aliases_alias_idx ON species_aliases (alias);
+
+-- ---------- 維基百科的文字段落 ----------
+CREATE TABLE IF NOT EXISTS species_texts (
+    species_id integer NOT NULL REFERENCES species (id) ON DELETE CASCADE,
+    section    text NOT NULL CHECK (section IN ('summary', 'appearance', 'habitat', 'diet', 'behavior')),
+    content    text NOT NULL,
+    PRIMARY KEY (species_id, section)
+);
+
+-- ---------- 每月紀錄數：每種都存滿 12 個月（沒有紀錄的月份是 0） ----------
+CREATE TABLE IF NOT EXISTS species_monthly_counts (
+    species_id integer NOT NULL REFERENCES species (id) ON DELETE CASCADE,
+    month      smallint NOT NULL CHECK (month BETWEEN 1 AND 12),
+    count      integer NOT NULL CHECK (count >= 0),
+    PRIMARY KEY (species_id, month)
+);
+
+-- ---------- 縣市、各縣市紀錄數（只存有紀錄的縣市） ----------
+CREATE TABLE IF NOT EXISTS counties (
+    id   smallint PRIMARY KEY,
+    name text NOT NULL UNIQUE
+);
+
+CREATE TABLE IF NOT EXISTS species_county_counts (
+    species_id integer NOT NULL REFERENCES species (id) ON DELETE CASCADE,
+    county_id  smallint NOT NULL REFERENCES counties (id),
+    count      integer NOT NULL CHECK (count > 0),
+    PRIMARY KEY (species_id, county_id)
+);
+-- 主鍵 (species_id, county_id) 只能從物種查縣市；「某縣市有哪些物種」要另外建從縣市開始的索引
+CREATE INDEX IF NOT EXISTS species_county_counts_county_id_idx ON species_county_counts (county_id);

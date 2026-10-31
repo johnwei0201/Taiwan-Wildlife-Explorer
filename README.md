@@ -34,11 +34,28 @@
 
 **測試（20 題）**：單一物種、兩種比較、俗名對到多種、名詞解釋、列舉型問題、無關問題、本站沒收錄的動物、提示注入、英文提問；平均一題約 0.0005 美元。已知限制：「住在高山的鳥」這類需要比較海拔的列舉題較弱；英文只認得本站收錄的英文名。
 
+## 資料庫（PostgreSQL）
+
+物種資料另外匯入 PostgreSQL（Neon），用在統計與查詢；網站瀏覽仍讀靜態 JSON，速度不受資料庫影響。
+
+| 資料表 | 內容 |
+|---|---|
+| `species` | 3,560 種動物的名稱、特有種、保育等級、紅皮書、外來種類型 |
+| `taxa` | 分類階層（綱→目→科→屬），`parent_id` 指向上一層，用 `WITH RECURSIVE` 查整條階層 |
+| `animal_groups`、`counties` | 類群、縣市 |
+| `species_photos`、`species_colors`、`species_aliases`、`species_texts` | 照片、顏色、俗名、維基段落（一對多） |
+| `species_monthly_counts`、`species_county_counts` | 每月、各縣市的紀錄數 |
+
+- 結構：[`backend/db/schema.sql`](backend/db/schema.sql)（外鍵、`CHECK` 限制、`ON DELETE CASCADE`、索引）
+- 匯入：[`backend/db/import_species.py`](backend/db/import_species.py)，整個匯入在一個交易裡，用 upsert 和 `COPY`，可以重複執行
+- 查詢範例：[`backend/db/example_queries.sql`](backend/db/example_queries.sql)（分組統計、`FILTER`、遞迴查詢、`EXISTS`）
+
 ## 技術
 
 - 前端：React 19、Vite、React Router、CSS Modules、Leaflet
 - 資料處理：Node.js、Python（標準函式庫）
 - AI 後端：Python、Claude API、onnxruntime、numpy；建立資料時用 sentence-transformers
+- 資料庫：PostgreSQL（Neon）、psycopg
 
 ## 本機開發
 
@@ -63,6 +80,13 @@ backend/.venv/Scripts/python backend/serve_local.py
 backend/.venv/Scripts/python backend/build_documents.py   # 物種資料 → 文件、塊、名稱索引
 backend/.venv/Scripts/python backend/build_index.py       # 塊 → 向量（只重新轉有變動的塊）
 backend/.venv/Scripts/python backend/ask.py               # 20 題測試（會呼叫 Claude）
+```
+
+匯入資料庫（需要 `backend/.env` 裡的 `DATABASE_URL`）：
+
+```bash
+backend/.venv/Scripts/python backend/db/import_species.py  # 建立資料表並匯入物種資料
+backend/.venv/Scripts/python backend/db/run_queries.py     # 執行查詢範例
 ```
 
 ## 資料來源
