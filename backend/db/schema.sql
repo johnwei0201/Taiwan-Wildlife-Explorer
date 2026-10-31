@@ -162,7 +162,7 @@ CREATE TABLE IF NOT EXISTS rag_chunks (
 CREATE INDEX IF NOT EXISTS rag_chunks_doc_id_position_idx ON rag_chunks (doc_id, position);
 
 -- ==========================================================================
--- 會員（第 4 步）：Google 登入、生命清單、收藏
+-- 會員（第 4 步）：Google 登入、看過的動物、收藏
 -- ==========================================================================
 
 -- 會員：只存 Google 提供的基本資料，沒有密碼（密碼由 Google 保管）
@@ -186,7 +186,7 @@ CREATE TABLE IF NOT EXISTS sessions (
 );
 CREATE INDEX IF NOT EXISTS sessions_user_id_idx ON sessions (user_id);
 
--- 生命清單（seen：在野外看過）和收藏（favorite）：同一種動物可以同時在兩個清單裡
+-- 看過的動物（seen：在野外看過）和收藏（favorite）：同一種動物可以同時在兩個清單裡
 CREATE TABLE IF NOT EXISTS user_species (
     user_id    bigint NOT NULL REFERENCES users (id) ON DELETE CASCADE,
     species_id integer NOT NULL REFERENCES species (id) ON DELETE CASCADE,

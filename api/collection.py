@@ -1,5 +1,5 @@
 """
-生命清單、收藏 API（Vercel Python Function）：需要登入
+看過的動物、收藏 API（Vercel Python Function）：需要登入
 
   GET    /api/collection                                  → {seen: [物種 id], favorite: [...], groups: [各類群完成度]}
   POST   /api/collection  {speciesId, list}               → 加入清單（list 是 seen 或 favorite），回傳新的清單

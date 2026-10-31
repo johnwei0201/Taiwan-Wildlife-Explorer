@@ -10,7 +10,7 @@
 - **物種介紹**：分類階層、保育與紅皮書等級、照片、常見月份、出現縣市、iNaturalist 紀錄地圖
 - **我附近的動物**：依目前位置顯示附近的觀察紀錄
 - **AI 動物通**：用 RAG（檢索增強生成）回答動物問題，只根據本站資料回答，並附上參考的物種卡片
-- **會員（生命清單）**：用 Google 帳號登入，記錄在野外看過的動物，看各類群、特有種的完成度；也可以收藏喜歡的動物
+- **會員（看過的動物）**：用 Google 帳號登入，記錄在野外看過的動物，看各類群、特有種的完成度；也可以收藏喜歡的動物
 
 ## AI 動物通（RAG）
 
@@ -54,7 +54,7 @@
 | `species_monthly_counts`、`species_county_counts` | 每月、各縣市的紀錄數 |
 | `rag_chunks` | AI 動物通的 8,754 塊文字和 384 維向量（pgvector） |
 | `ask_logs`、`ask_log_sources` | AI 動物通的問答紀錄、回答引用的物種 |
-| `users`、`sessions`、`user_species` | 會員、登入狀態、生命清單和收藏 |
+| `users`、`sessions`、`user_species` | 會員、登入狀態、看過的動物和收藏 |
 
 - 結構：[`backend/db/schema.sql`](backend/db/schema.sql)（外鍵、`CHECK` 限制、`ON DELETE CASCADE`、索引）
 - 匯入：[`backend/db/import_species.py`](backend/db/import_species.py)，整個匯入在一個交易裡，用 upsert 和 `COPY`，可以重複執行
@@ -72,7 +72,7 @@
 
 1. 前端用 Google Identity Services 的登入按鈕，登入後拿到 Google 簽名的 ID token（JWT）
 2. 後端（[`api/auth.py`](api/auth.py)）驗證 token，建立自己的登入狀態，存在 `sessions` 表；瀏覽器只拿到 HttpOnly cookie
-3. 生命清單的完成度用一段 SQL 算出：`LEFT JOIN` 保留沒看過的物種，`FILTER` 另外算特有種（[`backend/account.py`](backend/account.py)）
+3. 看過的動物完成度用一段 SQL 算出：`LEFT JOIN` 保留沒看過的物種，`FILTER` 另外算特有種（[`backend/account.py`](backend/account.py)）
 
 安全性的做法：
 

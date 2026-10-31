@@ -5,7 +5,7 @@
   current_user(token)        → 由 cookie 裡的 token 找出會員；沒登入或已過期回傳 None
   logout(token)              → 刪除這個登入狀態
   delete_user(user_id)       → 刪除會員；登入狀態、清單因為 ON DELETE CASCADE 一起刪除
-  collection(user_id)        → 生命清單、收藏，以及各類群的完成度
+  collection(user_id)        → 看過的動物、收藏，以及各類群的完成度
   add / remove(...)          → 加入、移出清單
 """
 
@@ -97,7 +97,7 @@ def collection(user_id):
         for list_name, species_id in cursor.fetchall():
             lists[list_name].append(species_id)
 
-        # 生命清單的完成度：每個類群「看過幾種／共幾種」，特有種另外算
+        # 看過的動物完成度：每個類群「看過幾種／共幾種」，特有種另外算
         #   LEFT JOIN：沒看過的物種也要留著，才算得出「共幾種」
         cursor.execute(
             """

@@ -5,7 +5,7 @@ import { useAccount } from '../../hooks/useAccount.jsx'
 import styles from './CollectionButtons.module.css'
 
 const BUTTONS = [
-  { list: 'seen', on: '✓ 看過', off: '看過', hint: '加入生命清單：在野外看過這種動物' },
+  { list: 'seen', on: '✓ 看過', off: '看過', hint: '我在野外看過這種動物' },
   { list: 'favorite', on: '♥ 已收藏', off: '♡ 收藏', hint: '收藏這種動物' },
 ]
 
@@ -20,7 +20,7 @@ export default function CollectionButtons({ speciesId }) {
   if (!user) {
     return (
       <p className={styles.signInHint}>
-        <Link to="/account">登入會員</Link>，就能把看過的動物記在生命清單裡
+        <Link to="/account">登入會員</Link>，就能記錄你看過的動物
       </p>
     )
   }

@@ -13,7 +13,7 @@ const TABS = [
   { list: 'favorite', label: '收藏', empty: '還沒有收藏。在物種介紹頁按「收藏」，就會出現在這裡。' },
 ]
 
-// 會員：沒登入時顯示說明和 Google 登入按鈕；登入後顯示生命清單的完成度、看過的動物、收藏
+// 會員：沒登入時顯示說明和 Google 登入按鈕；登入後顯示各類群的完成度、看過的動物、收藏
 export default function AccountPage() {
   const { status, user, clientId } = useAccount()
 
@@ -52,7 +52,7 @@ function SignIn({ clientId }) {
       <p>登入後可以記錄你和臺灣動物的相遇：</p>
       <ul className={styles.features}>
         <li>
-          <strong>生命清單</strong>：記下在野外看過的動物，看看鳥類、蝴蝶、蛙類……各收集了幾種，臺灣特有種看過幾種。
+          <strong>看過的動物</strong>：記錄在野外遇見的動物，看看鳥類、蝴蝶、蛙類……各收集了幾種，臺灣特有種看過幾種。
         </li>
         <li>
           <strong>收藏</strong>：把喜歡的動物存起來，下次直接找到。
@@ -97,12 +97,12 @@ function MyCollection() {
   }
 
   const handleDelete = () => {
-    if (window.confirm('確定要刪除帳號嗎？生命清單和收藏會全部刪除，無法復原。')) run(deleteAccount)
+    if (window.confirm('確定要刪除帳號嗎？看過的動物和收藏會全部刪除，無法復原。')) run(deleteAccount)
   }
 
   return (
     <>
-      <PagePanel title="我的生命清單">
+      <PagePanel title="我看過的動物">
         <div className={styles.profile}>
           {user.avatar && <img src={user.avatar} alt="" className={styles.avatar} referrerPolicy="no-referrer" />}
           <div className={styles.profileText}>
@@ -142,7 +142,7 @@ function MyCollection() {
   )
 }
 
-// 生命清單的完成度：總數、特有種，以及各類群的進度條（只列出至少看過一種的類群，其他收起來）
+// 看過的動物完成度：總數、特有種，以及各類群的進度條（只列出至少看過一種的類群，其他收起來）
 function Progress({ groups }) {
   const [showAll, setShowAll] = useState(false)
   const sum = (key) => groups.reduce((total, g) => total + g[key], 0)

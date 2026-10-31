@@ -1,4 +1,4 @@
-// 會員：Google 登入、生命清單、收藏
+// 會員：Google 登入、看過的動物、收藏
 //
 //   後端：api/auth.py、api/collection.py（Vercel Python Function），和網站同一個網域
 //   登入狀態存在 HttpOnly cookie，JavaScript 讀不到，fetch 同網域時瀏覽器會自動帶上
@@ -39,7 +39,7 @@ export const deleteAccount = () => request('/api/auth?scope=account', { method: 
 // { seen: [物種 id], favorite: [物種 id], groups: [{ code, name, seen, total, endemicSeen, endemicTotal }] }
 export const fetchCollection = () => request('/api/collection')
 
-// list：'seen'（生命清單：在野外看過）或 'favorite'（收藏）；都回傳更新後的清單
+// list：'seen'（看過的動物：在野外看過）或 'favorite'（收藏）；都回傳更新後的清單
 export const addToCollection = (speciesId, list) =>
   request('/api/collection', { method: 'POST', body: JSON.stringify({ speciesId, list }) })
 

@@ -12,7 +12,7 @@ import './styles/global.css'
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <BrowserRouter>
-      {/* 會員狀態（登入、生命清單）：整個網站共用 */}
+      {/* 會員狀態（登入、看過的動物）：整個網站共用 */}
       <AccountProvider>
         <App />
       </AccountProvider>

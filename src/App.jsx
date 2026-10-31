@@ -20,7 +20,7 @@ export default function App() {
         <Route path="/nearby" element={<NearbyPage />} />
         {/* AI 動物通：根據本站資料回答動物問題（RAG） */}
         <Route path="/ask" element={<AskPage />} />
-        {/* 會員：Google 登入、生命清單、收藏 */}
+        {/* 會員：Google 登入、看過的動物、收藏 */}
         <Route path="/account" element={<AccountPage />} />
         <Route path="/privacy" element={<PrivacyPage />} />
         {/* 分類頁：rank 是 class／order／family／genus，name 是學名 */}

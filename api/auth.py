@@ -4,7 +4,7 @@
   GET    /api/auth                 → {user, clientId}：目前登入的會員（沒登入是 null）、Google 登入用的 Client ID
   POST   /api/auth  {credential}   → 用 Google 給的 ID token 登入，設定登入 cookie，回傳 {user}
   DELETE /api/auth                 → 登出
-  DELETE /api/auth?scope=account   → 刪除帳號（生命清單、收藏一起刪除）
+  DELETE /api/auth?scope=account   → 刪除帳號（看過的動物、收藏一起刪除）
 
 登入狀態存在 cookie「session」：HttpOnly（網頁的 JavaScript 讀不到，防止被惡意程式偷走）、
 Secure（只走 HTTPS）、SameSite=Lax（別的網站送來的 POST 不會帶上它）
