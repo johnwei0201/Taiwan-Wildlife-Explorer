@@ -26,7 +26,7 @@ def parse_item(species_id, list_name):
 
 class handler(JsonHandler):
     def do_GET(self):
-        self.handle_request(lambda user: None)
+        self.respond(None)
 
     def do_POST(self):
         def change(user):
@@ -35,23 +35,27 @@ class handler(JsonHandler):
             if not account.add(user['id'], species_id, list_name):
                 raise BadRequest(404, '本站沒有收錄這個物種')
 
-        self.handle_request(change)
+        self.respond(change)
 
     def do_DELETE(self):
         def change(user):
             account.remove(user['id'], *parse_item(self.query('speciesId'), self.query('list')))
 
-        self.handle_request(change)
+        self.respond(change)
 
-    def handle_request(self, change):
-        """共同流程：檢查來源 → 確認登入 → 修改清單（GET 不修改）→ 回傳最新的清單"""
-        if self.command != 'GET' and not self.same_origin():
+    def respond(self, change):
+        """共同流程：檢查來源 → 確認登入 → 修改清單（change 是 None 時只讀取）→ 回傳最新的清單
+
+        不用 self.command 判斷是不是 GET：Vercel 直接呼叫 do_GET、do_POST，沒有設定這個屬性
+        """
+        if change is not None and not self.same_origin():
             return self.send_json(403, {'detail': '來源不正確'})
         try:
             user = account.current_user(self.cookie('session'))
             if not user:
                 return self.send_json(401, {'detail': '請先登入'})
-            change(user)
+            if change is not None:
+                change(user)
             self.send_json(200, account.collection(user['id']))
         except BadRequest as error:
             self.send_json(error.status, {'detail': error.detail})
