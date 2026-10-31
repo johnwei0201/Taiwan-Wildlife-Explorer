@@ -10,8 +10,10 @@
 
 回傳格式和前端 src/api/ask.js 一致：{ answer, sources: [物種 id], followUps: [延伸問題], mode }
 
-向量搜尋不用向量資料庫：8,754 塊 × 384 維，用 numpy 一次算完全部相似度只要幾毫秒，
-省下 Chroma，線上 API（Vercel，上限 500 MB）才放得下
+文字塊和向量放在 PostgreSQL 的 rag_chunks（pgvector，結構見 backend/db/schema.sql）：
+  向量搜尋用 SQL 的 <=>（餘弦距離）排序；名稱查詢也從資料庫取該物種的塊
+  不建向量索引（HNSW）：8,754 塊逐筆比對只要 6～14 毫秒，結果和原本 numpy 版完全相同；
+  實測 HNSW 雖然不到 1 毫秒，但前 40 名只有 33 筆和精確結果相同，回答品質比速度重要
 """
 
 import json
@@ -20,10 +22,10 @@ import re
 from functools import lru_cache
 from pathlib import Path
 
-import numpy as np
 from dotenv import load_dotenv
 
 from build_documents import normalize
+from database import run
 from query_encoder import embed_query
 
 BACKEND_DIR = Path(__file__).resolve().parent
@@ -88,29 +90,31 @@ ANSWER_SCHEMA = {
 }
 
 
-# ---------- 讀取 3-1 產生的資料（只讀一次） ----------
+# ---------- 讀取 3-1 產生的資料（只讀一次）；文字塊和向量在資料庫 ----------
 
 @lru_cache(maxsize=1)
 def load_data():
     documents = json.loads((DATA_DIR / 'documents.json').read_text(encoding='utf-8'))
     name_index = json.loads((DATA_DIR / 'name_index.json').read_text(encoding='utf-8'))
-    chunks_by_doc = {}
-    for line in (DATA_DIR / 'chunks.jsonl').read_text(encoding='utf-8').splitlines():
-        if line:
-            chunk = json.loads(line)
-            chunks_by_doc.setdefault(chunk['docId'], []).append(chunk)
-    return documents, name_index, chunks_by_doc
+    return documents, name_index
 
 
-@lru_cache(maxsize=1)
-def load_vectors():
-    """vectors.npy 的第 i 列就是 chunks.jsonl 的第 i 塊（build_index.py 依同樣順序產生）"""
-    chunks = [json.loads(line) for line in (DATA_DIR / 'chunks.jsonl').read_text(encoding='utf-8').splitlines() if line]
-    vectors = np.load(DATA_DIR / 'vectors.npy')
-    if len(chunks) != len(vectors):
-        raise RuntimeError('vectors.npy 和 chunks.jsonl 的數量不同，請重新執行 build_index.py')
-    groups = np.array([chunk['group'] for chunk in chunks])
-    return chunks, vectors, groups
+def fetch_chunks(doc_ids):
+    """從資料庫取這些文件的全部塊：{文件 id: [塊]}，依 doc_ids 的順序，每份文件裡概要排第一"""
+    if not doc_ids:
+        return {}
+
+    def work(cursor):
+        cursor.execute(
+            'SELECT doc_id, id, content FROM rag_chunks WHERE doc_id = ANY(%s::text[]) ORDER BY doc_id, position',
+            (list(doc_ids),),
+        )
+        return cursor.fetchall()
+
+    chunks = {d: [] for d in doc_ids}
+    for doc_id, chunk_id, content in run(work):
+        chunks[doc_id].append({'id': chunk_id, 'text': content})
+    return chunks
 
 
 # ---------- 1. 名稱查詢 ----------
@@ -120,7 +124,7 @@ def find_names(question):
 
     回傳 (文件 id 清單, 把名稱遮掉後的問題)；遮掉是為了避免「蛇鵰」的「蛇」被當成類群關鍵字
     """
-    _, name_index, _ = load_data()
+    _, name_index = load_data()
     text = normalize(question)
     used = [False] * len(text)
     found = []
@@ -171,29 +175,44 @@ def find_groups(text):
 
 # ---------- 3. 向量搜尋 ----------
 
+VECTOR_SEARCH_SQL = """
+WITH candidates AS (          -- 1. 意思最接近的 40 塊（<=> 是餘弦距離，越小越接近）
+    SELECT id, doc_id, embedding <=> %s::vector AS distance
+    FROM rag_chunks
+    {group_filter}
+    ORDER BY distance
+    LIMIT %s
+), best AS (                  -- 2. 每份文件只留最接近的那一塊
+    SELECT DISTINCT ON (doc_id) doc_id, id AS best_id, distance
+    FROM candidates
+    ORDER BY doc_id, distance
+), top_docs AS (              -- 3. 取最接近的前 5 份文件
+    SELECT doc_id, best_id, distance
+    FROM best
+    ORDER BY distance
+    LIMIT %s
+)
+SELECT t.doc_id, c.id, c.content   -- 4. 每份文件回傳「概要」＋「最接近的那塊」（兩者相同時只有一塊）
+FROM top_docs t
+JOIN rag_chunks c ON c.doc_id = t.doc_id AND (c.position = 1 OR c.id = t.best_id)
+ORDER BY t.distance, c.position
+"""
+
+
 def vector_search(question, groups):
     """依意思找最接近的塊，再依物種合併；每個物種取「最接近的那塊」＋「概要」"""
-    chunks, vectors, chunk_groups = load_vectors()
-    # 向量都已經正規化（長度 1），內積就是餘弦相似度
-    scores = vectors @ embed_query(question)
-    if groups:
-        scores = np.where(np.isin(chunk_groups, groups), scores, -np.inf)  # 不是指定類群的塊排到最後
-    top = np.argsort(-scores)[:CANDIDATES]
+    vector = '[' + ','.join(f'{x:.7g}' for x in embed_query(question)) + ']'
+    # 有指定類群時只在那些類群裡找（名詞解釋的 group_code 是 glossary，也會被排除）
+    sql = VECTOR_SEARCH_SQL.format(group_filter='WHERE group_code = ANY(%s::text[])' if groups else '')
+    params = (vector, *([list(groups)] if groups else []), CANDIDATES, MAX_SEARCHED)
 
-    _, _, chunks_by_doc = load_data()
+    def work(cursor):
+        cursor.execute(sql, params)
+        return cursor.fetchall()
+
     picked = {}
-    for index in top:
-        if scores[index] == -np.inf:
-            break
-        doc_id = chunks[index]['docId']
-        if doc_id in picked:
-            continue
-        doc_chunks = chunks_by_doc[doc_id]
-        best = next(c for c in doc_chunks if c['id'] == chunks[index]['id'])
-        overview = doc_chunks[0]
-        picked[doc_id] = [overview] if best is overview else [overview, best]
-        if len(picked) >= MAX_SEARCHED:
-            break
+    for doc_id, chunk_id, content in run(work):
+        picked.setdefault(doc_id, []).append({'id': chunk_id, 'text': content})
     return picked
 
 
@@ -201,7 +220,7 @@ def vector_search(question, groups):
 
 def retrieve(question):
     """回傳 {'references': [(文件, [塊])], 'method': 說明}"""
-    documents, _, chunks_by_doc = load_data()
+    documents, _ = load_data()
     named, masked = find_names(question)
     groups = find_groups(masked)
 
@@ -210,7 +229,7 @@ def retrieve(question):
 
     if named_species:
         # 問的是特定物種：取該物種的全部資料（概要、食性、棲地、習性、外觀）
-        picked = {d: chunks_by_doc[d] for d in named_species}
+        picked = fetch_chunks(named_species)
         method = '名稱查詢'
     elif glossary:
         picked = {}
@@ -218,8 +237,7 @@ def retrieve(question):
     else:
         picked = vector_search(question, groups)
         method = f"向量搜尋（類群：{'、'.join(groups)}）" if groups else '向量搜尋'
-    for d in glossary:
-        picked[d] = chunks_by_doc[d]
+    picked.update(fetch_chunks(glossary))
 
     return {'references': [(documents[d], chunks) for d, chunks in picked.items()], 'method': method}
 

@@ -4,7 +4,7 @@
   "functions": {
     "api/ask.py": {
       "maxDuration": 60,
-      "excludeFiles": "{public/**,src/**,scripts/**,dist/**,node_modules/**,backend/.venv/**,backend/db/**,backend/data/vector_keys.json,**/*.md,**/*.psd}"
+      "excludeFiles": "{public/**,src/**,scripts/**,dist/**,node_modules/**,backend/.venv/**,backend/db/**,backend/data/vector_keys.json,backend/data/vectors.npy,backend/data/chunks.jsonl,backend/verify_*.py,**/*.md,**/*.psd}"
     }
   }
 }

@@ -140,3 +140,23 @@ CREATE TABLE IF NOT EXISTS ask_log_sources (
     PRIMARY KEY (log_id, species_id)
 );
 CREATE INDEX IF NOT EXISTS ask_log_sources_species_id_idx ON ask_log_sources (species_id);
+
+-- ==========================================================================
+-- AI 動物通的向量搜尋（第 3 步）：pgvector
+-- ==========================================================================
+CREATE EXTENSION IF NOT EXISTS vector;
+
+-- RAG 的文字塊和向量：每種動物切成概要、食性、棲地、習性、外觀幾塊，名詞解釋各一塊
+--   向量由 backend/build_index.py 算好（multilingual-e5-small，384 維，已正規化），backend/db/import_vectors.py 匯入
+CREATE TABLE IF NOT EXISTS rag_chunks (
+    id         text PRIMARY KEY,                                         -- 'species:5043#diet'
+    doc_id     text NOT NULL,                                            -- 'species:5043'、'glossary:endemic'
+    species_id integer REFERENCES species (id) ON DELETE CASCADE,        -- 名詞解釋沒有對應的物種
+    group_code text NOT NULL,                                            -- 類群；名詞解釋是 'glossary'
+    field      text NOT NULL CHECK (field IN ('overview', 'diet', 'habitat', 'behavior', 'appearance', 'glossary')),
+    position   smallint NOT NULL,                                        -- 在文件裡的順序，1 是概要
+    content    text NOT NULL,
+    embedding  vector(384) NOT NULL
+);
+-- 名稱查詢時「取某幾種動物的全部塊，依順序排好」
+CREATE INDEX IF NOT EXISTS rag_chunks_doc_id_position_idx ON rag_chunks (doc_id, position);

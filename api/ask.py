@@ -22,6 +22,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / 'backend'))
 import ask_log  # noqa: E402
+import database  # noqa: E402
 from rag import answer_question  # noqa: E402
 
 MAX_QUESTION_LENGTH = 200
@@ -56,10 +57,10 @@ def rate_limit_message(ip):
 class handler(BaseHTTPRequestHandler):
     def do_GET(self):
         try:
-            database = 'ok' if ask_log.ping() else 'unavailable'
+            db_status = 'ok' if database.ping() else 'unavailable'
         except Exception:
-            database = 'unavailable'
-        self.send_json(200, {'status': 'ok', 'database': database})
+            db_status = 'unavailable'
+        self.send_json(200, {'status': 'ok', 'database': db_status})
 
     def do_POST(self):
         length = int(self.headers.get('content-length') or 0)

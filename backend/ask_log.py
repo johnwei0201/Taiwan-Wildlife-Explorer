@@ -8,73 +8,21 @@ AI 動物通的問答紀錄與次數限制（PostgreSQL 的 ask_logs、ask_log_s
 存在資料庫，所有主機看到的是同一份紀錄
 資料庫連不上時會丟出例外，由 api/ask.py 改用記憶體計算，AI 動物通不會因此停擺
 
-連線套件用 pg8000（純 Python，約 2 MB），不用 psycopg：
-  psycopg 的 binary 版附了 PostgreSQL 的 C 程式庫（約 23 MB），會讓 Vercel 函式超過 225 MB 的上限
-  本機的匯入、查詢程式（backend/db/）仍用 psycopg，因為它支援 COPY 大量寫入
+資料庫連線在 backend/database.py（和向量搜尋共用）
 """
 
 import hashlib
 import hmac
 import os
-import ssl
-import threading
 from datetime import datetime, timedelta, timezone
-from pathlib import Path
-from urllib.parse import unquote, urlparse
 
-import pg8000.dbapi
-from dotenv import load_dotenv
-
-load_dotenv(Path(__file__).resolve().parent / '.env')  # 本機讀 backend/.env；Vercel 用環境變數
+from database import run
 
 PER_MINUTE_LIMIT = 5      # 同一位訪客每分鐘最多 5 題
 PER_DAY_LIMIT = 50        # 同一位訪客每天最多 50 題
 DAILY_TOTAL_LIMIT = 500   # 全站每天最多 500 題（防止額度被一次用光）
 
 TAIPEI = timezone(timedelta(hours=8))  # 臺灣沒有日光節約時間，固定 UTC+8
-
-_conn = None
-_lock = threading.Lock()  # 本機測試伺服器會同時處理多個請求，同一條連線一次只給一個請求用
-
-
-def connect():
-    """pg8000 不直接接受連線字串，先把 postgresql://帳號:密碼@主機/資料庫 拆開"""
-    url = urlparse(os.environ['DATABASE_URL'])
-    return pg8000.dbapi.connect(
-        user=unquote(url.username), password=unquote(url.password or ''),
-        host=url.hostname, port=url.port or 5432, database=url.path.lstrip('/'),
-        ssl_context=ssl.create_default_context(),  # Neon 只接受加密連線，並驗證主機的憑證
-        timeout=10,
-    )
-
-
-def get_connection():
-    """沿用同一條連線：Vercel 的主機處理完請求後會保留一段時間，下一個請求就不用重新連線"""
-    global _conn
-    if _conn is None:
-        _conn = connect()
-    return _conn
-
-
-def run(work):
-    """在一個交易裡執行資料庫操作：全部成功才 commit，出錯就放棄這次的修改
-
-    出錯時直接關掉這條連線（可能已經斷線），沒有 commit 的修改會被資料庫丟棄；下次重新連線
-    """
-    global _conn
-    with _lock:
-        conn = get_connection()
-        try:
-            result = work(conn.cursor())
-            conn.commit()
-            return result
-        except Exception:
-            try:
-                conn.close()
-            except Exception:
-                pass
-            _conn = None
-            raise
 
 
 def client_hash(ip):
@@ -93,7 +41,7 @@ def start(ip, question):
     visitor = client_hash(ip)
 
     def work(cursor):
-        # 檢查次數和新增紀錄在同一個交易裡（run 會在最後 commit），並先鎖住這位訪客：
+        # 檢查次數和新增紀錄在同一個交易裡，並先鎖住這位訪客：
         # 同一位訪客同時送出兩題時，第二題會等第一題寫完才開始計算，不會兩題都以為還沒超過
         # （advisory lock 是 PostgreSQL 的「自訂名稱鎖」，交易結束時自動解開）
         cursor.execute('SELECT pg_advisory_xact_lock(hashtext(%s))', (visitor,))
@@ -119,7 +67,7 @@ def start(ip, question):
         cursor.execute('INSERT INTO ask_logs (client_hash, question) VALUES (%s, %s) RETURNING id', (visitor, question))
         return cursor.fetchone()[0], None
 
-    return run(work)
+    return run(work, transaction=True)
 
 
 def finish(log_id, result=None, duration_ms=None):
@@ -144,13 +92,5 @@ def finish(log_id, result=None, duration_ms=None):
                 [(log_id, species_id, i) for i, species_id in enumerate(result['sources'], 1)],
             )
 
-    run(work)
+    run(work, transaction=True)  # 更新紀錄和寫入引用物種要一起成功
 
-
-def ping():
-    """確認資料庫連得上（GET /api/ask 用）"""
-    def work(cursor):
-        cursor.execute('SELECT 1')
-        return cursor.fetchone()[0] == 1
-
-    return run(work)

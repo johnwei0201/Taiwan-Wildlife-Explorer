@@ -1,5 +1,5 @@
 """
-3-2 建立向量：把 3-1 切好的塊轉成向量，存成 backend/data/vectors.npy（線上 API 直接讀這個檔案）
+3-2 建立向量：把 3-1 切好的塊轉成向量，存成 backend/data/vectors.npy；再用 backend/db/import_vectors.py 匯入 PostgreSQL（pgvector），線上 API 從資料庫搜尋
 
 使用方式（在專案資料夾執行；請先執行 build_documents.py；需要安裝 backend/requirements.txt）：
   backend/.venv/Scripts/python backend/build_index.py

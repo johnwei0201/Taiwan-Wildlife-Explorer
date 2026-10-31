@@ -26,17 +26,23 @@
 |---|---|
 | 資料 | 3,560 種動物：TaiCOL、iNaturalist（常見月份、縣市）、維基百科（簡介、食性、棲地、習性、外觀、俗名） |
 | 切塊 | 每種切成概要、食性、棲地、習性、外觀，共 8,754 塊；每塊開頭帶物種名稱 |
-| 向量 | `intfloat/multilingual-e5-small`（384 維）；文件向量事先算好（`backend/data/vectors.npy`） |
-| 檢索 | 名稱索引 12,000 多個名稱（含俗名、英文名）＋ numpy 計算餘弦相似度 |
+| 向量 | `intfloat/multilingual-e5-small`（384 維）；文件向量事先算好，存在 PostgreSQL 的 `rag_chunks`（pgvector） |
+| 檢索 | 名稱索引 12,000 多個名稱（含俗名、英文名）＋ pgvector 用 SQL 計算餘弦距離（`<=>`） |
 | 部署 | Vercel Python Function（`api/ask.py`），和網站同一個網域；和資料庫一樣放在新加坡 |
 
-**為了放進 Vercel（Python 上限 500 MB）**：線上把問題轉向量改用同一個模型的 ONNX int8 量化版（onnxruntime，不需要 PyTorch，模型 470 → 118 MB），和原模型的向量相似度 0.996 以上（`backend/verify_onnx.py`）；向量搜尋不用向量資料庫，直接用 numpy 計算。
+**為了放進 Vercel（Python 函式上限 225 MB）**：線上把問題轉向量改用同一個模型的 ONNX int8 量化版（onnxruntime，不需要 PyTorch），和原模型的向量相似度 0.996 以上（`backend/verify_onnx.py`）；向量放在資料庫，函式不用帶 19 MB 的向量檔。
+
+**pgvector 的向量搜尋**：一段 SQL 完成「找最接近的 40 塊 → 每種動物留最接近的一塊（`DISTINCT ON`）→ 取前 5 種 → 附上概要」。
+
+- 不建 HNSW 索引：實測 8,754 塊逐筆比對 6～14 毫秒；HNSW 不到 1 毫秒，但前 40 名只有 33 筆和精確結果相同，加上類群篩選時還會少回傳（要開 `hnsw.iterative_scan`）。這個資料量下精確搜尋比較划算
+- 改用 pgvector 前後的檢索結果，110 題完全相同（`backend/verify_pgvector.py`，和原本的 numpy 版逐題比對）
+- 只讀取的查詢不開交易：pg8000 每開一次交易要多送 `BEGIN`、`COMMIT`，一次查詢從約 430 毫秒降到約 90 毫秒（從臺灣連線測量）
 
 **測試（20 題）**：單一物種、兩種比較、俗名對到多種、名詞解釋、列舉型問題、無關問題、本站沒收錄的動物、提示注入、英文提問；平均一題約 0.0005 美元。已知限制：「住在高山的鳥」這類需要比較海拔的列舉題較弱；英文只認得本站收錄的英文名。
 
 ## 資料庫（PostgreSQL）
 
-物種資料另外匯入 PostgreSQL（Neon），用在統計與查詢；網站瀏覽仍讀靜態 JSON，速度不受資料庫影響。
+物種資料、AI 動物通的向量和問答紀錄放在 PostgreSQL（Neon，新加坡）；網站瀏覽仍讀靜態 JSON，速度不受資料庫影響。
 
 | 資料表 | 內容 |
 |---|---|
@@ -45,6 +51,8 @@
 | `animal_groups`、`counties` | 類群、縣市 |
 | `species_photos`、`species_colors`、`species_aliases`、`species_texts` | 照片、顏色、俗名、維基段落（一對多） |
 | `species_monthly_counts`、`species_county_counts` | 每月、各縣市的紀錄數 |
+| `rag_chunks` | AI 動物通的 8,754 塊文字和 384 維向量（pgvector） |
+| `ask_logs`、`ask_log_sources` | AI 動物通的問答紀錄、回答引用的物種 |
 
 - 結構：[`backend/db/schema.sql`](backend/db/schema.sql)（外鍵、`CHECK` 限制、`ON DELETE CASCADE`、索引）
 - 匯入：[`backend/db/import_species.py`](backend/db/import_species.py)，整個匯入在一個交易裡，用 upsert 和 `COPY`，可以重複執行
@@ -62,7 +70,7 @@
 
 - 前端：React 19、Vite、React Router、CSS Modules、Leaflet
 - 資料處理：Node.js、Python（標準函式庫）
-- AI 後端：Python、Claude API、onnxruntime、numpy；建立資料時用 sentence-transformers
+- AI 後端：Python、Claude API、onnxruntime、pgvector；建立資料時用 sentence-transformers
 - 資料庫：PostgreSQL（Neon）；線上用 pg8000（純 Python，Vercel 函式有 225 MB 上限），本機匯入用 psycopg（支援 COPY）
 
 ## 本機開發
@@ -87,6 +95,7 @@ backend/.venv/Scripts/python backend/serve_local.py
 ```bash
 backend/.venv/Scripts/python backend/build_documents.py   # 物種資料 → 文件、塊、名稱索引
 backend/.venv/Scripts/python backend/build_index.py       # 塊 → 向量（只重新轉有變動的塊）
+backend/.venv/Scripts/python backend/db/import_vectors.py # 塊和向量 → PostgreSQL（pgvector）
 backend/.venv/Scripts/python backend/ask.py               # 20 題測試（會呼叫 Claude）
 ```
 
