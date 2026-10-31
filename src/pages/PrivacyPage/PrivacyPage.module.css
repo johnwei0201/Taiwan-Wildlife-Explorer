@@ -1,0 +1,36 @@
+/* 文章排版：段落、小標、清單之間留出閱讀的空間，行寬限制在約 40 個中文字，比較好讀 */
+.content {
+  max-width: 42em;
+  line-height: 1.8;
+}
+
+.content p + p,
+.content ul + p {
+  margin-top: var(--space-3);
+}
+
+.updated {
+  font-size: var(--fs-sm);
+  color: var(--color-text-muted);
+}
+
+.content h2 {
+  margin-top: var(--space-6);
+  margin-bottom: var(--space-2);
+  font-size: var(--fs-lg);
+  font-weight: 700;
+  color: var(--color-primary-dark);
+}
+
+.content ul {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  padding-left: 1.25em;
+  list-style: disc;
+}
+
+.content a {
+  color: var(--color-primary);
+  text-decoration: underline;
+}

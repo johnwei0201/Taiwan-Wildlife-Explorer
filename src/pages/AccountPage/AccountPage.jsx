@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 import PagePanel from '../../components/PagePanel/PagePanel.jsx'
 import SpeciesGrid from '../../components/SpeciesGrid/SpeciesGrid.jsx'
 import GoogleSignInButton from '../../components/GoogleSignInButton/GoogleSignInButton.jsx'
@@ -68,7 +69,7 @@ function SignIn({ clientId }) {
       )}
 
       <p className={styles.privacy}>
-        （使用 Google 帳號登入，本站不會取得你的密碼；只保存 Google 提供的名稱、Email、頭像，以及你記錄的動物。可以隨時刪除帳號，資料會一併刪除。）
+        （使用 Google 帳號登入，本站不會取得你的密碼；只保存 Google 提供的名稱、Email、頭像，以及你記錄的動物。可以隨時刪除帳號，資料會一併刪除。詳見<Link to="/privacy">隱私權政策</Link>。）
       </p>
     </PagePanel>
   )

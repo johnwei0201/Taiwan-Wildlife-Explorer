@@ -39,6 +39,11 @@
   color: var(--color-text-muted);
 }
 
+.privacy a {
+  color: var(--color-primary);
+  text-decoration: underline;
+}
+
 /* ---------- 已登入：個人資料列 ---------- */
 .profile {
   display: flex;

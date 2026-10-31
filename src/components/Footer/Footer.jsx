@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import styles from './Footer.module.css'
 
 // 網站串接的開放資料：物種與照片（iNaturalist）、官方中文名與保育等級（TaiCOL）、
@@ -25,7 +26,9 @@ export default function Footer() {
             </span>
           ))}
         </p>
-        <p className={styles.note}>照片版權屬於各攝影者，依各自的 CC 授權條款使用</p>
+        <p className={styles.note}>
+          照片版權屬於各攝影者，依各自的 CC 授權條款使用｜<Link to="/privacy">隱私權政策</Link>
+        </p>
       </div>
     </footer>
   )
