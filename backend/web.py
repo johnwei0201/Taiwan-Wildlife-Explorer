@@ -6,7 +6,6 @@ API 共用的 HTTP 工具（api/ask.py、api/auth.py、api/collection.py）
 """
 
 import json
-from http.cookies import SimpleCookie
 from http.server import BaseHTTPRequestHandler
 from urllib.parse import parse_qs, urlparse
 
@@ -36,8 +35,17 @@ class JsonHandler(BaseHTTPRequestHandler):
         return (parse_qs(urlparse(self.path).query).get(name) or [None])[0]
 
     def cookie(self, name):
-        cookies = SimpleCookie(self.headers.get('cookie') or '')
-        return cookies[name].value if name in cookies else None
+        """從 Cookie 標頭取出某個 cookie 的值
+
+        不用 Python 的 SimpleCookie：Google 登入按鈕會在本站存一個 g_state={"i_l":0} 的 cookie，
+        SimpleCookie 遇到這種含引號、大括號的值就停止解析，排在它後面的 session 會讀不到（登入後換頁就變成沒登入）
+        瀏覽器送來的格式是「名稱=值; 名稱=值」，直接切開就好
+        """
+        for part in (self.headers.get('cookie') or '').split(';'):
+            key, _, value = part.strip().partition('=')
+            if key == name:
+                return value
+        return None
 
     def client_ip(self):
         # Vercel 在前面有一層轉送，真正的 IP 在 X-Forwarded-For 的第一個
